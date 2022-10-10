@@ -24,22 +24,6 @@
   {$smarty.capture.page_styles}
   
   
-    {if in_array($module, ['MainController'])}
-      <script>
-      var comebackUrl = 'https://vozmycredit.com/comebacker/fin5/';
-          document.addEventListener("DOMContentLoaded", function () {
-              if (typeof history.pushState === 'function') {
-                  history.pushState('back', null, null);
-                  window.onpopstate = function () {
-                      history.pushState('back', null, null);
-                      if (typeof comebackUrl !== 'undefined') {
-                          window.location = comebackUrl;
-                      }
-                  };
-              }
-          });
-      </script>
-    {/if}
   
 
   <script>

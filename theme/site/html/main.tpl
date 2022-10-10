@@ -1,6 +1,6 @@
 {capture name='page_scripts'}
 
-  <script src="theme/site/js/calc.app.js?v=1.02"></script>
+  <script src="theme/site/js/calc.app.js?v=1.03"></script>
   <script src="theme/site/js/main.app.js?v=1.22"></script>
 
 {/capture}
@@ -87,7 +87,6 @@
                 </span>-->
               </div>
 
-              {if $is_developer}
                 <div class="form-group">
                   <div class="form_row">
                       <div class="check mb-0 check_box justify-content-center">
@@ -95,19 +94,24 @@
                       </div>
                   </div>
                 </div>
-
-                <div id="promo_code" style="display:none" class="pr-3 pl-3">
-                  <div class="text-center text-success">
+                   <div id="promo_code" style="display:none" class="pr-3 pl-3">
+                  <div class="text-center text-success js-success-promo" style="display:none">
                       <p>Промокод активирован            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
                               <path d="M9.88442 1.8301L4.15429 7.55898C4.00072 7.71194 3.75208 7.71194 3.59912 7.55898L0.114476 4.05205C-0.0384842 3.89847 -0.0384842 3.6489 0.114476 3.49625L0.947087 2.66426C1.10067 2.51099 1.3493 2.51099 1.50226 2.66426L3.87965 5.05744L8.4957 0.441075C8.64866 0.288115 8.8973 0.288115 9.0515 0.441075L9.88411 1.2743C10.0386 1.42757 10.0386 1.67714 9.88442 1.8301Z" fill="#33CC66"></path>
                           </svg>
                       </p>
                   </div>
-                  <div class="text-center text-danger">
+                  <div class="text-center text-danger js-error-promo" style="display:none">
                       <p>Промокод не применен</p>
                   </div>
-                </div
-              {/if}
+                  <div id="promo_input" class="form-group form-phone">
+                      <input id="promoCode" type="text" class="form-control -fs-18 -gil-m">
+                      <span class="phone_info -fs-14">Промокод</span>
+                  </div>
+                  <div class="form-group form-btn">
+                    <a id="check_promo_code" href="javascript:void(0);" class="btn btn-secondary  -fs-20 -fullwidth  js-promo-code-ckeck ">Применить</a>
+                  </div>
+                </div>
 
 
             </form>

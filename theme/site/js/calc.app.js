@@ -46,6 +46,88 @@
 
     };
 
+    var _init_promo_code = function(){
+        $('.js-toggle-promo-code').click(function(e){
+            e.preventDefault();
+
+            $('#promo_code').slideToggle()
+        })
+
+        const _promo_code = document.cookie
+            .split('; ')
+            .find((row) => row.startsWith('promo_code='))
+            ?.split('=')[1];
+
+        if (_promo_code) {
+            //document.cookie = 'promo_code='+_promo_code+'; path=/; expires=Tue, 19 Jan 2021 03:14:07 GMT';
+        
+            $.ajax({
+                url: 'ajax/CheckPromoCodes.php',
+                data: {
+                    code: _promo_code
+                },
+                beforeSend: function(){
+                },
+                success: function(resp){
+                    
+                    console.log(resp);
+        
+                    if (!!resp.false)
+                    {
+                        $('.js-success-promo').hide();
+                        $('.js-error-promo').show();
+                    }
+                    else if (!!resp.checked)
+                    {
+                        $('#promo_code').show()
+                        $('.js-error-promo').hide();
+                        $('.js-success-promo').show();
+                        $('#promo_input').hide();
+                        $('#check_promo_code').hide();
+                        app.loan_percent = resp.percent;
+                        _calculate();
+                        document.cookie = 'promo_code='+_promo_code+'; path=/';
+                    }
+                }
+            });
+        }
+
+        $('#check_promo_code').click(function(e){
+            e.preventDefault();
+    
+            var _code = $('#promoCode').val();
+    
+            $.ajax({
+                url: 'ajax/CheckPromoCodes.php',
+                data: {
+                    code: _code
+                },
+                beforeSend: function(){
+                },
+                success: function(resp){
+                    
+                    console.log(resp);
+        
+                    if (!!resp.false)
+                    {
+                        $('.js-success-promo').hide();
+                        $('.js-error-promo').show();
+                    }
+                    else if (!!resp.checked)
+                    {
+                        $('.js-error-promo').hide();
+                        $('.js-success-promo').show();
+                        $('#promo_input').hide();
+                        $('#check_promo_code').hide();
+                        app.loan_percent = resp.percent;
+                        _calculate();
+                        document.cookie = 'promo_code='+_code+'; path=/';
+                    }
+                }
+            });
+        })
+    }
+
     var _init_ranges = function(){
         app.$input_summ.ionRangeSlider({
             skin: "round",
@@ -144,6 +226,7 @@
 
     ;(function(){
     _init();
+    _init_promo_code();
     _init_ranges();
 })();
 };
