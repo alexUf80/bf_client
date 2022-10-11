@@ -9,12 +9,17 @@
 
 <main class="main">
   <div class="section ">
-    <div class="container">
+    <div class="wrapper">
       <div class="section_row row">
 
         
         <div class="col-lg-12">
-          <h1>{$page->name}</h1>
+          {* <h1>{$page->name}</h1> *}
+          <section class="breadcrumbs">
+            <a href="" class="breadcrumbs__link breadcrumbs__link_home">Главная</a>
+            <span class="breadcrumbs__separator"> / </span>
+            <a class="breadcrumbs__link breadcrumbs__link_active">{$page->name|escape}</a>
+          </section>
             {if $page->url == 'documents'}
             <h2>Правоустанавливающие документы</h2>
             <div class="row">
@@ -23,11 +28,11 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/bazovij_standart_zaschity_prav_i_interesov_fiz_i_yur_lits.pdf" target="_blank">Базовый стандарт защиты прав и интересов физических и юридических лиц - получателей финансовых услуг</a></li>
 						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/bazovij_standart_sovershenija_operatsij.pdf" target="_blank">Базовый стандарт совершения микрофинансовой организацией операций на финансовом рынке</a></li>
 						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/infirmatsionnaja_pamyatka_banka_rossii_o_mfo.pdf" target="_blank">Информационная памятка Банка России о МФО</a></li>
-                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/informatsija_dlya_poluchatelej_finansovoj_uslugi_4.pdf" target="_blank">Информация для получателя финансовой услуги</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/informatsija_dlya_poluchatelej_finansovoj_uslugi_5.pdf" target="_blank">Информация для получателя финансовой услуги</a></li>
 						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/informatsija_o_sluzhbe_finansovogo_upolnomochenogo.pdf" target="_blank">Информация о службе финансового уполномоченного</a></li>
 						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/obschie_usloviya.pdf" target="_blank">Общие условия</a></li>
-						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/svidetelstvo_o_chlenstve_sro_edinstvo.pdf" target="_blank">Свидетельство о членстве в СРО Единство</a></li>
-						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/svidetelstvo_na_tovarnij_znak.pdf" target="_blank">Свидетельство на товарный знак</a></li>
+						<li class="docs_list_item"><a class="docs_list_link" href="/files/about/svidetelstvo_o_chlenstve_sro_edinstvo_new.pdf" target="_blank">Свидетельство о членстве в СРО</a></li>
+						<!--li class="docs_list_item"><a class="docs_list_link" href="/files/about/svidetelstvo_na_tovarnij_znak.pdf" target="_blank">Свидетельство на товарный знак</a></li-->
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/usloviya_dogovora_strahovanija.pdf" target="_blank">Условия договора страхования</a></li>
                     </ul>
                 </div>
