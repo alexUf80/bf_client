@@ -9,12 +9,12 @@
             <td width="190">
                 <p>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА:</p>
                 <p>{$base_percent*365}%</p>
-                <p>({($base_percent*365)|percent_string|upper}) ПРОЦЕНТОВ ГОДОВЫХ</p>
+                <p>({$base_percent*365}) ПРОЦЕНТОВ ГОДОВЫХ</p>
             </td>
             <td width="150">
                 <p>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА:</p>
                 <p>{$return_amount_percents} РУБЛЕЙ 00 КОПЕЕК</p>
-                <p>{$return_amount_percents|price_string|upper}</p>
+                <p>{$return_amount_percents|upper}</p>
                 
             </td>
         </tr>
@@ -375,15 +375,6 @@
                         <td width="18">
                             <table border="1" width="10" align="center"><tr><td>X</td></tr></table>
                         </td>
-                        <td width="180">
-                                По заявлению о выдаче
-                                судебного приказа\исковому
-                                заявлению               
-                                {$tribunal->sud}
-                                <br /><br />
-                                При неподсудности Мировому суду:
-                                {$tribunal->mir_sud}
-                        </td>
                     </tr>
                     <tr>
                         <td width="18">
@@ -396,10 +387,6 @@
                         </td>
                     </tr>
                 </table>
-                
-                
-                
-                
             </td>
         </tr>
     </tbody>

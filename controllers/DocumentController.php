@@ -3,6 +3,7 @@
 error_reporting(-1);
 ini_set('display_errors', 'On');
 ini_set('max_execution_time', 120);
+
 class DocumentController extends Controller
 {
     public function fetch()
@@ -30,14 +31,33 @@ class DocumentController extends Controller
             return false;
 
         if (!empty($document->params)) {
+            $document->params = unserialize($document->params);
+
             foreach ($document->params as $param_name => $param_value)
                 $this->design->assign($param_name, $param_value);
 
             $user = $this->users->get_user($user_id);
+            $contract = $this->contracts->get_contract($document->contract_id);
 
-            $regaddress_full = "$user->Regindex $user->Regregion $user->Regregion_shorttype $user->Regdistrict $user->Regcity 
-            $user->Regcity_shorttype $user->Regstreet $user->Regbuilding $user->Reghousing $user->Regroom";
+            $return_amount_percents = round($contract->loan_body_summ * $contract->base_percent * $contract->period / 100, 2);
+            $return_amount = round($contract->loan_body_summ + $contract->loan_body_summ * $contract->base_percent * $contract->period / 100, 2);
+            $return_amount_rouble = (int)$return_amount;
+            $return_amount_kop = ($return_amount - $return_amount_rouble) * 100;
+
+            $this->design->assign('return_amount_percents', $return_amount_percents);
+            $this->design->assign('return_amount', $return_amount);
+            $this->design->assign('return_amount_rouble', $return_amount_rouble);
+            $this->design->assign('return_amount_kop', $return_amount_kop);
+
+            $regaddress_full = $this->Addresses->get_address($user->regaddress_id);
+            $regaddress_full = $regaddress_full->adressfull;
+
+            $faktaddress_full = $this->Addresses->get_address($user->faktaddress_id);
+            $faktaddress_full = $faktaddress_full->adressfull;
+
+
             $this->design->assign('regaddress_full', $regaddress_full);
+            $this->design->assign('faktaddress_full', $faktaddress_full);
         }
 
         if ($document->type == 'IND_USLOVIYA_NL') {
@@ -209,7 +229,7 @@ class DocumentController extends Controller
         if ($type == 'POLIS_STRAHOVANIYA')
         {
             $insurance = new StdClass();
-            
+
             $insurance->create_date = date('Y-m-d H:i:s');
             $insurance->amount = round($insurance_cost, 2);
             $insurance->start_date = date('Y-m-d 00:00:00', time() + (1 * 86400));
@@ -220,11 +240,11 @@ class DocumentController extends Controller
 
         foreach ($params as $param_name => $param_value)
             $this->design->assign($param_name, $param_value);
-        
+
        	$tpl = $this->design->fetch('pdf/'.$template);
-        
+
         $this->pdf->create($tpl, $template_name, $template);
-        
+
     }
 
 }
