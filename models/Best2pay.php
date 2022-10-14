@@ -29,7 +29,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 2200200111114591, UNKNOWN NAME, 05/2022, 426
 5570725111081379, UNKNOWN NAME, 05/2022, 415 с 3ds
 4809388889655340, UNKNOWN NAME, 05/2022, 195    */
-    private $url = 'https://pay.best2pay.net/';
+    private $url = 'https://test.best2pay.net/webapi/';
     private $currency_code = 643;
     
     private $fee = 0.049;
@@ -51,24 +51,16 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     */
 
     private $sectors = array(
-        'PAY_CREDIT' => '8078', //сектор для отправки кредита на карту клиента (P2PCredit)
-        'RECURRENT' => '8079', // сектор для совершения рекурентных платежей (token)
-        'ADD_CARD' => '8079', // сектор для привязки карты (token)
-        'PAYMENT' => '8081', // сектор для оплаты любой картой (C2A)
-        'YUK' => '8081', // сектор для оплаты любой картой (C2A)
-        'PREMIER' => '8081', // сектор для оплаты любой картой (C2A)
+        'PAY_CREDIT' => '4038', //сектор для отправки кредита на карту клиента (P2PCredit)
+        'RECURRENT' => '4037', // сектор для совершения рекурентных платежей (token)
+        'ADD_CARD' => '4037', // сектор для привязки карты (token)
+        'PAYMENT' => '4039', // сектор для оплаты любой картой (C2A)
     );
     
     private $passwords = array(
-        '3246' => 'test', 
-        '3244' => 'test', 
-        '3245' => 'test', 
-        '3247' => 'test', 
-
-        '8078' => 'Qn9B6o2',
-        '8079' => 'R723NaI6',
-        '8080' => 'nc15jY3',
-        '8081' => '3w69fF5',
+        '4038' => 'test',
+        '4037' => 'test',
+        '4039' => 'test'
     );
     
     public function __construct()
