@@ -77,7 +77,7 @@ class SmsCode extends Core
         } else {
             $contract_id = $this->request->get('contract_id', 'integer');
             if ($contract = $this->contracts->get_contract($contract_id)) {
-                $msg = 'Активируй займ ' . ($contract->amount * 1) . ' в личном кабинете, код' . $contract->accept_code . ' ecozaym24.ru/lk';
+                $msg = 'Активируй займ ' . ($contract->amount * 1) . ' в личном кабинете, код' . $contract->accept_code;
                 if (!empty($this->is_developer)) {
                     $this->response['mode'] = 'developer';
                     $this->response['developer_code'] = $contract->accept_code;
@@ -85,6 +85,16 @@ class SmsCode extends Core
                     $this->response['message'] = $msg;
                 } else {
                     $send_response = $this->sms->send($phone, $msg);
+
+                    $message =
+                        [
+                            'code' => $code,
+                            'phone' => $phone,
+                            'response' => "$send_response"
+                        ];
+
+                    $this->sms->add_message($message);
+
                     $this->response['response'] = $send_response;
 
                     $this->response['mode'] = 'standart';
