@@ -13,8 +13,6 @@ class Sms extends Core
         
         $this->login = $this->settings->apikeys['sms']['login'];
         $this->password = $this->settings->apikeys['sms']['password'];
-        $this->originator = $this->settings->apikeys['sms']['originator'];
-        $this->connect_id = $this->settings->apikeys['sms']['connect_id'];
     }
     
     public function clear_phone($phone)
