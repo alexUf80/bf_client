@@ -110,6 +110,7 @@
                                     </div>
                                 </form>
                             </div>
+                            {*
                             {if $prolongation_amount && $show_prolongation}
                                 <div class="pt-4 text-center">
                                     <form action="account/pay" method="POST" class="border rounded">
@@ -137,7 +138,7 @@
                                     </form>
                                 </div>
                             {/if}
-
+                            *}
                         </div>
                     </div>
                 </div>
@@ -449,7 +450,7 @@
                                         </div>
                                     </form>
                                 </div>
-
+                                {*
                                 {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation}
                                     <div class="pt-4 text-center">
                                         <form action="account/pay" method="POST" data-user="{$user->id}"
@@ -482,7 +483,7 @@
                                         </form>
                                     </div>
                                 {/if}
-
+                                *}
                             </div>
                         </div>
                     </div>
