@@ -128,7 +128,7 @@ class SmsCode extends Core
 
                 $sms_message['response'] = 'DEVELOPER MODE';
             } else {
-                $send_response = $this->sms->send($phone, "$rand_code - код подтверждения регистрации ecozaym24.ru");
+                $send_response = $this->sms->send($phone, "$rand_code - код подтверждения регистрации");
                 $this->response['response'] = $send_response;
                 $sms_message['response'] = $send_response;
 
