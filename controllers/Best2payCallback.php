@@ -118,6 +118,7 @@ class Best2payCallback extends Controller
                             $date_diff = date_diff($now_date, $issuance_date)->days;
                             $prolongation = 0;
                             $docs = 0;
+                            /*
 
                             if ($date_diff < 150
                                 && $contract->loan_percents_summ <= $payment_amount
@@ -217,6 +218,7 @@ class Best2payCallback extends Controller
                             } else {
                                 $this->transactions->update_transaction($transaction->id, array('prolongation' => 0));
                             }
+                            */
 
                             // списываем проценты
                             $contract_loan_percents_summ = (float)$contract->loan_percents_summ;
@@ -245,6 +247,7 @@ class Best2payCallback extends Controller
                                     $rest_amount = 0;
                                 }
                             }
+                            /*
 
                             if (!empty($contract->collection_status)) {
                                 $date1 = new DateTime(date('Y-m-d', strtotime($contract->return_date)));
@@ -270,6 +273,8 @@ class Best2payCallback extends Controller
                                 );
                             }
 
+                            */
+
                             $this->contracts->update_contract($contract->id, array(
                                 'loan_percents_summ' => $contract_loan_percents_summ,
                                 'loan_charge_summ' => 0,
@@ -284,6 +289,7 @@ class Best2payCallback extends Controller
                                 'loan_body_summ' => empty($transaction_loan_body_summ) ? 0 : $transaction_loan_body_summ,
                             ));
 
+                            /*
                             if ($prolongation == 1) {
                                 if (!empty($collection_order))
                                     $collection_order['prolongation'] = 1;
@@ -324,6 +330,7 @@ class Best2payCallback extends Controller
                                     }
                                 }
                             }
+                            */
 
                             // закрываем кредит
                             $contract_loan_percents_summ = round($contract_loan_percents_summ, 2);
@@ -340,8 +347,10 @@ class Best2payCallback extends Controller
                                     'status' => 7
                                 ));
 
+                                /*
                                 if (!empty($collection_order))
                                     $collection_order['closed'] = 1;
+                                */
 
                                 $operation_id = $this->operations->add_operation(array(
                                     'contract_id' => $contract->id,
@@ -355,6 +364,7 @@ class Best2payCallback extends Controller
                                     'contract_is_closed' => 1
                                 ));
 
+                                /*
                                 //Отправляем чек по страховке
                                 $this->ekam->send_insurance($operation_id);
 
@@ -394,19 +404,22 @@ class Best2payCallback extends Controller
                                 ));
 
                                 $closed = 1;
+                                */
 
                             }
 
+                            /*
                             if (!empty($collection_order)) {
                                 $this->collections->add_collection($collection_order);
                             }
+                            */
 
                             $this->operations->add_operation(array(
                                 'contract_id' => $contract->id,
                                 'user_id' => $contract->user_id,
                                 'order_id' => $contract->order_id,
                                 'type' => 'PAY',
-                                'amount' => ($closed || $closed == 1) ? $payment_amount - 400 : $payment_amount,
+                                'amount' => $payment_amount,
                                 'created' => $operation_date,
                                 'transaction_id' => $transaction->id,
                                 'loan_body_summ' => $contract_loan_body_summ,
