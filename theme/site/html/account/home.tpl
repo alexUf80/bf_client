@@ -557,7 +557,6 @@
                                 </div>
                             {/if}
                         </div>
-                        {*
                         {if $cards}
                             <div class="col-md-12">
                                 <div class="pt-4 text-center">
@@ -578,7 +577,6 @@
                                 </div>
                             </div>
                         {/if}
-                        *}
                     </div>
                 </div>
                 <div class="new_order_box hide js-repeat-block">
