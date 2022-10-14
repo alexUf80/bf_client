@@ -246,7 +246,7 @@
                                     </div>
                                     {*}
                                     <form id="accept_credit_form" data-phone="{$user->phone_mobile}">
-                                        <input type="hidden" name="contract_id" value="{$order->contract->id}"/>
+                                        <input type="hidden" name="contract_id" value="{$order->contract_id}"/>
                                         <input type="hidden" name="phone" value="{$user->phone_mobile}"/>
 
                                         <div class="form-group">
