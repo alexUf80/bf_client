@@ -85,6 +85,7 @@ class SmsCode extends Core
                     $this->response['message'] = $msg;
                 } else {
                     $send_response = $this->sms->send($phone, $msg);
+                    $send_response = $send_response['response'];
 
                     $message =
                         [
