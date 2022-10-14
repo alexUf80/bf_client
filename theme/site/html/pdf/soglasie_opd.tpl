@@ -16,7 +16,7 @@
     <strong>{$lastname|upper} {$firstname|upper} {$patronymic|upper} {$birth|date_format:'%d.%m.%Y'}</strong>
     года рождения, место
     рождения <strong>{$birth_place|upper}</strong>, паспорт
-    серия <strong>{$passport_serial} № {$passport_number} выдан {$passport_issued|upper} {$passport_date|date}</strong>
+    серия <strong>{$passport_serial} № {$passport_number} выдан {$passport_issued|upper} {$passport_date}</strong>
     года, код подразделения <strong>{$subdivision_code}</strong> сознательно, свободно, своей волей и в своем
     интересе даю свое согласие ООО МКК «Баренц Финанс» (ОГРН 1217700350812, регистрационный номер записи в
     государственном реестре микрофинансовых организаций 2103045009732, адрес места нахождения: Российская Федерация

@@ -31,64 +31,10 @@ class DocumentController extends Controller
             return false;
 
         if (!empty($document->params)) {
-            $document->params = unserialize($document->params);
 
             foreach ($document->params as $param_name => $param_value)
                 $this->design->assign($param_name, $param_value);
 
-            $user = $this->users->get_user($user_id);
-            $contract = $this->contracts->get_contract($document->contract_id);
-
-            $return_amount_percents = round($contract->loan_body_summ * $contract->base_percent * $contract->period / 100, 2);
-            $return_amount = round($contract->loan_body_summ + $contract->loan_body_summ * $contract->base_percent * $contract->period / 100, 2);
-            $return_amount_rouble = (int)$return_amount;
-            $return_amount_kop = ($return_amount - $return_amount_rouble) * 100;
-
-            $this->design->assign('return_amount_percents', $return_amount_percents);
-            $this->design->assign('return_amount', $return_amount);
-            $this->design->assign('return_amount_rouble', $return_amount_rouble);
-            $this->design->assign('return_amount_kop', $return_amount_kop);
-
-            $regaddress_full = $this->Addresses->get_address($user->regaddress_id);
-            $regaddress_full = $regaddress_full->adressfull;
-
-            $faktaddress_full = $this->Addresses->get_address($user->faktaddress_id);
-            $faktaddress_full = $faktaddress_full->adressfull;
-
-
-            $this->design->assign('regaddress_full', $regaddress_full);
-            $this->design->assign('faktaddress_full', $faktaddress_full);
-        }
-
-        if ($document->type == 'IND_USLOVIYA_NL') {
-            $tribunal = $this->tribunals->find_tribunal($user->Regregion);
-            $this->design->assign('tribunal', $tribunal);
-        }
-
-        if ($document->type == 'IMPORT') {
-            $document->content = $this->format_document($document->content, $document->name);
-            $this->design->assign('content', $document->content);
-            $style = '
-.text-left {
- text-align:left!important
-}
-.text-right {
- text-align:right!important
-}
-.text-center {
- text-align:center!important
-}
-.float-left {
- float:left!important
-}
-.float-right {
- float:right!important
-}
-.float-none {
- float:none!important
-}
-';
-            $this->design->assign('style', $style);
         }
 
         $tpl = $this->design->fetch('pdf/' . $document->template);

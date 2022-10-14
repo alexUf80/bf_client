@@ -15,7 +15,7 @@
     <strong>{$lastname|upper} {$firstname|upper} {$patronymic|upper} {$birth|date_format:'%d.%m.%Y'}</strong>
     года рождения, место
     рождения <strong>{$birth_place|upper}</strong>, паспорт
-    серия <strong>{$passport_serial} № {$passport_number} выдан {$passport_issued|upper} {$passport_date|date}</strong>
+    серия <strong>{$passport_serial} № {$passport_number} выдан {$passport_issued|upper} {$passport_date}</strong>
     года, код подразделения <strong>{$subdivision_code}</strong> СНИЛС <strong>{$snils}</strong>, телефон
     <strong>{$phone_mobile}</strong>
     настоящим, понимая значение своих действий и руководствуясь ими, прошу ООО МКК «Баренц Финанс» (далее - Кредитор) на
