@@ -88,7 +88,7 @@ class SmsCode extends Core
 
                     $message =
                         [
-                            'code' => $code,
+                            'code' => $contract->accept_code,
                             'phone' => $phone,
                             'response' => "$send_response"
                         ];
