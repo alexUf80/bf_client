@@ -3,83 +3,22 @@
 class Documents extends Core
 {
     private $templates = array(
-
-        'IND_USLOVIYA_NL' => 'individualnie-usloviya-nl.tpl',
-        'IND_USLOVIYA_NL_ZERO' => 'individualnie-usloviya-nl-zero.tpl',
-        'SOGLASIE_VZAIMODEYSTVIE' => 'soglasie-na-vzaimodeystvie.tpl',
-        'POLIS_STRAHOVANIYA' => 'polis-strahovaniya.08.02.2022.tpl',
-        'SOGLASIE_SCORING' => 'soglasie-dlya-skoringa.tpl',
-        'SOGLASIE_SPISANIE' => 'soglasie-na-spisanie.tpl',
-        'SOLGLASHENIE_PEP' => 'soglashenie-pep.tpl',
-        'SOGLASIE_MEGAFON' => 'soglasie-dlya-megafona.tpl', // согласие на иную частоту взаимодействия
-        'ANKETA_PEP' => 'zayavlenie-o-vidache-zayma.08.02.2022.tpl',// заявление на выдачу займа
-        'PRICHINA_OTKAZA' => 'zayavlenie-na-uslugu-uznay-prichinu-otkaza.tpl',
-
-        'DOP_SOGLASHENIE_PROLONGATSIYA' => 'dopolnitelnoe-soglashenie-o-prolongatsii.tpl',
-        'POLIS_ZAKRITIE' => 'polis-zakritie.tpl',
-
-        'DOP_USLUGI_VIDACHA' => 'soglasie-na-okazanie-dopuslugi-pri-vidache.070922.tpl',
-        'BUD_V_KURSE' => 'bud_v_kurse.tpl',
-
-        'DOP_USLUGI_PROLONGATSIYA' => 'soglasie-na-okazanie-dopuslugi-pri-prolongatsii.tpl',
-
-        'SUD_PRIKAZ' => 'sudblock_prikaz.tpl',
-        'SUD_SPRAVKA' => 'sudblock_spravka.tpl',
-        'SUD_VOZBUZHDENIE' => 'sudblock_spravka.tpl',
-        'SOGLASIE_OPD' => 'obrabotka_personalnyh_dannyh.070922.tpl',
+        'IND_USLOVIYA_NL' => 'dogovor.tpl',
+        'ANKETA_PEP' => 'zayavlenie_na_poluchenie.tpl',
+        'SOGLASIE_OPD' => 'soglasie_opd.tpl'
     );
 
 
     private $names = array(
-        'ANKETA_PEP' => 'Заявление-анкета на получение займа',
-        'IND_USLOVIYA_NL_ZERO' => 'Индивидуальные условия(без подписи)',
-        'SOLGLASHENIE_PEP' => 'Соглашение об АСП',
-        'SOGLASIE_VZAIMODEYSTVIE' => 'Согласие на взаимодействие с 3 лицами',
-        'SOGLASIE_MEGAFON' => 'Согласие на иную частоту взаимодействия',
-        'SOGLASIE_SCORING' => 'Согласие на получение КИ',
-        'SOGLASIE_SPISANIE' => 'Соглашение о рекуррентных платежах',
-        'PRICHINA_OTKAZA' => 'Заявление на услугу Узнай причину отказа',
-        'DOP_SOGLASHENIE_PROLONGATSIYA' => 'Дополнительное соглашение',
-
-        'POLIS_ZAKRITIE' => 'Полис при закрытии',
-
         'IND_USLOVIYA_NL' => 'Индивидуальные условия',
-        'POLIS_STRAHOVANIYA' => 'Полис страхования',
-        'DOP_USLUGI_VIDACHA' => 'Заявление на страхование',
-        'BUD_V_KURSE' => 'Будь в курсе',
-
-        'DOP_USLUGI_PROLONGATSIYA' => 'Согласие на оказание доп услуги при пролонгации',
-
-        'SUD_PRIKAZ' => 'Заявление о вынесении судебного приказа',
-        'SUD_SPRAVKA' => 'Справка',
-        'SUD_VOZBUZHDENIE' => 'Заявление о возбуждении испольнительного производства',
-        'SOGLASIE_OPD' => 'Согласие на обработку персональных данных заемщика'
-
+        'ANKETA_PEP' => 'Заявление-анкета на получение займа',
+        'SOGLASIE_OPD' => 'Согласие на обработку персональных данных заемщика',
     );
 
     private $client_visible = array(
-        'ANKETA_PEP' => 1,
-        'IND_USLOVIYA_NL_ZERO' => 1,
-        'SOLGLASHENIE_PEP' => 1,
-        'SOGLASIE_VZAIMODEYSTVIE' => 0,
-        'SOGLASIE_MEGAFON' => 0,
-        'SOGLASIE_SCORING' => 0,
-        'SOGLASIE_SPISANIE' => 0,
-        'PRICHINA_OTKAZA' => 0,
-        'DOP_SOGLASHENIE_PROLONGATSIYA' => 1,
-
         'IND_USLOVIYA_NL' => 1,
-        'POLIS_STRAHOVANIYA' => 1,
-        'POLIS_ZAKRITIE' => 1,
-        'DOP_USLUGI_VIDACHA' => 1,
-        'BUD_V_KURSE' => 1,
-
-        'DOP_USLUGI_PROLONGATSIYA' => 0,
-
-        'SUD_PRIKAZ' => 0,
-        'SUD_SPRAVKA' => 0,
-        'SUD_VOZBUZHDENIE' => 0,
-        'SOGLASIE_OPD' => 0
+        'ANKETA_PEP' => 1,
+        'SOGLASIE_OPD' => 1
     );
 
 

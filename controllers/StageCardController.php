@@ -184,53 +184,6 @@ class StageCardController extends Controller
                 $params['contactperson2_firstname'] = isset($contact_person2_name[1]) ? $contact_person2_name[1] : '';
                 $params['contactperson2_patronymic'] = isset($contact_person2_name[2]) ? $contact_person2_name[2] : '';
             }
-            // анкета заявление
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => 0,
-                'type' => 'ANKETA_PEP',
-                'params' => $params,
-            ));
-
-            // соглашение пэп / Соглашение об АСП
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => $order_id,
-                'type' => 'SOLGLASHENIE_PEP',
-                'params' => $params,
-            ));
-
-            // согласие на взаимодействие
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => 0,
-                'type' => 'SOGLASIE_VZAIMODEYSTVIE',
-                'params' => $params,
-            ));
-
-            // согласие для мегафона
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => 0,
-                'type' => 'SOGLASIE_MEGAFON',
-                'params' => $params,
-            ));
-
-            // согласие для скористы
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => 0,
-                'type' => 'SOGLASIE_SCORING',
-                'params' => $params,
-            ));
-
-            // согласие на списание
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => 0,
-                'type' => 'SOGLASIE_SPISANIE',
-                'params' => $params,
-            ));
 
             // Согласие на ОПД
             $this->documents->create_document(array(
@@ -240,38 +193,11 @@ class StageCardController extends Controller
                 'params' => $params,
             ));
 
-            // Заявление на услугу «Узнать причину отказа»
-            $params['service_reason_cost'] = $this->settings->reject_reason_cost;
+            // Заявление на получение займа
             $this->documents->create_document(array(
                 'user_id' => $this->user->id,
                 'order_id' => $order_id,
-                'type' => 'PRICHINA_OTKAZA',
-                'params' => $params,
-            ));
-
-            if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
-                try {
-                    $this->leadgens->send_pending_postback_click2money($order_id, $order);
-                    $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
-                } catch (\Throwable $th) {
-                    //throw $th;
-                }
-            }
-
-            if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'unicom24') {
-                try {
-                    $this->UnicomLeadgen->send_pending_postback($order_id, $order);
-                    $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
-                } catch (\Throwable $th) {
-                    //throw $th;
-                }
-            }
-
-            // Полис страхования (без подписи)
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => $order_id,
-                'type' => 'POLIS_STRAHOVANIYA',
+                'type' => 'ANKETA_PEP',
                 'params' => $params,
             ));
 
