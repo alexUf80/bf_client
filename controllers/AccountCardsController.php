@@ -104,7 +104,7 @@ class AccountCardsController extends Controller
         $this->design->assign('cards', $cards);
         
         
-//        $card_link = $this->best2pay->add_card($this->user->id);
+//        $card_link = $this->BestPay->add_card($this->user->id);
 //        $this->design->assign('card_link', $card_link);
         
         return $this->design->fetch('account/cards.tpl');

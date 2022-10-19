@@ -1,6 +1,6 @@
 <?php
 
-class Best2payCallback extends Controller
+class BestPayCallback extends Controller
 {
     public function fetch()
     {
@@ -24,7 +24,7 @@ class Best2payCallback extends Controller
 
         endswitch;
 
-        return $this->design->fetch('best2pay_callback.tpl');
+        return $this->design->fetch('BestPay_callback.tpl');
     }
 
     public function payment_action()
@@ -35,7 +35,7 @@ class Best2payCallback extends Controller
         $error = $this->request->get('error', 'integer');
         $code = $this->request->get('code', 'integer');
 
-        $sector = $this->best2pay->get_sector('PAYMENT');
+        $sector = $this->BestPay->get_sector('PAYMENT');
 
 
         if (!empty($register_id)) {
@@ -46,7 +46,7 @@ class Best2payCallback extends Controller
                 } else {
 // TODO: сделать запрос в бест2пей и получить успешную операцию
                     if (empty($operation)) {
-                        $register_info = $this->best2pay->get_register_info($transaction->sector, $register_id);
+                        $register_info = $this->BestPay->get_register_info($transaction->sector, $register_id);
                         $xml = simplexml_load_string($register_info);
 
                         foreach ($xml->operations as $xml_operation)
@@ -56,7 +56,7 @@ class Best2payCallback extends Controller
 
 
                     if (!empty($operation)) {
-                        $operation_info = $this->best2pay->get_operation_info($transaction->sector, $register_id, $operation);
+                        $operation_info = $this->BestPay->get_operation_info($transaction->sector, $register_id, $operation);
                         $xml = simplexml_load_string($operation_info);
                         $operation_reference = (string)$xml->reference;
                         $reason_code = (string)$xml->reason_code;
@@ -437,7 +437,7 @@ class Best2payCallback extends Controller
                             }
 
                         } else {
-                            $reason_code_description = $this->best2pay->get_reason_code_description($code);
+                            $reason_code_description = $this->BestPay->get_reason_code_description($code);
                             $this->design->assign('reason_code_description', $reason_code_description);
 
                             $meta_title = 'Не удалось оплатить';
@@ -451,7 +451,7 @@ class Best2payCallback extends Controller
 
 
                     } else {
-                        $callback_response = $this->best2pay->get_register_info($transaction->sector, $register_id, $operation);
+                        $callback_response = $this->BestPay->get_register_info($transaction->sector, $register_id, $operation);
                         $this->transactions->update_transaction($transaction->id, array(
                             'operation' => 0,
                             'callback_response' => $callback_response
@@ -496,7 +496,7 @@ class Best2payCallback extends Controller
         if (!empty($register_id)) {
             if ($transaction = $this->transactions->get_register_id_transaction($register_id)) {
                 if (!empty($operation)) {
-                    $operation_info = $this->best2pay->get_operation_info($transaction->sector, $register_id, $operation);
+                    $operation_info = $this->BestPay->get_operation_info($transaction->sector, $register_id, $operation);
                     $xml = simplexml_load_string($operation_info);
                     $operation_reference = (string)$xml->reference;
                     $reason_code = (string)$xml->reason_code;
@@ -552,7 +552,7 @@ class Best2payCallback extends Controller
                         $this->Receipts->add_receipt($data);
 
                     } else {
-                        $reason_code_description = $this->best2pay->get_reason_code_description($code);
+                        $reason_code_description = $this->BestPay->get_reason_code_description($code);
                         $this->design->assign('reason_code_description', $reason_code_description);
 
                         $meta_title = 'Не удалось привязать карту';
@@ -566,7 +566,7 @@ class Best2payCallback extends Controller
 
 
                 } else {
-                    $callback_response = $this->best2pay->get_register_info($transaction->sector, $register_id, $operation, 1);
+                    $callback_response = $this->BestPay->get_register_info($transaction->sector, $register_id, $operation, 1);
                     $this->transactions->update_transaction($transaction->id, array(
                         'operation' => 0,
                         'callback_response' => $callback_response

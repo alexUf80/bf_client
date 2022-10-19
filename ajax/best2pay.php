@@ -6,7 +6,7 @@ chdir('..');
 
 require 'autoload.php';
 
-class Best2payAjax extends Ajax
+class BestPayAjax extends Ajax
 {
     public function run()
     {
@@ -60,7 +60,7 @@ class Best2payAjax extends Ajax
         {
             $description = "Оплата по договору ".$contract_id;
             $amount = $amount * 100;
-            $response = $this->best2pay->recurrent_pay($card->id, $amount, $description, $contract_id, $prolongation);
+            $response = $this->BestPay->recurrent_pay($card->id, $amount, $description, $contract_id, $prolongation);
             if (empty($response))
                 $this->response['error'] = 'Не удалось оплатить';
             else
@@ -87,7 +87,7 @@ class Best2payAjax extends Ajax
         else
         {
             $amount = $amount * 100;
-            $this->response['link'] = $this->best2pay->get_payment_link($amount, $contract_id, $prolongation, $card_id, $sms);
+            $this->response['link'] = $this->BestPay->get_payment_link($amount, $contract_id, $prolongation, $card_id, $sms);
         }
     }
     
@@ -97,9 +97,9 @@ class Best2payAjax extends Ajax
             return false;
         
         $this->response['user_id'] = $this->user->id;
-    	$this->response['link'] = $this->best2pay->add_card($this->user->id);
+    	$this->response['link'] = $this->BestPay->add_card($this->user->id);
     }
     
 }
-$ajax = new Best2payAjax();
+$ajax = new BestPayAjax();
 $ajax->run();
