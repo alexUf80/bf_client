@@ -29,7 +29,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 2200200111114591, UNKNOWN NAME, 05/2022, 426
 5570725111081379, UNKNOWN NAME, 05/2022, 415 с 3ds
 4809388889655340, UNKNOWN NAME, 05/2022, 195    */
-    private $url = 'https://test.best2pay.net/webapi/';
+    private $url = 'https://test.best2pay.net/';
     private $currency_code = 643;
 
     private $fee = 0.049;
