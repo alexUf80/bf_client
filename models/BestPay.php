@@ -579,9 +579,6 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $b2p = file_get_contents($this->url.$type.'/'.$method, false, $context);
 //echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($this->url.$type.'/'.$method, $data);echo '</pre><hr />';
 
-        var_dump($b2p);
-        exit;
-
         return $b2p;
     }
 
