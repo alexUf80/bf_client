@@ -90,7 +90,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     public function get_payment_link($amount, $contract_id, $prolongation = 0, $card_id = 0, $sms = '')
     {
 
-        $fee = ceil(max($this->min_fee, floatval($amount * $this->fee)));
+        $fee = round(max($this->min_fee, floatval($amount * $this->fee)));
         
         if (!($contract = $this->contracts->get_contract($contract_id)))
             return false;
@@ -106,7 +106,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
                 $password = $this->passwords[$sector];
                 
                 // на юк комиссия 2%
-                $fee = ceil(max($this->min_fee, floatval($amount * $this->yuk_fee)));
+                $fee = round(max($this->min_fee, floatval($amount * $this->yuk_fee)));
             }
             else
             {
@@ -114,7 +114,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
                 $password = $this->passwords[$sector];
                 
                 // на премьер комиссия 2%
-                $fee = ceil(max($this->min_fee, floatval($amount * $this->yuk_fee)));
+                $fee = round(max($this->min_fee, floatval($amount * $this->yuk_fee)));
             }
         }
         else
@@ -578,6 +578,10 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         ));
         $b2p = file_get_contents($this->url.$type.'/'.$method, false, $context);
 //echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($this->url.$type.'/'.$method, $data);echo '</pre><hr />';
+
+        var_dump($b2p);
+        exit;
+        
         return $b2p;
     }
     
