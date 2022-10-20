@@ -56,9 +56,7 @@ function ContractAcceptApp()
                             $('[name="service_reason"]').val(1);
                             $('[name="service_sms"]').val(1);
             
-                            $('html, body').animate({
-                                scrollTop: $(".header").offset().top  
-                            }, 400);                
+                                       
             
                             app.$form.find('.js-accept-code-error').html('').closest('.form-phone').removeClass('-error');
                             

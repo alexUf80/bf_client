@@ -240,7 +240,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $data['signature'] = $this->get_signature(array($data['sector'], $data['amount'], $data['currency'], $password));
 
         $b2p_order = $this->send('Register', $data);
-//echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($b2p_order, $sector);echo '</pre><hr />';
+echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($b2p_order, $sector);echo '</pre><hr />';
         $xml = simplexml_load_string($b2p_order);
         $b2p_order_id = (string)$xml->id;
 
@@ -649,10 +649,10 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
 
 
-    public function add_card_old($user_id)
+    public function add_card_enroll($user_id)
     {
-        $sector = 2243;
-        $password = $this->settings->apikeys['best2pay'][2243];
+        $sector = $this->sectors['ADD_CARD'];
+        $password = $this->passwords[$sector];
 
         $amount = 100; // сумма для списания > 100
         $description = 'Привязка карты'; // описание операции
@@ -664,7 +664,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             'currency' => $this->currency_code,
             'reference' => $user_id,
             'description' => $description,
-            'url' => 'http://nalic-front.eva-p.ru/best2pay_callback/add_card',
+            'url' => $this->config->root_url.'/best2pay_callback/add_card',
 //            'mode' => 1
         );
         $data['signature'] = $this->get_signature(array($data['sector'], $data['amount'], $data['currency'], $password));
@@ -691,7 +691,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         );
         $data['signature'] = $this->get_signature(array($sector, $b2p_order_id, $password));
 
-        $link = $this->url.'CardEnroll?'.http_build_query($data);
+        $link = $this->url.'webapi/CardEnroll?'.http_build_query($data);
 
         return $link;
     }

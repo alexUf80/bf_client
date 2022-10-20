@@ -1,6 +1,6 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 'Off');
+error_reporting(-1);
+ini_set('display_errors', 'On');
 
 chdir('..');
 
@@ -97,7 +97,7 @@ class BestPayAjax extends Ajax
             return false;
         
         $this->response['user_id'] = $this->user->id;
-    	$this->response['link'] = $this->BestPay->add_card($this->user->id);
+    	$this->response['link'] = $this->BestPay->add_card_enroll($this->user->id);
     }
     
 }
