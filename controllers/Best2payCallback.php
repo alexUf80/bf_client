@@ -1,6 +1,6 @@
 <?php
 
-class BestPayCallback extends Controller
+class Best2PayCallback extends Controller
 {
     public function fetch()
     {
@@ -24,7 +24,7 @@ class BestPayCallback extends Controller
 
         endswitch;
 
-        return $this->design->fetch('BestPay_callback.tpl');
+        return $this->design->fetch('best2pay_callback.tpl');
     }
 
     public function payment_action()
