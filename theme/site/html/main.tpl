@@ -62,7 +62,6 @@
                   <div class="res_info_sum -fs-20 -com-sb"><span class="js-total-summ"></span> ₽</div>
                 </div>
               </div>
-                {*
               <div class="form-group form-phone ">
                 <span class="phone_info -fs-14">Ваш номер телефона</span>
                 <input type="text" name="phone" id="phone" class="form-control -fs-18 -gil-m js-mask-phone js-loan-phone" value="">
@@ -95,7 +94,6 @@
                       </div>
                   </div>
                 </div>
-                *}
                    <div id="promo_code" style="display:none" class="pr-3 pl-3">
                   <div class="text-center text-success js-success-promo" style="display:none">
                       <p>Промокод активирован            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
