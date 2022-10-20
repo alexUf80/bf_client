@@ -303,7 +303,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 pt-4">
-                                <dl class="row pb-2 border-bottom">2
+                                <dl class="row pb-2 border-bottom">
                                     <dd class="col-6 text-left">Номер договора</dd>
                                     <dt class="col-6 text-right">{$order->contract->id}</dt>
                                 </dl>
