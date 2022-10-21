@@ -346,73 +346,7 @@ class Best2PayCallback extends Controller
                                 $this->orders->update_order($contract->order_id, array(
                                     'status' => 7
                                 ));
-
-                                /*
-                                if (!empty($collection_order))
-                                    $collection_order['closed'] = 1;
-                                */
-
-                                $operation_id = $this->operations->add_operation(array(
-                                    'contract_id' => $contract->id,
-                                    'user_id' => $contract->user_id,
-                                    'order_id' => $contract->order_id,
-                                    'transaction_id' => $transaction->id,
-                                    'type' => 'INSURANCE',
-                                    'amount' => 400,
-                                    'created' => date('Y-m-d H:i:s'),
-                                    'sent_status' => 0,
-                                    'contract_is_closed' => 1
-                                ));
-
-                                /*
-                                //Отправляем чек по страховке
-                                $this->ekam->send_insurance($operation_id);
-
-                                $insurance_id = $this->insurances->add_insurance(array(
-                                    'number' => '',
-                                    'amount' => 400,
-                                    'user_id' => $contract->user_id,
-                                    'order_id' => $contract->order_id,
-                                    'create_date' => date('Y-m-d H:i:s'),
-                                    'start_date' => date('Y-m-d 00:00:00', time() + (1 * 86400)),
-                                    'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
-                                    'operation_id' => (int)$operation_id,
-                                    'protection' => 0,
-                                ));
-
-                                $insurances = new stdClass();
-                                $insurances->operation_id = $operation_id;
-
-                                $params = array(
-                                    'now_date' => date('Y-m-d'),
-                                    'lastname' => $contract_order->lastname,
-                                    'firstname' => $contract_order->firstname,
-                                    'patronymic' => $contract_order->patronymic,
-                                    'birth' => $contract_order->birth,
-                                    'phone_mobile' => $contract_order->phone_mobile,
-                                    'email' => $contract_order->email,
-                                    'amount' => $contract->amount,
-                                    'operation_id' => $insurances
-                                );
-
-                                $this->documents->create_document(array(
-                                    'user_id' => $contract->user_id,
-                                    'order_id' => $contract->order_id,
-                                    'contract_id' => $contract->id,
-                                    'type' => 'POLIS_ZAKRITIE',
-                                    'params' => $params
-                                ));
-
-                                $closed = 1;
-                                */
-
                             }
-
-                            /*
-                            if (!empty($collection_order)) {
-                                $this->collections->add_collection($collection_order);
-                            }
-                            */
 
                             $this->operations->add_operation(array(
                                 'contract_id' => $contract->id,
