@@ -108,7 +108,7 @@ class AccountPayController extends Controller
 
         $this->design->assign('user_id', ($this->user->id));
 
-        $full_amount = $contract->loan_body_summ + $contract->loan_percents_summ + $contract->loan_peni_summ + $contract->loan_charge_summ + 400;
+        $full_amount = $contract->loan_body_summ + $contract->loan_percents_summ + $contract->loan_peni_summ + $contract->loan_charge_summ;
         $this->design->assign('full_amount', $full_amount);
 
         $this->design->assign('order_id', $order_id);

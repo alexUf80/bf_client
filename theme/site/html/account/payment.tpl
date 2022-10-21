@@ -91,7 +91,7 @@
 
                         </div>
                         <div class="col-md-4">
-                            {if $amount + 400 == $full_amount}
+                            {if $amount == $full_amount}
                                 <div>
                                     <div class="check">
                                         <input type="hidden" class="custom-checkbox" name="close_insurance" value="1"/>
