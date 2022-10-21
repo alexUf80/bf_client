@@ -93,17 +93,6 @@
                         <div class="col-md-4">
                             {if $amount == $full_amount}
                                 <div>
-                                    <div class="check">
-                                        <input type="hidden" class="custom-checkbox" name="close_insurance" value="1"/>
-                                        <input type="checkbox" class="custom-checkbox prolongation" id="close_insurance"
-                                               value="1" checked/>
-                                        <label for="close_insurance" class="check_box -gil-m">'
-                                            <span>согласен заключить договор страхования в соответствии с <a
-                                                        class="text-success"
-                                                        href="/html2pdf?user_id={$order->user_id}&document_name=strahovka-pri-zakritii&contract_id={$contract_id}"
-                                                        target="_blank">правилами</a></span>
-                                        </label>
-                                    </div>
                                     <div class="pt-4 text-center">
                                         <a href="#" id="close_contract" data-full-amount="{$full_amount}"
                                            class="btn btn-primary btn-block">Погасить займ</a>
