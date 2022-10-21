@@ -28,9 +28,9 @@ console.log('init')
 
             if (amount > 0)
             {
-                if ($('[name=card_id]:checked').length > 0)
+                if ($('input[name=card_id]:checked').length > 0)
                 {
-                    var card_id = $('[name=card_id]:checked').val();
+                    var card_id = $('input[name=card_id]:checked').val();
 
                     app.other_payment(contract_id, amount, e, prolongation, code_sms, card_id);
                 }
@@ -99,7 +99,7 @@ console.log('init')
                 card_id: card_id
             },
             success: function(resp){
-                
+
                 if (!!resp.error)
                 {
                     $('.payment-block').removeClass('loading').addClass('error');
@@ -117,7 +117,7 @@ console.log('init')
                     
                     
                 }
-                
+
             }
         })
     };

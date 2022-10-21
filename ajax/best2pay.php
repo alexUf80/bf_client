@@ -77,7 +77,6 @@ class BestPayAjax extends Ajax
         $contract_id = $this->request->get('contract_id', 'integer');
         $prolongation = $this->request->get('prolongation', 'integer');
         $sms = $this->request->get('code_sms', 'string');
-        
         $card_id = $this->request->get('card_id', 'integer');
         
         if (empty($amount))
