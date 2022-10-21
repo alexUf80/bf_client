@@ -102,8 +102,6 @@ class Cloudkassir extends Core
         }
 
     }
-    
-    
     public function send_reject_reason($order_id)
     {
     	if ($order = $this->orders->get_order($order_id))
