@@ -73,7 +73,7 @@
                     <div class="check mb-0 js-loan-agreement-block">
                       <input type="checkbox" class="custom-checkbox js-loan-agreement" id="check_agreement" name="agreement" value="1" checked="true" />
                       <label for="check_agreement" class="check_box -gil-m">
-                         <span>Я ознакомлен со <a href="#agreement_list" class="green-link js-toggle-agreement-list" >следующим</a></span>
+                         <span>Я ознакомлен со <a href="#agreement_list" style="color: #4A2982" class="js-toggle-agreement-list" >следующим</a></span>
                       </label>
                     </div>
                   </div>
@@ -90,12 +90,12 @@
                 <div class="form-group">
                   <div class="form_row">
                       <div class="check mb-0 check_box justify-content-center">
-                          <span><a href="#promo_code" class="green-link js-toggle-promo-code" >У меня есть промокод</a></span>
+                          <span><a href="#promo_code" class="js-toggle-promo-code" style="color: #4A2982">У меня есть промокод</a></span>
                       </div>
                   </div>
                 </div>
                    <div id="promo_code" style="display:none" class="pr-3 pl-3">
-                  <div class="text-center text-success js-success-promo" style="display:none">
+                  <div style="color: #4A2982" class="text-center js-success-promo" style="display:none">
                       <p>Промокод активирован            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
                               <path d="M9.88442 1.8301L4.15429 7.55898C4.00072 7.71194 3.75208 7.71194 3.59912 7.55898L0.114476 4.05205C-0.0384842 3.89847 -0.0384842 3.6489 0.114476 3.49625L0.947087 2.66426C1.10067 2.51099 1.3493 2.51099 1.50226 2.66426L3.87965 5.05744L8.4957 0.441075C8.64866 0.288115 8.8973 0.288115 9.0515 0.441075L9.88411 1.2743C10.0386 1.42757 10.0386 1.67714 9.88442 1.8301Z" fill="#33CC66"></path>
                           </svg>

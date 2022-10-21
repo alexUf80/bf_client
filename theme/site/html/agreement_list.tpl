@@ -14,7 +14,67 @@
         </li>
         {*}
     </ul>
-
+    <div class="">
+        <div class="form_row">
+            <div class="check">
+                <input type="hidden" class="custom-checkbox" name="service_insurance" value="1"/>
+                <input type="checkbox"
+                       class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if}
+                       id="service_insurance" value="1" checked/>
+                <label for="service_insurance" class="check_box -gil-m">
+                 <span>
+                    Согласие на обработку
+                    <a href="/files/about/soglasie_opd.pdf" target="_blank" style="color: #4A2982">персональных данных</a>
+                 </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="form_row">
+            <div class="check">
+                <input type="hidden" class="custom-checkbox" name="soglasie_pep" value="1" />
+                <input type="checkbox" class="custom-checkbox js-need-check"  id="soglasie_pep" value="1" checked/>
+                <label for="soglasie_pep" class="check_box -gil-m">
+                 <span>
+                     Соглашение
+                    <a style="color: #4A2982" href="/files/about/soglashenie_o_ispolzovanii_pep.pdf" target="_blank"> АСП</a>
+                 </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="form_row">
+            <div class="check">
+                <input type="hidden" class="custom-checkbox" name="soglasie_pep" value="1" />
+                <input type="checkbox" class="custom-checkbox js-need-check"  id="soglasie_pep" value="1" checked/>
+                <label for="soglasie_pep" class="check_box -gil-m">
+                 <span>
+                     Правила предоставления
+                    <a style="color: #4A2982" href="/files/about/pravila_predostavleniya.pdf" target="_blank"> микрозаймов</a>
+                 </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="form_row">
+            <div class="check">
+                <input type="hidden" class="custom-checkbox" name="service_reason" value="1"/>
+                <input type="checkbox"
+                       class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if}
+                       id="service_reason" value="1" checked/>
+                <label for="service_reason" class="check_box -gil-m">
+                 <span>
+                    В случае отказа по заявке, я хочу получить информацию о <a style="color: #4A2982"
+                                                                               href="/files/about/prichina_otkaza.pdf"
+                                                                               target="_blank">причине отказа</a>
+                 </span>
+                </label>
+            </div>
+        </div>
+    </div>
     <div class="">
         <div class="form_row">
             <div class="check">
@@ -25,44 +85,44 @@
                 <label for="service_insurance" class="check_box -gil-m">
                  <span>
                     согласен заключить договор страхования в соответствии
-                    <a class="text-success" href="/files/about/Pravila_195_strahovanie_ot_ns.pdf" target="_blank">с правилами</a>
+                    <a style="color: #4A2982" href="/files/about/Pravila_195_strahovanie_ot_ns.pdf" target="_blank">с правилами</a>
                  </span>
                 </label>
             </div>
         </div>
     </div>
-
-    {*
     <div class="">
         <div class="form_row">
             <div class="check">
-              <input type="hidden" class="custom-checkbox" name="service_reason" value="1" />
-              <input type="checkbox" class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if} id="service_reason" value="1" checked/>
-              <label for="service_reason" class="check_box -gil-m">
+                <input type="hidden" class="custom-checkbox" name="service_insurance" value="1"/>
+                <input type="checkbox"
+                       class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if}
+                       id="service_insurance" value="1" checked/>
+                <label for="service_insurance" class="check_box -gil-m">
                  <span>
-                    В случае отказа по заявке, я хочу получить информацию о причине отказа
+                    Общие условия
+                    <a style="color: #4A2982" href="/files/about/obshie_usloviya.pdf" target="_blank"> потребительского микрозайма</a>
                  </span>
-              </label>
+                </label>
             </div>
         </div>
     </div>
-
     <div class="">
         <div class="form_row">
             <div class="check">
-              <input type="hidden" class="custom-checkbox" name="service_sms" value="1" />
-              <input type="checkbox" class="custom-checkbox"  {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if} id="service_sms" value="1" checked/>
-              <label for="service_sms" class="check_box -gil-m">
+                <input type="hidden" class="custom-checkbox" name="service_insurance" value="1"/>
+                <input type="checkbox"
+                       class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if}
+                       id="service_insurance" value="1" checked/>
+                <label for="service_insurance" class="check_box -gil-m">
                  <span>
-                    Согласен на подключение услуги
-                    <a class="text-success" href="/files/about/pravila_bud_v_kurse.pdf" target="_blank">"Будь в курсе"</a>
+                    Информация об условиях предоставления, использования
+                    <a style="color: #4A2982" href="/files/about/predostavlenie_vozvrat.pdf" target="_blank"> и возврата потребительского микрозайма</a>
                  </span>
-              </label>
+                </label>
             </div>
         </div>
     </div>
-    *}
-
     {if $order->contract}
         <div class="">
             <div class="form_row">
