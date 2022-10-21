@@ -35,6 +35,11 @@ class DocumentController extends Controller
             foreach ($document->params as $param_name => $param_value)
                 $this->design->assign($param_name, $param_value);
 
+            $regaddress = $this->Addresses->get_address($user->regaddress_id);
+            $regaddress_full = $regaddress->adressfull;
+
+            $this->design->assign('regaddress_full', $regaddress_full);
+
         }
 
         $tpl = $this->design->fetch('pdf/' . $document->template);
