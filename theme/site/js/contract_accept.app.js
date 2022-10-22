@@ -89,11 +89,14 @@ function ContractAcceptApp() {
 
         var _contract_id = app.$form.find('[name=contract_id]').val();
 
+        let phone = app.$form.find('[name=phone]').val();
+
         $.ajax({
             url: 'ajax/sms_code.php',
             data: {
                 action: 'send_accept_code',
-                contract_id: _contract_id
+                contract_id: _contract_id,
+                phone: phone
             },
             success: function (resp) {
                 if (!!resp.error) {
