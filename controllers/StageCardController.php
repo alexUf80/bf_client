@@ -168,8 +168,8 @@ class StageCardController extends Controller
                 'first_loan_amount' => $this->user->first_loan_amount,
                 'first_loan_period' => $this->user->first_loan_period,
 
-                'number' => $order->order_id,
-                'create_date' => $order->date,
+                'number' => $order_id,
+                'create_date' => date('Y-m-d'),
                 'asp' => $this->user->sms,
             );
             if (!empty($this->user->contact_person_name))
@@ -198,7 +198,7 @@ class StageCardController extends Controller
                 'user_id' => $this->user->id,
                 'order_id' => $order_id,
                 'type' => 'SOGLASIE_OPD',
-                'params' => $params,
+                'params' => json_encode($params),
             ));
 
             // Заявление на получение займа
@@ -206,7 +206,7 @@ class StageCardController extends Controller
                 'user_id' => $this->user->id,
                 'order_id' => $order_id,
                 'type' => 'ANKETA_PEP',
-                'params' => $params,
+                'params' => json_encode($params),
             ));
 
 
