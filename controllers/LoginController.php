@@ -26,7 +26,7 @@ class LoginController extends Controller
 		{
             $phone = $this->request->post('phone', 'string');
             $code = $this->request->post('code', 'string');
-            $password = null;
+            $password = $this->request->post('password');
             
             $clean_phone = $this->sms->clear_phone($phone);
             
