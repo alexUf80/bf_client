@@ -8,8 +8,7 @@ class DocumentController extends Controller
 {
     public function fetch()
     {
-        if ($this->request->get('action') == 'preview')
-        {
+        if ($this->request->get('action') == 'preview') {
             $this->action_preview();
         }
 
@@ -32,6 +31,8 @@ class DocumentController extends Controller
 
         if (!empty($document->params)) {
 
+            $document->params = json_decode($document->params, true);
+
             foreach ($document->params as $param_name => $param_value)
                 $this->design->assign($param_name, $param_value);
 
@@ -40,6 +41,32 @@ class DocumentController extends Controller
 
             $this->design->assign('regaddress_full', $regaddress_full);
 
+            $order = $this->orders->get_order($document->params['number']);
+            $contract = $this->contracts->get_contract($order->contract_id);
+            $this->design->assign('contract', $contract);
+
+        }
+
+        $insurance = $this->request->get('insurance');
+
+        if (!empty($insurance)) {
+            if ($contract->amount <= 10000)
+            {
+                $insurance = 390;
+                $contract->amount += $insurance;
+            }
+            elseif ($contract->amount >= 10001 && $contract->amount <= 20000)
+            {
+                $insurance = 490;
+                $contract->amount += $insurance;
+            }
+            elseif ($contract->amount >= 20000)
+            {
+                $insurance = 590;
+                $contract->amount += $insurance;
+            }
+
+            $this->design->assign('insurance', $insurance);
         }
 
         $tpl = $this->design->fetch('pdf/' . $document->template);
@@ -103,7 +130,7 @@ class DocumentController extends Controller
 
         return $content;
     }
-    
+
     private function action_preview()
     {
         $type = $this->request->get('type');
@@ -113,19 +140,19 @@ class DocumentController extends Controller
 
         if (!($template = $this->documents->get_template($type)))
             return false;
-            
+
         if (!($template_name = $this->documents->get_template_name($type)))
             return false;
-            
+
         if (!($contract_id = $this->request->get('contract_id', 'integer')))
             return false;
-        
+
         if (!($contract = $this->contracts->get_contract($contract_id)))
             return false;
-        
+
 
         $ob_date = new DateTime();
-        $ob_date->add(DateInterval::createFromDateString($contract->period.' days'));
+        $ob_date->add(DateInterval::createFromDateString($contract->period . ' days'));
         $return_date = $ob_date->format('Y-m-d H:i:s');
 
         $return_amount = round($contract->amount + $contract->amount * $contract->base_percent * $contract->period / 100, 2);
@@ -165,20 +192,19 @@ class DocumentController extends Controller
             'passport_number' => substr(str_replace(array(' ', '-'), '', $contract_order->passport_serial), 4, 6),
 //            'asp' => $contract->accept_code,
         );
-        $regaddress_full = empty($contract_order->Regindex) ? '' : $contract_order->Regindex.', ';
-        $regaddress_full .= trim($contract_order->Regregion.' '.$contract_order->Regregion_shorttype);
-        $regaddress_full .= empty($contract_order->Regcity) ? '' : trim(', '.$contract_order->Regcity.' '.$contract_order->Regcity_shorttype);
-        $regaddress_full .= empty($contract_order->Regdistrict) ? '' : trim(', '.$contract_order->Regdistrict.' '.$contract_order->Regdistrict_shorttype);
-        $regaddress_full .= empty($contract_order->Reglocality) ? '' : trim(', '.$contract_order->Reglocality.' '.$contract_order->Reglocality_shorttype);
-        $regaddress_full .= empty($contract_order->Reghousing) ? '' : ', д.'.$contract_order->Reghousing;
-        $regaddress_full .= empty($contract_order->Regbuilding) ? '' : ', стр.'.$contract_order->Regbuilding;
-        $regaddress_full .= empty($contract_order->Regroom) ? '' : ', к.'.$contract_order->Regroom;
+        $regaddress_full = empty($contract_order->Regindex) ? '' : $contract_order->Regindex . ', ';
+        $regaddress_full .= trim($contract_order->Regregion . ' ' . $contract_order->Regregion_shorttype);
+        $regaddress_full .= empty($contract_order->Regcity) ? '' : trim(', ' . $contract_order->Regcity . ' ' . $contract_order->Regcity_shorttype);
+        $regaddress_full .= empty($contract_order->Regdistrict) ? '' : trim(', ' . $contract_order->Regdistrict . ' ' . $contract_order->Regdistrict_shorttype);
+        $regaddress_full .= empty($contract_order->Reglocality) ? '' : trim(', ' . $contract_order->Reglocality . ' ' . $contract_order->Reglocality_shorttype);
+        $regaddress_full .= empty($contract_order->Reghousing) ? '' : ', д.' . $contract_order->Reghousing;
+        $regaddress_full .= empty($contract_order->Regbuilding) ? '' : ', стр.' . $contract_order->Regbuilding;
+        $regaddress_full .= empty($contract_order->Regroom) ? '' : ', к.' . $contract_order->Regroom;
 
         $params['regaddress_full'] = $regaddress_full;
 
 
-        if ($type == 'POLIS_STRAHOVANIYA')
-        {
+        if ($type == 'POLIS_STRAHOVANIYA') {
             $insurance = new StdClass();
 
             $insurance->create_date = date('Y-m-d H:i:s');
@@ -192,7 +218,7 @@ class DocumentController extends Controller
         foreach ($params as $param_name => $param_value)
             $this->design->assign($param_name, $param_value);
 
-       	$tpl = $this->design->fetch('pdf/'.$template);
+        $tpl = $this->design->fetch('pdf/' . $template);
 
         $this->pdf->create($tpl, $template_name, $template);
 

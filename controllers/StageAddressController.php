@@ -93,8 +93,7 @@ class StageAddressController extends Controller
 
                 $regaddress_id = $this->Addresses->add_address($regaddress);
                 $faktaddress_id = $this->Addresses->add_address($faktaddress);
-
-                $this->users->update_user($this->user->id, array('regaddress_id' => $regaddress_id, 'faktaddress_id' => $faktaddress_id, 'stage_address' => 1, 'address_data_added_date' => date('Y-m-d H:i:s')));
+                $this->users->update_user($this->user->id, array('regaddress_id' => $regaddress_id, 'faktaddress_id' => $faktaddress_id, 'stage_address' => 1));
 
                 header('Location: /stage/work');
                 exit;
