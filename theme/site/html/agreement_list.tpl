@@ -49,11 +49,11 @@
     <div class="">
         <div class="form_row">
             <div class="check">
-                <input type="hidden" class="custom-checkbox" name="prichina_otkaza" value="1"/>
+                <input type="hidden" class="custom-checkbox" name="service_reason" value="1"/>
                 <input type="checkbox"
                        class="custom-checkbox"
-                       id="prichina_otkaza" value="1" checked/>
-                <label for="prichina_otkaza" class="check_box -gil-m">
+                       id="service_reason" value="1" checked/>
+                <label for="service_reason" class="check_box -gil-m">
                  <span>
                     В случае отказа по заявке, я хочу получить информацию о <a style="color: #4A2982"
                                                                                href="/files/about/prichina_otkaza.pdf"
