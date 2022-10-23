@@ -25,13 +25,12 @@ class Insurances extends Core
         $number .= 'NZI'; // код продукта (не меняется)
         $number .= '165'; // код партнера (не меняется)
         $number .= 9; // 9ХХХХХХ – номер полиса страхования (первая всегда 9 для экозайма)
-    	
-        $id_number = $id;
-        while (strlen($id_number) < 6)
+
+        while (strlen($id) < 6)
         {
-            $id_number = '0'.$id_number;
+            $id = '0'.$id;
         }
-        $number .= $id_number;
+        $number .= $id;
         
         return $number;
     }
