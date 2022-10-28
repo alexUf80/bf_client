@@ -95,22 +95,6 @@
                   </div>
                   <div class="form_row">
                     <label class="input_box -fullwidth">
-                      <input type="text" class="form-control js-only-cirylic js-input-required js-dadata-chief-name" name="chief_name" id="chief_name" value="{$chief_name|escape}">
-                      <span class="input_name {if $chief_name}-top{/if}">ФИО начальника</span>
-                    </label>
-                  </div>
-                  <div class="form_row">
-                    <label class="input_box">
-                      <input type="text" class="form-control js-input-required js-dadata-chief-position" name="chief_position" id="chief_position" value="{$chief_position}">
-                      <span class="input_name {if $chief_position}-top{/if}">Должность начальника</span>
-                    </label>
-                    <label class="input_box">
-                      <input type="text" class="form-control js-mask-phone js-input-required js-dadata-chief-phone" name="chief_phone" id="chief_phone" value="{$chief_phone}" />
-                      <span class="input_name {if $chief_phone}-top{/if}">Телефон начальника</span>
-                    </label>
-                  </div>
-                  <div class="form_row">
-                    <label class="input_box -fullwidth">
                       <input type="text" class="form-control js-input-required" name="contact_person_name" id="contact_person1" value="{$contact_person_name}" />
                       <span class="input_name {if $contact_person_name}-top{/if}">ФИО контактного лица</span>
                     </label>
@@ -132,31 +116,6 @@
                       <span class="input_name -top">Кем приходится</span>
                     </label>
                   </div>
-                  {*}
-                  <div class="form_row">
-                    <label class="input_box -fullwidth">
-                      <input type="text" class="form-control js-input-required" name="contact_person2_name" id="contact_person2" value="{$contact_person2_name}" />
-                      <span class="input_name {if $contact_person2_name}-top{/if}">ФИО контактного лица</span>
-                    </label>
-                  </div>
-                  <div class="form_row">
-                    <label class="input_box">
-                      <input type="text" class="form-control js-mask-phone js-input-required" name="contact_person2_phone" id="contact_person_phone2" value="{$contact_person2_phone}" />
-                      <span class="input_name {if $contact_person2_phone}-top{/if}">Телефон контактного лица</span>
-                    </label>
-                    <label class="input_box">
-                      <select name="contact_person2_relation" class="form-control">
-                        <option value="мать/отец" {if $contact_person2_relation=='мать/отец'}selected="selected"{/if}>мать/отец</option>
-                        <option value="муж/жена" {if $contact_person2_relation=='муж/жена'}selected="selected"{/if}>муж/жена</option>
-                        <option value="сын/дочь" {if $contact_person2_relation=='сын/дочь'}selected="selected"{/if}>сын/дочь</option>
-                        <option value="коллега" {if $contact_person2_relation=='коллега'}selected="selected"{/if}>коллега</option>
-                        <option value="друг/сосед" {if $contact_person2_relation=='друг/сосед'}selected="selected"{/if}>друг/сосед</option>
-                        <option value="иной родственник" {if $contact_person2_relation=='иной родственник'}selected="selected"{/if}>иной родственник</option>
-                      </select>
-                      <span class="input_name -top">Кем приходится</span>
-                    </label>
-                  </div>
-                  {*}
                 </div>
                 <div class="step_box_btn">
                   <a href="/stage/work?step=prev" class="btn btn_back btn-link -green -gil-m">Назад</a>

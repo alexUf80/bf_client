@@ -231,7 +231,7 @@
               <div class="new-questions__item-content">
                   <div class="new-questions__item-title">Получить деньги</div>
                   <div class="new-questions__item-text">
-                      <p>Готовы зачислить деньги на вашу банковску карту прямо сейчас.</p>
+                      <p>Готовы зачислить деньги на вашу банковскую карту прямо сейчас.</p>
                       <p>Заполните анкету с данными, получите индивидуальное предложение!</p>
                   </div>
               </div>
@@ -263,7 +263,7 @@
           </div>
       </div>
   </div>
-
+    {*
   <div class="new-actions">
     <div class="new-actions__main">
         <div class="new-actions__main-image">
@@ -300,7 +300,7 @@
         </div>
     </div>
   </div>
-
+  *}
 </div>
 {*}
 <main class="main">

@@ -41,10 +41,6 @@ class StageWorkController extends Controller
             $average_pay = (string)$this->request->post('average_pay');
             $amount_pay = (string)$this->request->post('amount_pay');
 
-            $chief_name = (string)$this->request->post('chief_name');
-            $chief_position = (string)$this->request->post('chief_position');
-            $chief_phone = (string)$this->request->post('chief_phone');
-
             $contact_person_name = (string)$this->request->post('contact_person_name');
             $contact_person_phone = (string)$this->request->post('contact_person_phone');
             $contact_person_relation = (string)$this->request->post('contact_person_relation');
@@ -64,9 +60,6 @@ class StageWorkController extends Controller
             $this->design->assign('average_pay', $average_pay);
             $this->design->assign('amount_pay', $amount_pay);
 
-            $this->design->assign('chief_name', $chief_name);
-            $this->design->assign('chief_position', $chief_position);
-            $this->design->assign('chief_phone', $chief_phone);
             $this->design->assign('contact_person_name', $contact_person_name);
             $this->design->assign('contact_person_phone', $contact_person_phone);
             $this->design->assign('contact_person_relation', $contact_person_relation);
@@ -86,12 +79,6 @@ class StageWorkController extends Controller
                 $errors[] = 'empty_income';
             if (empty($expenses))
                 $errors[] = 'empty_expenses';
-            if (empty($chief_name))
-                $errors[] = 'empty_chief_name';
-            if (empty($chief_position))
-                $errors[] = 'empty_chief_position';
-            if (empty($chief_phone))
-                $errors[] = 'empty_chief_phone';
             if (empty($contact_person_name))
                 $errors[] = 'empty_contact_person_name';
             if (empty($contact_person_phone))
@@ -139,9 +126,6 @@ class StageWorkController extends Controller
                     'average_pay' => $average_pay,
                     'amount_pay' => $amount_pay,
                     'pdn' => $pdn,
-                    'chief_name' => $chief_name,
-                    'chief_position' => $chief_position,
-                    'chief_phone' => $chief_phone,
                     'contact_person_name' => $contact_person_name,
                     'contact_person_phone' => $contact_person_phone,
                     'contact_person_relation' => $contact_person_relation,
@@ -171,9 +155,6 @@ class StageWorkController extends Controller
             $this->design->assign('workphone', $this->user->workphone);
             $this->design->assign('income', $this->user->income);
             $this->design->assign('expenses', $this->user->expenses);
-            $this->design->assign('chief_name', $this->user->chief_name);
-            $this->design->assign('chief_position', $this->user->chief_position);
-            $this->design->assign('chief_phone', $this->user->chief_phone);
             $this->design->assign('contact_person_name', $this->user->contact_person_name);
             $this->design->assign('contact_person_phone', $this->user->contact_person_phone);
             $this->design->assign('contact_person_relation', $this->user->contact_person_relation);

@@ -139,6 +139,7 @@
             </div>
             <div class="new-footer__block">
                 <div class="new-footer__contacts">
+                    {*
                     <a href="tel+79914714533" class="new-footer__contacts-item">
                         <div class="new-footer__contacts-item-icon">
                           <img src="/theme/site/i/Telegram.svg">
@@ -157,6 +158,7 @@
                         </div>
                         <div class="new-footer__contacts-item-text">8 991 471 45 33</div>
                     </a>
+                            *}
                     <a href="tel+78001018283" class="new-footer__contacts-item">
                         <div class="new-footer__contacts-item-icon">
                           <img src="/theme/site/i/Phone.svg">
@@ -239,7 +241,7 @@
 
 {if !$is_developer}
 {literal}
-<script src="//code-ya.jivosite.com/widget/0DbQAAOxcD" async></script>
+    <script src="//code.jivo.ru/widget/OPARMHrIm4" async></script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
