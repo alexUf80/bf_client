@@ -29,7 +29,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 2200200111114591, UNKNOWN NAME, 05/2022, 426
 5570725111081379, UNKNOWN NAME, 05/2022, 415 с 3ds
 4809388889655340, UNKNOWN NAME, 05/2022, 195    */
-    private $url = 'https://test.best2pay.net/';
+    private $url = 'https://pay.best2pay.net/';
     private $currency_code = 643;
 
     private $fee = 0.049;
@@ -51,16 +51,17 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     */
 
     private $sectors = array(
-        'PAY_CREDIT' => '4038', //сектор для отправки кредита на карту клиента (P2PCredit)
-        'RECURRENT' => '4037', // сектор для совершения рекурентных платежей (token)
-        'ADD_CARD' => '4037', // сектор для привязки карты (token)
-        'PAYMENT' => '4039', // сектор для оплаты любой картой (C2A)
+        'PAY_CREDIT' => '9733', //сектор для отправки кредита на карту клиента (P2PCredit)
+        'RECURRENT' => '9749', // сектор для совершения рекурентных платежей (token) ECOM
+        'ADD_CARD' => '9748', // сектор для привязки карты (token)
+        'PAYMENT' => '9750', // сектор для оплаты любой картой (C2A)
     );
 
     private $passwords = array(
-        '4038' => 'test',
-        '4037' => 'test',
-        '4039' => 'test'
+        '9733' => 'Hs3Me74',
+        '9749' => 'D41i7R39',
+        '9748' => 'U44eS3Is715',
+        '9750' => 'W38iUdA3'
     );
 
     public function __construct()
