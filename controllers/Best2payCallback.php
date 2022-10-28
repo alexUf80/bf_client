@@ -435,9 +435,6 @@ class Best2PayCallback extends Controller
                     $operation_reference = (string)$xml->reference;
                     $reason_code = (string)$xml->reason_code;
 
-
-//echo __FILE__.' '.__LINE__.'<br /><pre>';echo(htmlspecialchars($operation_info));echo '</pre><hr />';
-
                     if ($reason_code == 1) {
 
                         $card = array(
@@ -458,7 +455,7 @@ class Best2PayCallback extends Controller
 
                         $cardId = $this->cards->add_card($card);
 
-                        $countUserCards = $this->cards->count_cards(['user_id' => $xml->reference]);
+                        $countUserCards = $this->cards->count_cards(array('user_id' => $xml->reference));
                         if ($countUserCards > 1) {
                             $this->design->assign('cardId', $cardId);
                             $this->session->set('otherCardAdded', 1);
@@ -472,18 +469,18 @@ class Best2PayCallback extends Controller
                             'operation_id' => $transaction->id,
                             'amount' => 1);
 
-                        $res = $this->Ekam->send_receipt($receipt);
-                        $res = json_decode($res);
+                        //$res = $this->Ekam->send_receipt($receipt);
+                        //$res = json_decode($res);
 
-                        $data = array(
-                            'user_id' => $card['user_id'],
-                            'name' => $receipt['title'],
-                            'receipt_url' => $res->online_cashier_url,
-                            'response' => json_encode($res),
-                            'created' => date('Y-m-d H:i:s')
-                        );
+                        //$data = array(
+                         //   'user_id' => $card['user_id'],
+                        //    'name' => $receipt['title'],
+                         //   'receipt_url' => $res->online_cashier_url,
+                         //   'response' => json_encode($res),
+                         //   'created' => date('Y-m-d H:i:s')
+                       // );
 
-                        $this->Receipts->add_receipt($data);
+                        //$this->Receipts->add_receipt($data);
 
                     } else {
                         $reason_code_description = $this->BestPay->get_reason_code_description($code);
