@@ -32,7 +32,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     private $url = 'https://pay.best2pay.net/';
     private $currency_code = 643;
 
-    private $fee = 0.049;
+    private $fee = 0.04;
     private $min_fee = 3000;
 
     // комиссия на ЮК1 2%
