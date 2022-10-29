@@ -40,14 +40,6 @@ class StageWorkController extends Controller
 
             $average_pay = (string)$this->request->post('average_pay');
             $amount_pay = (string)$this->request->post('amount_pay');
-
-            $contact_person_name = (string)$this->request->post('contact_person_name');
-            $contact_person_phone = (string)$this->request->post('contact_person_phone');
-            $contact_person_relation = (string)$this->request->post('contact_person_relation');
-            $contact_person2_name = (string)$this->request->post('contact_person2_name');
-            $contact_person2_phone = (string)$this->request->post('contact_person2_phone');
-            $contact_person2_relation = (string)$this->request->post('contact_person2_relation');
-
             $juicescore_session_id = (string)$this->request->post('juicescore_session_id');
 
             $this->design->assign('workplace', $workplace);
@@ -56,16 +48,8 @@ class StageWorkController extends Controller
             $this->design->assign('workaddress', $workaddress);
             $this->design->assign('income', $income);
             $this->design->assign('expenses', $expenses);
-
             $this->design->assign('average_pay', $average_pay);
             $this->design->assign('amount_pay', $amount_pay);
-
-            $this->design->assign('contact_person_name', $contact_person_name);
-            $this->design->assign('contact_person_phone', $contact_person_phone);
-            $this->design->assign('contact_person_relation', $contact_person_relation);
-            $this->design->assign('contact_person2_name', $contact_person2_name);
-            $this->design->assign('contact_person2_phone', $contact_person2_phone);
-            $this->design->assign('contact_person2_relation', $contact_person2_relation);
 
             $errors = array();
 
@@ -79,10 +63,6 @@ class StageWorkController extends Controller
                 $errors[] = 'empty_income';
             if (empty($expenses))
                 $errors[] = 'empty_expenses';
-            if (empty($contact_person_name))
-                $errors[] = 'empty_contact_person_name';
-            if (empty($contact_person_phone))
-                $errors[] = 'empty_contact_person_phone';
 /***
             if (empty($contact_person2_name))
                 $errors[] = 'empty_contact_person2_name';
@@ -126,21 +106,11 @@ class StageWorkController extends Controller
                     'average_pay' => $average_pay,
                     'amount_pay' => $amount_pay,
                     'pdn' => $pdn,
-                    'contact_person_name' => $contact_person_name,
-                    'contact_person_phone' => $contact_person_phone,
-                    'contact_person_relation' => $contact_person_relation,
-/***
-                    'contact_person2_name' => $contact_person2_name,
-                    'contact_person2_phone' => $contact_person2_phone,
-                    'contact_person2_relation' => $contact_person2_relation,
-***/
                     'stage_work' => 1,
-
                     'juicescore_session_id' => $juicescore_session_id,
                 );
 
                 $update = array_map('strip_tags', $update);
-
                 $this->users->update_user($this->user->id, $update);
 
                 header('Location: /stage/files');
@@ -155,12 +125,6 @@ class StageWorkController extends Controller
             $this->design->assign('workphone', $this->user->workphone);
             $this->design->assign('income', $this->user->income);
             $this->design->assign('expenses', $this->user->expenses);
-            $this->design->assign('contact_person_name', $this->user->contact_person_name);
-            $this->design->assign('contact_person_phone', $this->user->contact_person_phone);
-            $this->design->assign('contact_person_relation', $this->user->contact_person_relation);
-            $this->design->assign('contact_person2_name', $this->user->contact_person2_name);
-            $this->design->assign('contact_person2_phone', $this->user->contact_person2_phone);
-            $this->design->assign('contact_person2_relation', $this->user->contact_person2_relation);
 
         }
 

@@ -32,8 +32,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     private $url = 'https://pay.best2pay.net/';
     private $currency_code = 643;
 
-    private $fee = 0.04;
-    private $min_fee = 3000;
+    private $fee = 0.03;
 
     // комиссия на ЮК1 2%
     private $yuk_fee = 0.02;
@@ -91,7 +90,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     public function get_payment_link($amount, $contract_id, $prolongation = 0, $card_id = 0, $sms = '')
     {
 
-        $fee = round(max($this->min_fee, floatval($amount * $this->fee)));
+        $fee = round(max(1, floatval($amount * $this->fee)));
 
         if (!($contract = $this->contracts->get_contract($contract_id)))
             return false;

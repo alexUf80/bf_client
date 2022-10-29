@@ -29,7 +29,8 @@ class LoginController extends Controller
             $password = $this->request->post('password');
             
             $clean_phone = $this->sms->clear_phone($phone);
-            
+
+            /*
             $error = NULL;
             if (!empty($password))
             {
@@ -46,6 +47,7 @@ class LoginController extends Controller
                     $error = 'Код из СМС не совпадает';
                 }
             }
+            */
             
             if (empty($error))
             {                

@@ -101,11 +101,6 @@
                 $('[name="service_insurance"]').val(1);
                 $('[name="service_reason"]').val(1);
                 $('[name="service_sms"]').val(1);
-
-                $('html, body').animate({
-                    scrollTop: $(".header").offset().top  
-                }, 400);                
-                
                 $('.js-loan-repeat-form').submit();
             }
         });
