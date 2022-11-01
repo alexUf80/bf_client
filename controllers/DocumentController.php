@@ -48,7 +48,7 @@ class DocumentController extends Controller
 
         $insurance = $this->request->get('insurance');
 
-        if (!empty($insurance)) {
+        if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
             if ($contract->amount <= 10000)
             {
                 $insurance = 390;
