@@ -41,8 +41,7 @@ class DocumentController extends Controller
 
             $this->design->assign('regaddress_full', $regaddress_full);
 
-            $order = $this->orders->get_order($document->params['number']);
-            $contract = $this->contracts->get_contract($order->contract_id);
+            $contract = $this->contracts->get_contract($document->contract_id);
             $this->design->assign('contract', $contract);
 
         }
