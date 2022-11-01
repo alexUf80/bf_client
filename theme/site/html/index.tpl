@@ -75,19 +75,12 @@
     <span>ID {$user->id}</span>
     {/if}
   </div>  
-  {/if} 
-  
-   
-{*}
+  {/if}
   <div class="developer-panel">
     <span>
-        В период с 21:00 по 23:59 (МСК) 01.03.2022 будут проводиться технические работы, портал будет недоступен. 
-        <br />Повторите авторизацию после завершения работ. 
-        Спасибо за понимание!    
+        На сайте ведутся технические работы до 14.00 (по МСК)
     </span>
   </div>
-{*}
-
     <header class="new-header">
       <div class="new-header__inner">
         <div class="new-header__hamburger-icon hamburger-icon"></div>

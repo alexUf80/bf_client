@@ -12,7 +12,7 @@
                     <td align="center">
                         <strong>ПОЛИС – ОФЕРТА</strong><br/>
                         <strong>СТРАХОВАНИЕ ОТ НЕСЧАСТНЫХ СЛУЧАЕВ</strong><br/>
-                        <strong>№ {$insurance->number} от {$insurance->create_date|date}г.</strong><br/>
+                        <strong>№ {$contract->insurance->number} от {$contract->insurance->create_date|date}г.</strong><br/>
                     </td>
                     <td style="width: 20%"></td>
                 </tr>
@@ -103,11 +103,11 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая сумма, руб:</strong></td>
-                    <td colspan="2">{$amount*3} ({($amount*3)|price_string}).</td>
+                    <td colspan="2">{$amount} ({($amount)|price_string}).</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая премия, руб:</strong></td>
-                    <td colspan="2">{$insurance_summ} ({$insurance_summ|price_string}).</td>
+                    <td colspan="2">{$contract->insurance->amount} ({$contract->insurance->amount|price_string}).</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Порядок оплаты страховой премии: </strong></td>
@@ -115,7 +115,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Дата оплаты страховой премии (не позднее): </strong></td>
-                    <td colspan="2">{$insurance->start_date|date}</td>
+                    <td colspan="2">{$contract->insurance->start_date|date}</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Территория страхования: </strong></td>
@@ -127,7 +127,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Срок действия договора страхования: </strong></td>
-                    <td colspan="2">с 00 часов  {$insurance->start_date|date}г.  по 24 часов {$insurance->end_date|date}
+                    <td colspan="2">с 00 часов  {$contract->insurance->start_date|date}г.  по 24 часов {$contract->insurance->end_date|date}
                         г.
                     </td>
                 </tr>

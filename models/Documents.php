@@ -63,16 +63,13 @@ class Documents extends Core
     
 	public function get_document($id)
 	{
-//		$this->db->query('SET NAMES '.$this->config->db_charset);
         $query = $this->db->placehold("
             SELECT *
             FROM __documents
             WHERE id = ?
         ", (int)$id);
         $this->db->query($query);
-        if ($result = $this->db->result())
-            $result->params = unserialize($result->params);
-//        $result->content = iconv('utf8', 'cp1251', $result->content);
+        $result = $this->db->result();
         return $result;
     }
 

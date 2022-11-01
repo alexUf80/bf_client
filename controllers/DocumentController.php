@@ -42,6 +42,21 @@ class DocumentController extends Controller
             $this->design->assign('regaddress_full', $regaddress_full);
 
             $contract = $this->contracts->get_contract($document->contract_id);
+
+            if(!empty($contract->insurance_id))
+                $contract->insurance = $this->insurances->get_insurance($contract->insurance_id);
+
+            $cards = $this->cards->get_cards($contract->user_id);
+            $active_card = '';
+
+            if (!empty($cards)) {
+                foreach ($cards as $card) {
+                    if($card->base_card == 1)
+                        $active_card = $card->pan;
+                }
+                $this->design->assign('active_card', $active_card);
+            }
+
             $this->design->assign('contract', $contract);
 
         }
@@ -66,6 +81,8 @@ class DocumentController extends Controller
             }
 
             $this->design->assign('insurance', $insurance);
+
+
         }
 
         $tpl = $this->design->fetch('pdf/' . $document->template);
