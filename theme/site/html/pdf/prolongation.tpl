@@ -51,7 +51,7 @@
         <td style="width: 36%;" align="center">
             <div>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА
                 СОСТАВЛЯЕТ {$return_amount_percents} РУБЛЕЙ 00 КОПЕЕК
-                {$return_amount_percents||upper}
+                ({$return_amount_percents|price_string|upper})
             </div>
         </td>
     </tr>
