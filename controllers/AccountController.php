@@ -281,7 +281,7 @@ class AccountController extends Controller
 
 
             $prolongation_amount = 0;
-            if (empty($order->contract->stop_profit) && $order->contract->delay <= 150) {
+            if (empty($order->contract->stop_profit)) {
                 if (empty($order->contract->hide_prolongation)) {
                     if ($order->contract->type == 'base' && ($order->contract->status == 2 || $order->contract->status == 4)) // выдан
                     {

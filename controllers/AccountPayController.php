@@ -83,6 +83,7 @@ class AccountPayController extends Controller
             $this->design->assign('prolongation_amount_without_insurance', $prolongation_amount_without_insurance);
             $this->design->assign('amount', $amount);
             $this->design->assign('prolongation_amount', $prolongation_amount);
+            $this->design->assign('prolongation', $prolongation);
 
 
             $card_list = $this->cards->get_cards(array('user_id' => $this->user->id));

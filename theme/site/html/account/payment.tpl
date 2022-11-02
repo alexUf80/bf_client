@@ -99,6 +99,7 @@
                                     </div>
                                 </div>
                                 {else}
+                                <input type="hidden" name="prolongation" value="{$prolongation}">
                                 <div class="pt-4 text-center">
                                     <a href="#" id="confirm_payment" class="btn btn-primary btn-block">Оплатить</a>
                                 </div>
