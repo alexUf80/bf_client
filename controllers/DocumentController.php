@@ -10,6 +10,7 @@ class DocumentController extends Controller
     {
         if ($this->request->get('action') == 'preview') {
             $this->action_preview();
+            exit;
         }
 
         $id = $this->request->get('id');
@@ -149,6 +150,8 @@ class DocumentController extends Controller
 
     private function action_preview()
     {
+        var_dump(123);
+        exit;
         $type = $this->request->get('type');
         $type = strtoupper(str_replace('.pdf', '', $type));
         if (empty($type))
@@ -179,7 +182,6 @@ class DocumentController extends Controller
 
         $insurance_cost = $this->insurances->get_insurance_cost($contract->amount);
 
-//echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($type);echo '</pre><hr />';        exit;
         $params = array(
             'lastname' => $contract_order->lastname,
             'firstname' => $contract_order->firstname,
@@ -206,27 +208,23 @@ class DocumentController extends Controller
             'passport_issued' => $contract_order->passport_issued,
             'passport_series' => substr(str_replace(array(' ', '-'), '', $contract_order->passport_serial), 0, 4),
             'passport_number' => substr(str_replace(array(' ', '-'), '', $contract_order->passport_serial), 4, 6),
-//            'asp' => $contract->accept_code,
         );
-        $regaddress_full = empty($contract_order->Regindex) ? '' : $contract_order->Regindex . ', ';
-        $regaddress_full .= trim($contract_order->Regregion . ' ' . $contract_order->Regregion_shorttype);
-        $regaddress_full .= empty($contract_order->Regcity) ? '' : trim(', ' . $contract_order->Regcity . ' ' . $contract_order->Regcity_shorttype);
-        $regaddress_full .= empty($contract_order->Regdistrict) ? '' : trim(', ' . $contract_order->Regdistrict . ' ' . $contract_order->Regdistrict_shorttype);
-        $regaddress_full .= empty($contract_order->Reglocality) ? '' : trim(', ' . $contract_order->Reglocality . ' ' . $contract_order->Reglocality_shorttype);
-        $regaddress_full .= empty($contract_order->Reghousing) ? '' : ', д.' . $contract_order->Reghousing;
-        $regaddress_full .= empty($contract_order->Regbuilding) ? '' : ', стр.' . $contract_order->Regbuilding;
-        $regaddress_full .= empty($contract_order->Regroom) ? '' : ', к.' . $contract_order->Regroom;
+
+        $user = $this->users->get_user($contract_order->user_id);
+
+        $regaddress = $this->Addresses->get_address($user->regaddress_id);
+        $regaddress_full = $regaddress->adressfull;
 
         $params['regaddress_full'] = $regaddress_full;
 
 
-        if ($type == 'POLIS_STRAHOVANIYA') {
+        if ($type == 'POLIS') {
             $insurance = new StdClass();
 
             $insurance->create_date = date('Y-m-d H:i:s');
             $insurance->amount = round($insurance_cost, 2);
             $insurance->start_date = date('Y-m-d 00:00:00', time() + (1 * 86400));
-            $insurance->end_date = date('Y-m-d 23:59:59', time() + (30 * 86400));
+            $insurance->end_date = date('Y-m-d 23:59:59', time() + (31 * 86400));
 
             $params['insurance'] = $insurance;
         }

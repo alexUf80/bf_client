@@ -100,7 +100,6 @@
                                 </div>
                                 {else}
                                 <div class="pt-4 text-center">
-                                    <input type="hidden" name="prolongation" value="{if $amount > $prolongation_amount_without_insurance }1{else}0{/if}"/>
                                     <a href="#" id="confirm_payment" class="btn btn-primary btn-block">Оплатить</a>
                                 </div>
                             {/if}

@@ -136,7 +136,7 @@ function SmsApp(phone, success_callback, _options) {
                 _tpl += '<input type="hidden" class="custom-checkbox" name="service_insurance" value="1"/>';
                 _tpl += '<input type="checkbox" class="custom-checkbox prolongation" id="service_insurance" value="1" checked/>';
                 _tpl += '<label for="service_insurance" class="check_box -gil-m">';
-                _tpl += '<span>согласен с <a class="text-success" href="/html2pdf?user_id=' + app.options.user_id + '&document_name=dopolnitelnoe-soglashenie-o-prolongatsii&contract_id=' + app.options.contract_id + '"  target="_blank">доп соглашением о пролонгации</a> </span> </label>';
+                _tpl += '<span>согласен с <a class="text-success" href="/html2pdf?user_id=' + app.options.user_id + '&document_name=DOP_SOGLASHENIE&contract_id=' + app.options.contract_id + '"  target="_blank">доп соглашением о пролонгации</a> </span> </label>';
                 _tpl += '</div>';
                 _tpl += '</div>';
                 _tpl += '</div>';
@@ -146,7 +146,7 @@ function SmsApp(phone, success_callback, _options) {
                 _tpl += '<input type="hidden" class="custom-checkbox" name="service_polise" value="1"/>';
                 _tpl += '<input type="checkbox" class="custom-checkbox prolongation" id="service_polise" value="1" checked/>';
                 _tpl += '<label for="service_polise" class="check_box -gil-m">';
-                _tpl += '<span>согласен с <a class="text-success" href="/html2pdf?user_id=' + app.options.user_id + '&document_name=polis_strahovaniya_preview&contract_id=' + app.options.contract_id + '" target="_blank">полисом страхования</a>';
+                _tpl += '<span>согласен с <a class="text-success" href="/html2pdf?user_id=' + app.options.user_id + '&document_name=POLIS&contract_id=' + app.options.contract_id + '" target="_blank">полисом страхования</a>';
                 _tpl += '</span>';
                 _tpl += '</label>';
                 _tpl += '</div>';

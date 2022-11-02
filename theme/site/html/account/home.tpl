@@ -450,7 +450,6 @@
                                         </div>
                                     </form>
                                 </div>
-                                {*
                                 {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation}
                                     <div class="pt-4 text-center">
                                         <form action="account/pay" method="POST" data-user="{$user->id}"
@@ -466,24 +465,18 @@
                                                 <div class="col-md-4 col-12">
                                                     <input type="text" readonly="" style="background-color: #fbfbfb;"
                                                            class="form-control text-right" name="amount"
-                                                           value="{1 * $prolongation_amount}"
+                                                           value="{$prolongation_amount}"
                                                            min="{$prolongation_amount}"/>
                                                 </div>
                                                 <div class="col-md-6 col-12 pt-1">
-                                                    {if $order->contract->type == 'onec'}
-                                                        <a href="https://nalichnoe.com/login/"
-                                                           class="btn btn-primary btn-block">Перейти&nbsp;к&nbsp;оплате</a>
-                                                    {else}
                                                         <button type="submit" class="btn btn-primary btn-block">
                                                             Оплатить
                                                         </button>
-                                                    {/if}
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 {/if}
-                                *}
                             </div>
                         </div>
                     </div>

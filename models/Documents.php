@@ -7,7 +7,8 @@ class Documents extends Core
         'ANKETA_PEP' => 'zayavlenie_na_poluchenie.tpl',
         'SOGLASIE_OPD' => 'soglasie_opd.tpl',
         'POLIS' => 'polis.tpl',
-        'KID' => 'kid.tpl'
+        'KID' => 'kid.tpl',
+        'DOP_SOGLASHENIE' => 'prolongation.tpl'
     );
 
 
@@ -16,7 +17,8 @@ class Documents extends Core
         'ANKETA_PEP' => 'Заявление-анкета на получение займа',
         'SOGLASIE_OPD' => 'Согласие на обработку персональных данных заемщика',
         'POLIS' => 'Полис страхования',
-        'KID' => 'Ключевой информационный документ об условиях добровольного страхования'
+        'KID' => 'Ключевой информационный документ об условиях добровольного страхования',
+        'DOP_SOGLASHENIE' => 'Дополнительное соглашение о пролонгации'
     );
 
     private $client_visible = array(
@@ -24,7 +26,8 @@ class Documents extends Core
         'ANKETA_PEP' => 1,
         'SOGLASIE_OPD' => 1,
         'POLIS' => 1,
-        'KID' => 1
+        'KID' => 1,
+        'DOP_SOGLASHENIE' => 1
     );
 
 
