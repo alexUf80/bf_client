@@ -287,9 +287,7 @@ class AccountController extends Controller
                     {
                         if ($order->contract->prolongation < 5 || ($order->contract->prolongation >= 5 && $order->contract->sold)) {
                             if ($order->contract->loan_percents_summ > 0) {
-                                $prolongation_amount = $order->contract->loan_percents_summ + $order->contract->loan_charge_summ;
-                                if (empty($order->contract->sold)) // снимаем страховку начиная со 2 пролонгации
-                                    $prolongation_amount += $this->settings->prolongation_amount;
+                                $prolongation_amount = $order->contract->loan_percents_summ + $order->contract->loan_peni_summ;
                             }
                         }
                     }

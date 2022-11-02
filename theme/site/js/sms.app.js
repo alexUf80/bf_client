@@ -143,8 +143,8 @@ function SmsApp(phone, success_callback, _options) {
                 _tpl += '<div class="">';
                 _tpl += '<div class="form_row">';
                 _tpl += '<div class="check">';
-                _tpl += '<input type="hidden" class="custom-checkbox" name="service_polise" value="1"/>';
-                _tpl += '<input type="checkbox" class="custom-checkbox prolongation" id="service_polise" value="1" checked/>';
+                _tpl += '<input type="hidden" class="custom-checkbox" name="service_polise"/>';
+                _tpl += '<input type="checkbox" class="custom-checkbox prolongation" id="service_polise" checked/>';
                 _tpl += '<label for="service_polise" class="check_box -gil-m">';
                 _tpl += '<span>согласен с <a class="text-success" href="/html2pdf?user_id=' + app.options.user_id + '&document_name=POLIS&contract_id=' + app.options.contract_id + '" target="_blank">полисом страхования</a>';
                 _tpl += '</span>';

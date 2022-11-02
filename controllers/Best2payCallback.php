@@ -101,7 +101,7 @@ class Best2PayCallback extends Controller
 
                             );
 
-                            $prolongation_sum = $contract->loan_percents_summ + $contract->loan_peni_summ + $this->settings->prolongation_amount;
+                            $prolongation_sum = $contract->loan_percents_summ + $contract->loan_peni_summ;
 
                             if (!empty($transaction->prolongation) && $payment_amount == $prolongation_sum) {
 
@@ -113,35 +113,42 @@ class Best2PayCallback extends Controller
                                 $document_params['return_date_year'] = date('Y', strtotime($new_return_date));
                                 $document_params['period'] = $this->settings->prolongation_period;
 
-                                $operation_id = $this->operations->add_operation(array(
-                                    'contract_id' => $contract->id,
-                                    'user_id' => $contract->user_id,
-                                    'order_id' => $contract->order_id,
-                                    'transaction_id' => $transaction->id,
-                                    'type' => 'INSURANCE',
-                                    'amount' => $this->settings->prolongation_amount,
-                                    'created' => date('Y-m-d H:i:s'),
-                                    'sent_status' => 0,
-                                ));
+                                $docs = 1;
 
-                                $insurance_id = $this->insurances->add_insurance(array(
-                                    'number' => '',
-                                    'amount' => $this->settings->prolongation_amount,
-                                    'user_id' => $contract->user_id,
-                                    'order_id' => $contract->order_id,
-                                    'create_date' => date('Y-m-d H:i:s'),
-                                    'start_date' => date('Y-m-d 00:00:00', time() + (1 * 86400)),
-                                    'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
-                                    'operation_id' => $operation_id,
-                                    'protection' => 0,
-                                ));
-                                $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
+                                if($payment_amount == $contract->loan_percents_summ + $contract->loan_peni_summ + $this->settings->prolongation_amount)
+                                {
+                                    $operation_id = $this->operations->add_operation(array(
+                                        'contract_id' => $contract->id,
+                                        'user_id' => $contract->user_id,
+                                        'order_id' => $contract->order_id,
+                                        'transaction_id' => $transaction->id,
+                                        'type' => 'INSURANCE',
+                                        'amount' => $this->settings->prolongation_amount,
+                                        'created' => date('Y-m-d H:i:s'),
+                                        'sent_status' => 0,
+                                    ));
 
-                                $rest_amount = $rest_amount - $this->settings->prolongation_amount;
+                                    $insurance_id = $this->insurances->add_insurance(array(
+                                        'number' => '',
+                                        'amount' => $this->settings->prolongation_amount,
+                                        'user_id' => $contract->user_id,
+                                        'order_id' => $contract->order_id,
+                                        'create_date' => date('Y-m-d H:i:s'),
+                                        'start_date' => date('Y-m-d 00:00:00', time() + (1 * 86400)),
+                                        'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
+                                        'operation_id' => $operation_id,
+                                        'protection' => 0,
+                                    ));
+                                    $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
 
-                                //Отправляем чек по страховке
-                                $this->Cloudkassir->send_insurance($operation_id);
-                                $payment_amount -= $this->settings->prolongation_amount;
+                                    $rest_amount = $rest_amount - $this->settings->prolongation_amount;
+
+                                    //Отправляем чек по страховке
+                                    $this->Cloudkassir->send_insurance($operation_id);
+                                    $payment_amount -= $this->settings->prolongation_amount;
+
+                                    $docs = 2;
+                                }
 
                                 // продлеваем контракт
                                 $this->contracts->update_contract($contract->id, array(
@@ -159,8 +166,6 @@ class Best2PayCallback extends Controller
                                     'accept_code' => $transaction->sms,
                                     'transaction_id' => $transaction->id,
                                 ));
-
-                                $prolongation = 1;
 
                             }
 
@@ -230,14 +235,17 @@ class Best2PayCallback extends Controller
                                 'params' => json_encode($document_params)
                             ));
 
-                            $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
-                            $this->documents->create_document(array(
-                                'user_id' => $contract->user_id,
-                                'order_id' => $contract->order_id,
-                                'contract_id' => $contract->id,
-                                'type' => 'POLIS',
-                                'params' => json_encode($document_params)
-                            ));
+                            if($docs == 2)
+                            {
+                                $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
+                                $this->documents->create_document(array(
+                                    'user_id' => $contract->user_id,
+                                    'order_id' => $contract->order_id,
+                                    'contract_id' => $contract->id,
+                                    'type' => 'POLIS',
+                                    'params' => json_encode($document_params)
+                                ));
+                            }
                         }
 
                         // закрываем кредит

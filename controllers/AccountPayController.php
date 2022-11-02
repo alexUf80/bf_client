@@ -57,10 +57,7 @@ class AccountPayController extends Controller
                 if ($contract->prolongation < 5)
                 {
                     // сделать проверку что бы в тот же день не было видно пролонгации
-                    $prolongation_amount = $contract->loan_percents_summ + $contract->loan_charge_summ;
-                    $prolongation_amount_without_insurance = $contract->loan_percents_summ;
-                    if (empty($contract->sold)) // снимаем страховку начиная со 2 пролонгации
-                        $prolongation_amount += $this->settings->prolongation_amount;
+                    $prolongation_amount = $amount;
                 }
             }
 
@@ -80,7 +77,6 @@ class AccountPayController extends Controller
                 $amount = $max_payment;
             }
 
-            $this->design->assign('prolongation_amount_without_insurance', $prolongation_amount_without_insurance);
             $this->design->assign('amount', $amount);
             $this->design->assign('prolongation_amount', $prolongation_amount);
             $this->design->assign('prolongation', $prolongation);

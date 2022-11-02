@@ -1,9 +1,9 @@
 {$meta_title='Личный кабинет' scope=parent}
 
 {capture name='page_scripts'}
-    <script src="theme/site/js/calc.app.js?v=1.05"></script>
-    <script src="theme/site/js/lk.app.js?v=1.05"></script>
-    <script src="theme/site/js/contract_accept.app.js?v=1.06"></script>
+    <script src="theme/site/js/calc.app.js?v=1.07"></script>
+    <script src="theme/site/js/lk.app.js?v=1.07"></script>
+    <script src="theme/site/js/contract_accept.app.js?v=1.07"></script>
 {/capture}
 
 {capture name='page_styles'}
