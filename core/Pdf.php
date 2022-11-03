@@ -18,6 +18,8 @@ class Pdf extends Core
         $this->tcpdf->SetTitle($name);
         $this->tcpdf->SetSubject('TCPDF Tutorial');
         $this->tcpdf->SetKeywords('');
+        $this->tcpdf->setFooterMargin(0);
+        $this->tcpdf->SetAutoPageBreak(TRUE, 0);
         
         // set font
         $this->tcpdf->SetFont('dejavuserif', '', 9);
