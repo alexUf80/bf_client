@@ -22,15 +22,12 @@ class Insurances extends Core
         $number = '';
         $number .= date('y'); // год выпуска полиса
         $number .= '0H3'; // код подразделения выпустившего полис (не меняется)
-        $number .= 'NZI'; // код продукта (не меняется)
-        $number .= '165'; // код партнера (не меняется)
-        $number .= 9; // 9ХХХХХХ – номер полиса страхования (первая всегда 9 для экозайма)
+        $number .= 'FIM'; // код продукта (не меняется)
+        $number .= '383'; // код партнера (не меняется)
 
-        while (strlen($id) < 6)
-        {
-            $id = '0'.$id;
-        }
-        $number .= $id;
+        $polis_number = str_pad($id, 7, '0', STR_PAD_LEFT);
+
+        $number .= $polis_number;
         
         return $number;
     }
