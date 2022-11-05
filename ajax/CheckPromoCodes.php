@@ -20,11 +20,9 @@ class CheckPromoCodes extends Core
 
         $code = $this->PromoCodes->get_code_by_code($code);
 
-        // $checked = $this->PromoCodes->check_code($code);
-
         if ($code->is_active) {
             $this->response['checked'] = 1;
-            $this->response['percent'] = $code->discount;
+            $this->response['percent'] = 1 - ($code->discount/100);
         } else {
             $this->response['code'] = $code->is_active;
             $this->response['false'] = 1;

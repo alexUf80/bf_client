@@ -109,7 +109,7 @@
                       <span class="phone_info -fs-14">Промокод</span>
                   </div>
                   <div class="form-group form-btn">
-                    <a id="check_promo_code" href="javascript:void(0);" class="btn btn-secondary  -fs-20 -fullwidth  js-promo-code-ckeck ">Применить</a>
+                    <a id="check_promo_code" href="javascript:void(0);" class="btn btn-secondary  -fs-20 -fullwidth  js-promo-code-ckeck">Применить</a>
                   </div>
                 </div>
 

@@ -35,7 +35,7 @@
         app.$total_summ = app.$form.find('.js-total-summ');
         app.$total_period = app.$form.find('.js-total-period');
 
-        app.loan_percent = parseFloat(app.$form.data('percent'));
+        app.loan_percent = parseFloat(app.$form.attr('data-percent'));
 
         app.min_summ = parseInt(app.$input_summ.attr('min'));
         app.max_summ = parseInt(app.$input_summ.attr('max'));
@@ -212,9 +212,11 @@
         app.$total_summ.text(new Intl.NumberFormat("ru").format(_total_summ));
 
         var _now = new Date();
-        _now.setDate(_now.getDate() + app.current_period)
+        _now.setDate(_now.getDate() + app.current_period);
         var _string_total_date = _get_string_date(_now);
         app.$total_period.text(_string_total_date);
+
+        console.log(app.loan_percent);
 
         if (!!app.DEBUG)
         {

@@ -121,23 +121,6 @@ class Users extends Core
         
         if (!empty($passport))
             $response['passport'] = $passport;
-        
-        
-        $work = array();
-        
-        if (empty($user->workplace) || empty($user->workaddress))
-            $work[] = 'workplace';
-        if (empty($user->profession))
-            $work[] = 'profession';
-        if (empty($user->workphone))
-            $work[] = 'workphone';
-        if (empty($user->income))
-            $work[] = 'income';
-        if (empty($user->expenses))
-            $work[] = 'expenses';
-        
-        if (!empty($work))
-            $response['work'] = $work;
 
         $files = array();
         $isset_files = array();
