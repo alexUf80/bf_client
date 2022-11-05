@@ -76,11 +76,13 @@
     {/if}
   </div>  
   {/if}
+  {*
   <div class="developer-panel">
     <span>
         На сайте ведутся технические работы до 14.00 (по МСК)
     </span>
   </div>
+  *}
     <header class="new-header">
       <div class="new-header__inner">
         <div class="new-header__hamburger-icon hamburger-icon"></div>

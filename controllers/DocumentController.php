@@ -47,7 +47,7 @@ class DocumentController extends Controller
             if(!empty($contract->insurance_id))
                 $contract->insurance = $this->insurances->get_insurance($contract->insurance_id);
 
-            $cards = $this->cards->get_cards($contract->user_id);
+            $cards = $this->cards->get_cards(['user_id' => $contract->user_id]);
             $active_card = '';
 
             if (!empty($cards)) {
