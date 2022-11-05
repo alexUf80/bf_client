@@ -136,6 +136,14 @@ class AccountController extends Controller
                 // проверяем возможность автоповтора
                 $order['autoretry'] = 1;
 
+                if(isset($_COOKIE['promo_code']))
+                {
+                    $promocode = $this->PromoCodes->get_code_by_code($_COOKIE['promo_code']);
+
+                    if(!empty($promocode))
+                        $order['promocode_id'] = $promocode->id;
+                }
+
                 $order_id = $this->orders->add_order($order);
 
                 if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
