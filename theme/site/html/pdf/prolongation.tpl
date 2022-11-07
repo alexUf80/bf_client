@@ -19,7 +19,7 @@
     </tr>
     <tr>
         <td width="25%"></td>
-        <td width="60%"><strong>No {$contract->number} от {$contract->issuance_date|date}</strong></td>
+        <td width="60%"><strong>No {$contract->number} от {$contract->inssuance_date|date}</strong></td>
         <td width="10%"></td>
     </tr>
 </table>
@@ -28,7 +28,7 @@
 </div>
 <table>
     <tr>
-        <td width="20%"><strong>{''|date:'d.m.Y'}</strong></td>
+        <td width="20%"><strong>{$created|date}</strong></td>
         <td width="60%"></td>
         <td width="20%"><strong>Г. АРХАНГЕЛЬСК</strong></td>
     </tr>
@@ -104,7 +104,7 @@
         <td width="40%">Сумма кредита (займа) или лимит кредитования
             и порядок его изменения
         </td>
-        <td width="50%">Сумма займа составляет {$contract->amount|upper} ({$contract->amount|price_string|upper}). Лимит кредитования
+        <td width="50%">Сумма займа составляет {$amount|upper} ({$amount|price_string|upper}). Лимит кредитования
             - не применимо.
         </td>
     </tr>
@@ -169,7 +169,7 @@
         </td>
         <td width="50%">Единовременно в конце срока предоставления займа — {$contract->insurance->end_date|date} заемщик
             осуществляет платеж в размере {$return_amount} рублей , включающий в себя погашение
-            суммы займа в размере {$contract->amount} рублей, и погашение процентов в размере {$return_amount_percents}
+            суммы займа в размере {$amount} рублей, и погашение процентов в размере {$return_amount_percents}
             рублей, начисленных со дня, следующего за днем предоставления займа.
         </td>
     </tr>
@@ -207,7 +207,7 @@
             р\с 40701810702500001111
             к\с 30101810845250000999
             БИК 044525999
-            Назначение платежа: оплата по договору займа № от {$contract->issuance_date|date} {$lastname|upper} {$firstname|upper} {$patronymic|upper}<br>- Путем совершения платежа с
+            Назначение платежа: оплата по договору займа № от {$contract->inssuance_date|date} {$lastname|upper} {$firstname|upper} {$patronymic|upper}<br>- Путем совершения платежа с
             использованием интернет-банка Сбербанка Онлайн,
             мобильного приложения Сбербанк Онлайн или внесения наличных денежных
             средств с помощью устройства самообслуживания Сбербанка.
@@ -417,7 +417,7 @@
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
-                        <br>Дата: {$contract->issuance_date|date}
+                        <br>Дата: {$created|date}
                     </td>
                 </tr>
             </table>

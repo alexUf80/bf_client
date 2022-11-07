@@ -44,8 +44,8 @@ class DocumentController extends Controller
 
             $contract = $this->contracts->get_contract($document->contract_id);
 
-            if(!empty($contract->insurance_id))
-                $contract->insurance = $this->insurances->get_insurance($contract->insurance_id);
+            if(!empty($document->params['insurance']))
+                $contract->insurance = $this->insurances->get_insurance($document->params['insurance']['id']);
 
             $cards = $this->cards->get_cards(['user_id' => $contract->user_id]);
             $active_card = '';
@@ -150,8 +150,6 @@ class DocumentController extends Controller
 
     private function action_preview()
     {
-        var_dump(123);
-        exit;
         $type = $this->request->get('type');
         $type = strtoupper(str_replace('.pdf', '', $type));
         if (empty($type))

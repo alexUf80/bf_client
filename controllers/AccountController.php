@@ -207,7 +207,18 @@ class AccountController extends Controller
         }
 
         if (!empty($order)) {
-            $order->return_amount = ($order->amount * 0.01 * $order->period) + $order->amount;
+
+            $order = $this->orders->get_order($order->order_id);
+
+            if($order->loantype_id != 0)
+            {
+                $loantype = $this->Loantypes->get_loantype($order->loantype_id);
+                $stdPercent = $loantype->percent/100;
+            }else
+                $stdPercent = 0.01;
+
+
+            $order->return_amount = ($order->amount * $stdPercent * $order->period) + $order->amount;
             $return_period = date_create();
             date_add($return_period, date_interval_create_from_date_string($order->period . ' days'));
             $order->return_period = date_format($return_period, 'Y-m-d H:i:s');

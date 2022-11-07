@@ -285,7 +285,7 @@ class Best2PayCallback extends Controller
                     }
                     $this->transactions->update_transaction($transaction->id, array(
                         'operation' => $operation,
-                        'callback_response' => $operation_info,
+                        'callback_response' => $register_info,
                         'reason_code' => $reason_code
                     ));
 
