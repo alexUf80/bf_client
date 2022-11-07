@@ -101,9 +101,7 @@ class Best2PayCallback extends Controller
 
                             );
 
-                            $prolongation_sum = $contract->loan_percents_summ + $contract->loan_peni_summ;
-
-                            if (!empty($transaction->prolongation) && $payment_amount >= $prolongation_sum) {
+                            if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
 
                                 $new_return_date = date('Y-m-d H:i:s', time() + 86400 * $this->settings->prolongation_period);
 
@@ -115,7 +113,7 @@ class Best2PayCallback extends Controller
 
                                 $docs = 1;
 
-                                if($payment_amount >= $contract->loan_percents_summ + $contract->loan_peni_summ + $this->settings->prolongation_amount)
+                                if($payment_amount >= $contract->loan_percents_summ + $this->settings->prolongation_amount)
                                 {
                                     $operation_id = $this->operations->add_operation(array(
                                         'contract_id' => $contract->id,
