@@ -71,17 +71,9 @@ class StageCardController extends Controller
                     $order['promocode_id'] = $promocode->id;
             }
 
-            $order['utm_source']   = (isset($_COOKIE['utm_source']))    ? $_COOKIE["utm_source"]   : ' ';
-            $order['utm_medium']   = (isset($_COOKIE['utm_medium']))    ? $_COOKIE["utm_medium"]   : ' ';
-            $order['utm_campaign'] = (isset($_COOKIE['utm_campaign']))  ? $_COOKIE["utm_campaign"] : ' ';
-            $order['utm_content']  = (isset($_COOKIE['utm_content']))   ? $_COOKIE["utm_content"]  : ' ';
-            $order['utm_term']     = (isset($_COOKIE['utm_term']))      ? $_COOKIE["utm_term"]     : ' ';
-
-            if (isset($_COOKIE['wm_id']))
-                $order['webmaster_id'] = $_COOKIE["wm_id"];
-
-            if (isset($_COOKIE['clickid']))
-                $order['click_hash'] = $_COOKIE["clickid"];
+            $order['utm_source'] = $_COOKIE['utm_source'];
+            $order['webmaster_id'] = $_COOKIE["wm_id"];
+            $order['click_hash'] = $_COOKIE["clickid"];
 
 
             $order_id = $this->orders->add_order($order);
@@ -108,15 +100,6 @@ class StageCardController extends Controller
                     $this->scorings->add_scoring($add_scoring);
                 }
             }
-
-            /* отправляем заявку в 1с
-            $order = $this->orders->get_order((int)$order_id);
-            if ($resp = $this->soap1c->send_order($order))
-            {
-                $this->orders->update_order($order_id, array('id_1c' => $resp->aid));
-                $this->users->update_user($this->user->id, array('UID' => $resp->UID));
-            }
-            */
 
             /** ******** создаем доки ********* **/
         $passport = str_replace([' ','-'], '', $this->user->passport_serial);
@@ -209,6 +192,8 @@ class StageCardController extends Controller
                 'params' => json_encode($params),
             ));
 
+            if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
+                $this->PostBackCron->add(['order_id' => $order_id]);
 
             header('Location: /account');
             exit;

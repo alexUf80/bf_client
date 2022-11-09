@@ -120,17 +120,9 @@ class AccountController extends Controller
                         $order['promocode_id'] = $promocode->id;
                 }
 
-                $order['utm_source']   = (isset($_COOKIE['utm_source']))    ? $_COOKIE["utm_source"]   : ' ';
-                $order['utm_medium']   = (isset($_COOKIE['utm_medium']))    ? $_COOKIE["utm_medium"]   : ' ';
-                $order['utm_campaign'] = (isset($_COOKIE['utm_campaign']))  ? $_COOKIE["utm_campaign"] : ' ';
-                $order['utm_content']  = (isset($_COOKIE['utm_content']))   ? $_COOKIE["utm_content"]  : ' ';
-                $order['utm_term']     = (isset($_COOKIE['utm_term']))      ? $_COOKIE["utm_term"]     : ' ';
-
-                if (isset($_COOKIE['wm_id']))
-                    $order['webmaster_id'] = $_COOKIE["wm_id"];
-
-                if (isset($_COOKIE['clickid']))
-                    $order['click_hash'] = $_COOKIE["clickid"];
+                $order['utm_source'] = $_COOKIE['utm_source'];
+                $order['webmaster_id'] = $_COOKIE["wm_id"];
+                $order['click_hash'] = $_COOKIE["clickid"];
 
 
                 // проверяем возможность автоповтора
@@ -145,24 +137,6 @@ class AccountController extends Controller
                 }
 
                 $order_id = $this->orders->add_order($order);
-
-                if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
-                    try {
-                        $this->leadgens->send_pending_postback_click2money($order_id, $order);
-                        $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                    }
-                }
-
-                if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'unicom24') {
-                    try {
-                        $this->UnicomLeadgen->send_pending_postback($order_id, $order);
-                        $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                    }
-                }
 
                 // добавляем задание для проведения активных скорингов
                 $scoring_types = $this->scorings->get_types();
@@ -179,15 +153,10 @@ class AccountController extends Controller
                     }
                 }
 
+                if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
+                    $this->PostBackCron->add(['order_id' => $order_id]);
 
-                /* отправляем заявку в 1с
-                $order = $this->orders->get_order((int)$order_id);
-                if ($resp = $this->soap1c->send_order($order))
-                {
-                    $this->orders->update_order($order_id, array('id_1c' => $resp->aid));
-                    $this->users->update_user($this->user->id, array('UID' => $resp->UID));
-                }
-                */
+
                 header('Location: /account');
                 exit;
             }
