@@ -154,7 +154,7 @@ class AccountController extends Controller
                 }
 
                 if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
-                    $this->PostBackCron->add(['order_id' => $order_id]);
+                    $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0]);
 
 
                 header('Location: /account');
