@@ -94,16 +94,14 @@ function LkApp() {
                 orderId: orderId
             },
             success: function (status) {
-
+                if(status == 3 || status == 8)
+                {
+                    setTimeout(function () {
+                        window.location.href = "https://barcredit.ru";
+                    }, 40000);
+                }
             }
         });
-
-            /*
-            setTimeout(function () {
-                window.location.href = "https://barcredit.ru";
-            }, 40000);
-
-            */
     };
 
     var _init_repeat_order = function () {
