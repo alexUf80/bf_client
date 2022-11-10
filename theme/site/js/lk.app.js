@@ -83,6 +83,28 @@ function LkApp() {
         }, 10000);
     };
 
+    var _redirect_to_partner = function () {
+
+        let orderId = $('.new_order_box').attr('data-order');
+
+        $.ajax({
+            method: 'POST',
+            data: {
+                order_id: orderId,
+            },
+            success: function (status) {
+
+            }
+        });
+
+            /*
+            setTimeout(function () {
+                window.location.href = "https://barcredit.ru";
+            }, 40000);
+
+            */
+    };
+
     var _init_repeat_order = function () {
         $('.js-open-repeat-block').click(function (e) {
             e.preventDefault();
@@ -134,6 +156,7 @@ function LkApp() {
 
         _init_repeat_order();
         _init_agreement_list();
+        _redirect_to_partner();
     })();
 };
 
