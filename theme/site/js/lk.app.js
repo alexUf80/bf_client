@@ -88,9 +88,10 @@ function LkApp() {
         let orderId = $('.new_order_box').attr('data-order');
 
         $.ajax({
+            url: 'ajax/CheckStatus.php',
             method: 'POST',
             data: {
-                order_id: orderId,
+                orderId: orderId
             },
             success: function (status) {
 
