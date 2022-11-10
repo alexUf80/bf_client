@@ -358,12 +358,10 @@
                                 <div class="pt-4 pr-5 pl-5 text-center">
                                     <small>{$order->reject_reason}</small>
                                     <div>
-                                        <a href="https://clck.ru/aiwik" target="_blank" class="blue-link">
+                                        <a href="https://barcredit.ru" target="_blank" class="blue-link">
                                             Получите займ у наших партнёров
                                             <br/>
-                                            <span class="sc-htoDjs fOeadG"><img class="smart-link-icon"
-                                                                                src="theme/site/i/vsezaimi_logo.svg"
-                                                                                width="20px"/></span>
+                                            <span class="sc-htoDjs fOeadG"></span>
                                             <span class="sc-iwsKbI jQhHGA">Лучшие предложения для вас</span>
                                         </a>
                                     </div>
