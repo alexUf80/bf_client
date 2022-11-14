@@ -139,24 +139,9 @@ console.info('_success_callback');
         $('.js-loan-phone').blur(function(){
 
 console.log($(this).val()) //'79171018924', '79179400617'
-            if (-1 !== $.inArray($(this).val(), ['+7(963) 914-3424', '+7(917) 101-8924', '+7(917) 940-0617']))
-            {
-                $('#service_insurance').removeAttr('disabled');
-                $('#service_reason').removeAttr('disabled');                
-                $('#service_sms').removeAttr('disabled');                
-                $('[name="service_insurance"]').val(0);
-                $('[name="service_reason"]').val(0);
-                $('[name="service_sms"]').val(0);
-            }
-            else
-            {
-//                $('#service_insurance').attr('disabled', true);
-//                $('#service_reason').attr('disabled', true);                
-//                $('[name="service_insurance"]').val(1);
-//                $('[name="service_reason"]').val(1);
-            }
+
         });
-        
+
         $('#service_reason').change(function(){
             if ($(this).is(':checked'))
                 $('[name="service_reason"]').val(1);

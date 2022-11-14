@@ -2,7 +2,7 @@
 
 {capture name='page_scripts'}
     
-    <script src="theme/site/js/contract_accept.app.js?v=1.13"></script>
+    <script src="theme/site/js/contract_accept.app.js?v=1.14"></script>
 
 {/capture}
 

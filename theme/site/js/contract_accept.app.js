@@ -44,13 +44,6 @@ function ContractAcceptApp() {
                             app.$form.find('.js-accept-code-error').html(resp.error).closest('.form-phone').addClass('-error');
                         }
                         if (!!resp.success) {
-                            $('#service_insurance + label').click();
-                            $('#service_reason + label').click();
-                            $('#service_sms + label').click();
-                            $('[name="service_insurance"]').val(1);
-                            $('[name="service_reason"]').val(1);
-                            $('[name="service_sms"]').val(1);
-
 
                             app.$form.find('.js-accept-code-error').html('').closest('.form-phone').removeClass('-error');
 
