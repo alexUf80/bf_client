@@ -34,8 +34,12 @@ class DocumentController extends Controller
 
             $document->params = json_decode($document->params, true);
 
+            if(in_array($document->type, ['DOP_RESTRUCT', 'GRAPH_RESTRUCT']))
+                $document->params['schedules']['payment_schedules'] = json_decode($document->params['schedules']['payment_schedules'], true);
+
             foreach ($document->params as $param_name => $param_value)
             {
+
                 if($param_name == 'insurance')
                     $this->design->assign('insurances', (object)$param_value);
                 else

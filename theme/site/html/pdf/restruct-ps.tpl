@@ -8,14 +8,12 @@
         <th><strong>Дата</strong></th>
         <th><strong>Сумма Платежа</strong></th>
     </tr>
-    {if isset($schedules)}
-        {foreach $schedules as $schedule}
-            <tr>
-                <td>{$date|date}</td>
-                <td>{$payment}</td>
-            </tr>
+        {foreach $schedules['payment_schedules'] as $schedule}
+                <tr>
+                    <td>{if $schedule['date'] != 'ИТОГО'}{$schedule['date']}{else}{$schedule['date']|date}{/if}</td>
+                    <td>{$schedule['payment']}</td>
+                </tr>
         {/foreach}
-    {/if}
 </table>
 <div>
 
