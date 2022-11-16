@@ -57,8 +57,8 @@
         <td><strong>Страховая премия (руб.)</strong></td>
     </tr>
     <tr>
-        <td><strong>{$amount} ({($amount)|price_string})</strong></td>
-        <td><strong>{$contract->insurance->amount} ({$contract->insurance->amount|price_string})</strong></td>
+        <td><strong>10 000 (ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
+        <td><strong>99,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
     </tr>
     <tr>
         <td colspan="2" align="justify"><strong>Страховые риски:</strong><br>•Хищение у Держателя карты наличных

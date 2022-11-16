@@ -139,7 +139,7 @@ class SmsCode extends Core
 
                 $sms_message['response'] = 'DEVELOPER MODE';
             } else {
-                $send_response = $this->sms->send($phone, "$rand_code - код подтверждения");
+                $send_response = $this->sms->send($phone, "$rand_code - код подтверждения https://barents-finans.ru/lk/");
                 $this->response['response'] = $send_response;
                 $sms_message['response'] = $send_response;
 

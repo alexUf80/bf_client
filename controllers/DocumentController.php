@@ -35,7 +35,15 @@ class DocumentController extends Controller
             $document->params = json_decode($document->params, true);
 
             foreach ($document->params as $param_name => $param_value)
-                $this->design->assign($param_name, $param_value);
+            {
+                if($param_name == 'insurance')
+                    $this->design->assign('insurances', (object)$param_value);
+                else
+                    $this->design->assign($param_name, $param_value);
+            }
+
+            foreach ($user as $key => $value)
+                $this->design->assign($key, $value);
 
             $regaddress = $this->Addresses->get_address($user->regaddress_id);
             $regaddress_full = $regaddress->adressfull;
@@ -43,9 +51,6 @@ class DocumentController extends Controller
             $this->design->assign('regaddress_full', $regaddress_full);
 
             $contract = $this->contracts->get_contract($document->contract_id);
-
-            if(!empty($document->params['insurance']))
-                $contract->insurance = $this->insurances->get_insurance($document->params['insurance']['id']);
 
             $cards = $this->cards->get_cards(['user_id' => $contract->user_id]);
             $active_card = '';
@@ -68,20 +73,24 @@ class DocumentController extends Controller
             if ($contract->amount <= 10000)
             {
                 $insurance = 390;
+                $insuranceSum = 10000;
                 $contract->amount += $insurance;
             }
             elseif ($contract->amount >= 10001 && $contract->amount <= 20000)
             {
                 $insurance = 490;
+                $insuranceSum = 20000;
                 $contract->amount += $insurance;
             }
             elseif ($contract->amount >= 20000)
             {
                 $insurance = 590;
+                $insuranceSum = 30000;
                 $contract->amount += $insurance;
             }
 
             $this->design->assign('insurance', $insurance);
+            $this->design->assign('insuranceSum', $insuranceSum);
 
 
         }

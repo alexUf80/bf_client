@@ -81,6 +81,14 @@
                                                 </a>
                                             </li>
                                         {/if}
+                                        {if ($document->name|escape == 'Ключевой информационный документ об условиях добровольного страхования')}
+                                            <li class="docs_list_item">
+                                                <a href="{$config->root_url}/document/{$user->id}/{$document->id}"
+                                                   class="docs_list_link" target="_blank">
+                                                    Ключевой информационный документ об условиях добровольного страхования
+                                                </a>
+                                            </li>
+                                        {/if}
                                     {/foreach}
                                     {if $recovers == 1}
                                         <li class="docs_list_item">
