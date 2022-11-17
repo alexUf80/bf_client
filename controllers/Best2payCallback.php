@@ -472,8 +472,6 @@ class Best2PayCallback extends Controller
                                 'fakt_date' => date('Y-m-d H:i:s')
                             ];
 
-                        $this->PaymentsToSchedules->update($planOperation->id, $faktOperation);
-
                         if ($planOperation->plan_payment >= $payment_amount) {
                             $countRemaining = $this->PaymentsToSchedules->get_count_remaining($contract->id);
 
@@ -498,7 +496,11 @@ class Best2PayCallback extends Controller
                                     'payment_id' => $nextPay->id
                                 ));
                             }
+
+                            $faktOperation['status'] = 2;
                         }
+
+                        $this->PaymentsToSchedules->update($planOperation->id, $faktOperation);
 
                         $this->design->assign('success', 'Оплата прошла успешно.');
                     } else {
