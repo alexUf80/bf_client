@@ -46,6 +46,9 @@
         <div class="person_info -gil-m">
           <div class="person_info_title -fs-26">
             {if $empty_password}
+              <div class="mt-2 alert alert-success">
+                В данном поле заполните удобный для вас пароль, в дальнейшем по нему будет осуществляться вход в личный кабинет
+              </div>
             Добавить пароль
             {else}
             Изменить пароль
