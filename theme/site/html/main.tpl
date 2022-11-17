@@ -1,7 +1,7 @@
 {capture name='page_scripts'}
 
   <script src="theme/site/js/calc.app.js?v=1.05"></script>
-  <script src="theme/site/js/main.app.js?v=1.23"></script>
+  <script src="theme/site/js/main.app.js?v=1.24"></script>
 
 {/capture}
 
@@ -71,7 +71,7 @@
               <div class="form-group">
                 <div class="form_row">
                     <div class="check mb-0 js-loan-agreement-block">
-                      <input type="checkbox" class="custom-checkbox js-loan-agreement" id="check_agreement" name="agreement" value="1" checked="true" />
+                      <input type="checkbox" class="custom-checkbox js-loan-agreement" id="check_agreement" name="agreement" value="1"/>
                       <label for="check_agreement" class="check_box -gil-m">
                          <span>Я ознакомлен со <a href="#agreement_list" style="color: #4A2982" class="js-toggle-agreement-list" >следующим</a></span>
                       </label>
