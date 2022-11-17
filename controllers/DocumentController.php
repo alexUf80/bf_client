@@ -39,9 +39,10 @@ class DocumentController extends Controller
 
             foreach ($document->params as $param_name => $param_value)
             {
-
                 if($param_name == 'insurance')
                     $this->design->assign('insurances', (object)$param_value);
+                if($param_name == 'contract')
+                    $this->design->assign('insurances', (object)$param_value['insurance']);
                 else
                     $this->design->assign($param_name, $param_value);
             }

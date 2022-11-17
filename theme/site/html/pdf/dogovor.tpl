@@ -421,9 +421,6 @@
         </td>
     </tr>
 </table>
-<div>
-    <br><br><br><br><br>
-</div>
 <table>
     <tr>
         <td style="width: 40%"></td>
@@ -566,6 +563,10 @@
     <tr>
         <td><strong>Кредитор</strong></td>
         <td>Кройтор В.В</td>
+    </tr>
+    <tr>
+        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
     </tr>
 </table>
 <table>
