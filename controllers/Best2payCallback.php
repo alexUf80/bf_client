@@ -18,6 +18,11 @@ class Best2PayCallback extends Controller
                 $this->recurrent();
                 break;
 
+            case 'paymentRestruct':
+                $this->paymentRestruct();
+                break;
+
+
             default:
                 $meta_title = 'Ошибка';
                 $this->design->assign('error', 'Ошибка');
@@ -113,8 +118,7 @@ class Best2PayCallback extends Controller
 
                                 $docs = 1;
 
-                                if($payment_amount >= $contract->loan_percents_summ + $this->settings->prolongation_amount)
-                                {
+                                if ($payment_amount >= $contract->loan_percents_summ + $this->settings->prolongation_amount) {
                                     $operation_id = $this->operations->add_operation(array(
                                         'contract_id' => $contract->id,
                                         'user_id' => $contract->user_id,
@@ -233,8 +237,7 @@ class Best2PayCallback extends Controller
                                 'params' => json_encode($document_params)
                             ));
 
-                            if($docs == 2)
-                            {
+                            if ($docs == 2) {
                                 $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
                                 $this->documents->create_document(array(
                                     'user_id' => $contract->user_id,
@@ -368,6 +371,153 @@ class Best2PayCallback extends Controller
 
         } else {
             $this->design->assign('error', 'Ошибка запроса');
+        }
+    }
+
+    private function paymentRestruct()
+    {
+        $register_id = $this->request->get('id', 'integer');
+        $operation = $this->request->get('operation', 'integer');
+        $code = $this->request->get('code', 'integer');
+        $paymentId = $this->request->get('payment_id');
+
+        if (!empty($register_id)) {
+            if ($transaction = $this->transactions->get_register_id_transaction($register_id)) {
+                if ($transaction_operation = $this->operations->get_transaction_operation($transaction->id)) {
+                    $this->design->assign('error', 'Оплата уже принята.');
+                } else {
+
+                    if (empty($operation)) {
+                        $register_info = $this->BestPay->get_register_info($transaction->sector, $register_id);
+                        $xml = simplexml_load_string($register_info);
+
+                        foreach ($xml->operations as $xml_operation)
+                            if ($xml_operation->operation->state == 'APPROVED')
+                                $operation = (string)$xml_operation->operation->id;
+                    }
+
+
+                    if (!empty($operation)) {
+                        $operation_info = $this->BestPay->get_operation_info($transaction->sector, $register_id, $operation);
+                        $xml = simplexml_load_string($operation_info);
+                        $reason_code = (string)$xml->reason_code;
+                        $payment_amount = strval($xml->amount) / 100;
+                        $operation_date = date('Y-m-d H:i:s', strtotime(str_replace('.', '-', (string)$xml->date)));
+
+                        if ($reason_code == 1) {
+                            if (!($contract = $this->contracts->get_contract($transaction->reference)))
+                                $contract = $this->contracts->get_number_contract($transaction->reference);
+                            $rest_amount = $payment_amount;
+
+                        } else {
+                            $this->transactions->update_transaction($transaction->id, array('prolongation' => 0));
+                        }
+
+                        $planOperation = $this->PaymentsToSchedules->get($paymentId);
+
+                        $faktOd = 0;
+                        $faktPrc = 0;
+                        $faktPeni = 0;
+
+                        // списываем основной долг
+                        if ($planOperation->plan_od > 0) {
+                            if ($rest_amount >= $planOperation->plan_od) {
+                                $faktOd += $planOperation->plan_od;
+                            } else {
+                                $faktOd = $planOperation->plan_od - $rest_amount;
+                                $rest_amount = 0;
+                            }
+                        }
+
+                        // списываем проценты
+                        if ($planOperation->plan_prc > 0) {
+                            if ($rest_amount >= $planOperation->plan_prc) {
+                                $faktPrc += $planOperation->plan_prc;
+                            } else {
+                                $faktPrc = $planOperation->plan_prc - $rest_amount;
+                                $rest_amount = 0;
+                            }
+                        }
+
+                        // списываем пени
+                        if ($planOperation->plan_peni > 0) {
+                            if ($rest_amount >= $planOperation->plan_peni) {
+                                $faktPeni += $planOperation->plan_peni;
+                            } else {
+                                $faktPeni = $planOperation->plan_peni - $rest_amount;
+                            }
+                        }
+
+                        $operationId = $this->operations->add_operation(array(
+                            'contract_id' => $contract->id,
+                            'user_id' => $contract->user_id,
+                            'order_id' => $contract->order_id,
+                            'type' => 'PAY',
+                            'amount' => $payment_amount,
+                            'created' => $operation_date,
+                            'transaction_id' => $transaction->id,
+                            'loan_body_summ' => $faktOd,
+                            'loan_percents_summ' => $faktPrc,
+                            'loan_peni_summ' => $faktPeni,
+                            'loan_charge_summ' => 0
+                        ));
+
+                        $faktOperation =
+                            [
+                                'operation_id' => $operationId,
+                                'fakt_payment' => $payment_amount,
+                                'fakt_od' => $faktOd,
+                                'fakt_prc' => $faktPrc,
+                                'fakt_peni' => $faktPeni,
+                                'fakt_date' => date('Y-m-d H:i:s')
+                            ];
+
+                        $this->PaymentsToSchedules->update($planOperation->id, $faktOperation);
+
+                        if ($planOperation->plan_payment >= $payment_amount) {
+                            $countRemaining = $this->PaymentsToSchedules->get_count_remaining($contract->id);
+
+                            if ($countRemaining == 0) {
+                                $this->contracts->update_contract($contract->id, array(
+                                    'status' => 3,
+                                    'collection_status' => 0,
+                                    'close_date' => date('Y-m-d H:i:s'),
+                                ));
+
+                                $this->orders->update_order($contract->order_id, array(
+                                    'status' => 7
+                                ));
+                            } else {
+                                $nextPay = $this->PaymentsToSchedules->get_next($contract->id);
+
+                                $this->contracts->update_contract($contract->id, array(
+                                    'loan_body_summ' => $nextPay->plan_od,
+                                    'loan_percents_summ' => $nextPay->plan_prc,
+                                    'loan_peni_summ' => $nextPay->plan_peni,
+                                    'next_pay' => date('Y-m-d', strtotime($nextPay->plan_date)),
+                                    'payment_id' => $nextPay->id
+                                ));
+                            }
+                        }
+
+                        $this->design->assign('success', 'Оплата прошла успешно.');
+                    } else {
+                        $reason_code_description = $this->BestPay->get_reason_code_description($code);
+                        $this->design->assign('reason_code_description', $reason_code_description);
+
+                        $this->design->assign('error', 'При оплате произошла ошибка.');
+                    }
+                    $this->transactions->update_transaction($transaction->id, array(
+                        'operation' => $operation,
+                        'callback_response' => $register_info,
+                        'reason_code' => $reason_code
+                    ));
+
+
+                }
+            }
+        } else {
+            $this->design->assign('error', 'Ошибка: Транзакция не найдена');
         }
     }
 }

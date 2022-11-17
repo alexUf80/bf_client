@@ -412,10 +412,17 @@
                                         <dt class="col-6 text-right">{($order->contract->loan_peni_summ*1)} руб.</dt>
                                     </dl>
                                 {/if}
-                                <dl class="row pb-2">
-                                    <dd class="col-6 text-left">Дата возврата</dd>
-                                    <dt class="col-6 text-right">{$order->contract->return_date|date} </dt>
-                                </dl>
+                                {if $order->contract->status == 11}
+                                    <dl class="row pb-2">
+                                        <dd class="col-6 text-left">Дата платежа</dd>
+                                        <dt class="col-6 text-right">{$order->contract->next_pay|date} </dt>
+                                    </dl>
+                                {else}
+                                    <dl class="row pb-2">
+                                        <dd class="col-6 text-left">Дата возврата</dd>
+                                        <dt class="col-6 text-right">{$order->contract->return_date|date} </dt>
+                                    </dl>
+                                {/if}
                                 {*}
                                 <dl class="row pb-2 border-bottom">
                                   <dd class="col-6 text-left">Сумма на дату возврата</dd>
@@ -434,15 +441,23 @@
                                         <div class="row">
                                             <div class="col-md-4 col-12">
                                                 <input type="text" class="form-control text-right" name="amount"
-                                                       value="{$order->contract->loan_body_summ + $order->contract->loan_percents_summ + $order->contract->loan_charge_summ + $order->contract->loan_peni_summ}"/>
+                                                       value="{$order->contract->loan_body_summ + $order->contract->loan_percents_summ + $order->contract->loan_charge_summ + $order->contract->loan_peni_summ}"
+                                                {if $order->contract->status == 11}
+                                                readonly
+                                                {/if}/>
                                             </div>
                                             <div class="col-md-6 pt-1">
                                                 {if $order->contract->type == 'onec'}
                                                     <a href="https://nalichnoe.com/login/"
                                                        class="btn btn-primary btn-block">Перейти&nbsp;к&nbsp;оплате</a>
                                                 {else}
-                                                    <button type="submit" class="btn btn-primary btn-block">Закрыть
-                                                    </button>
+                                                    {if $order->contract->status == 11}
+                                                        <button type="submit" class="btn btn-primary btn-block">Оплатить
+                                                        </button>
+                                                    {else}
+                                                        <button type="submit" class="btn btn-primary btn-block">Закрыть
+                                                        </button>
+                                                    {/if}
                                                 {/if}
                                             </div>
                                         </div>

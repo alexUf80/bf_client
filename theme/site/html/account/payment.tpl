@@ -95,7 +95,13 @@
                                 <div>
                                     <div class="pt-4 text-center">
                                         <a href="#" id="close_contract" data-full-amount="{$full_amount}"
-                                           class="btn btn-primary btn-block">Погасить займ</a>
+                                           class="btn btn-primary btn-block">
+                                            {if $contract->status == 11}
+                                                Оплатить займ
+                                            {else}
+                                                Погасить займ
+                                            {/if}
+                                        </a>
                                     </div>
                                 </div>
                                 {else}
