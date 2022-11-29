@@ -111,6 +111,22 @@
             </div>
         </div>
     </div>
+    <div class="">
+        <div class="form_row">
+            <div class="check">
+                <input type="hidden" class="custom-checkbox" name="cards_insurance" value="1"/>
+                <input type="checkbox"
+                       style="width: 100px" class="custom-checkbox"
+                       id="cards_insurance" value="1"/>
+                <label for="cards_insurance" class="check_box -gil-m">
+                 <span>
+                    Правила
+                    <a style="color: #4A2982" href="/files/about/strahovanie_kart.pdf" target="_blank"> страхования карт</a>
+                 </span>
+                </label>
+            </div>
+        </div>
+    </div>
     {if $order->contract}
         <div class="">
             <div class="form_row">

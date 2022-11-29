@@ -204,16 +204,32 @@ class Best2PayCallback extends Controller
                             }
                         }
 
+                        if (empty($transaction->prolongation) && $rest_amount != 0 && $contract_loan_body_summ == 0 && $contract_loan_percents_summ == 0)
+                        {
+                            // списываем пени
+                            $contract_loan_peni_summ = (float)$contract->loan_peni_summ;
+
+                            if ($contract->loan_peni_summ > 0) {
+                                if ($rest_amount >= $contract->loan_peni_summ) {
+                                    $contract_loan_peni_summ = 0;
+                                    $rest_amount = $rest_amount - $contract->loan_peni_summ;
+                                    $transaction_loan_peni_summ = $contract->loan_peni_summ;
+                                } else {
+                                    $contract_loan_peni_summ = $contract->loan_peni_summ - $rest_amount;
+                                    $transaction_loan_peni_summ = $rest_amount;
+                                    $rest_amount = 0;
+                                }
+                            }
+                        }
+
                         $this->contracts->update_contract($contract->id, array(
                             'loan_percents_summ' => $contract_loan_percents_summ,
-                            'loan_charge_summ' => 0,
-                            'loan_peni_summ' => 0,
+                            'loan_peni_summ' => isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ,
                             'loan_body_summ' => $contract_loan_body_summ,
                         ));
 
                         $this->transactions->update_transaction($transaction->id, array(
                             'loan_percents_summ' => empty($transaction_loan_percents_summ) ? 0 : $transaction_loan_percents_summ,
-                            'loan_charge_summ' => empty($transaction_loan_charge_summ) ? 0 : $transaction_loan_charge_summ,
                             'loan_peni_summ' => empty($transaction_loan_peni_summ) ? 0 : $transaction_loan_peni_summ,
                             'loan_body_summ' => empty($transaction_loan_body_summ) ? 0 : $transaction_loan_body_summ,
                         ));
@@ -252,8 +268,11 @@ class Best2PayCallback extends Controller
                         // закрываем кредит
                         $contract_loan_percents_summ = round($contract_loan_percents_summ, 2);
                         $contract_loan_body_summ = round($contract_loan_body_summ, 2);
-                        $closed = 0;
-                        if ($contract_loan_body_summ <= 0 && $contract_loan_percents_summ <= 0) {
+
+                        $contract_loan_peni_summ = isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ;
+                        $contract_loan_peni_summ = round($contract_loan_peni_summ, 2);
+                        
+                        if ($contract_loan_body_summ <= 0 && $contract_loan_percents_summ <= 0 && $contract_loan_peni_summ == 0) {
                             $this->contracts->update_contract($contract->id, array(
                                 'status' => 3,
                                 'collection_status' => 0,

@@ -614,7 +614,7 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $sector = $this->sectors['ADD_CARD'];
         $password = $this->passwords[$sector];
 
-        $amount = 100; // сумма для списания > 100
+        $amount = 1900; // сумма для списания
         $description = 'Привязка карты'; // описание операции
 // 812763
         // регистрируем оплату

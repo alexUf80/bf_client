@@ -139,11 +139,29 @@ class SmsCode extends Core
 
                 $sms_message['response'] = 'DEVELOPER MODE';
             } else {
-                $send_response = $this->sms->send($phone, "$rand_code - код подтверждения https://barents-finans.ru/lk/");
-                $this->response['response'] = $send_response;
-                $sms_message['response'] = $send_response;
+                $via_call = $this->request->get('via_call', 'string');
 
-                $this->response['mode'] = 'standart';
+                if ($via_call) {
+                    $send_response = $this->sms->send_code_via_call($phone);
+
+                    file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . 'call.log', date("Y-m-d H:i:s") . ' - ' . $send_response . "\n", FILE_APPEND | LOCK_EX);
+                    preg_match('/.+ (CODE - (?<code>\d+))/ui', $send_response, $match);
+                    if (isset($match['code'])) {
+                        $code = substr($match['code'], -4);
+                        $sms_message['code'] = $code;
+                    }
+
+                    $this->delay = 60;
+
+                    $this->response['response'] = $send_response;
+                    $sms_message['response'] = $send_response;
+                } else {
+                    $send_response = $this->sms->send($phone, "$rand_code - код подтверждения https://barents-finans.ru/lk/");
+                    $this->response['response'] = $send_response;
+                    $sms_message['response'] = $send_response;
+
+                    $this->response['mode'] = 'standart';
+                }
             }
 
             $this->sms->add_message($sms_message);
