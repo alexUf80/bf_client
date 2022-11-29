@@ -124,7 +124,7 @@ class Best2PayCallback extends Controller
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'transaction_id' => $transaction->id,
-                                        'type' => 'INSURANCE',
+                                        'type' => 'INSURANCE_BC',
                                         'amount' => $this->settings->prolongation_amount,
                                         'created' => date('Y-m-d H:i:s'),
                                         'sent_status' => 0,
