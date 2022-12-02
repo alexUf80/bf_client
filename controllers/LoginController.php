@@ -25,15 +25,17 @@ class LoginController extends Controller
             $clean_phone = $this->sms->clear_phone($phone);
 
 
-            if (!empty($password)) {
-                if (!($user_id = $this->users->check_password($clean_phone, $password))) {
-                    $error = 'Пароль не совпадает';
-                }
-            } else {
+            if (!empty($code)) {
                 $db_code = $this->sms->get_code($clean_phone);
-                if ($db_code != $code) {
+
+                if ($db_code != $code)
                     $error = 'Код из СМС не совпадает';
-                }
+
+            } else {
+                $user_id = $this->users->check_password($clean_phone, $password);
+
+                if (empty($user_id))
+                    $error = 'Пароль не совпадает';
             }
 
 

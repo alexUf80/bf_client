@@ -236,7 +236,6 @@ class AccountController extends Controller
                 }
             }
 
-
             if ($show_prolongation) {
                 $date_interval = 30;
                 if ($diff_days > 120) {
@@ -251,18 +250,9 @@ class AccountController extends Controller
                 }
             }
 
-
-
             if (!$order->prolongation_date) {
                 $show_prolongation = false;
             }
-
-
-
-
-
-
-
 
             $diff = $date2->diff($date1);
             $order->contract->delay = $diff->days;
@@ -275,7 +265,7 @@ class AccountController extends Controller
                     {
                         if ($order->contract->prolongation < 5 || ($order->contract->prolongation >= 5 && $order->contract->sold)) {
                             if ($order->contract->loan_percents_summ > 0) {
-                                $prolongation_amount = $order->contract->loan_percents_summ + $order->contract->loan_peni_summ;
+                                $prolongation_amount = $order->contract->loan_percents_summ;
                             }
                         }
                     }

@@ -1,5 +1,8 @@
 <?php
 
+define("SMS_LOGIN", "BF02092021");
+define("SMS_PASSWORD", "82e63217cdda82fae80ec99e231b47967e99e2fc");
+
 class Sms extends Core
 {
     private $login;
@@ -13,6 +16,9 @@ class Sms extends Core
         
         $this->login = $this->settings->apikeys['sms']['login'];
         $this->password = $this->settings->apikeys['sms']['password'];
+
+        $this->aero_login = 'webmaster@finreactor.ru';
+        $this->aero_api_key = '4ITlid0NnDePJe0awybOA5IxCv4g';
     }
     
     public function clear_phone($phone)
@@ -37,6 +43,14 @@ class Sms extends Core
         $phone = $this->clear_phone($phone);
         
     	return $this->send_smsc($phone, $message);
+    }
+
+    public function send_code_via_call($phone)
+    {
+        $url = 'https://smsc.ru/sys/send.php?login=' . SMS_LOGIN . '&psw=' . SMS_PASSWORD . '&phones=' . $phone . '&mes=code&call=3';
+        $resultString = file_get_contents($url);
+//echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($url);echo '</pre><hr />';
+        return $resultString;
     }
     
     
@@ -68,11 +82,8 @@ class Sms extends Core
     
     public function send_smsc($phone, $message)
     {
-        $login = 'BF02092021';
-        $password = '82e63217cdda82fae80ec99e231b47967e99e2fc';
-        
-        
-    	$url = 'http://smsc.ru/sys/send.php?login='.$login.'&psw='.$password.'&phones='.$phone.'&mes='.$message.'';
+
+    	$url = 'http://smsc.ru/sys/send.php?login='.SMS_LOGIN.'&psw='.SMS_PASSWORD.'&phones='.$phone.'&mes='.$message.'';
         
         $resp = file_get_contents($url);
         

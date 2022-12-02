@@ -364,8 +364,8 @@
         <td width="50%">{$lastname|upper} {$firstname|upper} {$patronymic|upper}</td>
     </tr>
     <tr>
-        <td width="50%">Юр. адрес: 115193, г. Москва, ул. Петра Романова, дом 7, стр. 1
-            манс.0, П8 К1, оф. 2
+        <td width="50%">Юр. адрес: 163045, Архангельская обл., г. Архангельск,
+            пр-д. К.С. Бадигина, д.19, оф. 107.
         </td>
         <td width="50%">Паспорт гражданина РФ: {$passport_serial}</td>
     </tr>
@@ -375,7 +375,7 @@
         </td>
     </tr>
     <tr>
-        <td width="50%">КПП 772301001</td>
+        <td width="50%">КПП 290101001</td>
         <td width="50%">Дата выдачи: {$passport_date|date} код подр.: {$subdivision_code}</td>
     </tr>
     <tr>
