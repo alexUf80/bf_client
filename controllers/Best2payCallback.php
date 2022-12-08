@@ -235,7 +235,7 @@ class Best2PayCallback extends Controller
                         ));
 
 
-                        if (isset($prolongation)) {
+                        if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
                             $return_amount = round($contract_loan_body_summ + $contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
                             $return_amount_percents = round($contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
 
@@ -295,8 +295,7 @@ class Best2PayCallback extends Controller
                             'loan_body_summ' => $contract_loan_body_summ,
                             'loan_percents_summ' => $contract_loan_percents_summ,
                             'loan_charge_summ' => 0,
-                            'loan_peni_summ' => 0,
-                            'contract_is_closed' => $closed,
+                            'loan_peni_summ' => 0
                         ));
                         $this->design->assign('success', 'Оплата прошла успешно.');
                     } else {
