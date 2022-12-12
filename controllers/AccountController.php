@@ -212,35 +212,16 @@ class AccountController extends Controller
         if ($order->contract_id) {
             $order->contract = $this->contracts->get_contract($order->contract_id);
 
-            $date1 = new DateTime(date('Y-m-d', strtotime($order->contract->inssuance_date)));
-            $date2 = new DateTime(date('Y-m-d'));
-            $date3 = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
+            $now = new DateTime(date('Y-m-d'));
+            $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
-            $currenDate = date('Y-m-d', time());
+            if($now < $returnDate && date_diff($now,$returnDate) <= 3 || $now > $returnDate)
+                $show_prolongation = 1;
 
             $pro_date = $order->contract->return_date;
 
-
-            if (date_diff($date2, $date3)->days <= 3) {
-                $show_prolongation = true;
-                $diff_days = date_diff($date1, $date3)->days;
-                if ($diff_days > 150) {
-                    $show_prolongation = false;
-                }
-            } else if ($date2 > $date3) {
-                $show_prolongation = true;
-                $diff_days = date_diff($date2, $date1)->days;
-                $pro_date = $currenDate;
-                if ($diff_days > 150) {
-                    $show_prolongation = false;
-                }
-            }
-
             if ($show_prolongation) {
                 $date_interval = 30;
-                if ($diff_days > 120) {
-                    $date_interval = 150 - $diff_days;
-                }
 
                 if ($date_interval < 0) {
                     $order->prolongation_date = null;
@@ -254,7 +235,7 @@ class AccountController extends Controller
                 $show_prolongation = false;
             }
 
-            $diff = $date2->diff($date1);
+            $diff = date_diff($now,$returnDate);
             $order->contract->delay = $diff->days;
 
 
@@ -272,7 +253,7 @@ class AccountController extends Controller
                 }
             }
 
-            if (date_diff($date2, $date3)->days <= 3 || $date2 > $date3)
+            if($now < $returnDate && date_diff($now,$returnDate) <= 3 || $now > $returnDate)
                 $this->design->assign('prolongation_amount', $prolongation_amount);
 
 
