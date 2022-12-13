@@ -34,6 +34,13 @@ class IndexController extends Controller
         $this->design->assign('content', $content);
         $this->design->assign('module', $module);
 
+        $needToConfirmCookies = 0;
+
+        if(empty($_COOKIE['cookie_confirmed']))
+            $needToConfirmCookies = 1;
+
+        $this->design->assign('needToConfirmCookies', $needToConfirmCookies);
+
         $utm_source = $this->request->get('utm_source');
         $cookie_inspiration = 60 * 60 * 24 * 30;
         $webmaster_id = $this->request->get('wmid');
