@@ -204,8 +204,7 @@ class Best2PayCallback extends Controller
                             }
                         }
 
-                        if (empty($transaction->prolongation) && $rest_amount != 0 && $contract_loan_body_summ == 0 && $contract_loan_percents_summ == 0)
-                        {
+                        if (empty($transaction->prolongation) && $rest_amount != 0 && $contract_loan_body_summ == 0 && $contract_loan_percents_summ == 0) {
                             // списываем пени
                             $contract_loan_peni_summ = (float)$contract->loan_peni_summ;
 
@@ -271,7 +270,7 @@ class Best2PayCallback extends Controller
 
                         $contract_loan_peni_summ = isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ;
                         $contract_loan_peni_summ = round($contract_loan_peni_summ, 2);
-                        
+
                         if ($contract_loan_body_summ <= 0 && $contract_loan_percents_summ <= 0 && $contract_loan_peni_summ == 0) {
                             $this->contracts->update_contract($contract->id, array(
                                 'status' => 3,
@@ -397,7 +396,6 @@ class Best2PayCallback extends Controller
         $register_id = $this->request->get('id', 'integer');
         $operation = $this->request->get('operation', 'integer');
         $code = $this->request->get('code', 'integer');
-        $paymentId = $this->request->get('payment_id');
 
         if (!empty($register_id)) {
             if ($transaction = $this->transactions->get_register_id_transaction($register_id)) {
@@ -420,68 +418,12 @@ class Best2PayCallback extends Controller
                         $xml = simplexml_load_string($operation_info);
                         $reason_code = (string)$xml->reason_code;
                         $payment_amount = strval($xml->amount) / 100;
-                        $operation_date = date('Y-m-d H:i:s', strtotime(str_replace('.', '-', (string)$xml->date)));
 
                         if ($reason_code == 1) {
                             if (!($contract = $this->contracts->get_contract($transaction->reference)))
                                 $contract = $this->contracts->get_number_contract($transaction->reference);
-                            $rest_amount = $payment_amount;
 
-                        } else {
-                            $this->transactions->update_transaction($transaction->id, array('prolongation' => 0));
-                        }
-
-                        $planOperation = $this->PaymentsToSchedules->get($paymentId);
-
-                        $operationId = $this->operations->add_operation(array(
-                            'contract_id' => $contract->id,
-                            'user_id' => $contract->user_id,
-                            'order_id' => $contract->order_id,
-                            'type' => 'PAY',
-                            'amount' => $payment_amount,
-                            'created' => $operation_date,
-                            'transaction_id' => $transaction->id,
-                            'loan_body_summ' => $planOperation->plan_od,
-                            'loan_percents_summ' => $planOperation->plan_prc,
-                            'loan_peni_summ' => $planOperation->plan_peni,
-                            'loan_charge_summ' => 0
-                        ));
-
-                        $faktOperation =
-                            [
-                                'operation_id' => $operationId,
-                                'fakt_payment' => $payment_amount,
-                                'fakt_od' => $planOperation->plan_od,
-                                'fakt_prc' => $planOperation->plan_prc,
-                                'fakt_peni' => $planOperation->plan_peni,
-                                'fakt_date' => date('Y-m-d H:i:s'),
-                                'status' => 2
-                            ];
-
-                        $this->PaymentsToSchedules->update($planOperation->id, $faktOperation);
-
-                        $countRemaining = $this->PaymentsToSchedules->get_count_remaining($contract->id);
-
-                        if ($countRemaining == 0) {
-                            $this->contracts->update_contract($contract->id, array(
-                                'status' => 3,
-                                'collection_status' => 0,
-                                'close_date' => date('Y-m-d H:i:s'),
-                            ));
-
-                            $this->orders->update_order($contract->order_id, array(
-                                'status' => 7
-                            ));
-                        } else {
-                            $nextPay = $this->PaymentsToSchedules->get_next($contract->id);
-
-                            $this->contracts->update_contract($contract->id, array(
-                                'loan_body_summ' => $nextPay->plan_od,
-                                'loan_percents_summ' => $nextPay->plan_prc,
-                                'loan_peni_summ' => $nextPay->plan_peni,
-                                'next_pay' => date('Y-m-d', strtotime($nextPay->plan_date)),
-                                'payment_id' => $nextPay->id
-                            ));
+                            $this->processingPay($contract->id, $payment_amount, $transaction->id);
                         }
 
                         $this->design->assign('success', 'Оплата прошла успешно.');
@@ -503,5 +445,126 @@ class Best2PayCallback extends Controller
         } else {
             $this->design->assign('error', 'Ошибка: Транзакция не найдена');
         }
+    }
+
+    private function processingPay($contractId, $rest_amount, $transactionId)
+    {
+        $contract = $this->contracts->get->contract($contractId);
+        $planOperation = $this->PaymentsToSchedules->get_next($contractId);
+
+        $faktOd = 0;
+        $faktPrc = 0;
+        $faktPeni = 0;
+
+        // списываем основной долг
+        if ($planOperation->plan_od > 0) {
+            if ($rest_amount >= $planOperation->plan_od) {
+                $faktOd = $planOperation->plan_od;
+                $rest_amount -= $planOperation->plan_od;
+            } else {
+                $faktOd = $planOperation->plan_od - $rest_amount;
+                $rest_amount = 0;
+            }
+        }
+
+        // списываем проценты
+        if ($planOperation->plan_prc > 0) {
+            if ($rest_amount >= $planOperation->plan_prc) {
+                $faktPrc = $planOperation->plan_prc;
+                $rest_amount -= $planOperation->plan_prc;
+            } else {
+                $faktPrc = $planOperation->plan_prc - $rest_amount;
+                $rest_amount = 0;
+            }
+        }
+
+        // списываем пени
+        if ($planOperation->plan_peni > 0) {
+            if ($rest_amount >= $planOperation->plan_peni) {
+                $faktPeni = $planOperation->plan_peni;
+                $rest_amount -= $planOperation->plan_peni;
+            } else {
+                $faktPeni = $planOperation->plan_peni - $rest_amount;
+                $rest_amount = 0;
+            }
+        }
+
+        $paySum = $faktOd + $faktPeni + $faktPrc;
+
+        $this->operations->add_operation(array(
+            'contract_id' => $contractId,
+            'user_id' => $contract->user_id,
+            'order_id' => $contract->order_id,
+            'type' => 'PAY',
+            'amount' => $paySum,
+            'created' => date('Y-m-d H:i:s'),
+            'transaction_id' => $transactionId,
+            'loan_body_summ' => $faktOd,
+            'loan_percents_summ' => $faktPrc,
+            'loan_peni_summ' => $faktPeni,
+            'loan_charge_summ' => 0
+        ));
+
+        $status = 1;
+
+        if($paySum >= $planOperation->plan_payment)
+            $status = 2;
+
+        $faktOperation =
+            [
+                'operation_id' => $planOperation->id,
+                'fakt_payment' => $payment_amount,
+                'fakt_od' => $faktOd,
+                'fakt_prc' => $faktPeni,
+                'fakt_peni' => $faktPrc,
+                'fakt_date' => date('Y-m-d H:i:s'),
+                'status' => $status
+            ];
+
+        $this->PaymentsToSchedules->update($planOperation->id, $faktOperation);
+
+        $countRemaining = $this->PaymentsToSchedules->get_count_remaining($contract->id);
+
+        if ($countRemaining == 0) {
+            $this->closeContract($contractId, $contract->order_id);
+            exit;
+        }
+
+        if($rest_amount > 0)
+            $this->processingPay($contractId, $rest_amount, $transactionId);
+        else
+        {
+            $nextPay = $this->PaymentsToSchedules->get_next($contractId);
+
+            if($status == 1)
+            {
+                $nextPay->plan_od -= $faktOd;
+                $nextPay->plan_prc -= $faktPrc;
+                $nextPay->plan_peni -= $faktPeni;
+                $nextPay->id = $planOperation->id;
+                $nextPay->plan_date = $planOperation->plan_date;
+            }
+
+            $this->contracts->update_contract($contract->id, array(
+                'loan_body_summ' => $nextPay->plan_od,
+                'loan_percents_summ' => $nextPay->plan_prc,
+                'loan_peni_summ' => $nextPay->plan_peni,
+                'next_pay' => date('Y-m-d', strtotime($nextPay->plan_date)),
+                'payment_id' => $nextPay->id
+            ));
+        }
+    }
+
+    private function closeContract($contractId, $orderId)
+    {
+        $this->contracts->update_contract($contractId, array(
+            'status' => 3,
+            'collection_status' => 0,
+            'close_date' => date('Y-m-d H:i:s'),
+        ));
+
+        $this->orders->update_order($orderId, array(
+            'status' => 7
+        ));
     }
 }

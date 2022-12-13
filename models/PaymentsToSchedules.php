@@ -32,7 +32,7 @@ class PaymentsToSchedules extends Core
             SELECT count(*) as `count` 
             FROM s_payments_to_schedules 
             WHERE contract_id = ?
-            AND status = 0
+            AND status in (0,1)
         ", $contract_id);
 
         $this->db->query($query);
@@ -47,7 +47,7 @@ class PaymentsToSchedules extends Core
             SELECT * 
             FROM s_payments_to_schedules 
             WHERE contract_id = ?
-            AND status = 0
+            AND status = in(0,1)
             ORDER by id asc
             limit 1
         ", $contract_id);
