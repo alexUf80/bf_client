@@ -36,7 +36,7 @@ class IndexController extends Controller
 
         $needToConfirmCookies = 0;
 
-        if(empty($_COOKIE['cookie_confirmed']))
+        if(empty($_COOKIE))
             $needToConfirmCookies = 1;
 
         $this->design->assign('needToConfirmCookies', $needToConfirmCookies);
