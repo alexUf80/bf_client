@@ -60,15 +60,15 @@ class AccountController extends Controller
 
                 $last_contract = $this->contracts->get_last_contract($this->user->id);
 
-                if(!empty($last_contract)){
-                    $issuance_date_from = date('Y-m-d', strtotime($last_contract->close_date.'-1 year'));
+                if (!empty($last_contract)) {
+                    $issuance_date_from = date('Y-m-d', strtotime($last_contract->close_date . '-1 year'));
                     $count_closed_contracts = $this->contracts->count_contracts([
                         'user_id' => $this->user->id,
                         'status' => 7,
                         'issuance_date_from' => $issuance_date_from
                     ]);
 
-                    if($count_closed_contracts >= 9){
+                    if ($count_closed_contracts >= 9) {
                         $this->design->assign('error', 'Ограничение на количество контрактов (не более 9 за один календарный год)');
                         exit;
                     }
@@ -112,11 +112,10 @@ class AccountController extends Controller
                     'client_status' => $client_status,
                 );
 
-                if(isset($_COOKIE['promo_code']))
-                {
+                if (isset($_COOKIE['promo_code'])) {
                     $promocode = $this->PromoCodes->get_code_by_code($_COOKIE['promo_code']);
 
-                    if(!empty($promocode))
+                    if (!empty($promocode))
                         $order['promocode_id'] = $promocode->id;
                 }
 
@@ -124,15 +123,22 @@ class AccountController extends Controller
                 $order['webmaster_id'] = $_COOKIE["wm_id"];
                 $order['click_hash'] = $_COOKIE["clickid"];
 
+                $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
+
+                if (!empty($hasClickHash)) {
+                    unset($order['utm_source']);
+                    unset($order['webmaster_id']);
+                    unset($order['click_hash']);
+                }
+
 
                 // проверяем возможность автоповтора
                 $order['autoretry'] = 1;
 
-                if(isset($_COOKIE['promo_code']))
-                {
+                if (isset($_COOKIE['promo_code'])) {
                     $promocode = $this->PromoCodes->get_code_by_code($_COOKIE['promo_code']);
 
-                    if(!empty($promocode))
+                    if (!empty($promocode))
                         $order['promocode_id'] = $promocode->id;
                 }
 
@@ -153,7 +159,7 @@ class AccountController extends Controller
                     }
                 }
 
-                if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
+                if (!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                     $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
 
 
@@ -162,7 +168,7 @@ class AccountController extends Controller
             }
 
         }
-        $documents = $this->documents->get_documents(array('user_id' => $this->user->id, 'client_visible'=>1));
+        $documents = $this->documents->get_documents(array('user_id' => $this->user->id, 'client_visible' => 1));
         $this->design->assign('documents', $documents);
 
         if ($active_contract = $this->contracts->find_active_contracts($this->user->id)) {
@@ -179,11 +185,10 @@ class AccountController extends Controller
 
             $order = $this->orders->get_order($order->order_id);
 
-            if($order->loantype_id != 0)
-            {
+            if ($order->loantype_id != 0) {
                 $loantype = $this->Loantypes->get_loantype($order->loantype_id);
-                $stdPercent = $loantype->percent/100;
-            }else
+                $stdPercent = $loantype->percent / 100;
+            } else
                 $stdPercent = 0.01;
 
 
@@ -215,7 +220,7 @@ class AccountController extends Controller
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
-            if($now < $returnDate && date_diff($now,$returnDate) <= 3 || $now > $returnDate)
+            if ($now < $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
                 $show_prolongation = 1;
 
             $pro_date = $order->contract->return_date;
@@ -235,7 +240,7 @@ class AccountController extends Controller
                 $show_prolongation = false;
             }
 
-            $diff = date_diff($now,$returnDate);
+            $diff = date_diff($now, $returnDate);
             $order->contract->delay = $diff->days;
 
 
@@ -253,9 +258,8 @@ class AccountController extends Controller
                 }
             }
 
-            if($now < $returnDate && date_diff($now,$returnDate) <= 3 || $now > $returnDate)
+            if ($now < $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
                 $this->design->assign('prolongation_amount', $prolongation_amount);
-
 
 
             /*
@@ -317,15 +321,15 @@ class AccountController extends Controller
                 return $this->design->fetch('account/cession.tpl');
             else
                 return $this->design->fetch('account/premier.tpl');
-        } else{
+        } else {
             $warning_card = '';
 
-            foreach ($cards as $card){
+            foreach ($cards as $card) {
                 list($month, $year) = explode('/', $card->expdate);
-                $card_exp = date('Y-m-t', strtotime($year.'-'.$month));
+                $card_exp = date('Y-m-t', strtotime($year . '-' . $month));
                 $now_date = date('Y-m-d');
 
-                if($now_date > $card_exp){
+                if ($now_date > $card_exp) {
                     $last_four_digits = substr($card->pan, -4);
                     $warning_card .= "Пожалуйста, замените карту *$last_four_digits. Она не активна, мы не сможем зачислить займ<br>";
                 }

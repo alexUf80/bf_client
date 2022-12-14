@@ -75,6 +75,14 @@ class StageCardController extends Controller
             $order['webmaster_id'] = $_COOKIE["wm_id"];
             $order['click_hash'] = $_COOKIE["clickid"];
 
+            $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
+
+            if (!empty($hasClickHash)) {
+                unset($order['utm_source']);
+                unset($order['webmaster_id']);
+                unset($order['click_hash']);
+            }
+
 
             $order_id = $this->orders->add_order($order);
 //            70093bcc-3a3f-11eb-9983-00155d2d0507
