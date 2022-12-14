@@ -105,8 +105,8 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $description = 'Оплата по договору ' . $contract->number;
 
-        if($contract->status == 11)
-            $url = $this->config->front_url . '/best2pay_callback/paymentRestruct?payment_id='.$contract->payment_id;
+        if ($contract->status == 11)
+            $url = $this->config->front_url . '/best2pay_callback/paymentRestruct?payment_id=' . $contract->payment_id;
         else
             $url = $this->config->front_url . '/best2pay_callback/payment';
 
@@ -125,6 +125,9 @@ Sector ID: 8081 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             'contract' => $contract->number,
 //            'get_token' => 1,
         );
+
+        if(isset($multipaymentData))
+            $data['multipaymentData'] = json_encode($multipaymentData);
 
         $data['signature'] = $this->get_signature(array(
             $data['sector'],
