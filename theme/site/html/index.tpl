@@ -115,6 +115,7 @@
                     <a href="/page/about-us/" class="new-footer__menu-item">О компании</a>
                     <a href="/page/documents/" class="new-footer__menu-item">Юридическая информация</a>
                     <a href="/page/contacts/" class="new-footer__menu-item">Контакты и реквизиты</a>
+                    <a href="/politics/" class="new-footer__menu-item">Политика конфиденциальности</a>
                 </div>
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Информация о займах</div>

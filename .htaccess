@@ -46,6 +46,8 @@ RewriteRule ^stage/work/?$          index.php?module=StageWorkController  [L,QSA
 RewriteRule ^stage/files/?$         index.php?module=StageFilesController  [L,QSA]
 RewriteRule ^stage/card/?$          index.php?module=StageCardController  [L,QSA]
 
+RewriteRule ^politics/?$            index.php?module=PoliticsController  [L,QSA]
+
 RewriteRule ^go/([^/]*)/?$        	index.php?module=ShortLinkController&page_url=$1 [L,QSA]
 
 RewriteRule ^accept/([^/]*)/?$      index.php?module=ContractAcceptController&id=$1  [L,QSA]
