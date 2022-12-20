@@ -99,7 +99,7 @@
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
-                        <br>Дата: {$contract->issuance_date|date}
+                        <br>Дата: {$contract->inssuance_date|date}
                     </td>
                 </tr>
             </table>

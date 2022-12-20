@@ -36,7 +36,6 @@ class AccountPayController extends Controller
                 if (!($user_balance = $this->balances->get_balance($user_balance_id)))
                     return false;
 
-                $max_payment = $user_balance->loan_body_summ + $user_balance->loan_percents_summ + $user_balance->loan_peni_summ + $user_balance->loan_charge_summ;
             }
             else
             {
@@ -46,8 +45,6 @@ class AccountPayController extends Controller
 
                 if ($contract->user_id != $this->user->id)
                     return false;
-
-                $max_payment = $contract->loan_body_summ + $contract->loan_percents_summ + $contract->loan_peni_summ + $contract->loan_charge_summ;
             }
 
 
@@ -65,16 +62,6 @@ class AccountPayController extends Controller
             {
                 $this->design->assign('error', 'Минимальная сумма для пролонгации: '.$prolongation_amount.' руб');
                 $amount = $prolongation_amount;
-            }
-            elseif ($amount > $max_payment)
-            {
-                $this->design->assign('error', 'Максимальная сумма к оплате: '.$max_payment.' руб');
-                $amount = $max_payment;
-            }
-            elseif ($max_payment != $amount && ($max_payment - $amount) < 1)
-            {
-                $this->design->assign('error', 'нельзя оставлять долг меньше 1 руб');
-                $amount = $max_payment;
             }
 
             $this->design->assign('amount', $amount);

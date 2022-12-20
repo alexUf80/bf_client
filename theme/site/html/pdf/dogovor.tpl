@@ -12,7 +12,7 @@
 </div>
 <table>
     <tr>
-        <td width="20%"><strong>{$contract->issuance_date|date}</strong></td>
+        <td width="20%"><strong>{$contract->inssuance_date|date}</strong></td>
         <td width="60%"></td>
         <td width="20%"><strong>Г. АРХАНГЕЛЬСК</strong></td>
     </tr>
@@ -195,7 +195,7 @@
             1111, наименование банка ТОЧКА ПАО БАНКА "ФК ОТКРЫТИЕ", к/с 3010 1810 8452 5000 0999,
             ИНН 7706092528, БИК 044525999. Получатель: ООО МКК «Баренц Финанс»
             Назначение платежа: оплата по договору займа № {$contract->number}
-            от {$contract->issuance_date|date} {$lastname|upper} {$firstname|upper} {$patronymic|upper}<br>
+            от {$contract->inssuance_date|date} {$lastname|upper} {$firstname|upper} {$patronymic|upper}<br>
             3.Путем совершения платежа с использованием интернет-банка Сбербанка Онлайн, мобильного приложения Сбербанк
             Онлайн или внесения наличных денежных средств с помощью устройства самообслуживания Сбербанка.<br>
             4. Путем совершения почтовых переводов денежных средств физических лиц в адрес Займодавца с применением
@@ -418,7 +418,7 @@
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
-                        <br>Дата: {$contract->issuance_date|date}
+                        <br>Дата: {$contract->inssuance_date|date}
                     </td>
                 </tr>
             </table>
@@ -437,7 +437,7 @@
 </div>
 <div align="center">
     <i>к индивидуальным условиям договора потребительского микрозайма № {$contract->number}
-        от {$contract->issuance_date|date}</i>
+        от {$contract->inssuance_date|date}</i>
 </div>
 <div align="center">
     <strong><h3>ГРАФИК ПЛАТЕЖЕЙ</h3></strong>
@@ -447,7 +447,7 @@
 </div>
 <table>
     <tr>
-        <td width="20%"><strong>{$contract->issuance_date|date}</strong></td>
+        <td width="20%"><strong>{$contract->inssuance_date|date}</strong></td>
         <td width="60%"></td>
         <td width="20%"><strong>Г. АРХАНГЕЛЬСК</strong></td>
     </tr>
@@ -464,7 +464,7 @@
     года, код подразделения {$subdivision_code}, именуемый в дальнейшем Заемщик, зарегистрированный(-ая) по
     адресу: {$regaddress_full}, aс другой стороны, далее вместе именуемые Стороны, согласовали График платежей по
     Договору потребительского кредита
-    (займа) № {$contract->number} от {$contract->issuance_date|date} в следующий редакции:
+    (займа) № {$contract->number} от {$contract->inssuance_date|date} в следующий редакции:
 </div>
 <div>
 
@@ -580,7 +580,7 @@
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
-                        <br>Дата: {$contract->issuance_date|date}
+                        <br>Дата: {$contract->inssuance_date|date}
                     </td>
                 </tr>
             </table>
