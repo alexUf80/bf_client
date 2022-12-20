@@ -13,6 +13,8 @@ class Addresses extends Core
         $result = $this->db->result();
 	
         return $result;
+
+
     }
     
 	public function get_addresses($filter = array())
