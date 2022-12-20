@@ -26,10 +26,14 @@
 
 
     <script>
+<<<<<<< HEAD
 
         {if $is_developer}console.info('DEVELOPER MODE')
         {/if}
 
+=======
+        {if $is_developer}console.info('DEVELOPER MODE'){/if}
+>>>>>>> 39d4e74d3b945f04f79897d968937243353c0181
     </script>
 
     <meta name="yandex-verification" content="2c0068d5cbd1bd2c"/>
