@@ -26,14 +26,7 @@
 
 
     <script>
-<<<<<<< HEAD
-
-        {if $is_developer}console.info('DEVELOPER MODE')
-        {/if}
-
-=======
         {if $is_developer}console.info('DEVELOPER MODE'){/if}
->>>>>>> 39d4e74d3b945f04f79897d968937243353c0181
     </script>
 
     <meta name="yandex-verification" content="2c0068d5cbd1bd2c"/>
@@ -122,7 +115,8 @@
                     <a href="/page/about-us/" class="new-footer__menu-item">О компании</a>
                     <a href="/page/documents/" class="new-footer__menu-item">Юридическая информация</a>
                     <a href="/page/contacts/" class="new-footer__menu-item">Контакты и реквизиты</a>
-                    <a href="/politics/" class="new-footer__menu-item">Политика конфиденциальности</a>
+                    <a href="/files/about/confidential_politics.pdf" class="new-footer__menu-item">Политика конфиденциальности</a>
+                    <a href="/files/about/cookies_politics.pdf" class="new-footer__menu-item">Политика Cookie</a>
                 </div>
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Информация о займах</div>
@@ -247,7 +241,6 @@
 
 {if !$is_developer}
 {literal}
-    <script src="//code.jivo.ru/widget/OPARMHrIm4" async></script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function (m, e, t, r, i, k, a) {
