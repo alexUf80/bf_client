@@ -42,13 +42,23 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     {
         parent::__construct();
 
-        $b2p = B2pAccessORM::get();
+        $this->sectors =
+            [
+                'PAY_CREDIT' => $this->config->p2pSector,
+                'RECURRENT' => $this->config->ecomSector,
+                'ADD_CARD' => $this->config->tokenSector,
+                'PAYMENT' => $this->config->paySector,
+            ];
 
-        foreach ($b2p as $access) {
-            $this->sectors[$access->type] = $access->sector;
-            $this->passwords[$access->sector] = $access->password;
-            $this->url = $access->link;
-        }
+        $this->passwords =
+            [
+                $this->config->p2pSector => $this->config->p2pSectorPassword,
+                $this->config->ecomSector => $this->config->ecomSectorPassword,
+                $this->config->tokenSector => $this->config->tokenPassword,
+                $this->config->paySector => $this->config->payPassword,
+            ];
+
+        $this->url = $this->config->b2phref;
     }
 
     public function get_sectors()
@@ -73,7 +83,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     public function get_payment_link($amount, $contract_id, $prolongation = 0, $card_id = 0, $sms = '')
     {
         if($prolongation == 1)
-            $amount += $this->settings->prolongation_amount;
+            $amount += ($this->settings->prolongation_amount * 100);
 
         $fee = round(max(1, floatval($amount * $this->fee)));
 

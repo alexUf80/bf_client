@@ -220,24 +220,15 @@ class AccountController extends Controller
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
-            if ($now < $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
+            if ($now <= $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
                 $show_prolongation = 1;
 
-            $pro_date = $order->contract->return_date;
+            $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
             if ($show_prolongation) {
-                $date_interval = 30;
 
-                if ($date_interval < 0) {
-                    $order->prolongation_date = null;
-                } else {
-                    $date_interval = new DateInterval("P{$date_interval}D");
-                    $order->prolongation_date = (new DateTime($pro_date))->add($date_interval)->format('Y-m-d');
-                }
-            }
-
-            if (!$order->prolongation_date) {
-                $show_prolongation = false;
+                $date_interval = new DateInterval("P30D");
+                $order->prolongation_date = $pro_date->add($date_interval)->format('Y-m-d');
             }
 
             $diff = date_diff($now, $returnDate);
@@ -245,20 +236,16 @@ class AccountController extends Controller
 
 
             $prolongation_amount = 0;
-            if (empty($order->contract->stop_profit)) {
-                if (empty($order->contract->hide_prolongation)) {
-                    if ($order->contract->type == 'base' && ($order->contract->status == 2 || $order->contract->status == 4)) // выдан
-                    {
-                        if ($order->contract->prolongation < 5 || ($order->contract->prolongation >= 5 && $order->contract->sold)) {
-                            if ($order->contract->loan_percents_summ > 0) {
-                                $prolongation_amount = $order->contract->loan_percents_summ;
-                            }
-                        }
+            if ($order->contract->type == 'base' && ($order->contract->status == 2 || $order->contract->status == 4)) // выдан
+            {
+                if ($order->contract->prolongation < 5 || ($order->contract->prolongation >= 5 && $order->contract->sold)) {
+                    if ($order->contract->loan_percents_summ > 0) {
+                        $prolongation_amount = $order->contract->loan_percents_summ;
                     }
                 }
             }
 
-            if ($now < $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
+            if ($now <= $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
                 $this->design->assign('prolongation_amount', $prolongation_amount);
 
 
