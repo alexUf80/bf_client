@@ -45,6 +45,7 @@ RewriteRule ^stage/address/?$       index.php?module=StageAddressController  [L,
 RewriteRule ^stage/work/?$          index.php?module=StageWorkController  [L,QSA]
 RewriteRule ^stage/files/?$         index.php?module=StageFilesController  [L,QSA]
 RewriteRule ^stage/card/?$          index.php?module=StageCardController  [L,QSA]
+RewriteRule ^contacts/?$            index.php?module=ContactsController [L,QSA]
 
 RewriteRule ^politics/?$            index.php?module=PoliticsController  [L,QSA]
 
