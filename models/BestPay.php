@@ -83,7 +83,17 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     public function get_payment_link($amount, $contract_id, $prolongation = 0, $card_id = 0, $sms = '')
     {
         if($prolongation == 1)
-            $amount += ($this->settings->prolongation_amount * 100);
+        {
+            $multipaymentData =
+                [
+                    'amount' => $this->settings->prolongation_amount * 100,
+                    'fee' => 0,
+                    'currency' => 643,
+                    'description' => 'Страхование банковской карты',
+                    'reference' => $contract->id,
+                    'paymentNum' => 2
+                ];
+        }
 
         $fee = round(max(1, floatval($amount * $this->fee)));
 
