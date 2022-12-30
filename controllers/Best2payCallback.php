@@ -422,9 +422,9 @@ class Best2PayCallback extends Controller
                         if ($reason_code == 1) {
                             if (!($contract = $this->contracts->get_contract($transaction->reference)))
                                 $contract = $this->contracts->get_number_contract($transaction->reference);
-
-                            $this->processingPay($contract->id, $payment_amount, $transaction->id);
                         }
+
+                        $this->processingPay($contract->id, $payment_amount, $transaction->id);
 
                         $this->design->assign('success', 'Оплата прошла успешно.');
                     } else {
