@@ -171,132 +171,164 @@ class Best2PayCallback extends Controller
 
                             }
 
-                        } else {
-                            $this->transactions->update_transaction($transaction->id, array('prolongation' => 0));
-                        }
-
-
-                        // списываем проценты
-                        $contract_loan_percents_summ = (float)$contract->loan_percents_summ;
-                        if ($contract->loan_percents_summ > 0) {
-                            if ($rest_amount >= $contract->loan_percents_summ) {
-                                $contract_loan_percents_summ = 0;
-                                $rest_amount = $rest_amount - $contract->loan_percents_summ;
-                                $transaction_loan_percents_summ = $contract->loan_percents_summ;
-                            } else {
-                                $contract_loan_percents_summ = $contract->loan_percents_summ - $rest_amount;
-                                $transaction_loan_percents_summ = $rest_amount;
-                                $rest_amount = 0;
-                            }
-                        }
-
-                        // списываем основной долг
-                        $contract_loan_body_summ = (float)$contract->loan_body_summ;
-                        if ($contract->loan_body_summ > 0) {
-                            if ($rest_amount >= $contract->loan_body_summ) {
-                                $contract_loan_body_summ = 0;
-                                $rest_amount = $rest_amount - $contract->loan_body_summ;
-                                $transaction_loan_body_summ = $contract->loan_body_summ;
-                            } else {
-                                $contract_loan_body_summ = $contract->loan_body_summ - $rest_amount;
-                                $transaction_loan_body_summ = $rest_amount;
-                                $rest_amount = 0;
-                            }
-                        }
-
-                        if (empty($transaction->prolongation) && $rest_amount != 0 && $contract_loan_body_summ == 0 && $contract_loan_percents_summ == 0) {
-                            // списываем пени
-                            $contract_loan_peni_summ = (float)$contract->loan_peni_summ;
-
-                            if ($contract->loan_peni_summ > 0) {
-                                if ($rest_amount >= $contract->loan_peni_summ) {
-                                    $contract_loan_peni_summ = 0;
-                                    $rest_amount = $rest_amount - $contract->loan_peni_summ;
-                                    $transaction_loan_peni_summ = $contract->loan_peni_summ;
+                            // списываем проценты
+                            $contract_loan_percents_summ = (float)$contract->loan_percents_summ;
+                            if ($contract->loan_percents_summ > 0) {
+                                if ($rest_amount >= $contract->loan_percents_summ) {
+                                    $contract_loan_percents_summ = 0;
+                                    $rest_amount = $rest_amount - $contract->loan_percents_summ;
+                                    $transaction_loan_percents_summ = $contract->loan_percents_summ;
                                 } else {
-                                    $contract_loan_peni_summ = $contract->loan_peni_summ - $rest_amount;
-                                    $transaction_loan_peni_summ = $rest_amount;
+                                    $contract_loan_percents_summ = $contract->loan_percents_summ - $rest_amount;
+                                    $transaction_loan_percents_summ = $rest_amount;
                                     $rest_amount = 0;
                                 }
                             }
-                        }
 
-                        $this->contracts->update_contract($contract->id, array(
-                            'loan_percents_summ' => $contract_loan_percents_summ,
-                            'loan_peni_summ' => isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ,
-                            'loan_body_summ' => $contract_loan_body_summ,
-                        ));
+                            // списываем основной долг
+                            $contract_loan_body_summ = (float)$contract->loan_body_summ;
+                            if ($contract->loan_body_summ > 0) {
+                                if ($rest_amount >= $contract->loan_body_summ) {
+                                    $contract_loan_body_summ = 0;
+                                    $rest_amount = $rest_amount - $contract->loan_body_summ;
+                                    $transaction_loan_body_summ = $contract->loan_body_summ;
+                                } else {
+                                    $contract_loan_body_summ = $contract->loan_body_summ - $rest_amount;
+                                    $transaction_loan_body_summ = $rest_amount;
+                                    $rest_amount = 0;
+                                }
+                            }
 
-                        $this->transactions->update_transaction($transaction->id, array(
-                            'loan_percents_summ' => empty($transaction_loan_percents_summ) ? 0 : $transaction_loan_percents_summ,
-                            'loan_peni_summ' => empty($transaction_loan_peni_summ) ? 0 : $transaction_loan_peni_summ,
-                            'loan_body_summ' => empty($transaction_loan_body_summ) ? 0 : $transaction_loan_body_summ,
-                        ));
+                            if (!empty($contract->collection_status)) {
+                                $date1 = new DateTime(date('Y-m-d', strtotime($contract->return_date)));
+                                $date2 = new DateTime(date('Y-m-d'));
 
+                                $diff = $date2->diff($date1);
+                                $contract->expired_days = $diff->days;
 
-                        if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
-                            $return_amount = round($contract_loan_body_summ + $contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
-                            $return_amount_percents = round($contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
+                                $collection_order = array(
+                                    'transaction_id' => $transaction->id,
+                                    'manager_id' => $contract->collection_manager_id,
+                                    'contract_id' => $contract->id,
+                                    'created' => date('Y-m-d H:i:s'),
+                                    'body_summ' => empty($transaction_loan_body_summ) ? 0 : $transaction_loan_body_summ,
+                                    'percents_summ' => empty($transaction_loan_percents_summ) ? 0 : $transaction_loan_percents_summ,
+                                    'charge_summ' => empty($transaction_loan_charge_summ) ? 0 : $transaction_loan_charge_summ,
+                                    'peni_summ' => empty($transaction_loan_peni_summ) ? 0 : $transaction_loan_peni_summ,
+                                    'commision_summ' => $transaction->commision_summ,
+                                    'closed' => 0,
+                                    'prolongation' => 0,
+                                    'collection_status' => $contract->collection_status,
+                                    'expired_days' => $contract->expired_days,
+                                );
+                            }
 
-                            $document_params['return_amount'] = $return_amount;
-                            $document_params['return_amount_percents'] = $return_amount_percents;
+                            if (empty($transaction->prolongation) && $rest_amount != 0 && $contract_loan_body_summ == 0 && $contract_loan_percents_summ == 0) {
+                                // списываем пени
+                                $contract_loan_peni_summ = (float)$contract->loan_peni_summ;
 
-                            $document_params['amount'] = $contract_loan_body_summ;
+                                if ($contract->loan_peni_summ > 0) {
+                                    if ($rest_amount >= $contract->loan_peni_summ) {
+                                        $contract_loan_peni_summ = 0;
+                                        $rest_amount = $rest_amount - $contract->loan_peni_summ;
+                                        $transaction_loan_peni_summ = $contract->loan_peni_summ;
+                                    } else {
+                                        $contract_loan_peni_summ = $contract->loan_peni_summ - $rest_amount;
+                                        $transaction_loan_peni_summ = $rest_amount;
+                                        $rest_amount = 0;
+                                    }
+                                }
+                            }
 
-                            // дополнительное соглашение
-                            $this->documents->create_document(array(
-                                'user_id' => $contract->user_id,
-                                'order_id' => $contract->order_id,
-                                'contract_id' => $contract->id,
-                                'type' => 'DOP_SOGLASHENIE',
-                                'params' => json_encode($document_params)
+                            $this->contracts->update_contract($contract->id, array(
+                                'loan_percents_summ' => $contract_loan_percents_summ,
+                                'loan_peni_summ' => isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ,
+                                'loan_body_summ' => $contract_loan_body_summ,
                             ));
 
-                            if ($docs == 2) {
-                                $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
+                            $this->transactions->update_transaction($transaction->id, array(
+                                'loan_percents_summ' => empty($transaction_loan_percents_summ) ? 0 : $transaction_loan_percents_summ,
+                                'loan_peni_summ' => empty($transaction_loan_peni_summ) ? 0 : $transaction_loan_peni_summ,
+                                'loan_body_summ' => empty($transaction_loan_body_summ) ? 0 : $transaction_loan_body_summ,
+                            ));
+
+
+                            if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
+                                if (!empty($collection_order))
+                                    $collection_order['prolongation'] = 1;
+
+                                $return_amount = round($contract_loan_body_summ + $contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
+                                $return_amount_percents = round($contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
+
+                                $document_params['return_amount'] = $return_amount;
+                                $document_params['return_amount_percents'] = $return_amount_percents;
+
+                                $document_params['amount'] = $contract_loan_body_summ;
+
+                                // дополнительное соглашение
                                 $this->documents->create_document(array(
                                     'user_id' => $contract->user_id,
                                     'order_id' => $contract->order_id,
                                     'contract_id' => $contract->id,
-                                    'type' => 'POLIS_PROLONGATION',
+                                    'type' => 'DOP_SOGLASHENIE',
                                     'params' => json_encode($document_params)
                                 ));
+
+                                if ($docs == 2) {
+                                    $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
+                                    $this->documents->create_document(array(
+                                        'user_id' => $contract->user_id,
+                                        'order_id' => $contract->order_id,
+                                        'contract_id' => $contract->id,
+                                        'type' => 'POLIS_PROLONGATION',
+                                        'params' => json_encode($document_params)
+                                    ));
+                                }
                             }
-                        }
 
-                        // закрываем кредит
-                        $contract_loan_percents_summ = round($contract_loan_percents_summ, 2);
-                        $contract_loan_body_summ = round($contract_loan_body_summ, 2);
+                            // закрываем кредит
+                            $contract_loan_percents_summ = round($contract_loan_percents_summ, 2);
+                            $contract_loan_body_summ = round($contract_loan_body_summ, 2);
 
-                        $contract_loan_peni_summ = isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ;
-                        $contract_loan_peni_summ = round($contract_loan_peni_summ, 2);
+                            $contract_loan_peni_summ = isset($contract_loan_peni_summ) ? $contract_loan_peni_summ : $contract->loan_peni_summ;
+                            $contract_loan_peni_summ = round($contract_loan_peni_summ, 2);
 
-                        if ($contract_loan_body_summ <= 0 && $contract_loan_percents_summ <= 0 && $contract_loan_peni_summ == 0) {
-                            $this->contracts->update_contract($contract->id, array(
-                                'status' => 3,
-                                'collection_status' => 0,
-                                'close_date' => date('Y-m-d H:i:s'),
+                            if ($contract_loan_body_summ <= 0 && $contract_loan_percents_summ <= 0 && $contract_loan_peni_summ == 0) {
+                                $this->contracts->update_contract($contract->id, array(
+                                    'status' => 3,
+                                    'collection_status' => 0,
+                                    'close_date' => date('Y-m-d H:i:s'),
+                                ));
+
+                                $this->orders->update_order($contract->order_id, array(
+                                    'status' => 7
+                                ));
+
+                                if (!empty($collection_order))
+                                    $collection_order['closed'] = 1;
+                            }
+
+                            if (!empty($collection_order))
+                                $this->collections->add_collection($collection_order);
+
+                            $this->operations->add_operation(array(
+                                'contract_id' => $contract->id,
+                                'user_id' => $contract->user_id,
+                                'order_id' => $contract->order_id,
+                                'type' => 'PAY',
+                                'amount' => $payment_amount,
+                                'created' => $operation_date,
+                                'transaction_id' => $transaction->id,
+                                'loan_body_summ' => $contract_loan_body_summ,
+                                'loan_percents_summ' => $contract_loan_percents_summ,
+                                'loan_charge_summ' => 0,
+                                'loan_peni_summ' => 0
                             ));
+                            $this->design->assign('success', 'Оплата прошла успешно.');
 
-                            $this->orders->update_order($contract->order_id, array(
-                                'status' => 7
-                            ));
+                        } else {
+                            $this->design->assign('error', 'При оплате произошла ошибка: Недостаточно средств');
                         }
-
-                        $this->operations->add_operation(array(
-                            'contract_id' => $contract->id,
-                            'user_id' => $contract->user_id,
-                            'order_id' => $contract->order_id,
-                            'type' => 'PAY',
-                            'amount' => $payment_amount,
-                            'created' => $operation_date,
-                            'transaction_id' => $transaction->id,
-                            'loan_body_summ' => $contract_loan_body_summ,
-                            'loan_percents_summ' => $contract_loan_percents_summ,
-                            'loan_charge_summ' => 0,
-                            'loan_peni_summ' => 0
-                        ));
-                        $this->design->assign('success', 'Оплата прошла успешно.');
                     } else {
                         $reason_code_description = $this->BestPay->get_reason_code_description($code);
                         $this->design->assign('reason_code_description', $reason_code_description);

@@ -84,9 +84,6 @@ function MainApp() {
                             app.$phone.focus();
                         }
                         else if (!!resp.not_found) {
-
-                            $('[name="service_insurance"]').val();
-                            $('[name="service_reason"]').val();
                             setTimeout(function () {
                                 // отправляем смс
                                 new SmsApp(_phone, _success_callback);
