@@ -257,6 +257,8 @@ class Best2PayCallback extends Controller
                                 if (!empty($collection_order))
                                     $collection_order['prolongation'] = 1;
 
+                                $this->contracts->update_contract($contract->id, ['collection_status' => 0, 'collection_manager_id' => 0]);
+
                                 $return_amount = round($contract_loan_body_summ + $contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
                                 $return_amount_percents = round($contract_loan_body_summ * $contract->base_percent * $this->settings->prolongation_period / 100, 2);
 
