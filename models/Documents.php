@@ -25,7 +25,7 @@ class Documents extends Core
 
     private $client_visible = array(
         'IND_USLOVIYA_NL' => 1,
-        'ANKETA_PEP' => 1,
+        'ANKETA_PEP' => 0,
         'SOGLASIE_OPD' => 1,
         'POLIS' => 1,
         'KID' => 1,
