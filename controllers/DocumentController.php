@@ -47,6 +47,9 @@ class DocumentController extends Controller
                 }
             }
 
+            $contract = ContractsORM::where('order_id', $document->order_id)->first();
+            $this->design->assign('contract', $contract);
+
 
             foreach ($document->params as $param_name => $param_value)
             {
@@ -68,8 +71,6 @@ class DocumentController extends Controller
 
             $this->design->assign('regaddress_full', $regaddress_full);
 
-            $contract = $this->contracts->get_contract($document->contract_id);
-
             $cards = $this->cards->get_cards(['user_id' => $contract->user_id]);
             $active_card = '';
 
@@ -80,9 +81,6 @@ class DocumentController extends Controller
                 }
                 $this->design->assign('active_card', $active_card);
             }
-
-            $this->design->assign('contract', $contract);
-
         }
 
         $insurance = $this->request->get('insurance');
