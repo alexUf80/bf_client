@@ -84,6 +84,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
     {
         if($prolongation == 1)
         {
+            $amount += $this->settings->prolongation_amount * 100;
+            /*
             $multipaymentData =
                 [
                     'amount' => $this->settings->prolongation_amount * 100,
@@ -93,6 +95,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
                     'reference' => $contract->id,
                     'paymentNum' => 2
                 ];
+
+            */
         }
 
         $fee = round(max(1, floatval($amount * $this->fee)));
