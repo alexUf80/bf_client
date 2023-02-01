@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(-1);
+ini_set('display_errors', 'on');
+
 class Best2PayCallback extends Controller
 {
     public function fetch()
@@ -456,7 +459,8 @@ class Best2PayCallback extends Controller
                                 $contract = $this->contracts->get_number_contract($transaction->reference);
                         }
 
-                        $this->processingPay($contract->id, $payment_amount, $transaction->id);
+                        var_dump($this->processingPay($contract->id, $payment_amount, $transaction->id));
+                        exit;
 
                         $this->design->assign('success', 'Оплата прошла успешно.');
                     } else {
@@ -481,7 +485,7 @@ class Best2PayCallback extends Controller
 
     private function processingPay($contractId, $rest_amount, $transactionId)
     {
-        $contract = $this->contracts->get->contract($contractId);
+        $contract = $this->contracts->get_contract($contractId);
         $planOperation = $this->PaymentsToSchedules->get_next($contractId);
 
         $faktOd = 0;
@@ -545,7 +549,7 @@ class Best2PayCallback extends Controller
         $faktOperation =
             [
                 'operation_id' => $planOperation->id,
-                'fakt_payment' => $payment_amount,
+                'fakt_payment' => $paySum,
                 'fakt_od' => $faktOd,
                 'fakt_prc' => $faktPeni,
                 'fakt_peni' => $faktPrc,
