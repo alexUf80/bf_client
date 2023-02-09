@@ -144,8 +144,6 @@ class AccountController extends Controller
 
                 $order_id = $this->orders->add_order($order);
 
-                $this->BestPay->authorize_by_token($this->user->id);
-
                 // добавляем задание для проведения активных скорингов
                 $scoring_types = $this->scorings->get_types();
                 foreach ($scoring_types as $scoring_type) {
@@ -164,6 +162,8 @@ class AccountController extends Controller
                 if (!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                     $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
 
+
+                $this->BestPay->authorize_by_token($this->user->id);
 
                 header('Location: /account');
                 exit;

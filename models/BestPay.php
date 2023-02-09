@@ -668,15 +668,23 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
                 'sector'      => $sector,
                 'amount'      => $amount,
                 'currency'    => '643',
-                'description' => 'Привязка карты',
+                $password
             ];
 
         $data['signature'] = $this->get_signature($data);
 
-        $b2p_order = $this->send('Register', $data);
 
-        var_dump($b2p_order);
-        exit;
+        $data = array(
+            'sector' => $sector,
+            'amount' => $amount,
+            'currency' => $this->currency_code,
+            'reference' => $userId,
+            'description' => $description,
+            'token' => $card->token
+        );
+        $data['signature'] = $this->get_signature(array($data['sector'], $data['amount'], $data['currency'], $password));
+
+        $b2p_order = $this->send('Register', $data);
 
         $xml = simplexml_load_string($b2p_order);
         $b2p_order_id = (string)$xml->id;
@@ -693,12 +701,21 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             'created' => date('Y-m-d H:i:s'),
         ));
 
-        $data['signature'] = $this->get_signature([$sector, $b2p_order_id, $card->token, $password]);
+        $data =
+            [
+                'sector' => $sector,
+                'id' => $b2p_order_id,
+                'token' => $card->token
+            ];
 
+        $data['signature'] = $this->get_signature([$data['sector'], $data['id'], $data['token'], $password]);
 
-        $xml = $this->send('AuthorizeByToken', $data);
+        $resp = $this->send('AuthorizeByToken', $data);
 
-        return $xml;
+        $xml = simplexml_load_string($resp);
+        $status = (string)$xml->order_state;
+
+        return $status;
     }
 
 
