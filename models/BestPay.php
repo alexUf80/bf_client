@@ -675,6 +675,9 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $b2p_order = $this->send('Register', $data);
 
+        var_dump($b2p_order);
+        exit;
+
         $xml = simplexml_load_string($b2p_order);
         $b2p_order_id = (string)$xml->id;
 
