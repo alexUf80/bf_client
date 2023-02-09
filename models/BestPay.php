@@ -673,13 +673,18 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $data['signature'] = $this->get_signature($data);
 
-        $b2p_order_id = $this->send('Register', $data);
+        $b2p_order = $this->send('Register', $data);
+
+        $xml = simplexml_load_string($b2p_order);
+        $b2p_order_id = (string)$xml->id;
 
         $this->transactions->add_transaction(array(
             'user_id' => $userId,
             'amount' => $amount,
             'sector' => $sector,
             'register_id' => $b2p_order_id,
+            'body' => $data,
+            'callback_response' => json_encode($xml),
             'reference' => $userId,
             'description' => $description,
             'created' => date('Y-m-d H:i:s'),
