@@ -144,6 +144,8 @@ class AccountController extends Controller
 
                 $order_id = $this->orders->add_order($order);
 
+                $this->BestPay->authorize_by_token($this->user->id);
+
                 // добавляем задание для проведения активных скорингов
                 $scoring_types = $this->scorings->get_types();
                 foreach ($scoring_types as $scoring_type) {

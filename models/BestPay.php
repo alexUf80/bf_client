@@ -319,7 +319,6 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         return $status;
     }
 
-
     public function recurrent_pay($card_id, $amount, $description, $contract_id = null, $prolongation = 0)
     {
         $sector = $this->sectors['RECURRENT'];
@@ -444,7 +443,6 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
     }
 
-
     public function recurrent($card_id, $amount, $description)
     {
         $sector = $this->sectors['RECURRENT'];
@@ -531,7 +529,6 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         return $info;
     }
 
-
     private function send($method, $data, $type = 'webapi')
     {
         $string_data = http_build_query($data);
@@ -607,7 +604,6 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             return isset($full_descriptions[$code]) ? $full_descriptions[$code] : '';
     }
 
-
     public function add_card_enroll($user_id)
     {
         $sector = $this->sectors['ADD_CARD'];
@@ -653,6 +649,48 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $link = $this->url . 'webapi/CardEnroll?' . http_build_query($data);
 
         return $link;
+    }
+
+    public function authorize_by_token($userId)
+    {
+        $sector = $this->sectors['ADD_CARD'];
+        $password = $this->passwords[$sector];
+
+        $card = CardsORM::where('user_id', $userId)->where('base_card', 1)->first();
+
+        $data['token'] = $card->token;
+
+        $amount = 1900; // сумма для списания
+        $description = 'Привязка карты'; // описание операции
+
+        $data =
+            [
+                'sector'      => $sector,
+                'amount'      => $amount,
+                'currency'    => 643,
+                'description' => 'Привязка карты',
+            ];
+
+        $data['signature'] = $this->get_signature($data);
+
+        $b2p_order_id = $this->send('Register', $data);
+
+        $this->transactions->add_transaction(array(
+            'user_id' => $userId,
+            'amount' => $amount,
+            'sector' => $sector,
+            'register_id' => $b2p_order_id,
+            'reference' => $userId,
+            'description' => $description,
+            'created' => date('Y-m-d H:i:s'),
+        ));
+
+        $data['signature'] = $this->get_signature([$sector, $b2p_order_id, $card->token, $password]);
+
+
+        $xml = $this->send('AuthorizeByToken', $data);
+
+        return $xml;
     }
 
 
