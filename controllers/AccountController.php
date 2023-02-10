@@ -163,6 +163,8 @@ class AccountController extends Controller
                     $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
 
 
+                $this->BestPay->authorize_by_token($this->user->id);
+
                 header('Location: /account');
                 exit;
             }
