@@ -222,7 +222,7 @@ class AccountController extends Controller
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
-            if ($now <= $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
+            if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35)
                 $show_prolongation = 1;
 
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
