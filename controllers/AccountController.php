@@ -187,11 +187,12 @@ class AccountController extends Controller
 
             $order = $this->orders->get_order($order->order_id);
 
-            if ($order->loantype_id != 0) {
-                $loantype = $this->Loantypes->get_loantype($order->loantype_id);
-                $stdPercent = $loantype->percent / 100;
-            } else
+            if (!empty($order->promocode_id)) {
+                $stdPercent = $this->PromoCodes->get_code($order->promocode_id);
+                $stdPercent = $stdPercent->discount / 10000;
+            } else {
                 $stdPercent = 0.01;
+            }
 
 
             $order->return_amount = ($order->amount * $stdPercent * $order->period) + $order->amount;
@@ -222,7 +223,7 @@ class AccountController extends Controller
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
-            if ($now <= $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
+            if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35)
                 $show_prolongation = 1;
 
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
