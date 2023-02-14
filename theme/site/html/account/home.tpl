@@ -9,7 +9,7 @@
 {capture name='page_styles'}
 
 {/capture}
-<div style="position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></div>
+<div id="baner" style="display: none;position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><a href="https://fcb-dolgi.ru/"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></a></div>
 <main class="main js-lk-app">
     <div class="section_lk_navbar">
         <div class="container">
@@ -359,7 +359,7 @@
                                     <small>{$order->reject_reason}</small>
                                     
                                     <div>
-                                        <div  target="_blank" class="blue-link">
+                                        <div onclick="clickRedirect()" style="cursor: pointer;"  target="_blank" class="blue-link">
                                             Получите займ у наших партнёров
                                             <br/>
                                             <span class="sc-htoDjs fOeadG"></span>
@@ -718,6 +718,15 @@
                     console.log('sessionready', e.detail.sessionId)
                     $('#juicescore_session_id').val(e.detail.sessionId)
                 })
+
+                function clickRedirect() {
+                    let baner = document.querySelector('#baner');
+                    baner.style='position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;cursor: pointer;'
+                    window.addEventListener('click', function(e){
+                        window.location.href = "http://stackoverflow.com";
+                    });
+                }
+                
             </script>
 
 
