@@ -357,6 +357,7 @@
                                 <div class="order_reject_icon"></div>
                                 <div class="pt-4 pr-5 pl-5 text-center">
                                     <small>{$order->reject_reason}</small>
+                                    <div style="position: absolute;"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></div>
                                     <div>
                                         <div  target="_blank" class="blue-link">
                                             Получите займ у наших партнёров
