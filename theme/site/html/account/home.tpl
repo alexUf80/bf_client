@@ -360,7 +360,7 @@
                                     
                                     <div>
                                         <div onclick="clickRedirect()" style="cursor: pointer;"  target="_blank" class="blue-link">
-                                            Получите займ у наших партнёров
+                                            Получите консультацию у наших партнёров. 
                                             <br/>
                                             <span class="sc-htoDjs fOeadG"></span>
                                             <span class="sc-iwsKbI jQhHGA">Лучшие предложения для вас</span>

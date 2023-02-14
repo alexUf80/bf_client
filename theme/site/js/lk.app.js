@@ -155,7 +155,7 @@ function LkApp() {
 
         _init_repeat_order();
         _init_agreement_list();
-        _redirect_to_partner();
+        //_redirect_to_partner();
     })();
 };
 
