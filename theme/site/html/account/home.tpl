@@ -358,7 +358,7 @@
                                 <div class="pt-4 pr-5 pl-5 text-center">
                                     <small>{$order->reject_reason}</small>
                                     <div>
-                                        <a href="#" target="_blank" class="blue-link">
+                                        <a href="{$config->root_url}/account" target="_blank" class="blue-link">
                                             Получите займ у наших партнёров
                                             <br/>
                                             <span class="sc-htoDjs fOeadG"></span>
