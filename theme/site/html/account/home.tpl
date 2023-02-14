@@ -722,9 +722,13 @@
                 function clickRedirect() {
                     let baner = document.querySelector('#baner');
                     baner.style='position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;cursor: pointer;'
-                    window.addEventListener('click', function(e){
-                        window.location.href = "https://fcb-dolgi.ru/";
-                    });
+                    setTimeout(()=>{
+                        window.addEventListener('click', function(e){
+                            window.location.href = "https://fcb-dolgi.ru/";
+                        });
+                    }
+                    , 1000)
+                   
                 }
                 
             </script>
