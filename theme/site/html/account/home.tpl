@@ -9,7 +9,7 @@
 {capture name='page_styles'}
 
 {/capture}
-<div style="position: absolute;"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></div>
+<div style="position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></div>
 <main class="main js-lk-app">
     <div class="section_lk_navbar">
         <div class="container">
