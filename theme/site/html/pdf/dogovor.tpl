@@ -96,7 +96,7 @@
         <td width="40%">Сумма кредита (займа) или лимит кредитования
             и порядок его изменения
         </td>
-        <td width="50%">Сумма займа составляет {$return_amount|upper} ({$return_amount|price_string|upper}). Лимит
+        <td width="50%">Сумма займа составляет {$contract->amount|upper} ({$contract->amount|price_string|upper}). Лимит
             кредитования
             - не применимо.
         </td>

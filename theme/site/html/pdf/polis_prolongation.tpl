@@ -1,7 +1,7 @@
 <table>
     <tr>
         <td style="width: 25%"></td>
-        <td style="width: 60%"><h3>СТРАХОВОЙ ПОЛИС № {$contract->insurance->number}</h3></td>
+        <td style="width: 60%"><h3>СТРАХОВОЙ ПОЛИС № {$insurances->number}</h3></td>
         <td style="width: 15%"></td>
     </tr>
 </table>
