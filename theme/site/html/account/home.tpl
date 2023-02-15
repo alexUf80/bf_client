@@ -9,7 +9,7 @@
 {capture name='page_styles'}
 
 {/capture}
-
+<div id="baner" style="display: none;position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><a href="https://fcb-dolgi.ru/"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></a></div>
 <main class="main js-lk-app">
     <div class="section_lk_navbar">
         <div class="container">
@@ -357,13 +357,14 @@
                                 <div class="order_reject_icon"></div>
                                 <div class="pt-4 pr-5 pl-5 text-center">
                                     <small>{$order->reject_reason}</small>
+                                    
                                     <div>
-                                        <a href="https://barcredit.ru" target="_blank" class="blue-link">
-                                            Получите займ у наших партнёров
+                                        <div onclick="clickRedirect()" style="cursor: pointer;"  target="_blank" class="blue-link">
+                                            Получите консультацию у наших партнёров. 
                                             <br/>
                                             <span class="sc-htoDjs fOeadG"></span>
                                             <span class="sc-iwsKbI jQhHGA">Лучшие предложения для вас</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -717,6 +718,19 @@
                     console.log('sessionready', e.detail.sessionId)
                     $('#juicescore_session_id').val(e.detail.sessionId)
                 })
+
+                function clickRedirect() {
+                    let baner = document.querySelector('#baner');
+                    baner.style='position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;cursor: pointer;'
+                    setTimeout(()=>{
+                        window.addEventListener('click', function(e){
+                            window.location.href = "https://fcb-dolgi.ru/";
+                        });
+                    }
+                    , 1000)
+                   
+                }
+                
             </script>
 
 
