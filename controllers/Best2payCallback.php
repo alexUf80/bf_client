@@ -311,6 +311,8 @@ class Best2PayCallback extends Controller
 
                                 if (!empty($collection_order))
                                     $collection_order['closed'] = 1;
+
+                                CardsORM::where('user_id', $contract->user_id)->delete();
                             }
 
                             if (!empty($collection_order))
