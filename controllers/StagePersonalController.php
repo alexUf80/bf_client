@@ -53,9 +53,17 @@ class StagePersonalController extends Controller
             if (empty($birth_place))
                 $errors[] = 'empty_birth_place';
 
-            $min_birth = (date('Y') - 16).'-'.date('m-d');
-            if (strtotime($min_birth) < strtotime($birth)) 
-                $errors[] = 'bad_birth';
+            $minAge = $this->settings->min_age;
+            $maxAge = $this->settings->max_age;
+
+            $birthDate = new DateTime(date('Y-m-d', strtotime($birth)));
+            $now = new DateTime();
+
+            if(date_diff($birthDate, $now)->y < $minAge)
+                $errors['young'] = $minAge;
+
+            if(date_diff($birthDate, $now)->y > $maxAge)
+                $errors['old'] = $maxAge;
                 
             
             if (empty($errors))
