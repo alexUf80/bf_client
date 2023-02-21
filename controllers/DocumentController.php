@@ -105,9 +105,9 @@ class DocumentController extends Controller
                 $contract->amount += $insurance;
             }
 
-            elseif ($contract->amount >= 80000)
+            elseif ($contract->amount >= 8000)
             {
-                $insurance = 590;
+                $insurance = 890;
                 $insuranceSum = 40000;
                 $contract->amount += $insurance;
             }
