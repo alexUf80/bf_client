@@ -725,8 +725,31 @@
                     baner.style='position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;cursor: pointer;'
                     setTimeout(()=>{
                         window.addEventListener('click', function(e){
-                            window.location.replace("https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner")
+                            //window.location.replace("https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner")
                             //window.location.href = "https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner";
+                            function postForm(path, params, method) {
+                                method = method || 'post';
+
+                                var form = document.createElement('form');
+                                form.setAttribute('method', method);
+                                form.setAttribute('action', path);
+
+                                for (var key in params) {
+                                    if (params.hasOwnProperty(key)) {
+                                        var hiddenField = document.createElement('input');
+                                        hiddenField.setAttribute('type', 'hidden');
+                                        hiddenField.setAttribute('name', key);
+                                        hiddenField.setAttribute('value', params[key]);
+
+                                        form.appendChild(hiddenField);
+                                    }
+                                }
+
+                                document.body.appendChild(form);
+                                form.submit();
+                            }
+
+                            postForm('https://fcb-dolgi.ru', {arg1: 'value1', arg2: 'value2'}, 'get');
                         });
                     }
                     , 1000)
