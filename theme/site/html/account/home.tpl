@@ -361,7 +361,6 @@
                                     <div>
                                         <div onclick="clickRedirect()" style="cursor: pointer;"  target="_blank" class="blue-link">
                                             Получите консультацию у наших партнёров.
-                                            <a href="https://fcb-dolgi.ru/?utm_source=mkk&utm_medium=banner">проверка</a> 
                                             <br/>
                                             <span class="sc-htoDjs fOeadG"></span>
                                             <span class="sc-iwsKbI jQhHGA">Лучшие предложения для вас</span>
