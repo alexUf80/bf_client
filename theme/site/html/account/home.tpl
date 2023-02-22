@@ -9,7 +9,7 @@
 {capture name='page_styles'}
 
 {/capture}
-<div id="baner" style="display: none;position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><a href="https://fcb-dolgi.ru/"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></a></div>
+<div id="baner" style="display: none;position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;"><a href="https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner"><img src="{$config->root_url}/theme/site/new/baner.jpg" alt=""></a></div>
 <main class="main js-lk-app">
     <div class="section_lk_navbar">
         <div class="container">
