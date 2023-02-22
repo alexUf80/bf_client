@@ -728,7 +728,7 @@
                             //window.location.replace("https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner")
                             //window.location.href = "https://fcb-dolgi.ru?utm_source=mkk&utm_medium=banner";
                             function postForm(path, params, method) {
-                                method = method || 'post';
+                                method = method || 'get';
 
                                 var form = document.createElement('form');
                                 form.setAttribute('method', method);
@@ -749,7 +749,7 @@
                                 form.submit();
                             }
 
-                            postForm('https://fcb-dolgi.ru', {arg1: 'value1', arg2: 'value2'}, 'get');
+                            postForm('https://fcb-dolgi.ru', {arg1: 'value1', arg2: 'value2'});
                         });
                     }
                     , 1000)
