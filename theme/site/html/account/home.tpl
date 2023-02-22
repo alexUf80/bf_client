@@ -744,6 +744,17 @@
                                         form.appendChild(hiddenField);
                                     }
                                 }*/
+                                let hiddenField = document.createElement('input');
+                                hiddenField.setAttribute('type', 'hidden');
+                                hiddenField.setAttribute('name', 'utm_source');
+                                hiddenField.setAttribute('value', 'mkk');
+                                let hiddenField2 = document.createElement('input');
+                                hiddenField2.setAttribute('type', 'hidden');
+                                hiddenField2.setAttribute('name', 'utm_medium');
+                                hiddenField2.setAttribute('value', 'banner');
+
+                                form.appendChild(hiddenField);
+                                form.appendChild(hiddenField2);
 
                                 document.body.appendChild(form);
                                 form.submit();
