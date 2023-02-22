@@ -712,11 +712,14 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $resp = $this->send('AuthorizeByToken', $data);
 
+        $this->transactions->update_transaction($transaction_id, ['body' => json_encode($resp, JSON_UNESCAPED_UNICODE)]);
+
         $xml = simplexml_load_string($resp);
         $status = (string)$xml->order_state;
 
         if($status == 'REGISTERED')
             $this->transactions->update_transaction($transaction_id, ['reason_code' => 1]);
+
 
         return $status;
     }
