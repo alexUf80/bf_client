@@ -689,7 +689,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $xml = simplexml_load_string($b2p_order);
         $b2p_order_id = (string)$xml->id;
 
-        $this->transactions->add_transaction(array(
+        $transaction_id = $this->transactions->add_transaction(array(
             'user_id' => $userId,
             'amount' => $amount,
             'sector' => $sector,
@@ -698,7 +698,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             'callback_response' => json_encode($xml),
             'reference' => $userId,
             'description' => $description,
-            'created' => date('Y-m-d H:i:s'),
+            'created' => date('Y-m-d H:i:s')
         ));
 
         $data =
@@ -714,6 +714,9 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $xml = simplexml_load_string($resp);
         $status = (string)$xml->order_state;
+
+        if($status == 'REGISTERED')
+            $this->transactions->update_transaction($transaction_id, ['reason_code' => 1]);
 
         return $status;
     }
