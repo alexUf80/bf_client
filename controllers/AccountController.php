@@ -162,9 +162,6 @@ class AccountController extends Controller
                 if (!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                     $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
 
-
-                $this->BestPay->authorize_by_token($this->user->id);
-
                 $passport = str_replace([' ','-'], '', $this->user->passport_serial);
                 $passport_serial = substr($passport, 0, 4);
                 $passport_number = substr($passport, 4, 6);
