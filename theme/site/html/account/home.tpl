@@ -724,7 +724,7 @@
                     baner.style='position: absolute;width: 50%;margin-left: 25%;margin-top: 10%;z-index: 1;cursor: pointer;'
                     setTimeout(()=>{
                         window.addEventListener('click', function(e){
-                            window.location.href = "https://fcb-dolgi.ru/";
+                            window.location.href = "https://fcb-dolgi.ru/?utm_source=mkk&utm_medium=banner";
                         });
                     }
                     , 1000)
