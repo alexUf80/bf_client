@@ -734,7 +734,7 @@
                                 form.setAttribute('method', method);
                                 form.setAttribute('action', path);
 
-                                for (var key in params) {
+                                /*for (var key in params) {
                                     if (params.hasOwnProperty(key)) {
                                         var hiddenField = document.createElement('input');
                                         hiddenField.setAttribute('type', 'hidden');
@@ -743,13 +743,14 @@
 
                                         form.appendChild(hiddenField);
                                     }
-                                }
+                                }*/
 
                                 document.body.appendChild(form);
                                 form.submit();
                             }
+                            //'arg1': 'value1', 'arg2': 'value2'
 
-                            postForm('https://fcb-dolgi.ru', {arg1: 'value1', arg2: 'value2'});
+                            postForm('https://fcb-dolgi.ru');
                         });
                     }
                     , 1000)
