@@ -82,17 +82,17 @@
                 <div class="form_group -fs-18">
                   <div class="form_group-title -gil-m">Дата и место рождения:</div>
                   <div class="form_row">
-                    <label class="input_box {if in_array('bad_birth', (array)$errors)}-error{/if}">
+                    <label class="input_box {if isset($errors['young']) || isset($errors['old'])}-error{/if}">
                       <input type="text" class="form-control js-mask-date js-input-required" name="birth" id="birth_date" value="{$birth}" />
                       <span class="input_name {if $birth}-top{/if}">Дата рождения</span>
-                      {if in_array('young', $errors)}
-                      <div class="error_text">Кредиты выдаются лицам старше {$errors['young']} лет</div>
+                      {if isset($errors['young'])}
+                      <div class="error_text">Кредиты выдаются лицам младше {$errors['young']} лет</div>
                       {/if}
-                      {if in_array('old', $errors)}
-                        <div class="error_text">Кредиты выдаются лицам младше {$errors['old']} лет</div>
+                      {if isset($errors['old'])}
+                        <div class="error_text">Кредиты выдаются лицам старше {$errors['old']} лет</div>
                       {/if}
                     </label>
-                    <label class="input_box">
+                    <label class="input_box" style="width: 150px">
                       <input type="text" class="form-control js-input-required js-input-cirylic js-cirylic-plus" name="birth_place" id="birthplace" value="{$birth_place}" />
                       <span class="input_name {if $birth_place}-top{/if}">Место рождения</span>
                     </label>
