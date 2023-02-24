@@ -86,10 +86,10 @@
                       <input type="text" class="form-control js-mask-date js-input-required" name="birth" id="birth_date" value="{$birth}" />
                       <span class="input_name {if $birth}-top{/if}">Дата рождения</span>
                       {if isset($errors['young'])}
-                      <div class="error_text">Кредиты выдаются лицам младше {$errors['young']} лет</div>
+                      <div class="error_text">Кредиты не выдаются лицам младше {$errors['young']} лет</div>
                       {/if}
                       {if isset($errors['old'])}
-                        <div class="error_text">Кредиты выдаются лицам старше {$errors['old']} лет</div>
+                        <div class="error_text">Кредиты не выдаются лицам старше {$errors['old']} лет</div>
                       {/if}
                     </label>
                     <label class="input_box" style="width: 150px">
