@@ -156,7 +156,7 @@
                                             <li class="docs_list_item">
                                                 <a href="{$receipt->receipt_url}"
                                                    class="docs_list_link" target="_blank">
-                                                    Чек за {$receipt->created|date}
+                                                    Чек за {$receipt->created|date} за {$receipt->name}
                                                 </a>
                                             </li>
                                         {/foreach}
