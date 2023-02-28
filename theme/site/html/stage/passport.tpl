@@ -59,9 +59,12 @@
                       <input type="text" class="form-control js-mask-passport js-input-required" name="passport_serial" id="series" value="{$passport_serial}" />
                       <span class="input_name {if $passport_serial}-top{/if}">Серия и номер</span>
                     </label>
-                    <label class="input_box ">
+                    <label class="input_box {if isset($errors['format'])}-error{/if}">
                       <input type="text" class="form-control js-mask-date js-input-required" name="passport_date" id="issue" value="{$passport_date}" />
                       <span class="input_name {if $passport_date}-top{/if}">Дата выдачи</span>
+                      {if isset($errors['format'])}
+                        <div class="error_text">Не верный формат даты выдачи паспорта</div>
+                      {/if}
                     </label>
                   </div>
                   <div class="form_row">

@@ -82,7 +82,7 @@
                 <div class="form_group -fs-18">
                   <div class="form_group-title -gil-m">Дата и место рождения:</div>
                   <div class="form_row">
-                    <label class="input_box {if isset($errors['young']) || isset($errors['old'])}-error{/if}">
+                    <label class="input_box {if isset($errors['young']) || isset($errors['old']) || isset($errors['format'])}-error{/if}">
                       <input type="text" class="form-control js-mask-date js-input-required" name="birth" id="birth_date" value="{$birth}" />
                       <span class="input_name {if $birth}-top{/if}">Дата рождения</span>
                       {if isset($errors['young'])}
@@ -90,6 +90,9 @@
                       {/if}
                       {if isset($errors['old'])}
                         <div class="error_text">Кредиты не выдаются лицам старше {$errors['old']} лет</div>
+                      {/if}
+                      {if isset($errors['format'])}
+                        <div class="error_text">Не верный формат даты рождения</div>
                       {/if}
                     </label>
                     <label class="input_box" style="width: 150px">
