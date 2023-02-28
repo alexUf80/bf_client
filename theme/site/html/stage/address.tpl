@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
     <script>
         $(function () {
-            let token_dadata = "25c845f063f9f3161487619f630663b2d1e4dcd7";
+            let token_dadata = "6c5e267e77fced3f672e81d26bfc1bb3a768eca1";
 
             $('.Regadress').suggestions({
                 token: token_dadata,

@@ -75,7 +75,7 @@
                                         </label>
                                         <label class="input_box">
                                             <input type="text"
-                                                   class="form-control js-mask-phone js-input-required js-dadata-phone"
+                                                   class="ss form-control js-mask-phone js-input-required js-dadata-phone"
                                                    name="workphone" id="work_phone" value="{$workphone}"/>
                                             <span class="input_name {if $workphone}-top{/if}">Рабочий телефон</span>
                                         </label>
@@ -87,19 +87,19 @@
                                             <span class="input_name {if $income}-top{/if}">Ежемесячный доход</span>
                                         </label>
                                         <label class="input_box">
-                                            <input type="text" class="form-control js-input-digits js-input-required"
+                                            <input type="text" class="ss form-control js-input-digits js-input-required"
                                                    name="expenses" id="expenses" value="{$expenses}"/>
                                             <span class="input_name {if $expenses}-top{/if}">Ежемесячные расходы</span>
                                         </label>
                                     </div>
                                     <div class="form_row">
                                         <label class="input_box">
-                                            <input type="text" class="form-control js-input-digits" name="average_pay"
+                                            <input type="text" class="ss form-control js-input-digits" name="average_pay"
                                                    id="average_pay" value="{$average_pay}"/>
                                             <span class="input_name {if $average_pay}-top{/if}">Среднемесячный платеж по кредитам и займам</span>
                                         </label>
                                         <label class="input_box">
-                                            <input type="text" class="form-control js-input-digits" name="amount_pay"
+                                            <input type="text" class="ss form-control js-input-digits" name="amount_pay"
                                                    id="amount_pay" value="{$amount_pay}"/>
                                             <span class="input_name {if $amount_pay}-top{/if}">Сумма просроченных кредитов и займов</span>
                                         </label>

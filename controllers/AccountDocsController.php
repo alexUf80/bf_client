@@ -37,13 +37,6 @@ class AccountDocsController extends Controller
         $this->design->assign('documents', $documents);
 
         $receipts = $this->Receipts->get_receipts($this->user->id);
-
-        if(!empty($receipts)){
-            foreach ($receipts as $receipt){
-                $response = json_decode($receipt->response);
-                $receipt->title = $response->lines[0]->title;
-            }
-        }
         $this->design->assign('receipts', $receipts);
 
         if ($otherCardAdded = $this->session->get('otherCardAdded')) {

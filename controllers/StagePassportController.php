@@ -42,9 +42,14 @@ class StagePassportController extends Controller
             $this->design->assign('passport_issued', $passport_issued);
             $this->design->assign('subdivision_code', $subdivision_code);
             $this->design->assign('snils', $snils);
-            
-            
+
             $errors = array();
+
+            $passportDateCheck = explode('.', $passport_date);
+            $passportDateCheck = checkdate($passportDateCheck[0], $passportDateCheck[1], $passportDateCheck[2]);
+
+            if(!$passportDateCheck)
+                $errors['format'] = 1;
             
             if (empty($passport_serial))
                 $errors[] = 'empty_passport_serial';
