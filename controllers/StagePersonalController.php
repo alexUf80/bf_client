@@ -60,7 +60,7 @@ class StagePersonalController extends Controller
             $now = new DateTime();
 
             $birthCheck = explode('.', $birth);
-            $birthCheck = checkdate($birthCheck[0], $birthCheck[1], $birthCheck[2]);
+            $birthCheck = checkdate($birthCheck[1], $birthCheck[0], $birthCheck[2]);
 
             if(date_diff($birthDate, $now)->y < $minAge)
                 $errors['young'] = $minAge;
