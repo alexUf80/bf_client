@@ -202,12 +202,14 @@ class Best2PayCallback extends Controller
                                 }
                             }
 
-                            if (!empty($contract->collection_status)) {
-                                $date1 = new DateTime(date('Y-m-d', strtotime($contract->return_date)));
-                                $date2 = new DateTime(date('Y-m-d'));
+                            
+                            $date1 = new DateTime(date('Y-m-d', strtotime($contract->return_date)));
+                            $date2 = new DateTime(date('Y-m-d'));
 
-                                $diff = $date2->diff($date1);
-                                $contract->expired_days = $diff->days;
+                            $diff = $date2->diff($date1);
+                            $contract->expired_days = $diff->days;
+
+                            if (!empty($contract->collection_status)) {
 
                                 $collection_order = array(
                                     'transaction_id' => $transaction->id,
@@ -329,7 +331,8 @@ class Best2PayCallback extends Controller
                                 'loan_body_summ' => $contract_loan_body_summ,
                                 'loan_percents_summ' => $contract_loan_percents_summ,
                                 'loan_charge_summ' => 0,
-                                'loan_peni_summ' => 0
+                                'loan_peni_summ' => 0,
+                                'expired_period' => $contract->expired_days
                             ));
                             $this->design->assign('success', 'Оплата прошла успешно.');
 
