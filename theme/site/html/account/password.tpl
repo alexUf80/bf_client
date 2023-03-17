@@ -78,7 +78,7 @@
                         Новый пароль
                     {/if}
                 </span>
-                <input type="password" name="password" id="phone" class="form-control -fs-18 -gil-m js-login-phone js-mask-phone" value="" />
+                <input style="border: 1px solid #b7b7b7" type="password" name="password" id="phone" class="form-control -fs-18 -gil-m js-login-phone js-mask-phone" value="" />
                 <div class="error_text js-login-phone-error" style="display:none"></div>
               </div>
               <div class="form-group form-btn">
