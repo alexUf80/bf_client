@@ -650,6 +650,26 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         return $link;
     }
 
+    public function reverseCardEnroll($register_id)
+    {
+        $sector = $this->sectors['ADD_CARD'];
+        $password = $this->passwords[$sector];
+
+        $data = array(
+            'sector' => $sector,
+            'id' => $register_id,
+            'amount' => 1900,
+            'currency' => $this->currency_code,
+            'password' => $password
+        );
+
+        $data['signature'] = $this->get_signature($data);
+
+        $this->send('Reverse', $data);
+
+        return 1;
+    }
+
     public function authorize_by_token($userId)
     {
         $sector = $this->sectors['ADD_CARD'];
