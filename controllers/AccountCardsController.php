@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(-1);
+ini_set('display_errors', 'on');
+
 class AccountCardsController extends Controller
 {
     public function fetch()
@@ -9,7 +12,7 @@ class AccountCardsController extends Controller
             exit;
         }
 
-        if (array_key_exists($this->request->get(), ['remove', 'base'])) {
+        if ($this->request->get('remove') || $this->request->get('base')) {
             if (!empty($_SESSION['looker_mode']))
                 return false;
 
@@ -36,7 +39,7 @@ class AccountCardsController extends Controller
     {
         $countUserCards = CardsORM::where('user_id', $this->user->id)->get()->count();
 
-        if (count($countUserCards) <= 1) {
+        if ($countUserCards <= 1) {
             $this->design->assign('error', 'Нельзя удалить единственную карту');
         } else {
             $thisCard = CardsORM::find($id);
