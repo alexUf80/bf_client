@@ -48,6 +48,9 @@ class DocumentController extends Controller
             }
 
             $contract = ContractsORM::where('order_id', $document->order_id)->first();
+            
+            $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+
             $this->design->assign('contract', $contract);
 
 
