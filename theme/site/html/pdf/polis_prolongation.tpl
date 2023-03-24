@@ -9,7 +9,7 @@
     <tr>
         <td style="width: 10%"></td>
         <td style="width: 60%"></td>
-        <td style="width: 30%">дата выдачи полиса {$contract->insurance->create_date|date}г.</td>
+        <td style="width: 30%">дата выдачи полиса {$document->created|date}г.</td>
     </tr>
 </table>
 <div>

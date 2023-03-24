@@ -43,6 +43,9 @@
             <form action="" method="POST" class="regform js-form-app js-stage-personal-form">
               <div class="step_box step1">
                 <div class="form_group -fs-18">
+                  <div class="alert alert-info">
+                    Все даты вводятся в формате дд.мм.гггг
+                  </div>
                   <div class="form_group-title -gil-m">ФИО как в паспорте:</div>
                   <div class="form_row">
                     <label class="input_box ">

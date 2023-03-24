@@ -48,6 +48,9 @@ class DocumentController extends Controller
             }
 
             $contract = ContractsORM::where('order_id', $document->order_id)->first();
+            
+            $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+
             $this->design->assign('contract', $contract);
 
 
@@ -86,29 +89,22 @@ class DocumentController extends Controller
         $insurance = $this->request->get('insurance');
 
         if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
-            if ($contract->amount <= 3999)
-            {
-                $insurance = 390;
-                $insuranceSum = 10000;
-                $contract->amount += $insurance;
-            }
-            elseif ($contract->amount >= 4000 && $contract->amount <= 4999)
-            {
-                $insurance = 490;
-                $insuranceSum = 20000;
-                $contract->amount += $insurance;
-            }
-            elseif ($contract->amount >= 5000 && $contract->amount <= 7999)
+            if ($contract->amount <= 4999)
             {
                 $insurance = 590;
                 $insuranceSum = 30000;
                 $contract->amount += $insurance;
             }
-
-            elseif ($contract->amount >= 8000)
+            elseif ($contract->amount >= 5000 && $contract->amount <= 8999)
             {
                 $insurance = 890;
                 $insuranceSum = 40000;
+                $contract->amount += $insurance;
+            }
+            elseif ($contract->amount >= 9000)
+            {
+                $insurance = 990;
+                $insuranceSum = 50000;
                 $contract->amount += $insurance;
             }
 

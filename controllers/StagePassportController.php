@@ -46,7 +46,7 @@ class StagePassportController extends Controller
             $errors = array();
 
             $passportDateCheck = explode('.', $passport_date);
-            $passportDateCheck = checkdate($passportDateCheck[0], $passportDateCheck[1], $passportDateCheck[2]);
+            $passportDateCheck = checkdate($passportDateCheck[1], $passportDateCheck[0], $passportDateCheck[2]);
 
             if(!$passportDateCheck)
                 $errors['format'] = 1;

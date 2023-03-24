@@ -400,6 +400,9 @@ class Best2PayCallback extends Controller
                             $this->design->assign('cardId', $cardId);
                             $this->session->set('otherCardAdded', 1);
                         }
+
+                        $this->BestPay->reverseCardEnroll($register_id);
+
                         $this->design->assign('success', 'Карта успешно привязана.');
 
                     } else {

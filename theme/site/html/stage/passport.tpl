@@ -50,6 +50,10 @@
               </div>
               
               {else}
+
+                <div class="alert alert-info">
+                  Все даты вводятся в формате дд.мм.гггг
+                </div>
               
               <div class="step_box step2">
                 <div class="form_group -fs-18">
