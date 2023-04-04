@@ -3,7 +3,7 @@
 </div>
 <table align="center">
     <tr>
-        <td width="100%" align="center"><strong>ИНДИВИДУАЛЬНЫЕ УСЛОВИЯ ДОГОВОРА ПОТРЕБИТЕЛЬСКОГО МИКРОЗАЙМА
+        <td width="100%" align="center"><strong>11ИНДИВИДУАЛЬНЫЕ УСЛОВИЯ ДОГОВОРА ПОТРЕБИТЕЛЬСКОГО МИКРОЗАЙМА
                 № {$contract->number}</strong></td>
     </tr>
 </table>
@@ -381,20 +381,20 @@
         <td width="50%">Дата рождения: {$birth|date}</td>
     </tr>
     <tr>
-        <td width="50%">Банк: ТОЧКА ПАО БАНКА "ФК ОТКРЫТИЕ"</td>
+        <td width="50%">ООО «Банк Точка»</td>
         <td width="50%">Место рождения: {$birth_place}</td>
     </tr>
     <tr>
-        <td width="50%">р\с 40701810702500001111</td>
+        <td width="50%">БИК: 044 525 104</td>
         <td width="50%">Адрес регистрации: {$regaddress_full}
         </td>
     </tr>
     <tr>
-        <td width="50%">к\с 30101810845250000999</td>
+        <td width="50%">Расчётный счёт: 4070 1810 7025 0000 1111</td>
         <td width="50%">СНИЛС: {$snils}</td>
     </tr>
     <tr>
-        <td width="50%">БИК 044525999</td>
+        <td width="50%">Корсчёт: 3010 1810 7453 7452 5104</td>
         <td width="50%">Банковская карта: {$active_card}</td>
     </tr>
 </table>
@@ -543,20 +543,20 @@
         <td width="50%">Дата рождения: {$birth|date}</td>
     </tr>
     <tr>
-        <td width="50%">Банк: ТОЧКА ПАО БАНКА "ФК ОТКРЫТИЕ"</td>
+        <td width="50%">ООО «Банк Точка»</td>
         <td width="50%">Место рождения: {$birth_place}</td>
     </tr>
     <tr>
-        <td width="50%">р\с 40701810702500001111</td>
+        <td width="50%">БИК: 044 525 104</td>
         <td width="50%">Адрес регистрации: {$regaddress_full}
         </td>
     </tr>
     <tr>
-        <td width="50%">к\с 30101810845250000999</td>
+        <td width="50%">Расчётный счёт: 4070 1810 7025 0000 1111</td>
         <td width="50%">СНИЛС: {$snils}</td>
     </tr>
     <tr>
-        <td width="50%">БИК 044525999</td>
+        <td width="50%">Корсчёт: 3010 1810 7453 7452 5104</td>
         <td width="50%">Банковская карта: {$active_card}</td>
     </tr>
 </table>
