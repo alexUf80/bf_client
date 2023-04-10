@@ -44,6 +44,7 @@ class Operations extends Core
 	public function get_operations($filter = array())
 	{
 		$id_filter = '';
+		$type_filter = '';
         $contract_id_filter = '';
         $keyword_filter = '';
         $limit = 1000;
@@ -51,6 +52,9 @@ class Operations extends Core
         
         if (!empty($filter['id']))
             $id_filter = $this->db->placehold("AND id IN (?@)", array_map('intval', (array)$filter['id']));
+        
+        if (!empty($filter['type']))
+            $type_filter .= $this->db->placehold("AND type IN (?@)", array_map('strval', (array)$filter['type']));
         
         if (!empty($filter['contract_id']))
             $contract_id_filter = $this->db->placehold("AND contract_id IN (?@)", array_map('intval', (array)$filter['contract_id']));
@@ -75,6 +79,7 @@ class Operations extends Core
             FROM __operations
             WHERE 1
                 $id_filter
+                $type_filter
                 $contract_id_filter
                 $keyword_filter
             ORDER BY id DESC 
