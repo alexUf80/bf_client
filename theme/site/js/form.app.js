@@ -104,7 +104,44 @@
                 $input_box.addClass('-error').removeClass('-ok').find('.error_text').remove(), $input_box.append('<div class="error_text">'+_msg+'</div>');
             else
                 $input_box.removeClass('-error').addClass('-ok').find('.error_text').remove();            
+
+            // Проверка введенной даты
+            if ($input.attr("name") == 'passport_date' || $input.attr("name") == 'birth'){
+                var _msg = $input_box.data('msg') || 'Не верный формат даты';
+                
+                var passportDate = $input.val().split('.').reverse().join('-');
+                if(isNaN(Date.parse(passportDate))){
+                    $input_box.addClass('-error').removeClass('-ok').find('.error_text').remove(), $input_box.append('<div class="error_text">'+_msg+'</div>');
+                }
+
+                var passportDateArray = $input.val().split('.');
+                var passportDateDate = passportDateArray[0];
+                var passportDateMonth = passportDateArray[1];
+                var passportDateYear = passportDateArray[2];
+
+                if(passportDateMonth == 4 || passportDateMonth == 6 || passportDateMonth == 9 || passportDateMonth == 11){
+                    if(passportDateDate > 30){
+                        $input_box.addClass('-error').removeClass('-ok').find('.error_text').remove(), $input_box.append('<div class="error_text">'+_msg+'</div>');
+                    }
+                }
+
+                if(passportDateMonth == 2){
+
+                    var daysInFebruary = 0;
+                    if(((passportDateYear % 4 == 0) && (passportDateYear % 100 != 0)) || (passportDateYear % 400 == 0)){
+                        daysInFebruary = 29;
+                    } else {
+                        daysInFebruary = 28;
+                    }
+
+                    if(passportDateDate > daysInFebruary){
+                        $input_box.addClass('-error').removeClass('-ok').find('.error_text').remove(), $input_box.append('<div class="error_text">'+_msg+'</div>');
+                    }
+                }
+            }
         }
+
+       
         
         // отчество
         if ($input.attr('name') == 'patronymic')
