@@ -26,6 +26,11 @@ class RunScoringsApp extends Core
                 {
                     if ($type == 'all')
                     {
+                        $exist_nbki = $this->scorings->get_scorings([
+                            'type' => 'nbki',
+                            'user_id' => $order->user_id,
+                            'limit' => 1,
+                        ]);
                         $audit = new StdClass();
                         $audit->status = 'new';
                         $audit->order_id = $order->order_id;
@@ -33,9 +38,17 @@ class RunScoringsApp extends Core
                         
                         $audit->types = array();
                         foreach ($scoring_types as $scoring_type)
-                            if ($scoring_type->active)
-                                $audit->types[] = $scoring_type->name;
-                        
+                            if ($scoring_type->active) {
+                                if ($scoring_type->name == 'nbki') {
+                                    if (count($exist_nbki) <= 0) {
+                                        $audit->types[] = $scoring_type->name;
+                                    }
+                                } else {
+                                    $audit->types[] = $scoring_type->name;
+
+                                }
+                            }
+
                         $this->response['audit_id'] = $this->scorings->add_audit($audit);
                         $this->response['success'] = 1;
                         

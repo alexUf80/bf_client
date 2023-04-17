@@ -57,8 +57,13 @@
         <td><strong>Страховая премия (руб.)</strong></td>
     </tr>
     <tr>
-        <td><strong>10 000 (ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
-        <td><strong>99,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+        {if $insurance_all->amount == 99}
+            <td><strong>10 000 (ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
+            <td><strong>99,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+        {else}
+            <td><strong>20 000 (ДВАДЦАТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
+            <td><strong>199,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+        {/if}
     </tr>
     <tr>
         <td colspan="2" align="justify"><strong>Страховые риски:</strong><br>•Хищение у Держателя карты наличных

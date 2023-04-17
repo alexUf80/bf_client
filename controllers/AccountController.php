@@ -146,6 +146,13 @@ class AccountController extends Controller
 
                 // добавляем задание для проведения активных скорингов
                 $scoring_types = $this->scorings->get_types();
+
+                $exist_nbki = $this->scorings->get_scorings([
+                    'type' => 'nbki',
+                    'user_id' => $this->user->id,
+                    'limit' => 1,
+                ]);
+
                 foreach ($scoring_types as $scoring_type) {
                     if ($scoring_type->active && empty($scoring_type->is_paid)) {
                         $add_scoring = array(
@@ -155,7 +162,13 @@ class AccountController extends Controller
                             'status' => 'new',
                             'created' => date('Y-m-d H:i:s')
                         );
-                        $this->scorings->add_scoring($add_scoring);
+                        if ($scoring_type->name == 'nbki') {
+                            if (count($exist_nbki) <= 0) {
+                                $this->scorings->add_scoring($add_scoring);
+                            }
+                        } else {
+                            $this->scorings->add_scoring($add_scoring);
+                        }
                     }
                 }
 

@@ -88,6 +88,15 @@ class DocumentController extends Controller
 
         $insurance = $this->request->get('insurance');
 
+        $operations = $this->operations->get_operations(['type' => 'INSURANCE_BC', 'contract_id' => $contract->id]);
+        $insurance_all = '';
+        foreach ($operations as $operation) {
+            if(mb_substr($operation->created, 0, 10) == mb_substr($document->created, 0, 10)){
+                $insurance_all = $operation;
+            }
+        }
+        $this->design->assign('insurance_all', $insurance_all);
+
         if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
             if ($contract->amount <= 4999)
             {
