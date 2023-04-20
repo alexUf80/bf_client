@@ -218,7 +218,11 @@
 
 </div>
 <div class="new-banner">
-  <img src="/theme/site/i/banner.jpg" alt="">
+    <img src="/theme/site/i/banner.jpg" alt="">
+</div>
+<br>
+<div class="new-banner">
+    <img src="/theme/site/i/bannerfaq.jpg" alt="">
 </div>
 <div class="wrapper">
   <div class="new-questions">
