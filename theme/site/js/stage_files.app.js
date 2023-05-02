@@ -14,6 +14,11 @@
     var _init_submit = function(){
         
         $('.js-stage-files-form').submit(function(e){
+            try {
+                ym(88054135,'reachGoal','order_done')
+            } catch (e) {
+                console.log(e)
+            }
             var $form = $(this);
             $form.find('.form_file_item').each(function(){
                 var $fileblock = $(this);
