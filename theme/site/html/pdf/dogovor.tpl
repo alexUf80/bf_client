@@ -129,7 +129,8 @@
             ее значение на дату предоставления заемщику
             индивидуальных условий
         </td>
-        <td width="50%">365% (Триста шестьдесят пять процентов) годовых (1% (Один процент) в день)</td>
+        <td width="50%">{$base_percent*365}%
+            ({($base_percent*365)|percent_string} процентов) годовых ({$base_percent}% ({$base_percent|percent_string}) в день)</td>
     </tr>
     <tr>
         <td align="center" width="10%">5.</td>

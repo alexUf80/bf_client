@@ -90,6 +90,11 @@
                     $('.js-sms-error').html('').hide();
                     app.success_callback(app.code);
                     $('.js-sms-code-wrap').removeClass('-error').addClass('-ok');
+                    try {
+                        ym(88054135,'reachGoal','accept_phone')
+                    } catch (e) {
+                        console.log(e)
+                    }
                 }
                 else
                 {
