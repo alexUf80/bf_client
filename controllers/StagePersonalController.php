@@ -53,7 +53,7 @@ class StagePersonalController extends Controller
             if (empty($birth_place))
                 $errors[] = 'empty_birth_place';
 
-            $minAge = $this->settings->min_age;
+            $minAge = 18;
             $maxAge = $this->settings->max_age;
 
             $birthDate = new DateTime(date('Y-m-d', strtotime($birth)));
