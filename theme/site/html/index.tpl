@@ -172,7 +172,7 @@
                         </div>
                         <div class="new-footer__contacts-item-text">info@mkkbf.ru</div>
                     </a>
-                    <a href="https://vk.com/barentsfinans123    " class="new-footer__contacts-item">
+                    <a href="https://vk.com/barentsfinans" class="new-footer__contacts-item">
                         <div class="new-footer__contacts-item-icon">
                             <img src="/theme/site/i/Vk.svg">
                         </div>
