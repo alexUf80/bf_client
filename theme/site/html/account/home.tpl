@@ -494,7 +494,6 @@
                 {/if}
             {/if}
 
-
             {*}
             <div class="person_info_box">
               <div class="person_info">

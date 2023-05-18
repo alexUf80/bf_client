@@ -332,7 +332,6 @@ class AccountController extends Controller
                 }
             }
 
-
             if (date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5) {
                 $show_prolongation = 1;
             }
