@@ -3,23 +3,23 @@
 class Leadgens extends Core
 {
 
-    public function send_pending_postback_click2money($order)
+    public function send_pending_postback_click2money($order_id, $order)
     {
 
-        var_dump('send_pending_postback_click2money');
-        die;
+        // $base_link = 'https://c2mpbtrck.com/cpaCallback';
+        // $link_lead = $base_link . '?cid=' . $order->click_hash . '&action=hold&partner=finfive&lead_id=' . $order->id_1c;
 
-        $base_link = 'https://c2mpbtrck.com/cpaCallback';
-        $link_lead = $base_link . '?cid=' . $order->click_hash . '&action=hold&partner=finfive&lead_id=' . $order->id_1c;
-
-        $ch = curl_init($link_lead);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-        $res = curl_exec($ch);
-        curl_close($ch);
+        // $ch = curl_init($link_lead);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        // curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        // $res = curl_exec($ch);
+        // curl_close($ch);
 
         $result = $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
+        var_dump($order);
+        var_dump($result);
+        die;
 
         // $this->to_log(__METHOD__, 'hold', $link_lead, $res, 'lead_click2money.txt');
     }

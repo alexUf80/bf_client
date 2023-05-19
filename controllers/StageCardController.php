@@ -84,7 +84,7 @@ class StageCardController extends Controller
             $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
             if (!empty($hasClickHash)) {
-                unset($order['utm_source']);
+                // unset($order['utm_source']);
                 unset($order['webmaster_id']);
                 unset($order['click_hash']);
             }
