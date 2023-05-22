@@ -71,17 +71,23 @@ class StageCardController extends Controller
                     $order['promocode_id'] = $promocode->id;
             }
 
-            $order['utm_source'] = $_COOKIE['utm_source'];
+            // $order['utm_source'] = $_COOKIE['utm_source'];
             $order['webmaster_id'] = $_COOKIE["wm_id"];
             $order['click_hash'] = $_COOKIE["clickid"];
+            
+            $order['utm_source']   = (isset($_COOKIE['utm_source']))    ? $_COOKIE["utm_source"]   : ' ';
+            $order['utm_medium']   = (isset($_COOKIE['utm_medium']))    ? $_COOKIE["utm_medium"]   : ' ';
+            $order['utm_campaign'] = (isset($_COOKIE['utm_campaign']))  ? $_COOKIE["utm_campaign"] : ' ';
+            $order['utm_content']  = (isset($_COOKIE['utm_content']))   ? $_COOKIE["utm_content"]  : ' ';
+            $order['utm_term']     = (isset($_COOKIE['utm_term']))      ? $_COOKIE["utm_term"]     : ' ';
 
             $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
-            if (!empty($hasClickHash)) {
-                unset($order['utm_source']);
-                unset($order['webmaster_id']);
-                unset($order['click_hash']);
-            }
+            // if (!empty($hasClickHash)) {
+            //     unset($order['utm_source']);
+            //     unset($order['webmaster_id']);
+            //     unset($order['click_hash']);
+            // }
 
 
             $order_id = $this->orders->add_order($order);
@@ -215,6 +221,15 @@ class StageCardController extends Controller
 
             if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                 $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
+
+                if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
+                try {
+                    $this->leadgens->send_pending_postback_click2money($order_id, $order);
+                    // $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+            }
 
             header('Location: /account');
             exit;

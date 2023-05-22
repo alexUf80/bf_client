@@ -42,19 +42,38 @@ class IndexController extends Controller
         $this->design->assign('needToConfirmCookies', $needToConfirmCookies);
 
         $utm_source = $this->request->get('utm_source');
+        $utm_medium = $this->request->get('utm_medium');
+        $utm_campaign = $this->request->get('utm_campaign');
+        $utm_content = $this->request->get('utm_content');
+        $utm_term = $this->request->get('utm_term');
+        $click_hash   = $this->request->get('click_id');
         $cookie_inspiration = 60 * 60 * 24 * 30;
-        $webmaster_id = $this->request->get('wmid');
-        $click_hash   = $this->request->get('clickid');
 
+        
+        $webmaster_id = $this->request->get('wmid');
+        // $click_hash   = $this->request->get('clickid');
+        
         if (!isset($_COOKIE['wm_id']))
             setcookie("wm_id", $webmaster_id, time() + $cookie_inspiration, '/', $this->config->main_domain);
-
+        
         if (!isset($_COOKIE['clickid']))
             setcookie("clickid", $click_hash, time() + $cookie_inspiration, '/', $this->config->main_domain);
-
+        
         if (!isset($_COOKIE['utm_source']))
-            setcookie("utm_source", trim($utm_source), time() + $cookie_inspiration, '/', $this->config->main_domain);
-
+            setcookie("utm_source", trim($utm_source), time() + $cookie_inspiration, $this->config->main_domain);
+        
+        if (!isset($_COOKIE['utm_medium']))
+            setcookie("utm_medium", trim($utm_medium), time() + $cookie_inspiration, $this->config->main_domain);
+        
+        if (!isset($_COOKIE['utm_term']))
+            setcookie("utm_term", trim($utm_term), time() + $cookie_inspiration, $this->config->main_domain);
+        
+        if (!isset($_COOKIE['utm_content']))
+        setcookie("utm_content", trim($utm_content), time() + $cookie_inspiration, $this->config->main_domain);
+        
+        if (!isset($_COOKIE['utm_campaign']))
+            setcookie("utm_campaign", trim($utm_campaign), time() + $cookie_inspiration, $this->config->main_domain);
+        
         $wrapper = $this->design->get_var('wrapper');
         if (false && isset($this->user->contract->status) && $this->user->contract->status != 3 && $this->user->contract->sold) // отключаю цессия
         {
