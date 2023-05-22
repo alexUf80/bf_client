@@ -83,11 +83,11 @@ class StageCardController extends Controller
 
             $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
-            if (!empty($hasClickHash)) {
-                // unset($order['utm_source']);
-                unset($order['webmaster_id']);
-                unset($order['click_hash']);
-            }
+            // if (!empty($hasClickHash)) {
+            //     unset($order['utm_source']);
+            //     unset($order['webmaster_id']);
+            //     unset($order['click_hash']);
+            // }
 
 
             $order_id = $this->orders->add_order($order);
@@ -222,7 +222,7 @@ class StageCardController extends Controller
             if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                 $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);
 
-            if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
+                if (!empty($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'click2money') {
                 try {
                     $this->leadgens->send_pending_postback_click2money($order_id, $order);
                     // $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));

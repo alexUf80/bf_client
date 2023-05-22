@@ -16,10 +16,7 @@ class Leadgens extends Core
         // $res = curl_exec($ch);
         // curl_close($ch);
 
-        $result = $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'pending'));
-        var_dump($order);
-        var_dump($result);
-        die;
+        $result = $this->orders->update_order($order_id, array('lead_postback_date' => date('Y-m-d H:i'), 'lead_postback_type' => 'pending'));
 
         // $this->to_log(__METHOD__, 'hold', $link_lead, $res, 'lead_click2money.txt');
     }
@@ -54,7 +51,7 @@ class Leadgens extends Core
 
         var_dump($ch);
 
-        $result = $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'approved'));
+        $result = $this->orders->update_order($order_id, array('lead_postback_date' => date('Y-m-d H:i'), 'lead_postback_type' => 'approved'));
 
         var_dump($result);
 
@@ -76,7 +73,7 @@ class Leadgens extends Core
         $res = curl_exec($ch);
         curl_close($ch);
 
-        $this->orders->update_order($order_id, array('leadcraft_postback_date' => date('Y-m-d H:i'), 'leadcraft_postback_type' => 'cancelled'));
+        $this->orders->update_order($order_id, array('lead_postback_date' => date('Y-m-d H:i'), 'lead_postback_type' => 'cancelled'));
 
         // $this->to_log(__METHOD__, 'cancelled', $link_lead, $res, 'lead_click2money.txt');
     }

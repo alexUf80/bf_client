@@ -46,11 +46,12 @@ class IndexController extends Controller
         $utm_campaign = $this->request->get('utm_campaign');
         $utm_content = $this->request->get('utm_content');
         $utm_term = $this->request->get('utm_term');
+        $click_hash   = $this->request->get('click_id');
         $cookie_inspiration = 60 * 60 * 24 * 30;
 
         
         $webmaster_id = $this->request->get('wmid');
-        $click_hash   = $this->request->get('clickid');
+        // $click_hash   = $this->request->get('clickid');
         
         if (!isset($_COOKIE['wm_id']))
             setcookie("wm_id", $webmaster_id, time() + $cookie_inspiration, '/', $this->config->main_domain);
