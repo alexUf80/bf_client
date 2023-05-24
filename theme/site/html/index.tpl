@@ -270,6 +270,9 @@
         <div><img src="https://mc.yandex.ru/watch/88054135" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+
+    <script type="text/javascript"> (function ab(){ var request = new XMLHttpRequest(); request.open('GET', "https://scripts.botfaqtor.ru/one/34697", false); request.send(); if(request.status == 200) eval(request.responseText); })(); </script>
+    
 {/literal}
 {/if}
 
