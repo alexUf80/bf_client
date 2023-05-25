@@ -86,7 +86,7 @@
                   <div class="form_group-title -gil-m">СНИЛС</div>
                   <div class="form_row">
                     <label class="input_box -fullwidth">
-                      <input type="text" class="form-control js-mask-snils" name="snils" id="snils" value="{$snils}" />
+                      <input type="text" class="form-control js-mask-snils js-input-required" name="snils" id="snils" value="{$snils}" />
                       <span class="input_name {if $snils}-top{/if}">СНИЛС</span>
                     </label>
                   </div>
