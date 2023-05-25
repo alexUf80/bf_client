@@ -334,7 +334,14 @@ class AccountController extends Controller
 
             if (date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5) {
                 $show_prolongation = 1;
+<<<<<<< HEAD
             }
+=======
+
+            if($order->contract->stop_profit);
+                $show_prolongation = 0;
+
+>>>>>>> 7677eb878f89996f2fb0b94b31a022ee30bc27c4
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
             if ($show_prolongation) {
