@@ -318,6 +318,9 @@ class AccountController extends Controller
             if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35)
                 $show_prolongation = 1;
 
+            if($order->contract->stop_profit);
+                $show_prolongation = 0;
+
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
             if ($show_prolongation) {
