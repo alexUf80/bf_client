@@ -332,11 +332,17 @@ class AccountController extends Controller
                 }
             }
 
+<<<<<<< HEAD
             if (date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5) {
                 $show_prolongation = 1;
 <<<<<<< HEAD
             }
 =======
+=======
+            if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35){
+                $show_prolongation = 1;
+            }
+>>>>>>> 4059852d88c198719309fabc3f92f0160e20b251
 
             if($order->contract->stop_profit);
                 $show_prolongation = 0;
