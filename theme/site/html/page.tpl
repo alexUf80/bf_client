@@ -55,6 +55,7 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_for_mobilized_and_participants.pdf" target="_blank">Памятка для мобилизованных и участников СВО</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_provided_to_the_recipient_of_the_financial_service.pdf" target="_blank">Информация предоставляемая получателю финансовой услуги</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_on_the_right_of_consumers_of_financial_services_to_appeal_to_the_financial_commissioner.pdf" target="_blank">Информация о праве потребителей финансовых услуг на обращение к финансовому уполномоченному</a></li>                   
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/about_borrowers_and_other_users_pd.pdf" target="_blank">Положение об обработке  ПД заемщиков и иных пользователей сайта</a></li>                   
                     </ul>
                 </div>
             </div>
