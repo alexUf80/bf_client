@@ -314,6 +314,7 @@ class AccountController extends Controller
 
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
+            
             $inssuanceDate = new DateTime(date('Y-m-d', strtotime($order->contract->inssuance_date)));
 
             if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35){
