@@ -314,12 +314,13 @@ class AccountController extends Controller
 
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
+            $inssuanceDate = new DateTime(date('Y-m-d', strtotime($order->contract->inssuance_date)));
 
             if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35){
                 $show_prolongation = 1;
             }
 
-            if($order->contract->stop_profit);
+            if($order->contract->stop_profit || date_diff($now, $inssuanceDate)->days > 100)
                 $show_prolongation = 0;
 
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));

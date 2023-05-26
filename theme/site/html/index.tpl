@@ -114,10 +114,11 @@
                     <div class="new-footer__menu-title">Про нас</div>
                     <a href="/page/about-us/" class="new-footer__menu-item">О компании</a>
                     <a href="/page/documents/" class="new-footer__menu-item">Юридическая информация</a>
-                    <a href="/contacts/" class="new-footer__menu-item">Контакты и реквизиты</a>
+                    <a href="/contacts/" class="new-footer__menu-item">Отправить вопрос</a>
                     <a href="/files/about/confidential_politics.pdf" class="new-footer__menu-item">Политика
                         конфиденциальности</a>
                     <a href="/files/about/cookies_politics.pdf" class="new-footer__menu-item">Политика Cookie</a>
+                    <a href="/insurance/" class="new-footer__menu-item">Страхование</a>
                 </div>
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Информация о займах</div>
