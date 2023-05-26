@@ -30,6 +30,7 @@
                 </form>
             </div>
             <div class="page-contacts__list">
+                {*}
                 <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Telegram1.svg" alt=""/> <a
                             href="#">+7(991)471-45-33</a>
                 </div>
@@ -39,8 +40,11 @@
                 <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Viber1.svg" alt=""/> <a
                             href="#">+7(991)471-45-33</a>
                 </div>
-                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/mail1.svg" alt=""/> <a
-                            href="mailto:info@mkkbf.ru">info@mkkbf.ru</a></div>
+                {*}
+                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/mail1.svg" alt=""/ style="height: 35px"> <a
+                            href="tel:info@mkkbf.ru">info@mkkbf.ru</a></div>
+                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Phone.svg" alt=""/ style="height: 35px"> <a
+                            href="tel:+78001018283">8 800 101 82 83</a></div>
             </div>
         </div>
     </div>
