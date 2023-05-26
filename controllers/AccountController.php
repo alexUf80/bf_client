@@ -314,23 +314,7 @@ class AccountController extends Controller
 
             $now = new DateTime(date('Y-m-d'));
             $returnDate = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
-            // $start_date = new DateTime(date('Y-m-d', strtotime($order->contract->inssuance_date)));
-            // /*if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35)
-            //     $show_prolongation = 1;*/
-
-            // $operations = OperationsORM::query()
-            //     ->where('contract_id', '=', $order->contract->id)
-            //     ->where('type', '=', 'PAY')->get();
-
-            // $count_prolongation = 0;
-            // foreach ($operations as $operation) {
-            //     if ($operation->transaction_id) {
-            //         $transaction = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
-            //         if ($transaction && $transaction->prolongation) {
-            //             $count_prolongation++;
-            //         }
-            //     }
-            // }
+            
             $inssuanceDate = new DateTime(date('Y-m-d', strtotime($order->contract->inssuance_date)));
 
             if ($now <= $returnDate && date_diff($now, $returnDate)->days <= 3 || $now > $returnDate && date_diff($now, $returnDate)->days <= 35){
