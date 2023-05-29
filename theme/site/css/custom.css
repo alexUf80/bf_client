@@ -780,9 +780,33 @@ body{
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.nfi{
+    flex-wrap: nowrap;
+}
+.nfi  .new-footer__block{
+    flex: 1 1 50%;
+}
+
+@media (max-width: 767px) {
+    .nfi{
+        flex-wrap: wrap;
+    }
+    .nfi .new-footer__block{
+        flex: 1 1 100%;
+    }
+}
 .new-footer__block{
     padding: 0 15px;
 }
+.new-footer__block p{
+    margin-top: 5px;
+    font-size: 15px;
+    color: rgb(195, 195, 195);
+}
+.new-footer__block p a{
+    color: rgb(255, 255, 255);
+}
+
 .new-footer__menu{
     display: flex;
     flex-direction: column;
