@@ -60,6 +60,12 @@ class AccountCardsController extends Controller
         CardsORM::where('user_id', $this->user->id)->update(['base_card' => 0]);
         CardsORM::where('id', $id)->update(['base_card' => 1]);
 
+        $order = $this->orders->get_orders(array('user_id'=>$this->user->id, 'sort' => 'id_desc'))[0];
+        $order->contract = $this->contracts->get_contract($order->contract_id);
+        $this->contracts->update_contract($order->contract->id, array(
+            'card_id' => $id
+        ));
+
         header('Location: ' . $this->request->url(array('base' => null)));
         exit;
     }
