@@ -99,7 +99,7 @@ class DocumentController extends Controller
 
                 $all_percents = $P2P * 1.5;
                 if($PAY + ($percents_one_day * 30) > $P2P * 1.5){
-                    $sum_back = $P2P * 1.5 - $PAY;
+                    $sum_back = $P2P * 2.5 - $PAY;
                 }
                 else{
                     $sum_back = $P2P +($percents_one_day * 30);
