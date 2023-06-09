@@ -49,6 +49,75 @@ class DocumentController extends Controller
 
             $contract = ContractsORM::where('order_id', $document->order_id)->first();
             
+            if($document->type == 'DOP_SOGLASHENIE'){
+
+                $query = $this->db->placehold("
+                    SELECT * 
+                    FROM __operations
+                    WHERE contract_id =  $contract->id
+                    AND (type = 'P2P' OR type = 'PAY' OR type = 'PERCENTS')
+                    ORDER BY created, id
+                ");
+                $this->db->query($query);
+                $operations = $this->db->results();
+
+                $document_date = date("Y-m-d", strtotime("+1 days", strtotime($document->created)));
+                
+                $P2P = 0;
+                $PAY = 0;
+                $PERCENTS = 0;
+                
+                $percents_one_day = 0;
+                $prolongations_count = 0;
+
+                foreach ($operations as $operation) {
+                    $operation_date = date('Y-m-d', strtotime($operation->created));
+                    if($operation_date < $document_date){
+                        switch ($operation->type):
+                            case 'P2P':
+                                $P2P += $operation->amount;
+                                break;
+                            case 'PAY':
+                                $PAY += $operation->amount;
+                                $transaction = $this->transactions->get_transaction($operation->transaction_id);
+                                if($transaction && $transaction->prolongation){
+                                    $prolongations_count++;
+                                }
+                                break;
+                            case 'PERCENTS':
+                                $PERCENTS += $operation->amount;
+                                $percents_one_day = $operation->amount;
+                                break;
+                        endswitch;
+                    }
+                }
+
+                $prolongations_days = $prolongations_count * 30;
+
+                $contract_end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+                $prolongation_end_date = date("Y-m-d", strtotime("+".$prolongations_days." days", strtotime($contract_end_date)));
+
+                $all_percents = $P2P * 1.5;
+                if($PAY + ($percents_one_day * 30) > $P2P * 1.5){
+                    $sum_back = $P2P * 1.5 - $PAY;
+                }
+                else{
+                    $sum_back = $P2P +($percents_one_day * 30);
+                }
+
+                $prolo = new StdClass();
+    
+                $prolo->return_date = $prolongation_end_date;
+                $prolo->return_amount = $sum_back;
+                $prolo->amount = $P2P;
+                $prolo->return_amount_percents = $sum_back - $P2P;
+
+                $sas = 'дат - '.$prolongation_end_date.' / займ - '.$P2P.' / вернуть - '.$sum_back.' /// % за день - '.$percents_one_day;
+                $this->design->assign('sas', $sas);
+                $this->design->assign('prolo', $prolo);
+
+            }
+            
             $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
 
             $this->design->assign('contract', $contract);
