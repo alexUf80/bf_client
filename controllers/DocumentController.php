@@ -148,6 +148,10 @@ class DocumentController extends Controller
 
             if (!empty($cards)) {
                 foreach ($cards as $card) {
+                    $active_card = $card->pan;
+                    break;
+                }
+                foreach ($cards as $card) {
                     if($card->base_card == 1)
                         $active_card = $card->pan;
                 }
