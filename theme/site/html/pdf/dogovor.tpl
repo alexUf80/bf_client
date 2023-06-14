@@ -3,7 +3,7 @@
 </div>
 <table align="center">
     <tr>
-        <td width="100%" align="center"><strong>11ИНДИВИДУАЛЬНЫЕ УСЛОВИЯ ДОГОВОРА ПОТРЕБИТЕЛЬСКОГО МИКРОЗАЙМА
+        <td width="100%" align="center"><strong>ИНДИВИДУАЛЬНЫЕ УСЛОВИЯ ДОГОВОРА ПОТРЕБИТЕЛЬСКОГО МИКРОЗАЙМА
                 № {$contract->number}</strong></td>
     </tr>
 </table>
