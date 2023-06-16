@@ -32,7 +32,10 @@ class DocumentController extends Controller
 
         if (!empty($document->params)) {
 
+            $this->design->assign('pan', json_decode(unserialize($document->params))->pan);
+
             $document->params = json_decode($document->params, true);
+
 
             if(in_array($document->type, ['DOP_RESTRUCT', 'GRAPH_RESTRUCT']))
             {
@@ -336,6 +339,8 @@ class DocumentController extends Controller
 
             $params['insurance'] = $insurance;
         }
+
+        $this->design->assign('params', $params);
 
         foreach ($params as $param_name => $param_value)
             $this->design->assign($param_name, $param_value);

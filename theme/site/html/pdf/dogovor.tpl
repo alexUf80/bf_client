@@ -396,7 +396,13 @@
     </tr>
     <tr>
         <td width="50%">Корсчёт: 3010 1810 7453 7452 5104</td>
-        <td width="50%">Банковская карта: {$active_card}</td>
+        <td width="50%">Банковская карта: 
+            {if $pan}
+                {$pan}
+            {else}
+                {$active_card}
+            {/if}
+        </td>
     </tr>
 </table>
 <div>
