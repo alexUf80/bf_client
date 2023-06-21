@@ -207,7 +207,13 @@ class Best2PayCallback extends Controller
                             $date2 = new DateTime(date('Y-m-d'));
 
                             $diff = $date2->diff($date1);
-                            $contract->expired_days = $diff->days;
+                            if ($date2 > $date1) {
+                                $contract->expired_days = $diff->days;
+                            }
+                            else{
+                                $contract->expired_days = 0;
+                            }
+
                             $epl = date('Y-m-d') . ' - ' . date('Y-m-d', strtotime($contract->return_date)) . ' - ' . $diff->days;
 
                             if (!empty($contract->collection_status)) {
