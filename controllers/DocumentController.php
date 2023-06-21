@@ -114,22 +114,27 @@ class DocumentController extends Controller
                 $prolongation_start_date = date("Y-m-d", strtotime($document->created));
                 $prolongation_end_date = date("Y-m-d", strtotime("+30 days", strtotime($document->created)));
 
-
-                $date1 = new DateTime(date('Y-m-d', strtotime($contract->inssuance_date)));
+                $date1 = new DateTime(date('Y-m-d', strtotime($document->created)));
                 $date2 = new DateTime(date('Y-m-d', strtotime($prolongation_end_date)));
+
 
                 $diff = $date2->diff($date1)->days;
 
-                if($percents_one_day * $diff > $P2P * 1.5){
-                    $sum_back = $P2P * 2.5 - $PAY;
-                }
-                else{
-                    $sum_back = $P2P + ($percents_one_day * $diff) - $PAY;
-                }
+                $sum_back = $P2P + ($percents_one_day * $diff);
+                // if($percents_one_day * $diff > $P2P * 2.5){
+                //     $sum_back = $P2P * 2.5 - $PAY;
+                //     $sas = 1;
+                // }
+                // else{
+                //     $sum_back = $P2P + ($percents_one_day * $diff) - $PAY;
+                //     $sas = 2;
+                // }
                 $this->design->assign('P2P', $P2P);
                 $this->design->assign('percents_one_day', $percents_one_day);
                 $this->design->assign('diff', $diff);
                 $this->design->assign('PAY', $PAY);
+                $this->design->assign('sas', $sas);
+                $this->design->assign('sas', $percents_one_day * $diff - $P2P * 2.5);
 
                 $prolo = new StdClass();
     
