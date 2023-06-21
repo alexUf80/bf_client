@@ -26,6 +26,14 @@
 
 
     <script>
+
+        showCessiaModal = function() {
+            $('#cessiaModal').modal();
+            setTimeout(function() {
+                $('#cessiaModal .close_cessia_btn').show();
+            }, 10000)
+        }
+
         {if $is_developer}console.info('DEVELOPER MODE'){/if}
     </script>
 
@@ -114,11 +122,10 @@
                     <div class="new-footer__menu-title">Про нас</div>
                     <a href="/page/about-us/" class="new-footer__menu-item">О компании</a>
                     <a href="/page/documents/" class="new-footer__menu-item">Юридическая информация</a>
-                    <a href="/contacts/" class="new-footer__menu-item">Отправить вопрос</a>
+                    <a href="/contacts/" class="new-footer__menu-item">Контакты и реквизиты</a>
                     <a href="/files/about/confidential_politics.pdf" class="new-footer__menu-item">Политика
                         конфиденциальности</a>
                     <a href="/files/about/cookies_politics.pdf" class="new-footer__menu-item">Политика Cookie</a>
-                    <a href="/insurance/" class="new-footer__menu-item">Страхование</a>
                 </div>
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Информация о займах</div>
@@ -173,31 +180,13 @@
                         </div>
                         <div class="new-footer__contacts-item-text">info@mkkbf.ru</div>
                     </a>
-                    <a href="https://vk.com/barentsfinans" class="new-footer__contacts-item">
+                    <a href="vk.com/barentsfinans" class="new-footer__contacts-item">
                         <div class="new-footer__contacts-item-icon">
                             <img src="/theme/site/i/Vk.svg">
                         </div>
                         <div class="new-footer__contacts-item-text">vk.com/barentsfinans</div>
                     </a>
                 </div>
-            </div>
-        </div>
-        <div class="new-footer__inner nfi">
-            <div class="new-footer__block">
-                <p>Общество с ограниченной ответственностью Микрокредитная компания «Баренц Финанс» (ООО МКК «Баренц Финанс»), ИНН 9723120835, ОГРН 1217700350812.</p>
-                <p>Регистрационный номер записи в государственном реестре микрофинансовых организаций: 2103045009732 от 02.09.2021 года.</p>
-                <p>Официальный сайт ЦБ РФ: <a href="https://cbr.ru/" target="_blank">https://cbr.ru/</a></p>
-                <p>Интернет приемная ЦБ РФ: <a href="https://cbr.ru/Reception/" target="_blank">https://cbr.ru/Reception/</a></p>
-                <p>Государственный реестр микрофинансовых организаций: <a href="https://cbr.ru/microfinance/registry/" target="_blank">https://cbr.ru/microfinance/registry/</a></p>
-                <p>Потребитель финансовой услуги вправе направить обращение финансовому уполномоченному: <a href="https://finombudsman.ru/" target="_blank">https://finombudsman.ru/</a></p>
-                <p>г. Москва, Старомонетный пер., дом 3, 8 (800) 200-00-10.</p>
-
-            </div>
-            <div class="new-footer__block">
-                <p>ООО МКК "Баренц Финанс" с 03.12.2021 года является членом Союза «Микрофинансовый Альянс «Институты развития малого и среднего бизнеса» (г. Москва, Полесский проезд 16, стр.1, оф.308) <a href="https://alliance-mfo.ru/" target="_blank">https://alliance-mfo.ru/</a></p>
-                <p>Единоличный исполнительный орган ООО МКК «Баренц Финанс» - Генеральный директор Кройтор Виктория Викторовна, назначен 19.07.2021 г.</p>
-                <p style=>ООО МКК «Баренц Финанс» — это микрокредитная организация, зарегистрированная в реестре Центрального банка Российской Федерации за номером 2103045009732 от 02.09.2021 года. Компания ведет свою деятельность на территории России согласно Федеральному закону «О микрофинансовой деятельности и микрофинансовых организациях».</p>
-                <p>Все материалы, расположенные на сайте, являются объектом авторского права и могут быть скопированы только при условии разрешения на публикацию.</p>
             </div>
         </div>
     </div>
@@ -232,7 +221,28 @@
         <a href="/page/documents/" class="new-hamburger-menu__item">Документы</a>
     </div>
 </div>
-
+<div id="cessiaModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div style="display: inline-block" class="modal-header">
+                <h2 style="text-align: center" class="modal-title">Уведомление</h2>
+                <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" class="close_cessia_btn">X</div>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Общество с ограниченной ответственностью МИКРОКРЕДИТНАЯ КОМПАНИЯ "БАРЕНЦ ФИНАНС" уведомляет Вас о том, что Кредитором по вышеуказанному Договору стал ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ».
+                </p>
+                <p>Реквизиты ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ»</p>
+                <p>ИНН: 6908019416</p>
+                <p>КПП: 690801001</p>
+                <p>ОГРН: 1216900005805</p>
+                <p>Юридический адрес: 171080, Тверская область, г. Бологое, ул. Кооперативная, д.4, кв. 38.</p>
+                <p>Банк: ПАО СБЕРБАНК БИК: 044525225 к/с 30101810400000000225 р/с 40702810240000007284</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="hide">
     <div class="info-modal" id="sms_code_modal"></div>
     <div class="info-modal" id="error_modal">
@@ -289,9 +299,6 @@
         <div><img src="https://mc.yandex.ru/watch/88054135" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
-
-    <script type="text/javascript"> (function ab(){ var request = new XMLHttpRequest(); request.open('GET', "https://scripts.botfaqtor.ru/one/34697", false); request.send(); if(request.status == 200) eval(request.responseText); })(); </script>
-    
 {/literal}
 {/if}
 
@@ -325,7 +332,11 @@
 
     </script>
 {/if}
-
+<script>
+    $('.close_cessia_btn').on('click',function() {
+        $('#cessiaModal').modal('hide');
+    });
+</script>
 </body>
 </html>
 {if !empty($needToConfirmCookies)}
