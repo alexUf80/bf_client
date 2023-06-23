@@ -214,7 +214,13 @@ class Best2PayCallback extends Controller
                                 $contract->expired_days = 0;
                             }
 
-                            $epl = date('Y-m-d') . ' - ' . date('Y-m-d', strtotime($contract->return_date)) . ' - ' . $diff->days;
+                            $prolo = 'no';
+                            if(isset($transaction->prolongation)){
+                                $contract->expired_days = 0;
+                                $prolo = 'yes';
+                            }
+
+                            $epl = date('Y-m-d') . ' - ' . date('Y-m-d', strtotime($contract->return_date)) . ' - ' . $diff->days . ' - ' . $prolo;
 
                             if (!empty($contract->collection_status)) {
 
