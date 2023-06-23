@@ -26,6 +26,14 @@
 
 
     <script>
+
+        showCessiaModal = function() {
+            $('#cessiaModal').modal();
+            setTimeout(function() {
+                $('#cessiaModal .close_cessia_btn').show();
+            }, 10000)
+        }
+
         {if $is_developer}console.info('DEVELOPER MODE'){/if}
     </script>
 
@@ -213,7 +221,28 @@
         <a href="/page/documents/" class="new-hamburger-menu__item">Документы</a>
     </div>
 </div>
-
+<div id="cessiaModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div style="display: inline-block" class="modal-header">
+                <h2 style="text-align: center" class="modal-title">Уведомление</h2>
+                <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" class="close_cessia_btn">X</div>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Общество с ограниченной ответственностью МИКРОКРЕДИТНАЯ КОМПАНИЯ "БАРЕНЦ ФИНАНС" уведомляет Вас о том, что Кредитором по вышеуказанному Договору стал ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ».
+                </p>
+                <p>Реквизиты ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ»</p>
+                <p>ИНН: 6908019416</p>
+                <p>КПП: 690801001</p>
+                <p>ОГРН: 1216900005805</p>
+                <p>Юридический адрес: 171080, Тверская область, г. Бологое, ул. Кооперативная, д.4, кв. 38.</p>
+                <p>Банк: ПАО СБЕРБАНК БИК: 044525225 к/с 30101810400000000225 р/с 40702810240000007284</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="hide">
     <div class="info-modal" id="sms_code_modal"></div>
     <div class="info-modal" id="error_modal">
@@ -303,7 +332,11 @@
 
     </script>
 {/if}
-
+<script>
+    $('.close_cessia_btn').on('click',function() {
+        $('#cessiaModal').modal('hide');
+    });
+</script>
 </body>
 </html>
 {if !empty($needToConfirmCookies)}
