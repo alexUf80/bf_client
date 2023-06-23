@@ -627,4 +627,5 @@ class Best2PayCallback extends Controller
             'status' => 7
         ));
     }
+
 }

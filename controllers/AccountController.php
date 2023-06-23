@@ -442,5 +442,5 @@ class AccountController extends Controller
             return $this->design->fetch('account/home.tpl');
         }
     }
-
+    
 }
