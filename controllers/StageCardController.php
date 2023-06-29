@@ -71,7 +71,7 @@ class StageCardController extends Controller
                     $order['promocode_id'] = $promocode->id;
             }
 
-            // $order['utm_source'] = $_COOKIE['utm_source'];
+            $order['utm_source'] = $_COOKIE['utm_source'];
             $order['webmaster_id'] = $_COOKIE["wm_id"];
             $order['click_hash'] = $_COOKIE["clickid"];
             
@@ -83,11 +83,11 @@ class StageCardController extends Controller
 
             $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
-            // if (!empty($hasClickHash)) {
-            //     unset($order['utm_source']);
-            //     unset($order['webmaster_id']);
-            //     unset($order['click_hash']);
-            // }
+            if (!empty($hasClickHash)) {
+                unset($order['utm_source']);
+                unset($order['webmaster_id']);
+                unset($order['click_hash']);
+            }
 
 
             $order_id = $this->orders->add_order($order);
