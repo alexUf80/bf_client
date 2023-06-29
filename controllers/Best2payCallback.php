@@ -215,7 +215,7 @@ class Best2PayCallback extends Controller
                             }
 
                             $prolo = 'no';
-                            if(isset($transaction->prolongation)){
+                            if($transaction->prolongation == 1){
                                 $contract->expired_days = 0;
                                 $prolo = 'yes';
                             }
