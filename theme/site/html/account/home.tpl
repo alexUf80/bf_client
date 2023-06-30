@@ -117,7 +117,7 @@
                                 </form>
                             </div>
                             {*
-                            {if $prolongation_amount && $show_prolongation}
+                            {if $prolongation_amount && $show_prolongation && !$order->contract->active_cessia}
                                 <div class="pt-4 text-center">
                                     <form action="account/pay" method="POST" class="border rounded">
                                         <input type="hidden" name="contract_id" value="{$order->contract->id}"/>
@@ -467,7 +467,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation}
+                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation && !$order->contract->active_cessia}
                                     <div class="pt-4 text-center">
                                         <form action="account/pay" method="POST" data-user="{$user->id}"
                                               data-contract="{$order->contract->id}"
