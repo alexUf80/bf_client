@@ -332,7 +332,8 @@ class AccountController extends Controller
                 }
             }
 
-            if (date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5
+            if ($order->contract->active_cessia == 0 &&
+            date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5
             && date_diff($now, $start_date)->days < 100
             && (($order->contract->loan_body_summ * 1.5) > $order->contract->loan_percents_summ)
             ) {
