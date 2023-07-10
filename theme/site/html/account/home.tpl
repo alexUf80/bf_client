@@ -8,15 +8,28 @@
         {if $order->contract->active_cessia == 1}
             {'showCessiaModal();'}
         {/if}
+
         showCessiaModal = function() {
             $('#cessiaModal').modal();
+
+
+            var seconds = 10;
+            var seconds_timer_id = setInterval(function() {
+                if (seconds > 0) {
+                    seconds --;
+                    $('#cessiaModal .close_cessia_sec').text(seconds+' сек.');
+                } else {
+                    clearInterval(seconds_timer_id);
+                }
+            }, 1000);
+
+
+
             setTimeout(function() {
                 $('#cessiaModal .close_cessia_btn').show();
+                $('#cessiaModal .close_cessia_sec').hide();
             }, 10000)
         }
-        $('.close_cessia_btn').on('click',function() {
-            $('#cessiaModal').modal('hide');
-        });
     </script>
 
 {/capture}
@@ -126,7 +139,7 @@
                                 </form>
                             </div>
                             {*
-                            {if $prolongation_amount && $show_prolongation}
+                            {if $prolongation_amount && $show_prolongation && !$order->contract->active_cessia}
                                 <div class="pt-4 text-center">
                                     <form action="account/pay" method="POST" class="border rounded">
                                         <input type="hidden" name="contract_id" value="{$order->contract->id}"/>
@@ -476,7 +489,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation}
+                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation && !$order->contract->active_cessia}
                                     <div class="pt-4 text-center">
                                         <form action="account/pay" method="POST" data-user="{$user->id}"
                                               data-contract="{$order->contract->id}"
