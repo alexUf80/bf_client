@@ -6,30 +6,10 @@
     <script src="theme/site/js/contract_accept.app.js?v=1.09"></script>
     <script>
         {if $order->contract->active_cessia == 1}
-            {'showCessiaModal();'}
-        {/if}
-
-        showCessiaModal = function() {
-            $('#cessiaModal').modal();
-
-
-            var seconds = 10;
-            var seconds_timer_id = setInterval(function() {
-                if (seconds > 0) {
-                    seconds --;
-                    $('#cessiaModal .close_cessia_sec').text(seconds+' сек.');
-                } else {
-                    clearInterval(seconds_timer_id);
-                }
-            }, 1000);
-
-
-
             setTimeout(function() {
-                $('#cessiaModal .close_cessia_btn').show();
-                $('#cessiaModal .close_cessia_sec').hide();
-            }, 10000)
-        }
+                showCessiaModal();
+            }, 100)
+        {/if}
     </script>
 
 {/capture}
