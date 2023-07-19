@@ -6,30 +6,10 @@
     <script src="theme/site/js/contract_accept.app.js?v=1.09"></script>
     <script>
         {if $order->contract->active_cessia == 1}
-            {'showCessiaModal();'}
-        {/if}
-
-        showCessiaModal = function() {
-            $('#cessiaModal').modal();
-
-
-            var seconds = 10;
-            var seconds_timer_id = setInterval(function() {
-                if (seconds > 0) {
-                    seconds --;
-                    $('#cessiaModal .close_cessia_sec').text(seconds+' сек.');
-                } else {
-                    clearInterval(seconds_timer_id);
-                }
-            }, 1000);
-
-
-
             setTimeout(function() {
-                $('#cessiaModal .close_cessia_btn').show();
-                $('#cessiaModal .close_cessia_sec').hide();
-            }, 10000)
-        }
+                showCessiaModal();
+            }, 100)
+        {/if}
     </script>
 
 {/capture}
@@ -807,6 +787,7 @@
             <div style="display: inline-block" class="modal-header">
                 <h2 style="text-align: center" class="modal-title">Уведомление</h2>
                 <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" class="close_cessia_btn">X</div>
+                <div style="color: red; position: absolute; right: 25px; top: 25px; " class="close_cessia_sec">10 сек.</div>
             </div>
             <div class="modal-body">
                 <p>
