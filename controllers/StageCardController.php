@@ -84,13 +84,17 @@ class StageCardController extends Controller
             $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
             if (!empty($hasClickHash)) {
-                unset($order['utm_source']);
+                // unset($order['utm_source']);
                 unset($order['webmaster_id']);
-                unset($order['click_hash']);
+                // unset($order['click_hash']);
             }
 
 
             $order_id = $this->orders->add_order($order);
+
+            if($_COOKIE['utm_source'] =='guruleads')
+                $this->gurulead->sendPendingPostback($order_id, $this->user->id, 2);
+
 //            70093bcc-3a3f-11eb-9983-00155d2d0507
             $uid = 'a0'.$order_id.'-'.date('Y').'-'.date('md').'-'.date('Hi').'-01771ca07de7';
             $this->users->update_user($this->user->id, array(
