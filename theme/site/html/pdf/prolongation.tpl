@@ -42,8 +42,8 @@
             <img src="{$config->root_dir}/theme/site/html/pdf/i/contract_qr.jpg" width="250">
         </td>
         <td style="width: 36%" align="center">
-            <div>ПОЛНАЯ СТОИМОСТЬ ЗАЙМАПере
-                СОСТАВЛЯЕТ 292,000 ДВЕСТИ
+            <div>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА
+                СОСТАВЛЯЕТ 292,00 ДВЕСТИ
                 ДЕВЯНОСТО ДВА ЦЕЛЫХ НОЛЬ
                 ТЫСЯЧНЫХ ПРОЦЕНТА ГОДОВЫХ
             </div>
