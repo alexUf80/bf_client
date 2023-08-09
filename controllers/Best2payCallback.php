@@ -121,21 +121,34 @@ class Best2PayCallback extends Controller
 
                                 $docs = 1;
 
-                                if ($payment_amount >= $contract->loan_percents_summ + $this->settings->prolongation_amount) {
+                                $ins_amount = 199;
+
+                                if ($contract->loan_body_summ >= 0 && $contract->loan_body_summ <= 6890) {
+                                    $ins_amount = 199;
+                                }
+                                if ($contract->loan_body_summ > 6890 && $contract->loan_body_summ <= 9990) {
+                                    $ins_amount = 299;
+                                }
+                                if ($contract->loan_body_summ > 9990) {
+                                    $ins_amount = 399;
+                                }
+
+                                if ($payment_amount >= $contract->loan_percents_summ + $ins_amount) {
+
                                     $operation_id = $this->operations->add_operation(array(
                                         'contract_id' => $contract->id,
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'transaction_id' => $transaction->id,
                                         'type' => 'INSURANCE_BC',
-                                        'amount' => $this->settings->prolongation_amount,
+                                        'amount' => $ins_amount,
                                         'created' => date('Y-m-d H:i:s'),
                                         'sent_status' => 0,
                                     ));
 
                                     $insurance_id = $this->insurances->add_insurance(array(
                                         'number' => '',
-                                        'amount' => $this->settings->prolongation_amount,
+                                        'amount' => $ins_amount,
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'create_date' => date('Y-m-d H:i:s'),
@@ -146,11 +159,11 @@ class Best2PayCallback extends Controller
                                     ));
                                     $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
 
-                                    $rest_amount = $rest_amount - $this->settings->prolongation_amount;
+                                    $rest_amount = $rest_amount - $ins_amount;
 
                                     //Отправляем чек по страховке
                                     $this->Cloudkassir->send_insurance($operation_id);
-                                    $payment_amount -= $this->settings->prolongation_amount;
+                                    $payment_amount -= $ins_amount;
 
                                     $docs = 2;
                                 }

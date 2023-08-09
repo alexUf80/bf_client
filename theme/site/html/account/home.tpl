@@ -787,7 +787,6 @@
             <div style="display: inline-block" class="modal-header">
                 <h2 style="text-align: center" class="modal-title">Уведомление</h2>
                 <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" class="close_cessia_btn">X</div>
-                <div style="color: red; position: absolute; right: 25px; top: 25px; " class="close_cessia_sec">10 сек.</div>
             </div>
             <div class="modal-body">
                 <p>

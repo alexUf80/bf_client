@@ -32,7 +32,7 @@
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/soglashenie_asp.pdf" target="_blank">Соглашение об использовании Аналога собственноручной подписи</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/bank_card_insurance_rules.pdf" target="_blank">Правила страхования банковских карт</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_of_combined_accident_and_disease_insurance.pdf" target="_blank">Правила комбинированного страхования от несчастных случаев и болезней</a></li>
-                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_about_the_conditions_for_the_provision_use_and_return_of_consumer_microloans.pdf" target="_blank">Информация об условиях предоставления, использования и возврата потребительского микрозайма</a></li>
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/predostavlenie_vozvrat_new.pdf" target="_blank">Информация об условиях предоставления, использования и возврата потребительского микрозайма</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/recommendations_to_the_client_on_protecting_information_from_the_effects_of_malicious_codes.pdf" target="_blank">Рекомендации клиенту по защите информации от воздействия вредоносных кодов в целях противодействия незаконным фонансовым операциям</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/payment_security_policy.pdf" target="_blank">Политика безопасности платежей</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ogrn_inn_ooo_mkk_bf.pdf" target="_blank">ОГРН ИНН ООО МКК БФ</a></li>
@@ -58,6 +58,7 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_on_the_right_of_consumers_of_financial_services_to_appeal_to_the_financial_commissioner.pdf" target="_blank">Информация о праве потребителей финансовых услуг на обращение к финансовому уполномоченному</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/about_borrowers_and_other_users_pd.pdf" target="_blank">Положение об обработке  ПД заемщиков и иных пользователей сайта</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_on_115_FZ.pdf" target="_blank">Памятка клиенту по 115 ФЗ</a></li>                   
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/helper_document.pdf" target="_blank">Справочник финансовых продуктов</a></li>
                     </ul>
                 </div>
             </div>

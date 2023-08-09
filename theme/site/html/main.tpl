@@ -220,10 +220,6 @@
 <div class="new-banner">
     <img src="/theme/site/i/banner.jpg" alt="">
 </div>
-<br>
-<div class="new-banner">
-    <img src="/theme/site/i/bannerfaq.jpg" alt="">
-</div>
 <div class="wrapper">
   <div class="new-questions">
       <div class="new-questions__title title">Частые вопросы</div>
