@@ -72,10 +72,12 @@ class StageCardController extends Controller
             }
 
             $order['utm_source'] = $_COOKIE['utm_source'];
+            $order['utm_s'] = $_COOKIE['utm_source'];
             $order['webmaster_id'] = $_COOKIE["wm_id"];
             $order['click_hash'] = $_COOKIE["clickid"];
             
             $order['utm_source']   = (isset($_COOKIE['utm_source']))    ? $_COOKIE["utm_source"]   : ' ';
+            $order['utm_s']   = (isset($_COOKIE['utm_source']))    ? $_COOKIE["utm_source"]   : ' ';
             $order['utm_medium']   = (isset($_COOKIE['utm_medium']))    ? $_COOKIE["utm_medium"]   : ' ';
             $order['utm_campaign'] = (isset($_COOKIE['utm_campaign']))  ? $_COOKIE["utm_campaign"] : ' ';
             $order['utm_content']  = (isset($_COOKIE['utm_content']))   ? $_COOKIE["utm_content"]  : ' ';
