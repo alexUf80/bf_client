@@ -784,9 +784,10 @@
      aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg" style="max-width: 1000px;">
         <div class="modal-content">
-            <div style="display: inline-block" class="modal-header">
-                <h2 style="text-align: center" class="modal-title">Уведомление</h2>
-                <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" class="close_cessia_btn">X</div>
+            <div class="modal-header" style="display: flex !important; flex: 1 1 auto; align-items:center">
+                <h2 style="text-align: center;width:100%" class="modal-title" >Уведомление</h2>
+                <span class="close_cessia_sec" style="width: 65px; color:red;">10 сек.</span>
+                <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" data-dismiss="modal" class="close_cessia_btn close">X</div>
             </div>
             <div class="modal-body">
                 <p>
