@@ -418,7 +418,7 @@
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
-                        <br>Дата: {$contract->inssuance_date|date}
+                        <br>Дата: {$document->created|date}
                     </td>
                 </tr>
             </table>
