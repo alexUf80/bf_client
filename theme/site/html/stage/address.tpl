@@ -44,12 +44,10 @@
 <main class="main">
     <div class="section section_form">
         <div class="container">
-            {if !empty($errors)}
-                {foreach $errors as $error}
-                    <div class="alert alert-danger">
-                        {$error}
-                    </div>
-                {/foreach}
+            {if !empty($error)}
+                <div class="alert alert-danger">
+                    {$error}
+                </div>
             {/if}
             <div class="section_form_row row">
                 <div class="col-lg-5">
