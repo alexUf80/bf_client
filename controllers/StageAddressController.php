@@ -140,7 +140,7 @@ class StageAddressController extends Controller
             if (empty($faktaddress['adressfull']))
                 $error = 'Не заполнен адрес проживания';
 
-            $this->design->assign('errors', $errors);
+            $this->design->assign('error', $error);
 
             if (empty($error)) {
 
