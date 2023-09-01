@@ -50,7 +50,7 @@ class StageAddressController extends Controller
 
             if ($this->request->post('clone_address', 'integer')) {
                 $faktaddress = $regaddress;
-            } else {
+            } else { 
                 $Fakt_adress = json_decode($this->request->post('Fakt_adress'));
 
                 $faktaddress = [];
@@ -140,7 +140,7 @@ class StageAddressController extends Controller
             if (empty($faktaddress['adressfull']))
                 $error = 'Не заполнен адрес проживания';
 
-            $this->design->assign('errors', $errors);
+            $this->design->assign('error', $error);
 
             if (empty($error)) {
 
