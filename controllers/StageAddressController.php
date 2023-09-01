@@ -81,29 +81,68 @@ class StageAddressController extends Controller
             $Regaddressfull = $this->Addresses->get_address($user->regaddress_id);
             $this->design->assign('Regaddressfull', $Regaddressfull);
 
-            $errors = array();
+            
+            // $error = array();
+
+            // if (empty($regaddress['adressfull'])) {
+            //     $error[] = 'empty_regregion';
+            // }
+
+            // $this->design->assign('error', $error);
+
+            $error = null;
+
+            $errorMessages =
+                [
+                    'zip' => 'Отсутствует индекс',
+                    'region' => 'Отсутствует регион',
+                    'city' => 'Отсутствует город',
+                    'district' => 'Отсутствует район',
+                    'locality' => 'Отсутствует местонахождение',
+                    'street' => 'Отсутствует улица',
+                    'house' => 'Отсутствует дом'
+                ];
+
+            if(empty($regaddress['zip']))
+                $error = $errorMessages['zip'].' у адреса регистрации';
+
+            if(empty($regaddress['region']))
+                $error = $errorMessages['region'].' у адреса регистрации';
+
+            if(empty($regaddress['region']) && empty($regaddress['district']) && empty($regaddress['locality']))
+                $error = $errorMessages['locality'].' у адреса регистрации';
+
+            // if(empty($regaddress['street']))
+            //     $error = $errorMessages['street'].' у адреса регистрации';
+
+            if(empty($regaddress['house']))
+                $error = $errorMessages['house'].' у адреса регистрации';
+
+            if(empty($faktaddress['zip']))
+                $error = $errorMessages['zip'].' у адреса проживания';
+
+            if(empty($faktaddress['region']))
+                $error = $errorMessages['region'].' у адреса проживания';
+
+            if(empty($faktaddress['region']) && empty($faktaddress['district']) && empty($faktaddress['locality']))
+                $error = $errorMessages['locality'].' у адреса проживания';
+
+            // if(empty($faktaddress['street']))
+            //     $error = $errorMessages['street'].' у адреса проживания';
+
+            if(empty($faktaddress['house']))
+                $error = $errorMessages['house'].' у адреса проживания';
 
             if (empty($regaddress['adressfull'])) {
-                $errors[] = 'empty_regregion';
+                $error = 'Не заполнен адрес прописки';
             }
 
-            if (empty( $regaddress['region']))
-                $errors[] = 'Не заполнен регион регистрации';
-            if (empty($regaddress['city']) && empty($regaddress['locality']))
-                $errors[] = 'Не заполнен населенный пункт регистрации';
-            if (empty($regaddress['house']))
-                $errors[] = 'Не заполнен дом регистрации';
-
-            if (empty($faktaddress['region']))
-                $errors[] = 'Не заполнен регион места жительства';
-            if (empty($faktaddress['city']) && empty($faktaddress['locality']))
-                $errors[] = 'Не заполнен населенный пункт места жительства';
-            if (empty($faktaddress['house']))
-                $errors[] = 'Не заполнен дом места жительства';
+            if (empty($faktaddress['adressfull']))
+                $error = 'Не заполнен адрес проживания';
 
             $this->design->assign('errors', $errors);
 
-            if (empty($errors)) {
+            if (empty($error)) {
 
                 $regaddress_id = $this->Addresses->add_address($regaddress);
                 $faktaddress_id = $this->Addresses->add_address($faktaddress);
