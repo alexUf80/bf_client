@@ -87,6 +87,20 @@ class StageAddressController extends Controller
                 $errors[] = 'empty_regregion';
             }
 
+            if (empty( $regaddress['region']))
+                $errors[] = 'Не заполнен регион регистрации';
+            if (empty($regaddress['city']) && empty($regaddress['locality']))
+                $errors[] = 'Не заполнен населенный пункт регистрации';
+            if (empty($regaddress['house']))
+                $errors[] = 'Не заполнен дом регистрации';
+
+            if (empty($faktaddress['region']))
+                $errors[] = 'Не заполнен регион места жительства';
+            if (empty($faktaddress['city']) && empty($faktaddress['locality']))
+                $errors[] = 'Не заполнен населенный пункт места жительства';
+            if (empty($faktaddress['house']))
+                $errors[] = 'Не заполнен дом места жительства';
+
             $this->design->assign('errors', $errors);
 
             if (empty($errors)) {
