@@ -207,7 +207,20 @@ class Best2PayCallback extends Controller
                             $date2 = new DateTime(date('Y-m-d'));
 
                             $diff = $date2->diff($date1);
-                            $contract->expired_days = $diff->days;
+                            if ($date2 > $date1) {
+                                $contract->expired_days = $diff->days;
+                            }
+                            else{
+                                $contract->expired_days = 0;
+                            }
+
+                            $prolo = 'no';
+                            if($transaction->prolongation == 1){
+                                $contract->expired_days = 0;
+                                $prolo = 'yes';
+                            }
+
+                            $epl = date('Y-m-d') . ' - ' . date('Y-m-d', strtotime($contract->return_date)) . ' - ' . $diff->days . ' - ' . $prolo;
 
                             if (!empty($contract->collection_status)) {
 
@@ -332,7 +345,8 @@ class Best2PayCallback extends Controller
                                 'loan_percents_summ' => $contract_loan_percents_summ,
                                 'loan_charge_summ' => 0,
                                 'loan_peni_summ' => 0,
-                                'expired_period' => $contract->expired_days
+                                'expired_period' => $contract->expired_days,
+                                'expired_period_log' => $epl
                             ));
                             $this->design->assign('success', 'Оплата прошла успешно.');
 
@@ -613,4 +627,5 @@ class Best2PayCallback extends Controller
             'status' => 7
         ));
     }
+
 }

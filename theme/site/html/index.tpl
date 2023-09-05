@@ -213,7 +213,6 @@
         <a href="/page/documents/" class="new-hamburger-menu__item">Документы</a>
     </div>
 </div>
-
 <div class="hide">
     <div class="info-modal" id="sms_code_modal"></div>
     <div class="info-modal" id="error_modal">
@@ -303,16 +302,39 @@
 
     </script>
 {/if}
-
 </body>
 </html>
 {if !empty($needToConfirmCookies)}
     <script>
         $(function () {
             $('#cookieModal').modal();
+
         });
     </script>
 {/if}
+<script>
+    showCessiaModal = function() {
+        $('#cessiaModal').modal();
+
+
+        var seconds = 10;
+        var seconds_timer_id = setInterval(function() {
+            if (seconds > 0) {
+                seconds --;
+                $('#cessiaModal .close_cessia_sec').text(seconds+' сек.');
+            } else {
+                clearInterval(seconds_timer_id);
+            }
+        }, 1000);
+
+
+
+        setTimeout(function() {
+            $('#cessiaModal .close_cessia_btn').show();
+            $('#cessiaModal .close_cessia_sec').hide();
+        }, 10000)
+    }
+</script>
 <div id="cookieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
      aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">

@@ -30,6 +30,7 @@
                 </form>
             </div>
             <div class="page-contacts__list">
+                {*}
                 <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Telegram1.svg" alt=""/> <a
                             href="#">+7(991)471-45-33</a>
                 </div>
@@ -39,8 +40,19 @@
                 <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Viber1.svg" alt=""/> <a
                             href="#">+7(991)471-45-33</a>
                 </div>
-                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/mail1.svg" alt=""/> <a
-                            href="mailto:info@mkkbf.ru">info@mkkbf.ru</a></div>
+                {*}
+                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/mail1.svg" alt=""/ style="height: 35px"> <a
+                            href="tel:info@mkkbf.ru">info@mkkbf.ru</a></div>
+                <div class="page-contacts__item"><img src="https://bf-dev.ru/theme/site/i/Phone.svg" alt=""/ style="height: 35px"> <a
+                            href="tel:+78001018283">8 800 101 82 83</a></div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="docs_list">				
+                            <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Procedure_and_terms_of_consideration_of_consumer_complaints.pdf" target="_blank">Порядок и сроки рассмотрения обращений потребителей</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

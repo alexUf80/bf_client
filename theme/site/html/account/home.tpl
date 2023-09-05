@@ -4,6 +4,14 @@
     <script src="theme/site/js/calc.app.js?v=1.09"></script>
     <script src="theme/site/js/lk.app.js?v=1.10"></script>
     <script src="theme/site/js/contract_accept.app.js?v=1.09"></script>
+    <script>
+        {if $order->contract->active_cessia == 1}
+            setTimeout(function() {
+                showCessiaModal();
+            }, 100)
+        {/if}
+    </script>
+
 {/capture}
 
 {capture name='page_styles'}
@@ -111,7 +119,7 @@
                                 </form>
                             </div>
                             {*
-                            {if $prolongation_amount && $show_prolongation}
+                            {if $prolongation_amount && $show_prolongation && !$order->contract->active_cessia}
                                 <div class="pt-4 text-center">
                                     <form action="account/pay" method="POST" class="border rounded">
                                         <input type="hidden" name="contract_id" value="{$order->contract->id}"/>
@@ -461,7 +469,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation}
+                                {if $prolongation_amount && $order->contract->type == 'base' && $show_prolongation && !$order->contract->active_cessia}
                                     <div class="pt-4 text-center">
                                         <form action="account/pay" method="POST" data-user="{$user->id}"
                                               data-contract="{$order->contract->id}"
@@ -772,3 +780,26 @@
         </div>
     </div>
 </main>
+<div id="cessiaModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex !important; flex: 1 1 auto; align-items:center">
+                <h2 style="text-align: center;width:100%" class="modal-title" >Уведомление</h2>
+                <span class="close_cessia_sec" style="width: 65px; color:red;">10 сек.</span>
+                <div style="cursor:pointer;position: absolute;right: 25px;top: 25px;font-weight: bold;display: none;" data-dismiss="modal" class="close_cessia_btn close">X</div>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Общество с ограниченной ответственностью МИКРОКРЕДИТНАЯ КОМПАНИЯ "БАРЕНЦ ФИНАНС" уведомляет Вас о том, что Кредитором по вышеуказанному Договору стал ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ».
+                </p>
+                <p>Реквизиты ООО «КОЛЛЕКТОРСКОЕ АГЕНТСТВО «ШАМИЛЬ И ПАРТНЕРЫ»</p>
+                <p>ИНН: 6908019416</p>
+                <p>КПП: 695001001</p>
+                <p>ОГРН: 1216900005805</p>
+                <p>Юридический адрес: 170100, Тверская область, г. Тверь, ул. Андрея Дементьева, д.3, кв. 801</p>
+                <p>Банк: ПАО СБЕРБАНК БИК: 044525225 к/с 30101810400000000225 р/с 40702810240000007284</p>
+            </div>
+        </div>
+    </div>
+</div>

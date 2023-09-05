@@ -13,6 +13,7 @@ class DocumentController extends Controller
             exit;
         }
 
+        
         $id = $this->request->get('id');
         $id = str_replace('.pdf', '', $id);
         if (empty($id))
@@ -32,7 +33,18 @@ class DocumentController extends Controller
 
         if (!empty($document->params)) {
 
-            $document->params = json_decode($document->params, true);
+            $this->design->assign('pan', json_decode(unserialize($document->params))->pan);
+
+            $params = json_decode($document->params, true);
+            
+            if (is_null($params)){
+                $document->params = json_decode(unserialize($document->params), true);
+                $this->design->assign('params', $document->params);
+            }
+            else{
+                $document->params = json_decode($document->params, true);
+                $this->design->assign('params', '2');
+            }
 
             if(in_array($document->type, ['DOP_RESTRUCT', 'GRAPH_RESTRUCT']))
             {
@@ -48,6 +60,93 @@ class DocumentController extends Controller
             }
 
             $contract = ContractsORM::where('order_id', $document->order_id)->first();
+            
+            if($document->type == 'DOP_SOGLASHENIE'){
+
+                $query = $this->db->placehold("
+                    SELECT * 
+                    FROM __operations
+                    WHERE contract_id =  $contract->id
+                    AND (type = 'P2P' OR type = 'PAY' OR type = 'PERCENTS')
+                    ORDER BY created, id
+                ");
+                $this->db->query($query);
+                $operations = $this->db->results();
+
+                $document_date = date("Y-m-d", strtotime("+1 days", strtotime($document->created)));
+                
+                $P2P = 0;
+                $PAY = 0;
+                $PERCENTS = 0;
+                
+                $percents_one_day = 0;
+                $prolongations_count = 0;
+
+                foreach ($operations as $operation) {
+                    $operation_date = date('Y-m-d', strtotime($operation->created));
+                    if($operation_date < $document_date){
+                        switch ($operation->type):
+                            case 'P2P':
+                                $P2P += $operation->amount;
+                                break;
+                            case 'PAY':
+                                $PAY += $operation->amount;
+                                $transaction = $this->transactions->get_transaction($operation->transaction_id);
+                                if($transaction && $transaction->prolongation){
+                                    $prolongations_count++;
+                                }
+                                break;
+                            case 'PERCENTS':
+                                $PERCENTS += $operation->amount;
+                                $percents_one_day = $operation->amount;
+                                break;
+                        endswitch;
+                    }
+                }
+
+                // $prolongations_days = $prolongations_count * 30;
+
+                $contract_end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+                
+                // $prolongation_start_date = date("Y-m-d", strtotime("+".($prolongations_days - 30)." days", strtotime($contract_end_date)));
+                // $prolongation_end_date = date("Y-m-d", strtotime("+".$prolongations_days." days", strtotime($contract_end_date)));
+                
+                $prolongation_start_date = date("Y-m-d", strtotime($document->created));
+                $prolongation_end_date = date("Y-m-d", strtotime("+30 days", strtotime($document->created)));
+
+                $date1 = new DateTime(date('Y-m-d', strtotime($document->created)));
+                $date2 = new DateTime(date('Y-m-d', strtotime($prolongation_end_date)));
+
+
+                $diff = $date2->diff($date1)->days;
+
+                $sum_back = $P2P + ($percents_one_day * $diff);
+                // if($percents_one_day * $diff > $P2P * 2.5){
+                //     $sum_back = $P2P * 2.5 - $PAY;
+                //     $sas = 1;
+                // }
+                // else{
+                //     $sum_back = $P2P + ($percents_one_day * $diff) - $PAY;
+                //     $sas = 2;
+                // }
+                $this->design->assign('P2P', $P2P);
+                $this->design->assign('percents_one_day', $percents_one_day);
+                $this->design->assign('diff', $diff);
+                $this->design->assign('PAY', $PAY);
+                $this->design->assign('sas', $sas);
+                $this->design->assign('sas', $percents_one_day * $diff - $P2P * 2.5);
+
+                $prolo = new StdClass();
+    
+                $prolo->start_date = $document->created;
+                $prolo->return_date = $prolongation_end_date;
+                $prolo->return_amount = $sum_back;
+                $prolo->amount = $P2P;
+                $prolo->return_amount_percents = $sum_back - $P2P;
+
+                $this->design->assign('prolo', $prolo);
+
+            }
             
             $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
 
@@ -78,6 +177,10 @@ class DocumentController extends Controller
             $active_card = '';
 
             if (!empty($cards)) {
+                foreach ($cards as $card) {
+                    $active_card = $card->pan;
+                    break;
+                }
                 foreach ($cards as $card) {
                     if($card->base_card == 1)
                         $active_card = $card->pan;
@@ -263,6 +366,8 @@ class DocumentController extends Controller
 
             $params['insurance'] = $insurance;
         }
+
+        $this->design->assign('params', $params);
 
         foreach ($params as $param_name => $param_value)
             $this->design->assign($param_name, $param_value);

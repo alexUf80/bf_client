@@ -197,6 +197,28 @@
 <div>
 
 </div>
+<div>Подписывая настоящее заявление, даю согласие на оплату договора страхования за счет заемных средств:
+</div>
+<div>
+
+</div>
+<table border="0.5" cellpadding="5">
+    <tbody>
+    <tr>
+        <td style="width: 10%" align="center">{if isset($insurance)}V{/if}</td>
+        <td style="width: 10%; text-align: center">Да</td>
+        <td rowspan="2" style="width: 80%">В случае принятия решения об оплате страховой премии по договору страхования за счет собственных средств согласен сообщить о своем решении посредством отправки текстового сообщения в  произвольной форме на электронную почту info@mkkbf.ru и получить ссылку на оплату страховой премии.
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 10%">{if !isset($insurance)}V{/if}</td>
+        <td style="width: 10%; text-align: center">Нет</td>
+    </tr>
+    </tbody>
+</table>
+<div>
+
+</div>
 <div><strong>Не заключение договора на дополнительную услугу не является основанием для отказа в предоставлении договора
         займа или ухудшения условий предоставления договора займа. </strong>
 </div>
@@ -214,7 +236,7 @@
         <td style="width: 50%; text-align: center">Общая сумма потребительского займа с учетом выбранных дополнительных
             услуг:
         </td>
-        <td style="width: 50%; text-align: center">{$contract->amount} рублей.</td>
+        <td style="width: 50%; text-align: center">{$contract->amount} рублей ({$contract->amount|price_string|upper}).</td>
     </tr>
     </tbody>
 </table>
