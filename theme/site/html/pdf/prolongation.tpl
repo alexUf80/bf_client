@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td width="25%"></td>
-        <td width="60%"><strong>No1/0003231-1 К ДОГОВОРУ ПОТРЕБИТЕЛЬСКОГО</strong></td>
+        <td width="60%"><strong>К ДОГОВОРУ ПОТРЕБИТЕЛЬСКОГО</strong></td>
         <td width="10%"></td>
     </tr>
     <tr>
