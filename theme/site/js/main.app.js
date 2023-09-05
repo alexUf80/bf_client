@@ -15,6 +15,7 @@ function MainApp() {
         app.$phone.mask("+7(999) 999-9999");
 
         $('.js-loan-start').click(function (e) {
+            alert('a');
             e.preventDefault();
 
             var $btn = $(this);
