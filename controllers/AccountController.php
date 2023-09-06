@@ -341,6 +341,19 @@ class AccountController extends Controller
             }
             $pro_date = new DateTime(date('Y-m-d', strtotime($order->contract->return_date)));
 
+            $date_diff = date_diff(
+                new DateTime(date('Y-m-d', strtotime($order->contract->return_date))),
+                new DateTime(date('Y-m-d'))
+            );
+            if (isset($date_diff->days) && $date_diff->days > 40) {
+                $show_prolongation = false;
+            }
+
+            // !!!
+            if ($order->order_id == 41911){
+                $show_prolongation = 1;
+            }
+
             if ($show_prolongation) {
 
                 $date_interval = new DateInterval("P30D");
