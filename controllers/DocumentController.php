@@ -307,6 +307,11 @@ class DocumentController extends Controller
         if (!($contract = $this->contracts->get_contract($contract_id)))
             return false;
 
+        $rd = $contract->return_date;
+
+        $contract->return_date = date('Y-m-d H:i:s', strtotime($rd . ' +30 days'));
+
+        $this->design->assign('contract', $contract);
 
         $ob_date = new DateTime();
         $ob_date->add(DateInterval::createFromDateString($contract->period . ' days'));
