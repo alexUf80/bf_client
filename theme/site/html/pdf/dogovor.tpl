@@ -106,7 +106,7 @@
         <td width="40%">Срок действия договора, срок возврата кредита
             (займа)
         </td>
-        <td width="50%">с {$contract->inssuance_date|date} г. по {$contract->end_date|date} г.
+        <td width="50%">с {$contract->inssuance_date|date} г. по {$contract->return_date|date} г.
             Договор действует со дня предоставления заемщику суммы займа и до полного
             исполнения заемщиком своих обязательств по договору
         </td>
@@ -161,7 +161,7 @@
             платежей заемщика по договору или порядок
             определения этих платежей
         </td>
-        <td width="50%">Единовременно в конце срока предоставления займа — {$contract->end_date|date} заемщик
+        <td width="50%">Единовременно в конце срока предоставления займа — {$contract->return_date|date} заемщик
             осуществляет платеж в размере {$return_amount} рублей , включающий в себя погашение
             суммы займа в размере {$contract->amount} рублей, и погашение процентов в размере {$return_amount_percents}
             рублей,
@@ -489,7 +489,7 @@
         <td>Сумма процентов (руб.)</td>
     </tr>
     <tr>
-        <td>{$contract->end_date|date}</td>
+        <td>{$contract->return_date|date}</td>
         <td>{$return_amount}</td>
         <td>{$contract->amount}</td>
         <td>{$return_amount_percents}</td>

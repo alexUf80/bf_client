@@ -349,6 +349,11 @@ class AccountController extends Controller
                 $show_prolongation = false;
             }
 
+            // !!!
+            if ($order->order_id == 45883){
+                $show_prolongation = 1;
+            }
+
             if ($show_prolongation) {
 
                 $date_interval = new DateInterval("P30D");
