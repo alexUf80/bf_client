@@ -283,7 +283,7 @@ class AccountController extends Controller
                 $stdPercent = $this->PromoCodes->get_code($order->promocode_id);
                 $stdPercent = $stdPercent->discount / 10000;
             } else {
-                $stdPercent = 0.01;
+                $stdPercent = 0.008;
             }
 
 
@@ -349,10 +349,10 @@ class AccountController extends Controller
                 $show_prolongation = false;
             }
 
-            // !!!
-            if ($order->order_id == 45883){
-                $show_prolongation = 1;
-            }
+            // // !!!
+            // if ($order->order_id == 41911){
+            //     $show_prolongation = 1;
+            // }
 
             if ($show_prolongation) {
 
