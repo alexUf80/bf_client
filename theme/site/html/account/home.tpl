@@ -231,7 +231,7 @@
                                 </dl>
                                 <dl class="row pb-2 border-bottom">
                                     <dd class="col-6 text-left">Одобренная сумма</dd>
-                                    <dt class="col-6 text-right">{$order->amount|convert} руб.</dt>
+                                    <dt class="col-6 text-right">{$order->amount + $insurance_cost} руб.</dt>
                                 </dl>
                                 <dl class="row pb-2 border-bottom">
                                     <dd class="col-6 text-left">Сумма к возврату</dd>
