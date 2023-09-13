@@ -287,7 +287,8 @@ class AccountController extends Controller
             }
 
 
-            $order->return_amount = ($order->amount * $stdPercent * $order->period) + $order->amount;
+            $insurance_cost = $this->insurances->get_insurance_cost($order->amount);
+            $order->return_amount = (($order->amount + $insurance_cost) * $stdPercent * $order->period) + $order->amount + $insurance_cost;
             $return_period = date_create();
             date_add($return_period, date_interval_create_from_date_string($order->period . ' days'));
             $order->return_period = date_format($return_period, 'Y-m-d H:i:s');
