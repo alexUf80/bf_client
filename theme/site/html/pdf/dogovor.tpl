@@ -55,8 +55,8 @@
     адресу: {$regaddress_full}, с другой стороны, далее вместе именуемые Стороны, заключили настоящий Договор о
     нижеследующем:
 </div>
-<div align="justify">- Займодавец предоставляет Заемщику денежные средства в размере {$contract->amount|upper}
-    ({$contract->amount|price_string|upper}), а Заемщик обязуется
+<div align="justify">- Займодавец предоставляет Заемщику денежные средства в размере {($contract->amount + $insurance_cost)|upper}
+    ({($contract->amount + $insurance_cost)|price_string|upper}), а Заемщик обязуется
     возвратить Займодавцу сумму займа и уплатить проценты на нее в срок, указанный в п. 2 настоящего Договора.
     В случае если по настоящему Договору срок возврата потребительского кредита (займа) на момент его заключения не
     превышает одного
@@ -96,7 +96,7 @@
         <td width="40%">Сумма кредита (займа) или лимит кредитования
             и порядок его изменения
         </td>
-        <td width="50%">Сумма займа составляет {$contract->amount|upper} ({$contract->amount|price_string|upper}). Лимит
+        <td width="50%">Сумма займа составляет {($contract->amount + $insurance_cost)|upper} ({($contract->amount + $insurance_cost)|price_string|upper}). Лимит
             кредитования
             - не применимо.
         </td>
@@ -163,7 +163,7 @@
         </td>
         <td width="50%">Единовременно в конце срока предоставления займа — {$contract->return_date|date} заемщик
             осуществляет платеж в размере {$return_amount_percents + $contract->amount + $insurance_cost} рублей , включающий в себя погашение
-            суммы займа в размере {$contract->amount} рублей, и погашение процентов в размере {$return_amount_percents}
+            суммы займа в размере {$contract->amount + $insurance_cost} рублей, и погашение процентов в размере {$return_amount_percents}
             рублей,
             начисленных со дня, следующего за днем предоставления займа.
         </td>
@@ -491,14 +491,14 @@
     <tr>
         <td>{$contract->return_date|date}</td>
         <td>{$return_amount_percents + $contract->amount + $insurance_cost}</td>
-        <td>{$contract->amount}</td>
+        <td>{$contract->amount + $insurance_cost}</td>
         <td>{$return_amount_percents}</td>
         <td>0</td>
     </tr>
     <tr>
         <td>Общая сумма выплат:</td>
         <td>{$return_amount_percents + $contract->amount + $insurance_cost}</td>
-        <td>{$contract->amount}</td>
+        <td>{$contract->amount + $insurance_cost}</td>
         <td>{$return_amount_percents}</td>
         <td></td>
     </tr>
