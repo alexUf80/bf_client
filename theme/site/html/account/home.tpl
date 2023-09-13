@@ -235,7 +235,7 @@
                                 </dl>
                                 <dl class="row pb-2 border-bottom">
                                     <dd class="col-6 text-left">Сумма к возврату</dd>
-                                    <dt class="col-6 text-right">{$order->return_amount|convert} руб.</dt>
+                                    <dt class="col-6 text-right">{$order->return_amount} руб.</dt>
                                 </dl>
                                 <dl class="row pb-2">
                                     <dd class="col-6 text-left">Дата возврата</dd>

@@ -324,6 +324,7 @@ class DocumentController extends Controller
         $contract_order = $this->orders->get_order((int)$contract->order_id);
 
         $insurance_cost = $this->insurances->get_insurance_cost($contract->amount);
+        $this->design->assign('insurance_cost', $insurance_cost);
 
         $params = array(
             'lastname' => $contract_order->lastname,
@@ -344,7 +345,7 @@ class DocumentController extends Controller
             'base_percent' => $contract->base_percent,
             'amount' => $contract->amount,
             'period' => $contract->period,
-            'return_amount_percents' => round($contract->amount * $contract->base_percent * $contract->period / 100, 2),
+            'return_amount_percents' => round(($contract->amount + $insurance_cost) * $contract->base_percent * $contract->period / 100, 2),
             'passport_serial' => $contract_order->passport_serial,
             'passport_date' => $contract_order->passport_date,
             'subdivision_code' => $contract_order->subdivision_code,
