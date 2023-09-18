@@ -57,12 +57,16 @@
         <td><strong>Страховая премия (руб.)</strong></td>
     </tr>
     <tr>
+        {$insurance_all->amount} - 
         {if $insurance_all->amount == 99}
             <td><strong>10 000 (ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
             <td><strong>99,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
-        {else}
+        {elseif $insurance_all->amount == 99}
             <td><strong>20 000 (ДВАДЦАТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
-            <td><strong>199,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+            <td><strong>199,00 (СТО ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+        {else}
+            <td><strong>25 000 (ДВАДЦАТЬ ПЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
+            <td><strong>299,00 (ДВЕСТИ ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
         {/if}
     </tr>
     <tr>
