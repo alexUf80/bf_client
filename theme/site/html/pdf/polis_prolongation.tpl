@@ -57,7 +57,6 @@
         <td><strong>Страховая премия (руб.)</strong></td>
     </tr>
     <tr>
-        {$insurance_all->amount} - 
         {if $insurance_all->amount == 99}
             <td><strong>10 000 (ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
             <td><strong>99,00 (ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
