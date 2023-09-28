@@ -286,11 +286,11 @@ class AccountController extends Controller
                 $stdPercent = 0.008;
             }
 
-            $user = $this->users->get_user($order->user_id);
-            $address = $this->Addresses->get_address($user->regaddress_id);
-            $insurance_cost = $this->insurances->get_insurance_cost($order->amount,$address->id);
-            // $insurance_cost = $this->insurances->get_insurance_cost($order->amount);
-            $this->design->assign('insurance_cost', $insurance_cost);
+            // $user = $this->users->get_user($order->user_id);
+            // $address = $this->Addresses->get_address($user->regaddress_id);
+            // $insurance_cost = $this->insurances->get_insurance_cost($order->amount,$address->id);
+            // // $insurance_cost = $this->insurances->get_insurance_cost($order->amount);
+            // $this->design->assign('insurance_cost', $insurance_cost);
 
             $order->return_amount = (($order->amount + $insurance_cost) * $stdPercent * $order->period) + $order->amount + $insurance_cost;
             $return_period = date_create();
