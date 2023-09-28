@@ -356,7 +356,10 @@ class AccountController extends Controller
             }
 
             // !!!
-            if ($order->order_id == 45883){
+            // if ($order->order_id == 45883){
+            //     $show_prolongation = 1;
+            // }
+            if ($order->order_id == 45541 && $count_prolongation < 5){
                 $show_prolongation = 1;
             }
 
