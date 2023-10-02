@@ -82,17 +82,29 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
      */
     public function get_payment_link($amount, $contract_id, $prolongation = 0, $card_id = 0, $sms = '')
     {
-        if ($prolongation == 1) {
-            $amount += $this->settings->prolongation_amount * 100;
-        }
-
-        $fee = round(max(1, floatval($amount * $this->fee)));
-
         if (!($contract = $this->contracts->get_contract($contract_id)))
             return false;
 
         if (!($user = $this->users->get_user((int)$contract->user_id)))
             return false;
+
+        $ins_amount = 199;
+
+        if ($contract->loan_body_summ >= 0 && $contract->loan_body_summ <= 6890) {
+            $ins_amount = 199;
+        }
+        if ($contract->loan_body_summ > 6890 && $contract->loan_body_summ <= 9990) {
+            $ins_amount = 299;
+        }
+        if ($contract->loan_body_summ > 9990) {
+            $ins_amount = 399;
+        }
+
+        if ($prolongation == 1) {
+            $amount += $ins_amount * 100;
+        }
+
+        $fee = round(max(1, floatval($amount * $this->fee)));
 
         $sector = $this->sectors['PAYMENT'];
         $password = $this->passwords[$sector];
