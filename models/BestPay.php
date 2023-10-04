@@ -670,7 +670,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $data = array(
             'sector' => $sector,
             'id' => $register_id,
-            'amount' => 1900,
+            'amount' => 2900,
             'currency' => $this->currency_code,
             'password' => $password
         );
