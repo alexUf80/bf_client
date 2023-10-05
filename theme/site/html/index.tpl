@@ -192,7 +192,7 @@
                 <p>Государственный реестр микрофинансовых организаций: <a href="https://cbr.ru/microfinance/registry/" target="_blank">https://cbr.ru/microfinance/registry/</a></p>
                 <p>Потребитель финансовой услуги вправе направить обращение финансовому уполномоченному: <a href="https://finombudsman.ru/" target="_blank">https://finombudsman.ru/</a></p>
                 <p>г. Москва, Старомонетный пер., дом 3, 8 (800) 200-00-10.</p>
-                <p>Контактная информация для связи с ИП Абуталиев Э.М. - <nobr><a href="mail:info@abutaliev.ru">info@abutaliev.ru</a></nobr>, тел. <nobr><a href="tel:+74993946501">8 (499) 394-65-01</a></nobr></p>
+                <p>Контактная информация для связи с ИП Абуталиев Э.М. - <nobr><a href="mail:insurance@abutaliev.ru">insurance@abutaliev.ru</a></nobr>, тел. <nobr><a href="tel:+74993946501">8 (499) 394-65-01</a></nobr></p>
 
             </div>
             <div class="new-footer__block">
