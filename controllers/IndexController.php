@@ -57,7 +57,8 @@ class IndexController extends Controller
             setcookie("wm_id", $webmaster_id, time() + $cookie_inspiration, '/', $this->config->main_domain);
         
         if (!isset($_COOKIE['clickid']))
-            setcookie("clickid", $click_hash, time() + $cookie_inspiration, '/', $this->config->main_domain);
+            setcookie("clickid", $click_hash, time() + $cookie_inspiration, $this->config->main_domain);
+            // setcookie("clickid", $click_hash, time() + $cookie_inspiration, '/', $this->config->main_domain);
         
         if (!isset($_COOKIE['utm_source']))
             setcookie("utm_source", trim($utm_source), time() + $cookie_inspiration, $this->config->main_domain);
