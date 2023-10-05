@@ -86,6 +86,17 @@ class StagePersonalController extends Controller
                     'stage_personal' => 1,
                 );
 
+                if (isset($_COOKIE['utm_source'])) 
+                    $update['utm_source'] = $_COOKIE['utm_source'];
+                if (isset($_COOKIE['utm_medium'])) 
+                    $update['utm_medium'] = $_COOKIE['utm_medium'];
+                if (isset($_COOKIE['utm_campaign'])) 
+                    $update['utm_campaign'] = $_COOKIE['utm_campaign'];
+                if (isset($_COOKIE['wm_id'])) 
+                    $update['webmaster_id'] = $_COOKIE['wm_id'];
+                if (isset($_COOKIE['clickid'])) 
+                    $update['click_hash'] = $_COOKIE['clickid'];
+
                 $update = array_map('strip_tags', $update);
 
                 $this->users->update_user($this->user->id, $update);
