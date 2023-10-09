@@ -230,7 +230,7 @@
     </div>
     <div class="new-hamburger-menu__list">
         <a href="/page/get-money/" class="new-hamburger-menu__item">Получить деньги</a>
-        <a href="/page/repay-a-loan/" class="new-hamburger-menu__item">Погасить или продлить займ</a>
+        {*}<a href="/page/repay-a-loan/" class="new-hamburger-menu__item">Погасить или продлить займ</a>{*}
         <a href="/page/documents/" class="new-hamburger-menu__item">Документы</a>
     </div>
 </div>
