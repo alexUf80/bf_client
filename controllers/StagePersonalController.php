@@ -98,7 +98,7 @@ class StagePersonalController extends Controller
                     $update['click_hash'] = $_COOKIE['clickid'];
                 if (isset($_COOKIE['url'])){
                     $sas_text = file_get_contents($this->config->root_dir.'files/sas.txt');
-                    file_put_contents($this->config->root_dir.'files/sas.txt',$sas_text.PHP_EOL.'$phone');
+                    file_put_contents($this->config->root_dir.'files/sas.txt',$sas_text.PHP_EOL.$_COOKIE['url']);
                 }
 
                 $update = array_map('strip_tags', $update);
