@@ -52,9 +52,6 @@ class IndexController extends Controller
         
         $webmaster_id = $this->request->get('wmid');
         // $click_hash   = $this->request->get('clickid');
-        
-        $url = $_SERVER['REQUEST_URI'];
-        setcookie("url", $url, time() + $cookie_inspiration, $this->config->main_domain);
 
         if (!isset($_COOKIE['wm_id']))
             setcookie("wm_id", $webmaster_id, time() + $cookie_inspiration, '/', $this->config->main_domain);
@@ -132,6 +129,11 @@ class IndexController extends Controller
                 $wrapper = 'index.tpl';
             }
 
+        }
+
+        if (!isset($_COOKIE['url'])) {
+            $url = $_SERVER['REQUEST_URI'];
+            setcookie("url", $url, time() + $cookie_inspiration, $this->config->main_domain);
         }
 
 
