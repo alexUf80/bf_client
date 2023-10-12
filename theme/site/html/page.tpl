@@ -58,7 +58,9 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/about_borrowers_and_other_users_pd.pdf" target="_blank">Положение об обработке  ПД заемщиков и иных пользователей сайта</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_on_115_FZ.pdf" target="_blank">Памятка клиенту по 115 ФЗ</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/helper_document.pdf" target="_blank">Справочник финансовых продуктов</a></li>
+                        {*}
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Агентский_договор_между_ИП_и_МКК_docx.pdf" target="_blank">Агентский договор между ИП и МКК</Агентский договор между ИП и МКК 115 ФЗ</a></li>                   
+                        {*}
                     </ul>
                 </div>
             </div>
