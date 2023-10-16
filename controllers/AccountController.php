@@ -122,6 +122,7 @@ class AccountController extends Controller
                 $order['utm_source'] = $_COOKIE['utm_source'];
                 $order['webmaster_id'] = $_COOKIE["wm_id"];
                 $order['click_hash'] = $_COOKIE["clickid"];
+                $order['url'] = $_COOKIE['url'];
 
                 $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
 
