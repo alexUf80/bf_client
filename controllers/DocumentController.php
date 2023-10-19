@@ -201,35 +201,57 @@ class DocumentController extends Controller
         $this->design->assign('insurance_all', $insurance_all);
 
         if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
-            if ($contract->amount <= 3999)
-            {
-                $insurance = 590;
-                $insuranceSum = 30000;
-                $contract->amount += $insurance;
+            if ($contract->inssuance_date < '2023-10-01') {
+                if ($contract->amount <= 4999)
+                {
+                    $insurance = 590;
+                    $insuranceSum = 30000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 5000 && $contract->amount <= 8999)
+                {
+                    $insurance = 890;
+                    $insuranceSum = 40000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 9000)
+                {
+                    $insurance = 990;
+                    $insuranceSum = 50000;
+                    $contract->amount += $insurance;
+                }
             }
-            elseif ($contract->amount >= 4000 && $contract->amount <= 4999)
-            {
-                $insurance = 690;
-                $insuranceSum = 35000;
-                $contract->amount += $insurance;
-            }
-            elseif ($contract->amount >= 5000 && $contract->amount <= 6999)
-            {
-                $insurance = 890;
-                $insuranceSum = 40000;
-                $contract->amount += $insurance;
-            }
-            elseif ($contract->amount >= 7000 && $contract->amount <= 10999)
-            {
-                $insurance = 1490;
-                $insuranceSum = 65000;
-                $contract->amount += $insurance;
-            }
-            elseif ($contract->amount >= 11000)
-            {
-                $insurance = 2190;
-                $insuranceSum = 85000;
-                $contract->amount += $insurance;
+            else{
+                if ($contract->amount <= 3999)
+                {
+                    $insurance = 590;
+                    $insuranceSum = 30000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 4000 && $contract->amount <= 4999)
+                {
+                    $insurance = 690;
+                    $insuranceSum = 35000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 5000 && $contract->amount <= 6999)
+                {
+                    $insurance = 890;
+                    $insuranceSum = 40000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 7000 && $contract->amount <= 10999)
+                {
+                    $insurance = 1490;
+                    $insuranceSum = 65000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 11000)
+                {
+                    $insurance = 2190;
+                    $insuranceSum = 85000;
+                    $contract->amount += $insurance;
+                }
             }
 
             $this->design->assign('insurance', $insurance);
