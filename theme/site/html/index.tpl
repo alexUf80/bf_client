@@ -94,7 +94,7 @@
         </a>
         <nav class="new-header__menu menu">
             <a href="/page/get-money/" class="menu__item">Получить деньги</a>
-            <a href="/page/repay-a-loan/" class="menu__item">Погасить или продлить займ</a>
+            {*}<a href="/page/repay-a-loan/" class="menu__item">Погасить или продлить займ</a>{*}
             <a href="/page/documents/" class="menu__item">Документы</a>
         </nav>
         <a href="tel:+78001018283" class="new-header__phone phone">
@@ -130,7 +130,7 @@
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Частые вопросы:</div>
                     <a href="/page/get-money/" class="new-footer__menu-item">Как получить кредит?</a>
-                    <a href="/page/repay-a-loan/" class="new-footer__menu-item">Как погасить или продлить кредит?</a>
+                    {*}<a href="/page/repay-a-loan/" class="new-footer__menu-item">Как погасить или продлить кредит?</a>{*}
                 </div>
                 <div class="new-footer__menu">
                     <a href="/lk/" class="new-footer__menu-item">Взять кредит наличными</a>
