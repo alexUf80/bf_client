@@ -201,7 +201,7 @@ class DocumentController extends Controller
         $this->design->assign('insurance_all', $insurance_all);
 
         if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
-            if ($contract->inssuance_date < '2023-10-01') {
+            if ($contract->inssuance_date < '2023-10-24') {
                 if ($contract->amount <= 4999)
                 {
                     $insurance = 590;
