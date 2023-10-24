@@ -85,6 +85,7 @@ class MainController extends Controller
                     'service_sms' => 1,
                     'reg_ip' => $_SERVER['REMOTE_ADDR'],
                     'last_ip' => $_SERVER['REMOTE_ADDR'],
+                    'reg_user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'],0,150),
                     'enabled' => 1,
                     'created' => date('Y-m-d H:i:s'),
                 );
