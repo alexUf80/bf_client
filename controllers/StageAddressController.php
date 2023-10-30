@@ -36,8 +36,8 @@ class StageAddressController extends Controller
             $regaddress['region_type'] = $Regadress->data->region_type ?? '';
             $regaddress['city'] = $Regadress->data->city ?? '';
             $regaddress['city_type'] = $Regadress->data->city_type ?? '';
-            $regaddress['district'] = $Regadress->data->city_district ?? '';
-            $regaddress['district_type'] = $Regadress->data->city_district_type ?? '';
+            $regaddress['district'] = $Regadress->data->area ?? '';
+            $regaddress['district_type'] = $Regadress->data->area_type ?? '';
             $regaddress['locality'] = $Regadress->data->settlement ?? '';
             $regaddress['locality_type'] = $Regadress->data->settlement_type ?? '';
             $regaddress['street'] = $Regadress->data->street ?? '';
@@ -50,7 +50,7 @@ class StageAddressController extends Controller
 
             if ($this->request->post('clone_address', 'integer')) {
                 $faktaddress = $regaddress;
-            } else { 
+            } else {
                 $Fakt_adress = json_decode($this->request->post('Fakt_adress'));
 
                 $faktaddress = [];
@@ -60,8 +60,8 @@ class StageAddressController extends Controller
                 $faktaddress['region_type'] = $Fakt_adress->data->region_type ?? '';
                 $faktaddress['city'] = $Fakt_adress->data->city ?? '';
                 $faktaddress['city_type'] = $Fakt_adress->data->city_type ?? '';
-                $faktaddress['district'] = $Fakt_adress->data->city_district ?? '';
-                $faktaddress['district_type'] = $Fakt_adress->data->city_district_type ?? '';
+                $faktaddress['district'] = $Fakt_adress->data->area ?? '';
+                $faktaddress['district_type'] = $Fakt_adress->data->area_type ?? '';
                 $faktaddress['locality'] = $Fakt_adress->data->settlement ?? '';
                 $faktaddress['locality_type'] = $Fakt_adress->data->settlement_type ?? '';
                 $faktaddress['street'] = $Fakt_adress->data->street ?? '';
