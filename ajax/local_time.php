@@ -29,6 +29,7 @@ class LocalTimeUpdate extends Core
             'last_local_time' => $local_time,
             'last_activity' => time(),
             'last_ip' => $_SERVER['REMOTE_ADDR'],
+            'last_user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'],0,150),
         ));
     }
     

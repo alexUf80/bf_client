@@ -125,15 +125,16 @@ class AccountController extends Controller
                 if (isset($_COOKIE['url'])) {
                     $order['url'] = $_COOKIE['url'];
                 }
-
-                $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
-
-                if (!empty($hasClickHash)) {
-                    unset($order['utm_source']);
-                    unset($order['webmaster_id']);
-                    unset($order['click_hash']);
+                
+                if (!empty($order['click_hash'])) {
+                    $hasClickHash = OrdersORM::where('click_hash', $order['click_hash'])->first();
+    
+                    if (!empty($hasClickHash)) {
+                        unset($order['utm_source']);
+                        unset($order['webmaster_id']);
+                        unset($order['click_hash']);
+                    }
                 }
-
 
                 // проверяем возможность автоповтора
                 $order['autoretry'] = 1;

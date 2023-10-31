@@ -84,6 +84,7 @@ class MainController extends Controller
                     'service_insurance' => $service_insurance,
                     'service_sms' => 1,
                     'reg_ip' => $_SERVER['REMOTE_ADDR'],
+                    'last_user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'],0,150),
                     'last_ip' => $_SERVER['REMOTE_ADDR'],
                     'reg_user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'],0,150),
                     'enabled' => 1,
