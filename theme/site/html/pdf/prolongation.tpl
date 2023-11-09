@@ -406,20 +406,11 @@
 <div>
 
 </div>
-<table style="width: 50%">
+<table style="width: 100%">
     <tr>
-        <td><strong>Кредитор</strong></td>
-        <td>Кройтор В.В</td>
-    </tr>
-    <tr>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <td></td>
-        <td>
+        <td style="width: 25%"><strong>Кредитор</strong></td>
+        <td style="width: 25%">Кройтор В.В</td>
+        <td style="width: 50%" rowspan="2">
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
@@ -428,5 +419,9 @@
                 </tr>
             </table>
         </td>
+    </tr>
+    <tr>
+        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
     </tr>
 </table>
