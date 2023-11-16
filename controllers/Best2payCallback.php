@@ -303,6 +303,13 @@ class Best2PayCallback extends Controller
                                         'type' => 'POLIS_PROLONGATION',
                                         'params' => json_encode($document_params)
                                     ));
+                                    $this->documents->create_document(array(
+                                        'user_id' => $contract->user_id,
+                                        'order_id' => $contract->order_id,
+                                        'contract_id' => $contract->id,
+                                        'type' => 'KID_PROLONGATION',
+                                        'params' => json_encode($document_params)
+                                    ));
                                 }
                             }
 
