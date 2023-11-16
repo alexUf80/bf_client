@@ -16,7 +16,7 @@
 об условиях договора страхования банковских карт
 </strong>
         </td>
-        <td rowspan="3"><img src="{$config->root_dir}/theme/site/html/pdf/i/qr-kid.png"></td>
+        <td rowspan="3"><img src="{$config->root_dir}/theme/site/html/pdf/i/qr-kid.jpg"></td>
     </tr>
     <tr>
         <td></td>
@@ -31,7 +31,6 @@
 
 </div>
 <div align="justify"><strong>Страховщик: </strong>САО «ВСК», 121552, Москва, ул. Островная, 4
-    от 11.09.2015 г.
 </div>
 <div>
 
