@@ -9,7 +9,8 @@ class Documents extends Core
         'POLIS' => 'polis.tpl',
         'KID' => 'kid.tpl',
         'DOP_SOGLASHENIE' => 'prolongation.tpl',
-        'POLIS_PROLONGATION' => 'polis_prolongation.tpl'
+        'POLIS_PROLONGATION' => 'polis_prolongation.tpl',
+        'KID_PROLONGATION' => 'kid_prolongation.tpl'
     );
 
 
@@ -20,7 +21,8 @@ class Documents extends Core
         'POLIS' => 'Полис страхования',
         'KID' => 'Ключевой информационный документ об условиях добровольного страхования',
         'DOP_SOGLASHENIE' => 'Дополнительное соглашение о пролонгации',
-        'POLIS_PROLONGATION' => 'Полис страхования'
+        'POLIS_PROLONGATION' => 'Полис страхования',
+        'KID_PROLONGATION' => 'Ключевой информационный документ (пролонгация)'
     );
 
     private $client_visible = array(
@@ -30,7 +32,8 @@ class Documents extends Core
         'POLIS' => 1,
         'KID' => 1,
         'DOP_SOGLASHENIE' => 1,
-        'POLIS_PROLONGATION' => 1
+        'POLIS_PROLONGATION' => 1,
+        'KID_PROLONGATION' => 1
     );
 
 
