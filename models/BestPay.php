@@ -195,7 +195,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 //        $password = $this->settings->apikeys['best2pay'][$sector];
         $password = $this->passwords[$sector];
 
-        $amount = 2900;
+        $amount = 4600;
         $description = 'Привязка карты'; // описание операции
 
         if (!($user = $this->users->get_user((int)$user_id)))
@@ -621,7 +621,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $sector = $this->sectors['ADD_CARD'];
         $password = $this->passwords[$sector];
 
-        $amount = 2900; // сумма для списания
+        $amount = 4600; // сумма для списания
         $description = 'Привязка карты'; // описание операции
 
         // регистрируем оплату
@@ -691,7 +691,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
 
         $data['token'] = $card->token;
 
-        $amount = 2900; // сумма для списания
+        $amount = 4600; // сумма для списания
         $description = 'Привязка карты'; // описание операции
 
         $data =
