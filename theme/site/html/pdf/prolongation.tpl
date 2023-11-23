@@ -44,7 +44,10 @@
         <td style="width: 36%" align="center">
             <div>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА
                 СОСТАВЛЯЕТ 
+                {*}
                 {if ($contract->inssuance_date >= '2023-07-01 00:00:00')}
+                {*}
+                {if $contract->base_percent == 0.8}
                     292,00 ДВЕСТИ ДЕВЯНОСТО ДВА ЦЕЛЫХ 
                 {else}
                     365,00 ТРИСТА ШЕСТЬДЕСЯТ ПЯТЬ ЦЕЛЫХ 
