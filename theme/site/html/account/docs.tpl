@@ -48,6 +48,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="docs_list">
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/general_terms_of_a_consumer_microloan.pdf" target="_blank">Общие условия договора потребительского микрозайма</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/predostavlenie_vozvrat_new.pdf" target="_blank">Информация об условиях предоставления, использования и возврата потребительского микрозайма</a>
+                                    </li>
+                                    <hr>
                                     {foreach $documents as $document}
                                             <li class="docs_list_item">
                                                 <a href="{$config->root_url}/document/{$user->id}/{$document->id}"
