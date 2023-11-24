@@ -161,7 +161,7 @@
             платежей заемщика по договору или порядок
             определения этих платежей
         </td>
-        <td width="50%">Единовременно в конце срока предоставления займа — {$contract->return_date|date} заемщик
+        <td width="50%">Единовременно в конце срока предоставления займа — {$contract->end_date|date} заемщик
             осуществляет платеж в размере {$return_amount_percents + $contract->amount + $insurance_cost} рублей , включающий в себя погашение
             суммы займа в размере {$contract->amount + $insurance_cost} рублей, и погашение процентов в размере {$return_amount_percents}
             рублей,
@@ -489,7 +489,7 @@
         <td>Сумма процентов (руб.)</td>
     </tr>
     <tr>
-        <td>{$contract->return_date|date}</td>
+        <td>{$contract->end_date|date}</td>
         <td>{$return_amount_percents + $contract->amount + $insurance_cost}</td>
         <td>{$contract->amount + $insurance_cost}</td>
         <td>{$return_amount_percents}</td>
