@@ -121,16 +121,38 @@ class Best2PayCallback extends Controller
 
                                 $docs = 1;
 
-                                $ins_amount = 199;
+                                $ins_amount = 0;
+                                $contract_operations = $this->ProloServicesCost->gets(array('id' => ($contract->prolongation + 1)));
+                                if (isset($contract_operations[0]->insurance_cost)) {
+                                    $insurance_cost_limits = json_decode($contract_operations[0]->insurance_cost);
 
-                                if ($contract->loan_body_summ >= 0 && $contract->loan_body_summ <= 6890) {
-                                    $ins_amount = 199;
+                                    $array_name = [];
+                                    foreach ($insurance_cost_limits as $key => $val) {
+                                        $array_name[$key] = $val[0];
+                                    }
+                                    array_multisort($array_name, SORT_ASC, $insurance_cost_limits);
+
+                                    foreach ($insurance_cost_limits as $insurance_cost_limit) {
+                                        if ($contract->loan_body_summ < $insurance_cost_limit[0] ) {
+                                            $insurance_cost_amount = $insurance_cost_limit[1];
+                                            break;
+                                        }
+                                    }
+                        
+                                    $ins_amount = (float)$insurance_cost_amount;
                                 }
-                                if ($contract->loan_body_summ > 6890 && $contract->loan_body_summ <= 9990) {
-                                    $ins_amount = 299;
-                                }
-                                if ($contract->loan_body_summ > 9990) {
-                                    $ins_amount = 399;
+
+                                if ($ins_amount == 0) {
+                                    // if ($contract->loan_body_summ >= 0 && $contract->loan_body_summ <= 6890) {
+                                    //     $ins_amount = 199;
+                                    // }
+                                    // if ($contract->loan_body_summ > 6890 && $contract->loan_body_summ <= 9990) {
+                                    //     $ins_amount = 299;
+                                    // }
+                                    // if ($contract->loan_body_summ > 9990) {
+                                    //     $ins_amount = 399;
+                                    // }
+                                    $ins_amount = 400;
                                 }
 
                                 if ($payment_amount >= $contract->loan_percents_summ + $ins_amount) {
@@ -162,7 +184,7 @@ class Best2PayCallback extends Controller
                                     $rest_amount = $rest_amount - $ins_amount;
 
                                     //Отправляем чек по страховке
-                                    $this->Cloudkassir->send_insurance($operation_id);
+                                    // $this->Cloudkassir->send_insurance($operation_id);
                                     $payment_amount -= $ins_amount;
 
                                     $docs = 2;
