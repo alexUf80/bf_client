@@ -65,8 +65,8 @@ class StagePersonalController extends Controller
             if(date_diff($birthDate, $now)->y < $minAge)
                 $errors['young'] = $minAge;
 
-            if(date_diff($birthDate, $now)->y > $maxAge)
-                $errors['old'] = $maxAge;
+            // if(date_diff($birthDate, $now)->y > $maxAge)
+            //     $errors['old'] = $maxAge;
 
             if(!$birthCheck)
                 $errors['format'] = 1;
