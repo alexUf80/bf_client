@@ -2,6 +2,62 @@
 
 {capture name='page_scripts'}
     <script src="theme/site/js/payment.app.js?v=1.22"></script>
+    <script>
+        // $('.js-toggle-agreement-list').click(function (e) {
+        //     e.preventDefault();
+
+        //     $('#agreement_list').slideToggle()
+        // })
+
+        // $('#check_agreement').on('click', function () {
+        //     if ($(this).is(':checked')) {
+        //         $('input[type="checkbox"]').each(function () {
+        //             $(this).prop('checked', true);
+        //         });
+        //     } else {
+        //         $('input[type="checkbox"]').each(function () {
+        //             $(this).prop('checked', false);
+        //         });
+        //     }
+
+        // });
+
+        $('#confirm_payment').click(function (e) {
+
+            if($(this).attr('disabled')){
+                return;
+                e.preventDefault();
+            }
+            $(this).attr('disabled', true);
+            $(this).hide();
+
+            // var _error = 0;
+            // var _agreement = $('.js-loan-agreement').is(':checked');
+
+            // $('.js-need-check').each(function () {
+            //     if (!$(this).is(':checked')) {
+            //         _error = 1;
+            //         $(this).closest('.check').addClass('-error');
+            //     }
+            //     else {
+            //         $(this).closest('.check').removeClass('-error');
+            //     }
+            // })
+
+            // if (!_agreement) {
+            //     $('.js-loan-agreement-block').addClass('-error');
+
+            //     _error = 1;
+            // }
+            // else {
+            //     $('.js-loan-agreement-block').removeClass('-error');
+            // }
+
+            // if (_error){
+            //     e.preventDefault();
+            // }
+        })
+    </script>
 {/capture}
 
 {capture name='page_styles'}
@@ -104,7 +160,173 @@
                                         </a>
                                     </div>
                                 </div>
-                                {else}
+                            {else}
+                                {*}
+                                {*}
+                                {*}
+                                <div class="order_accept_icon"></div>
+                                <div class="form-group">
+                                    <div class="form_row">
+                                        <div class="check mb-0 js-loan-agreement-block">
+                                            <input type="checkbox" class="custom-checkbox js-loan-agreement"
+                                                    id="check_agreement" name="agreement" value="1"/>
+                                            <label for="check_agreement" class="check_box -gil-m">
+                                                <span>Я ознакомлен и согласен со <a href="#agreement_list"
+                                                                                    class="green-link js-toggle-agreement-list">следующим</a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="agreement_list" style="display:none" class="pr-3 pl-3">
+                                    <ul>
+                                    </ul>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="pers" value="1"/>
+                                                <input type="checkbox"
+                                                    class="custom-checkbox" {if !in_array($user->phone_mobile, ['79171018924', '79179400617'])}{/if}
+                                                    id="pers" checked value="1"/>
+                                                <label for="pers" class="check_box -gil-m">
+                                                <span>
+                                                    Согласие на обработку
+                                                    <a href="/files/about/soglasie_opd.pdf" target="_blank"
+                                                    style="color: #4A2982">персональных данных</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="soglasie_pep" value="1"/>
+                                                <input type="checkbox" class="custom-checkbox" id="soglasie_pep" checked value="1"/>
+                                                <label for="soglasie_pep" class="check_box -gil-m">
+                                                <span>
+                                                    Соглашение
+                                                    <a style="color: #4A2982" href="/files/about/soglashenie_o_ispolzovanii_pep.pdf" target="_blank"> АСП</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="pravila" value="1"/>
+                                                <input type="checkbox" class="custom-checkbox" id="pravila" checked value="1"/>
+                                                <label for="pravila" class="check_box -gil-m">
+                                                <span>
+                                                    Правила предоставления
+                                                    <a style="color: #4A2982" href="/files/about/pravila_predostavleniya.pdf" target="_blank"> микрозаймов</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="service_insurance" value="1"/>
+                                                <input type="checkbox"
+                                                    class="custom-checkbox"
+                                                    id="service_insurance" checked value="1"/>
+                                                <label for="service_insurance" class="check_box -gil-m">
+                                                <span>
+                                                    согласен заключить договор страхования в соответствии
+                                                    <a style="color: #4A2982" href="/files/about/strahovanie_kart.pdf" target="_blank">с правилами страхования карт</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="obshie_usloviya" value="1"/>
+                                                <input type="checkbox"
+                                                    class="custom-checkbox"
+                                                    id="obshie_usloviya" checked value="1"/>
+                                                <label for="obshie_usloviya" class="check_box -gil-m">
+                                                <span>
+                                                    Общие условия
+                                                    <a style="color: #4A2982" href="/files/about/obshie_usloviya.pdf" target="_blank"> потребительского микрозайма</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form_row">
+                                            <div class="check">
+                                                <input type="hidden" class="custom-checkbox" name="vozvrat" value="1"/>
+                                                <input type="checkbox"
+                                                    style="width: 100px" class="custom-checkbox"
+                                                    id="vozvrat" checked value="1"/>
+                                                <label for="vozvrat" class="check_box -gil-m">
+                                                <span>
+                                                    Информация об условиях предоставления, использования
+                                                    <a style="color: #4A2982" href="/files/about/predostavlenie_vozvrat.pdf" target="_blank"> и возврата потребительского микрозайма</a>
+                                                </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {*}
+                                    {*}
+                                    {if $order->contract}
+                                    {*}
+                                    {*}
+                                        <div class="">
+                                            <div class="form_row">
+                                                <div class="check">
+                                                    <input type="hidden" class="custom-checkbox" name="ind_usloviya" value="1"/>
+                                                    <input type="checkbox" class="custom-checkbox" id="ind_usloviya" checked value="1"/>
+                                                    <label for="ind_usloviya" class="check_box -gil-m">
+                                                        <a style="color: #4A2982"
+                                                        href="{$config->root_url}/preview/dop_soglashenie?contract_id={$contract_id}"
+                                                        target="_blank">
+                                                            <span>Дополнительное соглашение</span>
+                                                        </a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {*}
+                                        {*}
+                                        {foreach $documents as $document}
+                                            {if $document->type == 'ANKETA_PEP'}
+                                                <div class="">
+                                                    <div class="form_row">
+                                                        <div class="check">
+                                                            <input type="hidden" class="custom-checkbox" name="pep" value="1"/>
+                                                            <input type="checkbox" class="custom-checkbox" id="pep" value="1"/>
+                                                            <label for="pep" class="check_box -gil-m">
+                                                                <a class="pep" style="color: #4A2982"
+                                                                href="/document/{$order->user_id}/{$document->id}?insurance=1"
+                                                                target="_blank">
+                                                                    <span>Заявление на получение займа</span>
+                                                                </a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        {/foreach}
+                                        {*}
+                                        {*}
+                                    {*}
+                                    {*}
+                                    {/if}
+                                    {*}
+                                    {*}
+                                </div>
+                                {*}
+                                {*}
+                                {*}
+
+
                                 <input type="hidden" name="prolongation" value="{$prolongation}">
                                 <div class="pt-4 text-center">
                                     <a href="#" id="confirm_payment" class="btn btn-primary btn-block">Оплатить</a>
