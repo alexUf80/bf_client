@@ -194,7 +194,7 @@ class DocumentController extends Controller
         $operations = $this->operations->get_operations(['type' => 'INSURANCE_BC', 'contract_id' => $contract->id]);
         $insurance_all = '';
         foreach ($operations as $operation) {
-            if(mb_substr($operation->created, 0, 10) == mb_substr($document->created, 0, 10)){
+            if(mb_substr($operation->created, 0, 16) == mb_substr($document->created, 0, 16)){
                 $insurance_all = $operation;
             }
         }
