@@ -47,6 +47,7 @@ class IndexController extends Controller
         $utm_content = $this->request->get('utm_content');
         $utm_term = $this->request->get('utm_term');
         $click_hash   = $this->request->get('click_id');
+        $sub_id   = $this->request->get('sub_id');
         $cookie_inspiration = 60 * 60 * 24 * 30;
 
         
@@ -68,6 +69,9 @@ class IndexController extends Controller
         
         if (!isset($_COOKIE['utm_term']))
             setcookie("utm_term", trim($utm_term), time() + $cookie_inspiration, $this->config->main_domain);
+        
+        if (!isset($_COOKIE['sub_id']))
+            setcookie("sub_id", trim($sub_id), time() + $cookie_inspiration, $this->config->main_domain);
         
         if (!isset($_COOKIE['utm_content']))
         setcookie("utm_content", trim($utm_content), time() + $cookie_inspiration, $this->config->main_domain);
