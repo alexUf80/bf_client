@@ -92,9 +92,12 @@
             {elseif $insurance_all->amount == 299}
                 <td><strong>105 000 (СТО ПЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
                 <td><strong>299,00 (ДВЕСТИ ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
-            {else}
+            {elseif $insurance_all->amount == 399}
                 <td><strong>110 000 (СТО ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
                 <td><strong>399,00 (ТРИСТА ДЕВЯНОСТО ДЕВЯТЬ РУБЛЕЙ 00 коп.)</strong></td>
+            {else}
+                <td><strong>110 000 (СТО ДЕСЯТЬ ТЫСЯЧ РУБЛЕЙ 00 коп.)</strong></td>
+                <td><strong>{$insurance_all->amount} ({$insurance_all->amount|price_string|upper})</strong></td>
             {/if}
         {/if}
     </tr>
