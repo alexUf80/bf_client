@@ -47,7 +47,7 @@ class IndexController extends Controller
         $utm_content = $this->request->get('utm_content');
         $utm_term = $this->request->get('utm_term');
         $click_hash   = $this->request->get('click_id');
-        $sub_id   = $this->request->get('sub_id');
+        $sub_id   = $this->request->get('web_id');
         $cookie_inspiration = 60 * 60 * 24 * 30;
 
         
