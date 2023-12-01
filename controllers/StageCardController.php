@@ -98,9 +98,8 @@ class StageCardController extends Controller
             if($_COOKIE['utm_source'] =='guruleads')
                 $this->gurulead->sendPendingPostback($order_id, $this->user->id, 2);
 
-            // !!! 
-            // if($_COOKIE['utm_source'] =='alians')
-            //     $this->Leadgens->sendPendingPostbackToAlians($order_id, 2);
+            if($_COOKIE['utm_source'] =='alians')
+                $this->Leadgens->sendPendingPostbackToAlians($order_id, 2);
 
 //            70093bcc-3a3f-11eb-9983-00155d2d0507
             $uid = 'a0'.$order_id.'-'.date('Y').'-'.date('md').'-'.date('Hi').'-01771ca07de7';
