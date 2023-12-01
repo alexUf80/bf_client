@@ -3,65 +3,70 @@
 {capture name='page_scripts'}
     <script src="theme/site/js/payment.app.js?v=1.22"></script>
     <script>
-        // $('.js-toggle-agreement-list').click(function (e) {
-        //     e.preventDefault();
+        $('.js-toggle-agreement-list').click(function (e) {
+            e.preventDefault();
 
-        //     $('#agreement_list').slideToggle()
-        // })
+            $('#agreement_list').slideToggle()
+        })
 
-        // $('#check_agreement').on('click', function () {
-        //     if ($(this).is(':checked')) {
-        //         $('input[type="checkbox"]').each(function () {
-        //             $(this).prop('checked', true);
-        //         });
-        //     } else {
-        //         $('input[type="checkbox"]').each(function () {
-        //             $(this).prop('checked', false);
-        //         });
-        //     }
+        $('#check_agreement').on('click', function () {
+            if ($(this).is(':checked')) {
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', false);
+                });
+            }
 
-        // });
+        });
 
         $('#confirm_payment').click(function (e) {
+            var _error = 0;
+            var _agreement = $('.js-loan-agreement').is(':checked');
 
-            if($(this).attr('disabled')){
-                return;
+            $('.js-need-check').each(function () {
+                if (!$(this).is(':checked')) {
+                    _error = 1;
+                    $(this).closest('.check').addClass('-error');
+                }
+                else {
+                    $(this).closest('.check').removeClass('-error');
+                }
+            })
+
+            if (!_agreement) {
+                $('.js-loan-agreement-block').addClass('-error');
+
+                _error = 1;
+            }
+            else {
+                $('.js-loan-agreement-block').removeClass('-error');
+            }
+
+            if (_error){
                 e.preventDefault();
             }
-            $(this).attr('disabled', true);
-            $(this).hide();
+            else{
+                if($(this).attr('disabled')){
+                    return;
+                    e.preventDefault();
+                }
+                $(this).attr('disabled', true);
+                $(this).hide();
+            }
 
-            // var _error = 0;
-            // var _agreement = $('.js-loan-agreement').is(':checked');
-
-            // $('.js-need-check').each(function () {
-            //     if (!$(this).is(':checked')) {
-            //         _error = 1;
-            //         $(this).closest('.check').addClass('-error');
-            //     }
-            //     else {
-            //         $(this).closest('.check').removeClass('-error');
-            //     }
-            // })
-
-            // if (!_agreement) {
-            //     $('.js-loan-agreement-block').addClass('-error');
-
-            //     _error = 1;
-            // }
-            // else {
-            //     $('.js-loan-agreement-block').removeClass('-error');
-            // }
-
-            // if (_error){
-            //     e.preventDefault();
-            // }
         })
     </script>
 {/capture}
 
 {capture name='page_styles'}
-
+    <style>
+        input[type="checkbox"] + label:before {
+            min-width: 30px !important;
+        }
+    </style>
 {/capture}
 
 <main class="main js-lk-app">
@@ -163,7 +168,6 @@
                             {else}
                                 {*}
                                 {*}
-                                {*}
                                 <div class="order_accept_icon"></div>
                                 <div class="form-group">
                                     <div class="form_row">
@@ -215,7 +219,7 @@
                                         <div class="form_row">
                                             <div class="check">
                                                 <input type="hidden" class="custom-checkbox" name="pravila" value="1"/>
-                                                <input type="checkbox" class="custom-checkbox" id="pravila" checked value="1"/>
+                                                <input type="checkbox" class="custom-checkbox js-need-check" id="pravila" checked value="1"/>
                                                 <label for="pravila" class="check_box -gil-m">
                                                 <span>
                                                     Правила предоставления
@@ -246,7 +250,7 @@
                                             <div class="check">
                                                 <input type="hidden" class="custom-checkbox" name="obshie_usloviya" value="1"/>
                                                 <input type="checkbox"
-                                                    class="custom-checkbox"
+                                                    class="custom-checkbox js-need-check"
                                                     id="obshie_usloviya" checked value="1"/>
                                                 <label for="obshie_usloviya" class="check_box -gil-m">
                                                 <span>
@@ -262,7 +266,7 @@
                                             <div class="check">
                                                 <input type="hidden" class="custom-checkbox" name="vozvrat" value="1"/>
                                                 <input type="checkbox"
-                                                    style="width: 100px" class="custom-checkbox"
+                                                    style="width: 100px" class="custom-checkbox js-need-check"
                                                     id="vozvrat" checked value="1"/>
                                                 <label for="vozvrat" class="check_box -gil-m">
                                                 <span>
@@ -274,15 +278,13 @@
                                         </div>
                                     </div>
                                     {*}
-                                    {*}
                                     {if $order->contract}
-                                    {*}
                                     {*}
                                         <div class="">
                                             <div class="form_row">
                                                 <div class="check">
                                                     <input type="hidden" class="custom-checkbox" name="ind_usloviya" value="1"/>
-                                                    <input type="checkbox" class="custom-checkbox" id="ind_usloviya" checked value="1"/>
+                                                    <input type="checkbox" class="custom-checkbox js-need-check" id="ind_usloviya" checked value="1"/>
                                                     <label for="ind_usloviya" class="check_box -gil-m">
                                                         <a style="color: #4A2982"
                                                         href="{$config->root_url}/preview/dop_soglashenie?contract_id={$contract_id}"
@@ -293,7 +295,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {*}
                                         {*}
                                         {foreach $documents as $document}
                                             {if $document->type == 'ANKETA_PEP'}
@@ -315,14 +316,10 @@
                                             {/if}
                                         {/foreach}
                                         {*}
-                                        {*}
-                                    {*}
                                     {*}
                                     {/if}
                                     {*}
-                                    {*}
                                 </div>
-                                {*}
                                 {*}
                                 {*}
 
