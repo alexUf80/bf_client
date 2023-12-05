@@ -124,7 +124,11 @@
 
                         <div class="col-12">
                             <div class="-fs-32 -gil-b -green text-center pb-3">
-                                Сумма платежа {$amount} руб.
+                                {if $prolongation}
+                                    Сумма платежа {$amount + $ins_amount} руб.
+                                {else}
+                                    Сумма платежа {$amount} руб.
+                                {/if}
                             </div>
                         </div>
                         <div class="col-md-8 pt-4">

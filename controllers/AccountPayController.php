@@ -88,7 +88,49 @@ class AccountPayController extends Controller
         }
 
         $order_id = $this->contracts->get_contract($contract_id);
+        $ctr = $order_id;
         $order_id = $order_id->order_id;
+
+
+        $operations = OperationsORM::query()
+        ->where('contract_id', '=', $contract_id)
+        ->where('type', '=', 'PAY')->get();
+        
+        $count_prolongation = 0;
+        foreach ($operations as $operation) {
+            if ($operation->transaction_id) {
+                $transaction = $this->transactions->get_transaction($operation->transaction_id);
+                // $transaction = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
+                if ($transaction && $transaction->prolongation) {
+                    $count_prolongation++;
+                }
+            }
+        }
+
+        $ins_amount = 0;
+        $contract_operations = $this->ProloServicesCost->gets(array('id' => ($count_prolongation + 1)));
+        if (isset($contract_operations[0]->insurance_cost)) {
+            $insurance_cost_limits = json_decode($contract_operations[0]->insurance_cost);
+
+            $array_name = [];
+            foreach ($insurance_cost_limits as $key => $val) {
+                $array_name[$key] = $val[0];
+            }
+            array_multisort($array_name, SORT_ASC, $insurance_cost_limits);
+
+            foreach ($insurance_cost_limits as $insurance_cost_limit) {
+                if ($ctr->loan_body_summ < $insurance_cost_limit[0] ) {
+                    $insurance_cost_amount = $insurance_cost_limit[1];
+                    break;
+                }
+            }
+
+            $ins_amount = (float)$insurance_cost_amount;
+        }
+        // var_dump($ins_amount);
+        // die;
+        $this->design->assign('ins_amount', $ins_amount);
+
 
         $this->design->assign('user_id', ($this->user->id));
 
