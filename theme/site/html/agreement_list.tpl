@@ -105,7 +105,7 @@
                 <label for="vozvrat" class="check_box -gil-m">
                  <span>
                     Информация об условиях предоставления, использования
-                    <a style="color: #4A2982" href="/files/about/predostavlenie_vozvrat.pdf" target="_blank"> и возврата потребительского микрозайма</a>
+                    <a style="color: #4A2982" href="/files/about/predostavlenie_vozvrat_new.pdf" target="_blank"> и возврата потребительского микрозайма</a>
                  </span>
                 </label>
             </div>

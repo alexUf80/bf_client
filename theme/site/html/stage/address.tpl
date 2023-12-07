@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
     <script>
         $(function () {
-            let token_dadata = "6c5e267e77fced3f672e81d26bfc1bb3a768eca1";
+            let token_dadata = "6231c5eb6afa02d3bcf7301c4b627b180e6449f9";
 
             $('.Regadress').suggestions({
                 token: token_dadata,
@@ -44,7 +44,7 @@
 <main class="main">
     <div class="section section_form">
         <div class="container">
-            {if !empty($error)}
+            {if !empty($error)} 
                 <div class="alert alert-danger">
                     {$error}
                 </div>
