@@ -1,11 +1,11 @@
 <?php
 
-class ServicesCost extends Core
+class ProloServicesCost extends Core
 {
     public function add($services_cost)
     {
         $query = $this->db->placehold("
-        INSERT INTO s_services_cost 
+        INSERT INTO s_prolo_services_cost 
         SET ?%
         ", $services_cost);
 
@@ -18,7 +18,7 @@ class ServicesCost extends Core
     {
         $query = $this->db->placehold("
         SELECT * 
-        FROM s_services_cost
+        FROM s_prolo_services_cost
         where id = ?
         ", $id);
 
@@ -29,16 +29,18 @@ class ServicesCost extends Core
     public function gets($filter = array())
     {
         $region_filter = '';
+        $id_filter = '';
 
-        if (isset($filter['region']))
-            $region_filter = $this->db->placehold("AND region = ?", $this->db->escape(trim($filter['region'])));
+        if (isset($filter['id']))
+            $region_filter = $this->db->placehold("AND id = ?", $this->db->escape(trim($filter['id'])));
         
 
         $query = $this->db->placehold("
         SELECT * 
-        FROM s_services_cost
+        FROM s_prolo_services_cost
         where 1
         $region_filter
+        $id_filter
         ORDER BY id
         ");
 
@@ -49,7 +51,7 @@ class ServicesCost extends Core
     public function update($id, $services_cost)
     {
         $query = $this->db->placehold("
-        UPDATE s_services_cost 
+        UPDATE s_prolo_services_cost 
         SET ?%
         where id = ?
         ", (array)$services_cost, (int)$id);
@@ -60,7 +62,7 @@ class ServicesCost extends Core
     public function delete($id)
     {
         $query = $this->db->placehold("
-        DELETE FROM s_services_cost
+        DELETE FROM s_prolo_services_cost
         where id = ?
         ", $id);
 

@@ -343,8 +343,8 @@ class AccountController extends Controller
             }
 
             if ($order->contract->active_cessia == 0 &&
-            date_diff($now, $start_date)->days >= 7 && $count_prolongation < 5
-            && date_diff($now, $start_date)->days < 100
+            date_diff($now, $start_date)->days >= 7 && $count_prolongation < 4
+            && date_diff($now, $start_date)->days < 130
             && (($order->contract->loan_body_summ * 1.5) > $order->contract->loan_percents_summ)
             ) {
                 $show_prolongation = 1;
@@ -390,6 +390,30 @@ class AccountController extends Controller
             if ($now <= $returnDate && date_diff($now, $returnDate) <= 3 || $now > $returnDate)
                 $this->design->assign('prolongation_amount', $prolongation_amount);
 
+
+            $ins_amount = 0;
+            $contract_operations = $this->ProloServicesCost->gets(array('id' => ($count_prolongation + 1)));
+            if (isset($contract_operations[0]->insurance_cost)) {
+                $insurance_cost_limits = json_decode($contract_operations[0]->insurance_cost);
+
+                $array_name = [];
+                foreach ($insurance_cost_limits as $key => $val) {
+                    $array_name[$key] = $val[0];
+                }
+                array_multisort($array_name, SORT_ASC, $insurance_cost_limits);
+
+                foreach ($insurance_cost_limits as $insurance_cost_limit) {
+                    if ($order->contract->loan_body_summ < $insurance_cost_limit[0] ) {
+                        $insurance_cost_amount = $insurance_cost_limit[1];
+                        break;
+                    }
+                }
+    
+                $ins_amount = (float)$insurance_cost_amount;
+            }
+
+            $this->design->assign('prolongation_insurance_amount', $ins_amount);
+            $this->design->assign('count_prolongation', $count_prolongation);
 
             /*
             $inssuance_date = new DateTime();

@@ -398,47 +398,7 @@
                                     У Вас есть активный займ от {$order->contract->create_date|date}г.
                                 </div>
                             </div>
-                            <div class="col-md-6 pt-4">
-                                <dl class="row pb-2 border-bottom">
-                                    <dd class="col-6 text-left">Номер договора</dd>
-                                    <dt class="col-6 text-right">
-                                        {$order->contract->number}
-                                    </dt>
-                                </dl>
-                                <dl class="row pb-2 border-bottom">
-                                    <dd class="col-6 text-left">Основной долг</dd>
-                                    <dt class="col-6 text-right">{($order->contract->loan_body_summ*1)} руб.</dt>
-                                </dl>
-                                <dl class="row pb-2 border-bottom">
-                                    <dd class="col-6 text-left">Проценты</dd>
-                                    <dt class="col-6 text-right">{($order->contract->loan_percents_summ + $order->contract->loan_charge_summ)*1}
-                                        руб.
-                                    </dt>
-                                </dl>
-                                {if $order->contract->loan_peni_summ > 0}
-                                    <dl class="row pb-2 border-bottom">
-                                        <dd class="col-6 text-left">Пени</dd>
-                                        <dt class="col-6 text-right">{($order->contract->loan_peni_summ*1)} руб.</dt>
-                                    </dl>
-                                {/if}
-                                {if $order->contract->status == 11}
-                                    <dl class="row pb-2">
-                                        <dd class="col-6 text-left">Дата платежа</dd>
-                                        <dt class="col-6 text-right">{$order->contract->next_pay|date} </dt>
-                                    </dl>
-                                {else}
-                                    <dl class="row pb-2">
-                                        <dd class="col-6 text-left">Дата возврата</dd>
-                                        <dt class="col-6 text-right">{$order->contract->return_date|date} </dt>
-                                    </dl>
-                                {/if}
-                                {*}
-                                <dl class="row pb-2 border-bottom">
-                                  <dd class="col-6 text-left">Сумма на дату возврата</dd>
-                                  <dt class="col-6 text-right">{$order->contract->return_amount|convert} руб.</dt>
-                                </dl>
-                                {*}
-                            </div>
+                            
                             <div class="col-md-6">
 
                                 <div class="pt-4 pr-5 pl-5 text-center">
@@ -483,9 +443,13 @@
                                             <div class="row">
                                                 <div class="col-md-4 col-12">
                                                     <input type="text" readonly="" style="background-color: #fbfbfb;"
+                                                           class="form-control text-right" name="amount_"
+                                                           value="{($prolongation_amount + $prolongation_insurance_amount)}"
+                                                           min="{($prolongation_amount + $prolongation_insurance_amount)}"/>
+                                                    <input type="hidden" readonly="" style="background-color: #fbfbfb;"
                                                            class="form-control text-right" name="amount"
-                                                           value="{$prolongation_amount}"
-                                                           min="{$prolongation_amount}"/>
+                                                           value="{($prolongation_amount)}"
+                                                           min="{($prolongation_amount)}"/>
                                                 </div>
                                                 <div class="col-md-6 col-12 pt-1">
                                                     <button type="submit" class="btn btn-primary btn-block">
@@ -496,6 +460,74 @@
                                         </form>
                                     </div>
                                 {/if}
+                            </div>
+
+                            <div class="col-md-6 pt-4">
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Номер договора</dd>
+                                    <dt class="col-6 text-right">
+                                        {$order->contract->number}
+                                    </dt>
+                                </dl>
+
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">ФИО</dd>
+                                    <dt class="col-6 text-right">
+                                        {$order->lastname} {$order->firstname} {$order->patronymic} 
+                                    </dt>
+                                </dl>
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Дата рождения</dd>
+                                    <dt class="col-6 text-right">
+                                        {$order->birth}
+                                    </dt>
+                                </dl>
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Телефон</dd>
+                                    <dt class="col-6 text-right">
+                                        {$order->phone_mobile}
+                                    </dt>
+                                </dl>
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Электронная почта</dd>
+                                    <dt class="col-6 text-right">
+                                        {$order->email}
+                                    </dt>
+                                </dl>
+
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Основной долг</dd>
+                                    <dt class="col-6 text-right">{($order->contract->loan_body_summ*1)} руб.</dt>
+                                </dl>
+                                <dl class="row pb-2 border-bottom">
+                                    <dd class="col-6 text-left">Проценты</dd>
+                                    <dt class="col-6 text-right">{($order->contract->loan_percents_summ + $order->contract->loan_charge_summ)*1}
+                                        руб.
+                                    </dt>
+                                </dl>
+                                {if $order->contract->loan_peni_summ > 0}
+                                    <dl class="row pb-2 border-bottom">
+                                        <dd class="col-6 text-left">Пени</dd>
+                                        <dt class="col-6 text-right">{($order->contract->loan_peni_summ*1)} руб.</dt>
+                                    </dl>
+                                {/if}
+                                {if $order->contract->status == 11}
+                                    <dl class="row pb-2">
+                                        <dd class="col-6 text-left">Дата платежа</dd>
+                                        <dt class="col-6 text-right">{$order->contract->next_pay|date} </dt>
+                                    </dl>
+                                {else}
+                                    <dl class="row pb-2">
+                                        <dd class="col-6 text-left">Дата возврата</dd>
+                                        <dt class="col-6 text-right">{$order->contract->return_date|date} </dt>
+                                    </dl>
+                                {/if}
+                                {*}
+                                <dl class="row pb-2 border-bottom">
+                                  <dd class="col-6 text-left">Сумма на дату возврата</dd>
+                                  <dt class="col-6 text-right">{$order->contract->return_amount|convert} руб.</dt>
+                                </dl>
+                                {*}
                             </div>
                         </div>
                     </div>

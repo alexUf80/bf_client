@@ -109,6 +109,8 @@ class Best2PayCallback extends Controller
 
                             );
 
+                            $ins_amount = 0;
+                            $ins_coverage = 0;
                             if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
 
                                 $new_return_date = date('Y-m-d H:i:s', time() + 86400 * $this->settings->prolongation_period);
@@ -121,26 +123,56 @@ class Best2PayCallback extends Controller
 
                                 $docs = 1;
 
-                                $ins_amount = 199;
+                                $ins_amount = 0;
+                                $ins_coverage = 0;
 
-                                if ($contract->loan_body_summ >= 0 && $contract->loan_body_summ <= 6890) {
-                                    $ins_amount = 199;
+                                $operations = OperationsORM::query()
+                                ->where('contract_id', '=', $contract->id)
+                                ->where('type', '=', 'PAY')->get();
+                                $count_prolongation = 0;
+                                foreach ($operations as $operation) {
+                                    if ($operation->transaction_id) {
+                                        $transaction = $this->transactions->get_transaction($operation->transaction_id);
+                                        // $transaction = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
+                                        if ($transaction && $transaction->prolongation) {
+                                            $count_prolongation++;
+                                        }
+                                    }
                                 }
-                                if ($contract->loan_body_summ > 6890 && $contract->loan_body_summ <= 9990) {
-                                    $ins_amount = 299;
+                                $contract_operations = $this->ProloServicesCost->gets(array('id' => ($count_prolongation + 1)));
+                                if (isset($contract_operations[0]->insurance_cost)) {
+                                    $insurance_cost_limits = json_decode($contract_operations[0]->insurance_cost);
+
+                                    $array_name = [];
+                                    foreach ($insurance_cost_limits as $key => $val) {
+                                        $array_name[$key] = $val[0];
+                                    }
+                                    array_multisort($array_name, SORT_ASC, $insurance_cost_limits);
+
+                                    foreach ($insurance_cost_limits as $insurance_cost_limit) {
+                                        if ($contract->loan_body_summ < $insurance_cost_limit[0] ) {
+                                            $insurance_cost_amount = $insurance_cost_limit[1];
+                                            $insurance_coverage_cost = $insurance_cost_limit[2];
+                                            break;
+                                        }
+                                    }
+                        
+                                    $ins_amount = (float)$insurance_cost_amount;
+                                    $ins_coverage = (float)$insurance_coverage_cost;
                                 }
-                                if ($contract->loan_body_summ > 9990) {
-                                    $ins_amount = 399;
+
+                                if ($ins_amount == 0) {
+                                    $ins_amount = 400;
                                 }
 
                                 if ($payment_amount >= $contract->loan_percents_summ + $ins_amount) {
-                                    
                                     $operation_id = $this->operations->add_operation(array(
                                         'contract_id' => $contract->id,
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'transaction_id' => $transaction->id,
-                                        'type' => 'INSURANCE_BC',
+                                        // 'type' => 'INSURANCE_BC',
+                                        'type' => 'INSURANCE',
                                         'amount' => $ins_amount,
                                         'created' => date('Y-m-d H:i:s'),
                                         'sent_status' => 0,
@@ -309,18 +341,22 @@ class Best2PayCallback extends Controller
 
                                 if ($docs == 2) {
                                     $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
+                                    $document_params['insurance_amount'] = $ins_amount;
+                                    $document_params['insurance_coverage'] = $ins_coverage;
                                     $this->documents->create_document(array(
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'contract_id' => $contract->id,
-                                        'type' => 'POLIS_PROLONGATION',
+                                        // 'type' => 'POLIS_PROLONGATION',
+                                        'type' => 'POLIS_PROLONGATION_POROG',
                                         'params' => json_encode($document_params)
                                     ));
                                     $this->documents->create_document(array(
                                         'user_id' => $contract->user_id,
                                         'order_id' => $contract->order_id,
                                         'contract_id' => $contract->id,
-                                        'type' => 'KID_PROLONGATION',
+                                        // 'type' => 'KID_PROLONGATION',
+                                        'type' => 'KID_PROLONGATION_POROG',
                                         'params' => json_encode($document_params)
                                     ));
                                 }
