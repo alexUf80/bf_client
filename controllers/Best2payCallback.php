@@ -188,7 +188,7 @@ class Best2PayCallback extends Controller
                                         'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
                                         'operation_id' => $operation_id,
                                         'protection' => 0,
-                                    ));
+                                    ), $transaction->id);
                                     $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
 
                                     $rest_amount = $rest_amount - $ins_amount;
