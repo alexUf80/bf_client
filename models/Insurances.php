@@ -17,13 +17,16 @@ class Insurances extends Core
      * @param mixed $id
      * @return string
      */
-    public function create_number($id)
+    public function create_number($id, $transaction_id)
     {
+        $transaction = $this->transactions->get_transaction($transaction_id);
+        $code = $transaction->prolongation ? '383' : '771';
+
         $number = '';
         $number .= date('y'); // год выпуска полиса
         $number .= '0H3'; // код подразделения выпустившего полис (не меняется)
         $number .= 'FIM'; // код продукта (не меняется)
-        $number .= '383'; // код партнера (не меняется)
+        $number .= $code; // код партнера (не меняется)
 
         $polis_number = str_pad($id, 7, '0', STR_PAD_LEFT);
 
@@ -204,7 +207,7 @@ class Insurances extends Core
         return $count;
     }
     
-    public function add_insurance($insurance)
+    public function add_insurance($insurance, $transaction_id)
     {
 		$insurance = (array)$insurance;
         
@@ -214,7 +217,7 @@ class Insurances extends Core
         $this->db->query($query);
         $id = $this->db->insert_id();
 
-        $insurance_number = $this->create_number($id);
+        $insurance_number = $this->create_number($id, $transaction_id);
         
         if (!empty($insurance['protection']))
             $insurance_number = $insurance_number.'Z';
