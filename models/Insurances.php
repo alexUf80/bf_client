@@ -23,7 +23,7 @@ class Insurances extends Core
         $number .= date('y'); // год выпуска полиса
         $number .= '0H3'; // код подразделения выпустившего полис (не меняется)
         $number .= 'FIM'; // код продукта (не меняется)
-        $number .= '771'; // код партнера (не меняется)
+        $number .= '383'; // код партнера (не меняется)
 
         $polis_number = str_pad($id, 7, '0', STR_PAD_LEFT);
 
