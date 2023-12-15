@@ -280,7 +280,7 @@ class Best2PayCallback extends Controller
                                     'peni_summ' => empty($transaction_loan_peni_summ) ? 0 : $transaction_loan_peni_summ,
                                     'commision_summ' => $transaction->commision_summ,
                                     'closed' => 0,
-                                    'prolongation' => 0,
+                                    'prolongation' => $transaction->prolongation,
                                     'collection_status' => $contract->collection_status,
                                     'expired_days' => $contract->expired_days,
                                 );
