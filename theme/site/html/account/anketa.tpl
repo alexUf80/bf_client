@@ -409,7 +409,7 @@
                   {if in_array('passport1', $need_fields['files'])}
                   <div class="form_file_item {if $user_files['passport1']->status == 3}rejected{/if}">
                     <p>Первая страница паспорта</p>
-                    <input type="file" name="file1" id="file1" data-type="passport1" class="input_file" accept="image/png, image/gif, image/jpeg, image/jpg, image/jp2">
+                    <input type="file" name="file1" id="file1" data-type="passport1" class="input_file" accept="image/png, image/gif, image/jpeg, image/jpg, image/jp2, application/pdf">
                     <label for="file1" class="btn js-labelFile">
                       <span class="js-fileName {if $user_files['passport1']}uploaded{/if}">
                         <img src="/theme/site/i/passport.png" width="150" />
