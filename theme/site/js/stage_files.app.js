@@ -72,7 +72,7 @@
                     else if (resp.error == 'unknown_user')
                         error_text = 'Неизвестный пользователь.';
                     else if (resp.error == 'wrong_ext')
-                        error_text = 'Неверное расширение файла. Выберите файл с расширением "png", "gif", "jpeg", "jpg" или "jp2"';
+                        error_text = 'Неверное расширение файла. Выберите файл с расширением "png", "gif", "jpeg", "jpg", "jp2" или "pdf"';
                     else
                         error_text = resp.error;
                         

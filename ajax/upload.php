@@ -38,7 +38,7 @@ class UploadApp extends Core
         {
             $this->response->error = 'unknown_user';
         }
-        elseif (!in_array(strtolower($file_ext), ['png', 'gif', 'jpeg', 'jpg', 'jp2']))
+        elseif (!in_array(strtolower($file_ext), ['png', 'gif', 'jpeg', 'jpg', 'jp2', 'pdf']))
         {
             $this->response->error = 'wrong_ext';
         }
