@@ -88,8 +88,23 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         if (!($user = $this->users->get_user((int)$contract->user_id)))
             return false;
 
+        $operations = OperationsORM::query()
+        ->where('contract_id', '=', $contract_id)
+        ->where('type', '=', 'PAY')->get();
+        
+        $count_prolongation = 0;
+        foreach ($operations as $operation) {
+            if ($operation->transaction_id) {
+                $transaction = $this->transactions->get_transaction($operation->transaction_id);
+                // $transaction = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
+                if ($transaction && $transaction->prolongation) {
+                    $count_prolongation++;
+                }
+            }
+        }
+        
         $ins_amount = 0;
-        $contract_operations = $this->ProloServicesCost->gets(array('id' => ($contract->prolongation + 1)));
+        $contract_operations = $this->ProloServicesCost->gets(array('id' => ($count_prolongation + 1)));
         if (isset($contract_operations[0]->insurance_cost)) {
             $insurance_cost_limits = json_decode($contract_operations[0]->insurance_cost);
 
