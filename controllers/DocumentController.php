@@ -344,6 +344,8 @@ class DocumentController extends Controller
         $rd = $contract->return_date;
 
         $contract->return_date = date('Y-m-d H:i:s', strtotime($rd . ' +30 days'));
+        $bd = date('Y-m-d H:i:s');
+        $contract->end_date = date('Y-m-d H:i:s', strtotime($bd . ' +'.$contract->period.' days'));
 
         $this->design->assign('contract', $contract);
 
@@ -373,6 +375,7 @@ class DocumentController extends Controller
             'contract_date' => date('Y-m-d H:i:s'),
             'created' => date('Y-m-d H:i:s'),
             'return_date' => $return_date,
+            'end_date' => $end_date,
             'return_date_day' => date('d', strtotime($return_date)),
             'return_date_month' => date('m', strtotime($return_date)),
             'return_date_year' => date('Y', strtotime($return_date)),
