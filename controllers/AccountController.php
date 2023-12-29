@@ -491,6 +491,7 @@ class AccountController extends Controller
 
             }
 
+            $this->design->assign('now_date', date('Y-m-d H:i:s'));
             $this->design->assign('warning_card', $warning_card);
             return $this->design->fetch('account/home.tpl');
         }
