@@ -57,6 +57,10 @@
                 {/if}
             </div>
 
+            {if $now_date > '2023-12-31 00:00:00' && $now_date < '2024-01-03 10:00:00'}
+                <center><h1 style='color:red; background-color: rgb(255, 206, 206); padding: 30px'>Рассмотрение заявок начнется 03.01.2023 с 10:00</h1></center>
+            {/if}
+
             {if $user_balance1c}
                 <div class="new_order_box " data-status="{$order->status}" data-order="{$order->order_id}">
                     <div class="row">
