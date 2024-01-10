@@ -12,7 +12,10 @@ class Documents extends Core
         'POLIS_PROLONGATION' => 'polis_prolongation.tpl',
         'KID_PROLONGATION' => 'kid_prolongation.tpl',
         'POLIS_PROLONGATION_POROG' => 'polis_prolongation_porog.tpl',
-        'KID_PROLONGATION_POROG' => 'kid_prolongation_porog.tpl'
+        'KID_PROLONGATION_POROG' => 'kid_prolongation_porog.tpl',
+        'DOP_RESTRUCT' => 'restruct.tpl',
+        'GRAPH_RESTRUCT' => 'restruct-ps.tpl',
+        'INF_MESSAGE_PDN' => 'message_pdn.tpl',
     );
 
 
@@ -26,7 +29,10 @@ class Documents extends Core
         'POLIS_PROLONGATION' => 'Полис страхования',
         'KID_PROLONGATION' => 'Ключевой информационный документ (пролонгация)',
         'POLIS_PROLONGATION_POROG' => 'Полис страхования (пролонгация).',
-        'KID_PROLONGATION_POROG' => 'Ключевой информационный документ (пролонгация).'
+        'KID_PROLONGATION_POROG' => 'Ключевой информационный документ (пролонгация).',
+        'DOP_RESTRUCT' => 'Дополнительное соглашение о реструктуризации',
+        'GRAPH_RESTRUCT' => 'График платежей погашения задолженности',
+        'INF_MESSAGE_PDN' => 'Информационное сообщение о превышении ПДН'
     );
 
     private $client_visible = array(
@@ -39,7 +45,10 @@ class Documents extends Core
         'POLIS_PROLONGATION' => 1,
         'KID_PROLONGATION' => 1,
         'POLIS_PROLONGATION_POROG' => 1,
-        'KID_PROLONGATION_POROG' => 1
+        'KID_PROLONGATION_POROG' => 1,
+        'DOP_RESTRUCT' => 1,
+        'GRAPH_RESTRUCT' => 1,
+        'INF_MESSAGE_PDN' => 1
     );
 
 
