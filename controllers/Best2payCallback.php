@@ -132,9 +132,9 @@ class Best2PayCallback extends Controller
                                 $count_prolongation = 0;
                                 foreach ($operations as $operation) {
                                     if ($operation->transaction_id) {
-                                        $transaction = $this->transactions->get_transaction($operation->transaction_id);
-                                        // $transaction = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
-                                        if ($transaction && $transaction->prolongation) {
+                                        $transaction1 = $this->transactions->get_transaction($operation->transaction_id);
+                                        // $transaction1 = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
+                                        if ($transaction1 && $transaction1->prolongation) {
                                             $count_prolongation++;
                                         }
                                     }
