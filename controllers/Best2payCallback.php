@@ -130,10 +130,10 @@ class Best2PayCallback extends Controller
                                 ->where('contract_id', '=', $contract->id)
                                 ->where('type', '=', 'PAY')->get();
                                 $count_prolongation = 0;
-                                foreach ($operations as $operation) {
-                                    if ($operation->transaction_id) {
-                                        $transaction1 = $this->transactions->get_transaction($operation->transaction_id);
-                                        // $transaction1 = TransactionsORM::query()->where('id', '=', $operation->transaction_id)->first();
+                                foreach ($operations as $operation1) {
+                                    if ($operation1->transaction_id) {
+                                        $transaction1 = $this->transactions->get_transaction($operation1->transaction_id);
+                                        // $transaction1 = TransactionsORM::query()->where('id', '=', $operation1->transaction_id)->first();
                                         if ($transaction1 && $transaction1->prolongation) {
                                             $count_prolongation++;
                                         }
