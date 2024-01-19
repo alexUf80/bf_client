@@ -343,22 +343,43 @@ class Best2PayCallback extends Controller
                                     $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
                                     $document_params['insurance_amount'] = $ins_amount;
                                     $document_params['insurance_coverage'] = $ins_coverage;
-                                    $this->documents->create_document(array(
-                                        'user_id' => $contract->user_id,
-                                        'order_id' => $contract->order_id,
-                                        'contract_id' => $contract->id,
-                                        // 'type' => 'POLIS_PROLONGATION',
-                                        'type' => 'POLIS_PROLONGATION_POROG',
-                                        'params' => json_encode($document_params)
-                                    ));
-                                    $this->documents->create_document(array(
-                                        'user_id' => $contract->user_id,
-                                        'order_id' => $contract->order_id,
-                                        'contract_id' => $contract->id,
-                                        // 'type' => 'KID_PROLONGATION',
-                                        'type' => 'KID_PROLONGATION_POROG',
-                                        'params' => json_encode($document_params)
-                                    ));
+
+                                    if ( date('Y-m-d H:i:s') < '2024-01-21' ) {
+                                        $this->documents->create_document(array(
+                                            'user_id' => $contract->user_id,
+                                            'order_id' => $contract->order_id,
+                                            'contract_id' => $contract->id,
+                                            // 'type' => 'POLIS_PROLONGATION',
+                                            'type' => 'POLIS_PROLONGATION_POROG',
+                                            'params' => json_encode($document_params)
+                                        ));
+                                        $this->documents->create_document(array(
+                                            'user_id' => $contract->user_id,
+                                            'order_id' => $contract->order_id,
+                                            'contract_id' => $contract->id,
+                                            // 'type' => 'KID_PROLONGATION',
+                                            'type' => 'KID_PROLONGATION_POROG',
+                                            'params' => json_encode($document_params)
+                                        ));
+                                    }
+                                    else{
+                                        $this->documents->create_document(array(
+                                            'user_id' => $contract->user_id,
+                                            'order_id' => $contract->order_id,
+                                            'contract_id' => $contract->id,
+                                            // 'type' => 'POLIS_PROLONGATION',
+                                            'type' => 'POLIS_PROLONGATION_POROG_24-01-21',
+                                            'params' => json_encode($document_params)
+                                        ));
+                                        $this->documents->create_document(array(
+                                            'user_id' => $contract->user_id,
+                                            'order_id' => $contract->order_id,
+                                            'contract_id' => $contract->id,
+                                            // 'type' => 'KID_PROLONGATION',
+                                            'type' => 'KID_PROLONGATION_POROG_24-01-21',
+                                            'params' => json_encode($document_params)
+                                        ));
+                                    }
                                 }
                             }
 
