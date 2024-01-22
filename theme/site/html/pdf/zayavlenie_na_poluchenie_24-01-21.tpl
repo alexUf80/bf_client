@@ -15,7 +15,7 @@
     <strong>{$lastname|upper} {$firstname|upper} {$patronymic|upper} {$birth|date_format:'%d.%m.%Y'}</strong>
     года рождения, место
     рождения <strong>{$birth_place|upper}</strong>, 
-    адрес постоянной регистрации/адрес места жительства <strong>{$regaddress_full} / {faktaddress_full}</strong>,
+    адрес постоянной регистрации/адрес места жительства <strong>{$regaddress_full} / {$faktaddress_full}</strong>,
     паспорт
     серия <strong>{$passport_serial} № {$passport_number} выдан {$passport_issued|upper} {$passport_date}</strong>
     года, код подразделения <strong>{$subdivision_code}</strong> СНИЛС <strong>{$snils}</strong>, телефон
