@@ -99,18 +99,7 @@
             САО «ВСК»
         </td>
     </tr>
-    <tr>
-        <td style="width: 34%">
-           договор страхования на условиях Правил №183 страхования банковских карт
-        </td>
-        <td style="width: 34%">
-            {$limit_date}
-        </td>
-        <td>
-            САО «ВСК»
-        </td>
-    </tr>
-    
+        
 </table>
 
 <div align="justify">
