@@ -8,7 +8,7 @@
     }
 </style>
 <div>
-    <br><br><br><br>
+    <br><br><br><br><br><br>
 </div>
 <table>
     <tr>
@@ -99,7 +99,6 @@
             САО «ВСК»
         </td>
     </tr>
-        
 </table>
 
 <div align="justify">
