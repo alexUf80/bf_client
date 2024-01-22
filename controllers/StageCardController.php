@@ -222,12 +222,22 @@ class StageCardController extends Controller
             ));
 
             // Заявление на получение займа
-            $this->documents->create_document(array(
-                'user_id' => $this->user->id,
-                'order_id' => $order_id,
-                'type' => 'ANKETA_PEP',
-                'params' => json_encode($params),
-            ));
+            if ( date('Y-m-d H:i:s') < '2024-01-21' ) {
+                $this->documents->create_document(array(
+                    'user_id' => $this->user->id,
+                    'order_id' => $order_id,
+                    'type' => 'ANKETA_PEP',
+                    'params' => json_encode($params),
+                ));
+            }
+            else{
+                $this->documents->create_document(array(
+                    'user_id' => $this->user->id,
+                    'order_id' => $order_id,
+                    'type' => 'ANKETA_PEP_24-01-21',
+                    'params' => json_encode($params),
+                ));
+            }
 
             if(!empty($order['utm_source']) && $order['utm_source'] == 'leadstech')
                 $this->PostBackCron->add(['order_id' => $order_id, 'status' => 0, 'goal_id' => 3]);

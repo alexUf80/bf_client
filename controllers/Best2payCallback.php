@@ -361,6 +361,14 @@ class Best2PayCallback extends Controller
                                             'type' => 'KID_PROLONGATION_POROG',
                                             'params' => json_encode($document_params)
                                         ));
+                                        $this->documents->create_document(array(
+                                            'user_id' => $contract->user_id,
+                                            'order_id' => $contract->order_id,
+                                            'contract_id' => $contract->id,
+                                            // 'type' => 'KID_PROLONGATION',
+                                            'type' => 'UVEDOMLENIE_OTKAZ_OT_USLUG',
+                                            'params' => json_encode($document_params)
+                                        ));
                                     }
                                     else{
                                         $this->documents->create_document(array(
