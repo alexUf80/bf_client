@@ -147,6 +147,13 @@ class DocumentController extends Controller
                 $this->design->assign('prolo', $prolo);
 
             }
+
+            if($document->type == 'UVEDOMLENIE_OTKAZ_OT_USLUG'){
+                $dto = new DateTime($contract->inssuance_date);
+                $dto->modify('+30 days');
+                $limit_date = $dto->format('d.m.Y');
+                $this->design->assign('limit_date', $limit_date);
+            }
             
             $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
 
@@ -172,6 +179,11 @@ class DocumentController extends Controller
             $regaddress_full = $regaddress->adressfull;
 
             $this->design->assign('regaddress_full', $regaddress_full);
+
+            $faktaddress = $this->Addresses->get_address($user->faktaddress_id);
+            $faktaddress_full = $faktaddress->adressfull;
+
+            $this->design->assign('faktaddress_full', $faktaddress_full);
 
             $cards = $this->cards->get_cards(['user_id' => $contract->user_id]);
             $active_card = '';
