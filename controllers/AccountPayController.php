@@ -127,8 +127,12 @@ class AccountPayController extends Controller
 
             $ins_amount = (float)$insurance_cost_amount;
         }
-        // var_dump($ins_amount);
-        // die;
+        
+        $user = $this->users->get_user($contract->user_id);
+        if ($user->utm_source == 'kpk') {
+            $ins_amount = 0;
+        }
+
         $this->design->assign('ins_amount', $ins_amount);
 
 
