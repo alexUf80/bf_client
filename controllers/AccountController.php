@@ -423,6 +423,12 @@ class AccountController extends Controller
                 $ins_amount = (float)$insurance_cost_amount;
             }
 
+            $user = $this->users->get_user($order->user_id);
+            if ($user->utm_source == 'kpk') {
+                $ins_amount = 0;
+            }
+
+
             $this->design->assign('prolongation_insurance_amount', $ins_amount);
             $this->design->assign('count_prolongation', $count_prolongation);
 

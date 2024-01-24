@@ -137,6 +137,10 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $ins_amount = 400;
         }
 
+        if ($user->utm_source == 'kpk') {
+            $ins_amount = 0;
+        }
+
         if ($prolongation == 1) {
             $amount += $ins_amount * 100;
         }

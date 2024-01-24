@@ -21,6 +21,12 @@ class ContractAcceptController extends Controller
             $accept_code = $this->request->post('accept_code', 'integer');
             $service_insurance = $this->request->post('service_insurance', 'integer');
             $service_reason = $this->request->post('service_reason', 'integer');
+
+            $user = $this->users->get_user($contract->user_id);
+            if ($user->utm_source == 'kpk') {
+                $service_insurance = 0;
+                $service_reason = 0;
+            }
             
             if ($contract->status != 0)
             {

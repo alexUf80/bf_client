@@ -101,6 +101,13 @@ class StagePersonalController extends Controller
                     file_put_contents($this->config->root_dir.'files/sas.txt',$sas_text.PHP_EOL.$_COOKIE['url']);
                 }
 
+                if (isset($_COOKIE['utm_source']) && $_COOKIE['utm_source'] == 'kpk'){
+                    $update['service_recurent'] = 0;
+                    $update['service_sms'] = 0;
+                    $update['service_insurance'] = 0;
+                    $update['service_reason'] = 0;
+                }
+
                 $update = array_map('strip_tags', $update);
 
                 $this->users->update_user($this->user->id, $update);
