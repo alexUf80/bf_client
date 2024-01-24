@@ -160,11 +160,28 @@
 <div>
 
 </div>
-<table style="width: 100%">
+<table>
     <tr>
-        <td style="width: 33%"><strong>Генеральный директор </strong></td>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+        <td><strong>Генеральный директор</strong></td>
         <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
-        <td style="width: 33%">Кройтор В.В</td>
+        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+        <td style="text-align: right">Кройтор В.В</td>
+    </tr>
+</table>
+{*}
+<table style="page-break-after: always">
+{*}
+<table>
+    <tr>
+        <td></td>
+        <td>
+            <table border="1" cellpadding="4">
+                <tr>
+                    <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
+                        <br>Дата: {$contract->inssuance_date|date}
+                    </td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
