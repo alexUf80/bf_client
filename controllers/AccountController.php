@@ -424,7 +424,7 @@ class AccountController extends Controller
             }
 
             $user = $this->users->get_user($order->user_id);
-            if ($user->utm_source == 'kpk') {
+            if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
                 $ins_amount = 0;
             }
 
