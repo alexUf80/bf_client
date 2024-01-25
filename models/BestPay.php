@@ -137,7 +137,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $ins_amount = 400;
         }
 
-        if ($user->utm_source == 'kpk') {
+        if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
             $ins_amount = 0;
         }
 
@@ -239,7 +239,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         if (!($user = $this->users->get_user((int)$user_id)))
             return false;
 
-        if ($user->utm_source == 'kpk') {
+        if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
             $amount = 100;
         }
         else{
@@ -669,7 +669,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $password = $this->passwords[$sector];
 
         $user = $this->users->get_user((int)$user_id);
-        if ($user->utm_source == 'kpk') {
+        if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
             $amount = 100;
         }
         else{
@@ -721,7 +721,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $password = $this->passwords[$sector];
 
         $user = $this->users->get_user((int)$user_id);
-        if ($user->utm_source == 'kpk') {
+        if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
             $amount = 100;
         }
         else{
@@ -753,7 +753,7 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
         $data['token'] = $card->token;
 
         $user = $this->users->get_user((int)$userId);
-        if ($user->utm_source == 'kpk') {
+        if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
             $amount = 100;
         }
         else{
