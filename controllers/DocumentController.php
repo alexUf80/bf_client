@@ -162,8 +162,47 @@ class DocumentController extends Controller
 
             foreach ($document->params as $param_name => $param_value)
             {
-                if($param_name == 'insurance')
+                if($param_name == 'insurance'){
+                    
+                    // Добавляем страховую сумму
+                    $query = $this->db->placehold("
+                    SELECT 
+                    o.id as o_id 
+                    FROM `s_operations` o
+                    LEFT JOIN s_transactions t
+                    ON o.transaction_id=t.id
+                    WHERE `order_id`=? and type='INSURANCE' and t.prolongation=1
+                    ORDER BY o.created
+                    ", $param_value['order_id']);
+                    $this->db->query($query);
+                    $prolo_operations = $this->db->results();
+
+                    $prolo_count = 0;
+                    foreach ($prolo_operations as $prolo_operation) {
+                        $prolo_count++;
+                        break;
+                    }
+
+                    $prolo_services_cost_arrs = $this->ProloServicesCost->get($prolo_count);
+
+                    $prolo_services_cost_arr = $prolo_services_cost_arrs->insurance_cost;
+
+                    $prolo_services_cost_arr = str_replace('[[','',$prolo_services_cost_arr);
+                    $prolo_services_cost_arr = str_replace(']]','',$prolo_services_cost_arr);
+                    $prolo_services_cost_els = explode('],[', $prolo_services_cost_arr);
+
+                    foreach ($prolo_services_cost_els as $prolo_services_cost_el) {
+                        $prolo_services_cost_el = explode(',', $prolo_services_cost_el);
+
+                        if ((int)$param_value['amount'] == (int)str_replace('"','',$prolo_services_cost_el[1])) {
+                            $param_value['insuranceSum'] = (int)str_replace('"','',$prolo_services_cost_el[2]);
+                            break;
+                        }
+                    }
+
+
                     $this->design->assign('insurances', (object)$param_value);
+                }
                 if($param_name == 'contract')
                     $this->design->assign('insurances', (object)$param_value['insurance']);
                 else

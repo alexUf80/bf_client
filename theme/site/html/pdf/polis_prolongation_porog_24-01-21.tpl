@@ -12,7 +12,7 @@
                     <td align="center">
                         <strong>ПОЛИС</strong><br/>
                         <strong>СТРАХОВАНИЯ ОТ НЕСЧАСТНЫХ СЛУЧАЕВ</strong><br/>
-                        <strong>№ {$insurances->number} от {if !empty($insurances->created_date)}{$insurances->created_date|date}{elseif !empty($contract->inssuance_date)}{$contract->inssuance_date|date}{else}{$insurances->create_date|date}{/if}г.</strong><br/>
+                        <strong>№ {$insurances->number} от {$insurances->create_date|date} г.</strong><br/>
                     </td>
                     <td style="width: 20%"></td>
                 </tr>
@@ -90,11 +90,11 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая сумма, руб:</strong></td>
-                    <td colspan="2">{$insuranceSum} ({($insuranceSum)|price_string})</td>
+                    <td colspan="2">{$insurances->insuranceSum} ({($insurances->insuranceSum)|price_string})</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая премия, руб:</strong></td>
-                    <td colspan="2">{$insurance} ({$insurance|price_string})</td>
+                    <td colspan="2">{$insurances->amount} ({$insurances->amount|price_string})</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Порядок оплаты страховой премии: </strong></td>
