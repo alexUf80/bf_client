@@ -146,9 +146,9 @@
         <div class="">
             <div class="form_row">
                 <div class="check">
-                    <input type="hidden" class="custom-checkbox" name="ind_usloviya" value="1"/>
-                    <input type="checkbox" class="custom-checkbox" id="ind_usloviya" value="1"/>
-                    <label for="ind_usloviya" class="check_box -gil-m">
+                    <input type="hidden" class="custom-checkbox" name="inf_pdn" value="1"/>
+                    <input type="checkbox" class="custom-checkbox" id="inf_pdn" value="1"/>
+                    <label for="inf_pdn" class="check_box -gil-m">
                         <a style="color: #4A2982"
                            href="{$config->root_url}/preview/inf_message_pdn?contract_id={$order->contract->id}"
                            target="_blank">
