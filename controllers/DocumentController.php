@@ -180,7 +180,9 @@ class DocumentController extends Controller
                     $prolo_count = 0;
                     foreach ($prolo_operations as $prolo_operation) {
                         $prolo_count++;
-                        break;
+                        if($prolo_operation->o_id == $param_value['operation_id']){
+                            break;
+                        }
                     }
 
                     $prolo_services_cost_arrs = $this->ProloServicesCost->get($prolo_count);
