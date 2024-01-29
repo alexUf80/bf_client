@@ -191,13 +191,14 @@ class Best2PayCallback extends Controller
                                     ), $transaction->id);
                                     $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
 
+                                    $docs = 2;
+                                    
                                     $rest_amount = $rest_amount - $ins_amount;
 
                                     //Отправляем чек по страховке
                                     $this->Cloudkassir->send_insurance($operation_id);
                                     $payment_amount -= $ins_amount;
 
-                                    $docs = 2;
                                 }
 
                                 // продлеваем контракт
