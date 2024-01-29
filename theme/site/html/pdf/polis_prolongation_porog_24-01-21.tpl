@@ -90,11 +90,11 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая сумма, руб:</strong></td>
-                    <td colspan="2">{$insurances->insuranceSum} ({($insurances->insuranceSum)|price_string})</td>
+                    <td colspan="2">{$insurance_coverage} ({($insurance_coverage)|price_string})</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Страховая премия, руб:</strong></td>
-                    <td colspan="2">{$insurances->amount} ({$insurances->amount|price_string})</td>
+                    <td colspan="2">{$insurance_amount} ({$insurance_amount|price_string})</td>
                 </tr>
                 <tr>
                     <td colspan="2"><strong>Порядок оплаты страховой премии: </strong></td>
