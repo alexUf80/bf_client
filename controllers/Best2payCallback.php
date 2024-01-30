@@ -194,10 +194,10 @@ class Best2PayCallback extends Controller
                                     $docs = 2;
                                     
                                     $rest_amount = $rest_amount - $ins_amount;
+                                    $payment_amount -= $ins_amount;
 
                                     //Отправляем чек по страховке
                                     $this->Cloudkassir->send_insurance($operation_id);
-                                    $payment_amount -= $ins_amount;
 
                                 }
 
