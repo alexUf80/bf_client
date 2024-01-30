@@ -24,6 +24,7 @@ class Documents extends Core
         'INF_MESSAGE_PDN' => 'message_pdn.tpl',
         'UVEDOMLENIE_OTKAZ_OT_USLUG' => 'uvedomlenie_otkaz_ot_uslug.tpl',
         'DOGOVOR_REJECT_REASON' => 'dogovor_reject_reason.tpl',
+        'SOGLASIE_NA_VOZVRAT' => 'soglasie_na_vozvrat.tpl',
     );
 
 
@@ -49,6 +50,7 @@ class Documents extends Core
         'INF_MESSAGE_PDN' => 'Информационное сообщение о превышении ПДН',
         'UVEDOMLENIE_OTKAZ_OT_USLUG' => 'Уведомление о праве отказаться от дополнительных услуг',
         'DOGOVOR_REJECT_REASON' => 'Договор на оказание услуги Причина отказа',
+        'SOGLASIE_NA_VOZVRAT' => 'Согласие на возврат просроченной задолженности',
     );
 
     private $client_visible = array(
@@ -73,6 +75,7 @@ class Documents extends Core
         'INF_MESSAGE_PDN' => 1,
         'UVEDOMLENIE_OTKAZ_OT_USLUG' => 1,
         'DOGOVOR_REJECT_REASON' => 1,
+        'SOGLASIE_NA_VOZVRAT' => 1,
     );
 
 
