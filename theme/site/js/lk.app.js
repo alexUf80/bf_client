@@ -121,19 +121,40 @@ function LkApp() {
     };
 
     var _init_agreement_list = function () {
-            $('.js-toggle-agreement-list').click(function (e) {
-                e.preventDefault();
+        $('.js-toggle-agreement-list').click(function (e) {
+            e.preventDefault();
 
-                $('#agreement_list').slideToggle()
-            })
-        }
+            $('#agreement_list').slideToggle()
+        })
+    }
+
+    var _redirect_to_partner = function () {
+
+        let orderId = $('.new_order_box').attr('data-order');
+
+        $.ajax({
+            url: 'ajax/CheckStatus.php',
+            method: 'POST',
+            data: {
+                orderId: orderId
+            },
+            success: function (status) {
+                if(status == 3 || status == 8)
+                {
+                    setTimeout(function () {
+                        window.location.href = "https://365zaim.ru/201/";
+                    }, 7000);
+                }
+            }
+        });
+    };
 
 
     ;(function () {
         _init();
-
         _init_repeat_order();
         _init_agreement_list();
+        _redirect_to_partner();
     })();
 };
 
