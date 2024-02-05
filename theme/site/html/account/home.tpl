@@ -365,7 +365,7 @@
                                 <div class="order_reject_icon"></div>
                                 <div class="pt-4 pr-5 pl-5 text-center">
                                     <small>{$order->reject_reason}</small>
-                                    
+                                    {*}
                                     <div>
                                         <div onclick="clickRedirect()" style="cursor: pointer;"  target="_blank" class="blue-link">
                                             Получите консультацию у наших партнёров.
@@ -374,6 +374,7 @@
                                             <span class="sc-iwsKbI jQhHGA">Лучшие предложения для вас</span>
                                         </div>
                                     </div>
+                                    {*}
                                 </div>
                             </div>
                             {if $reject_block}
