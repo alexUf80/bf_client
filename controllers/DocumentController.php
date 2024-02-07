@@ -274,7 +274,7 @@ class DocumentController extends Controller
                     $contract->amount += $insurance;
                 }
             }
-            else{
+            else if($contract->inssuance_date < '2025-02-06') {
                 if ($contract->amount <= 3999)
                 {
                     $insurance = 590;
@@ -304,6 +304,52 @@ class DocumentController extends Controller
                     $insurance = 2190;
                     $insuranceSum = 85000;
                     $contract->amount += $insurance;
+                }
+            }
+            else{
+
+                // exception_regions = 0
+                // red_regions = 1
+                // yellow_regions = 2
+                // green_regions = 3
+
+                $servise_cost_arr = 
+                [
+                    [["4000","590","30000"],["5000","690","35000"],["7000","890","40000"],["11000","1490","65000"],["100000","2190","85000"]],
+                    [["4000","890","36000"],["5000","1290","44000"],["6000","1490","48000"],["7000","1790","54000"],["8000","1990","58000"],["9000","2390","66000"],["10000","2690","72000"],["11000","2990","78000"],["12000","3290","84000"],["1300","3590","90000"],["14000","3890","96000"],["15000","4190","102000"],["100000","4490","108000"]],
+                    [["4000","590","30000"],["5000","690","35000"],["7000","890","40000"],["11000","1490","65000"],["100000","2190","85000"]],
+                    [["4000","790","34000"],["5000","1090","40000"],["6000","1290","44000"],["7000","1590","50000"],["8000","1790","54000"],["9000","1990","58000"],["10000","2290","64000"],["11000","2490","68000"],["12000","2790","74000"],["1300","2990","78000"],["14000","3290","84000"],["15000","3490","88000"],["100000","3790","94000"]],
+                ];
+
+                $address = $this->Addresses->get_address($user->faktaddress_id);
+        
+                $scoring_type = $this->scorings->get_type('location');
+        
+                if (stripos($address->region, 'кути')) {
+                    $address->region = 'Саха/Якутия';
+                }
+
+                $reg=3;
+                $yellow_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['yellow-regions'])));
+                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $yellow_regions)){
+                    $reg = 2;
+                }
+                $red_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['red-regions'])));
+                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $red_regions)){
+                    $reg = 1;
+                }
+                $exception_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['regions'])));
+                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $exception_regions)){
+                    $reg = 0;
+                }
+
+                $arrs = $servise_cost_arr[$reg];
+                foreach ($arrs as $arr) {
+                    if((int)$arr[0] > $contract->amount){
+                        $insurance = (int)$arr[1];
+                        $insuranceSum = (int)$arr[2];
+                        break;
+                    }
                 }
             }
 
