@@ -274,7 +274,7 @@ class DocumentController extends Controller
                     $contract->amount += $insurance;
                 }
             }
-            else if($contract->inssuance_date < '2025-02-06') {
+            else if($contract->inssuance_date < '2024-02-13 11:30:00') {
                 if ($contract->amount <= 3999)
                 {
                     $insurance = 590;
