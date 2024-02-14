@@ -155,6 +155,8 @@ class StageAddressController extends Controller
                 $this->design->assign('Regaddressfull', $regaddress['adressfull']);
             }
         }
+        $dadata_token = $this->settings->apikeys['dadata']['api_key'];
+        $this->design->assign('dadata_token', $dadata_token);
 
         return $this->design->fetch('stage/address.tpl');
     }
