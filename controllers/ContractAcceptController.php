@@ -24,7 +24,7 @@ class ContractAcceptController extends Controller
 
             $user = $this->users->get_user($contract->user_id);
             if ($user->utm_source == 'kpk' || $user->utm_source == 'part1') {
-                $service_insurance = 0;
+                // $service_insurance = 0;
                 $service_reason = 0;
             }
             
