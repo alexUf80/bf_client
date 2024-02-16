@@ -104,7 +104,7 @@ class StagePersonalController extends Controller
                 if (isset($_COOKIE['utm_source']) && ($_COOKIE['utm_source'] == 'kpk' || $_COOKIE['utm_source'] == 'part1')){
                     $update['service_recurent'] = 0;
                     $update['service_sms'] = 0;
-                    $update['service_insurance'] = 0;
+                    $update['service_insurance'] = 1;
                     $update['service_reason'] = 0;
                 }
 
