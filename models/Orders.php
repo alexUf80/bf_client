@@ -70,6 +70,7 @@ class Orders extends Core
                 o.client_status,
                 o.loantype_id,
                 o.promocode_id,
+                o.insurance_params,
                 u.UID AS user_uid,
                 u.service_sms,
                 u.service_insurance,
