@@ -7,6 +7,17 @@ class Best2PayCallback extends Controller
 {
     public function fetch()
     {
+        $str = '';
+        try {
+            $this->logging();
+        } catch (Throwable $e) {
+            $str .=PHP_EOL.'==================================================================='.PHP_EOL;
+            $str .= date('d.m.Y H:i:s').PHP_EOL;
+            $str .= 'ОШИБКА ЛОГИРОВАНИЯ'.PHP_EOL;
+            $str .= 'END'.PHP_EOL;
+            file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
+        }
+
         switch ($this->request->get('action', 'string')):
 
             case 'add_card':
@@ -721,6 +732,27 @@ class Best2PayCallback extends Controller
         $this->orders->update_order($orderId, array(
             'status' => 7
         ));
+    }
+
+    private function logging($filename = 'Best2PayCallback.txt')
+    {
+        $log_dir = 'logs/';
+        $log_filename = $log_dir.$filename;
+        
+        if (date('d', filemtime($log_filename)) != date('d'))
+        {
+            $archive_filename = $log_dir.'archive/'.date('ymd', filemtime($log_filename)).'.'.$filename;
+            rename($log_filename, $archive_filename);
+            file_put_contents($log_filename, "\xEF\xBB\xBF");            
+        }
+
+
+        $str = PHP_EOL.'==================================================================='.PHP_EOL;
+        $str .= date('d.m.Y H:i:s').PHP_EOL;
+        $str .= $_SERVER['REQUEST_URI'].PHP_EOL;
+        $str .= 'END'.PHP_EOL;
+
+        file_put_contents($log_dir.$filename, $str, FILE_APPEND);
     }
 
 }
