@@ -136,8 +136,9 @@
         </td>
         <td width="50%">{$base_percent*365}%
             Процентная ставка по настоящему Договору является постоянной (фиксированной). 
-            <br>Процентная ставка - ({($base_percent*365)|percent_string} процентов) годовых ({$base_percent}% ({$base_percent|percent_string}) в день)</td>
+            <br>Процентная ставка - ({($base_percent*365)|percent_string} процентов) годовых ({$base_percent}% ({$base_percent|percent_string}) в день)
             <br>Заемщик признает такой размер процентов обоснованным, исходя из высокой степени риска выдачи микрозайма без обеспечения.
+        </td>
     </tr>
     <tr>
         <td align="center" width="10%">5.</td>
