@@ -72,6 +72,22 @@
                                                class="docs_list_link" target="_blank">Уведомление о привлечении 2 лица для взыскания
                                                 задолженности</a></li>
                                     {/if}
+
+                                    {if isset($documents_old)}
+                                        <hr>
+                                        <div class="person_info_title -fs-26" style="margin-bottom: 10px">Архивные документы</div>
+                                        {foreach $documents_old as $document_old}
+                                            {if in_array($document_old->type, ['ANKETA_PEP_24-01-21', 'IND_USLOVIYA_NL_24-01-21', 'DOP_SOGLASHENIE'])}
+                                                <li class="docs_list_item">
+                                                    <a href="{$config->root_url}/document/{$user->id}/{$document_old->id}"
+                                                        class="docs_list_link" target="_blank">
+                                                        {$document_old->name|escape}
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        {/foreach}
+                                    {/if}
+
                                 </ul>
                             </div>
                         </div>
