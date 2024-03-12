@@ -176,7 +176,7 @@
         </td>
     </tr>
     <tr>
-        <td style="width: 10%">{if !isset($insurance)}V{/if}</td>
+        <td style="width: 10%; text-align: center">{if !isset($insurance)}V{/if}</td>
         <td style="width: 10%; text-align: center">Нет</td>
     </tr>
     </tbody>
@@ -193,14 +193,14 @@
 <table border="0.5" cellpadding="5">
     <tbody>
     <tr>
-        <td style="width: 10%" align="center">{if isset($insurance)}V{/if}</td>
+        <td style="width: 10%" align="center">V</td>
         <td style="width: 10%; text-align: center">Да</td>
         <td rowspan="2" style="width: 80%">С предоставлением дополнительных услуг страхования своей банковской карты.
             Услуга предоставляется САО «ВСК», стоимость услуги составляет ({$settings->prolongation_amount} рублей).
         </td>
     </tr>
     <tr>
-        <td style="width: 10%">{if !isset($insurance)}V{/if}</td>
+        <td style="width: 10%"></td>
         <td style="width: 10%; text-align: center">Нет</td>
     </tr>
     </tbody>
@@ -216,13 +216,13 @@
 <table border="0.5" cellpadding="5">
     <tbody>
     <tr>
-        <td style="width: 10%" align="center">{if isset($insurance)}V{/if}</td>
+        <td style="width: 10%" align="center">V</td>
         <td style="width: 10%; text-align: center">Да</td>
         <td rowspan="2" style="width: 80%">В случае принятия решения об оплате страховой премии по договору страхования за счет собственных средств согласен сообщить о своем решении посредством отправки текстового сообщения в  произвольной форме на электронную почту info@mkkbf.ru и получить ссылку на оплату страховой премии.
         </td>
     </tr>
     <tr>
-        <td style="width: 10%">{if !isset($insurance)}V{/if}</td>
+        <td style="width: 10%"></td>
         <td style="width: 10%; text-align: center">Нет</td>
     </tr>
     </tbody>
@@ -280,7 +280,7 @@
             –
             код, являющийся аналогом<br>собственноручной подписи, отправленный<br>на
             номер {$lastname|upper} {$firstname|upper} {$patronymic|upper} {$phone_mobile} введен
-            верно<br>в {$created}
+            верно<br>в {$document->created}
         </td>
     </tr>
 </table>
