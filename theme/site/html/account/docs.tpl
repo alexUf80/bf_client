@@ -77,7 +77,7 @@
                                         <hr>
                                         <div class="person_info_title -fs-26" style="margin-bottom: 10px">Архивные документы</div>
                                         {foreach $documents_old as $document_old}
-                                            {if in_array($document_old->type, ['ANKETA_PEP_24-01-21', 'IND_USLOVIYA_NL_24-01-21', 'DOP_SOGLASHENIE', 'POLIS_24-01-21', 'KID_24-01-21', 'UVEDOMLENIE_OTKAZ_OT_USLUG', 'SOGLASIE_OPD'])}
+                                            {if in_array($document_old->type, ['ANKETA_PEP_24-01-21', 'IND_USLOVIYA_NL_24-01-21', 'DOP_SOGLASHENIE', 'POLIS_24-01-21', 'KID_24-01-21', 'UVEDOMLENIE_OTKAZ_OT_USLUG', 'SOGLASIE_OPD_24_03_14', 'SOGLASIE_KO'])}
                                                 <li class="docs_list_item">
                                                     <a href="{$config->root_url}/document/{$user->id}/{$document_old->id}"
                                                         class="docs_list_link" target="_blank">
