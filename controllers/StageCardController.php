@@ -217,7 +217,18 @@ class StageCardController extends Controller
             $this->documents->create_document(array(
                 'user_id' => $this->user->id,
                 'order_id' => $order_id,
-                'type' => 'SOGLASIE_OPD',
+                // до 2024-03-14 15:30
+                // 'type' => 'SOGLASIE_OPD',
+                'type' => 'SOGLASIE_OPD_24_03_14',
+                'params' => json_encode($params),
+            ));
+
+            // Согласие на получение КО
+            // с 2024-03-14 15:30
+            $this->documents->create_document(array(
+                'user_id' => $this->user->id,
+                'order_id' => $order_id,
+                'type' => 'SOGLASIE_KO',
                 'params' => json_encode($params),
             ));
 
