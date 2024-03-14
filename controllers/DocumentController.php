@@ -281,6 +281,11 @@ class DocumentController extends Controller
                     $contract->amount += $insurance;
                 }
             }
+            // !!!!!!!
+            else if($contract->order_id == 34287) {
+                $contract->amount += 1290.00;
+            }
+            // !!!!!!!
             else if($contract->inssuance_date < '2024-02-13 11:30:00') {
                 if ($contract->amount <= 3999)
                 {
