@@ -37,13 +37,10 @@ class AccountDocsController extends Controller
                 foreach ($documents_all as $document_all) {
                     foreach ($documents as $document) {
                         if ($document_all->id == $document->id) {
-                            $is_new = true;
                             continue;
                         }
                     }
-                    if ($is_new == false) {
-                        $documents_old[] = $document_all;
-                    }
+                    $documents_old[] = $document_all;
                 }
             }
         }
