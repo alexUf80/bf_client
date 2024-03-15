@@ -38,7 +38,6 @@
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_about_the_structure_and_composition_of_the_participants_of_the_microfinance_organization.pdf" target="_blank">Информация о структуре и составе участников микрофинансовой организации ООО МКК БФ</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/instructions_for_repayment_of_the_loan.pdf" target="_blank">Инструкция по погашению займа</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Consent_OPD_and_KI.pdf" target="_blank">Согласие на обработку персональных данных, и получение информации из бюро кредитных историй</a></li>
-                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/audit.pdf" target="_blank">Результат аудита ООО МКК «Баренц Финанс»</a></li>
                   </ul>
                 </div>
                 <div class="col-md-6">
