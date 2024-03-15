@@ -49,13 +49,25 @@
                             <div class="col-md-6">
                                 <ul class="docs_list">
                                     <li class="docs_list_item">
-                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a>
-                                    </li>
-                                    <li class="docs_list_item">
                                         <a class="docs_list_link" href="/files/about/general_terms_of_a_consumer_microloan.pdf" target="_blank">Общие условия договора потребительского микрозайма</a>
                                     </li>
                                     <li class="docs_list_item">
                                         <a class="docs_list_link" href="/files/about/predostavlenie_vozvrat_new.pdf" target="_blank">Информация об условиях предоставления, использования и возврата потребительского микрозайма</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_19_11_2021.pdf" target="_blank">Правила предоставления потребительских займов от 19.11.2021</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_01_03_2022.pdf" target="_blank">Правила предоставления потребительских займов от 01.03.2022</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_02_06_2022.pdf" target="_blank">Правила предоставления потребительских займов от 02.06.2022</a>
+                                    </li>
+                                    <li class="docs_list_item">
+                                        <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_16_09_2022.pdf" target="_blank">Правила предоставления потребительских займов от 16.09.2022</a>
                                     </li>
                                     <hr>
                                     {foreach $documents as $document}
