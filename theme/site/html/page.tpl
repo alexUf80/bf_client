@@ -38,6 +38,7 @@
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_about_the_structure_and_composition_of_the_participants_of_the_microfinance_organization.pdf" target="_blank">Информация о структуре и составе участников микрофинансовой организации ООО МКК БФ</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/instructions_for_repayment_of_the_loan.pdf" target="_blank">Инструкция по погашению займа</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Consent_OPD_and_KI.pdf" target="_blank">Согласие на обработку персональных данных, и получение информации из бюро кредитных историй</a></li>
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/audit.pdf" target="_blank">Результат аудита ООО МКК «Баренц Финанс»</a></li>
                   </ul>
                 </div>
                 <div class="col-md-6">
@@ -46,6 +47,9 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/egrul.pdf" target="_blank">ЕГРЮЛ</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/requisites_barents.pdf" target="_blank">Реквизиты ООО МКК Баренц Финанс</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav.pdf" target="_blank">Устав ООО МКК Баренц Финанс</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_03_08_2022.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 03.08.2022</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_14_06_2023.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 14.06.2023</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_28_06_2022.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 28.06.2022</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/baza_po_riskam.pdf" target="_blank">Базовый стандарт по управлению рисками микрофинансовых организаций</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/pravila_predostavleniya_uslugi_prichina_otkaza_bf.pdf" target="_blank">Правила предоставления услуги причина отказа</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a></li>
@@ -61,6 +65,22 @@
                         {*}
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Агентский_договор_между_ИП_и_МКК_docx.pdf" target="_blank">Агентский договор между ИП и МКК</Агентский договор между ИП и МКК 115 ФЗ</a></li>                   
                         {*}
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Архив правил предоставления займов</h2>
+            <div class="row">
+              <div class="col-md-6">
+                  <ul class="docs_list">				
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans_19_11_2021.pdf" target="_blank">Правила предоставления потребительских займов от 19.11.2021</a></li>
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans_01_03_2022.pdf" target="_blank">Правила предоставления потребительских займов от 01.03.2022</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="docs_list">
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans_02_06_2022.pdf" target="_blank">Правила предоставления потребительских займов от 02.06.2022</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans_16_09_2022.pdf" target="_blank">Правила предоставления потребительских займов от 16.09.2022</a></li>
                     </ul>
                 </div>
             </div>
