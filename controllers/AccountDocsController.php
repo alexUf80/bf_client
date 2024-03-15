@@ -37,10 +37,14 @@ class AccountDocsController extends Controller
                 foreach ($documents_all as $document_all) {
                     foreach ($documents as $document) {
                         if ($document_all->id == $document->id) {
+                            $is_new = true;
                             continue;
                         }
                     }
-                    $documents_old[] = $document_all;
+                    if ($is_new == false) {
+                        $documents_old[] = $document_all;
+                    }
+                    $is_new = false;
                 }
             }
         }
@@ -78,6 +82,7 @@ class AccountDocsController extends Controller
         }
 
         $this->design->assign('recovers', $recovers);
+        $this->design->assign('last_order_id', $last_order->id);
 
         return $this->design->fetch('account/docs.tpl');
     }
