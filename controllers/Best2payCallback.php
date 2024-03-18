@@ -461,12 +461,25 @@ class Best2PayCallback extends Controller
 
                         } else {
                             $this->design->assign('error', 'При оплате произошла ошибка: Недостаточно средств');
+                            // логирование не достаточно средств
+                            $str .=PHP_EOL.'==================================================================='.PHP_EOL;
+                            $str .= date('d.m.Y H:i:s').PHP_EOL;
+                            $str .= 'НЕДОСТАТОЧНО СДЕРСТВ ДЛЯ register_id = ' . $register_id .PHP_EOL;
+                            $str .= 'END'.PHP_EOL;
+                            file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
                         }
                     } else {
                         $reason_code_description = $this->BestPay->get_reason_code_description($code);
                         $this->design->assign('reason_code_description', $reason_code_description);
 
                         $this->design->assign('error', 'При оплате произошла ошибка.');
+                        
+                        // логирование не найденной операции
+                        $str .=PHP_EOL.'==================================================================='.PHP_EOL;
+                        $str .= date('d.m.Y H:i:s').PHP_EOL;
+                        $str .= 'НЕ НАЙДЕНА ОПЕРАЦИЯ ДЛЯ register_id = ' . $register_id .PHP_EOL;
+                        $str .= 'END'.PHP_EOL;
+                        file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
                     }
                     $this->transactions->update_transaction($transaction->id, array(
                         'operation' => $operation,
@@ -479,6 +492,12 @@ class Best2PayCallback extends Controller
             }
         } else {
             $this->design->assign('error', 'Ошибка: Транзакция не найдена');
+            // логирование не найденной транзакции
+            $str .=PHP_EOL.'==================================================================='.PHP_EOL;
+            $str .= date('d.m.Y H:i:s').PHP_EOL;
+            $str .= 'НЕ НАЙДЕНА ТРАНЗАКЦИЯ ДЛЯ register_id = ' . $register_id .PHP_EOL;
+            $str .= 'END'.PHP_EOL;
+            file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
         }
 
 
