@@ -38,6 +38,7 @@
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_about_the_structure_and_composition_of_the_participants_of_the_microfinance_organization.pdf" target="_blank">Информация о структуре и составе участников микрофинансовой организации ООО МКК БФ</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/instructions_for_repayment_of_the_loan.pdf" target="_blank">Инструкция по погашению займа</a></li>
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Consent_OPD_and_KI.pdf" target="_blank">Согласие на обработку персональных данных, и получение информации из бюро кредитных историй</a></li>
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_on_115_FZ.pdf" target="_blank">Памятка клиенту по 115 ФЗ</a></li>                   
                   </ul>
                 </div>
                 <div class="col-md-6">
@@ -51,6 +52,7 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_28_06_2022.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 28.06.2022</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/baza_po_riskam.pdf" target="_blank">Базовый стандарт по управлению рисками микрофинансовых организаций</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/pravila_predostavleniya_uslugi_prichina_otkaza_bf.pdf" target="_blank">Правила предоставления услуги причина отказа</a></li>
+                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/usloviya_uslugi_prichina_otkaza_bf.pdf" target="_blank">Условия предоставления услуги Причина отказа</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/general_terms_of_a_consumer_microloan.pdf" target="_blank">Общие условия договора потребительского микрозайма</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/certificate_of_entry_of_information_into_the_state_register.pdf" target="_blank">Свидетельство о внесении сведений в государственный реестр МФО</a></li>
@@ -59,7 +61,6 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_provided_to_the_recipient_of_the_financial_service.pdf" target="_blank">Информация предоставляемая получателю финансовой услуги</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/information_on_the_right_of_consumers_of_financial_services_to_appeal_to_the_financial_commissioner.pdf" target="_blank">Информация о праве потребителей финансовых услуг на обращение к финансовому уполномоченному</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/about_borrowers_and_other_users_pd.pdf" target="_blank">Положение об обработке  ПД заемщиков и иных пользователей сайта</a></li>                   
-                        <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_on_115_FZ.pdf" target="_blank">Памятка клиенту по 115 ФЗ</a></li>                   
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/helper_document.pdf" target="_blank">Справочник финансовых продуктов</a></li>
                         {*}
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Агентский_договор_между_ИП_и_МКК_docx.pdf" target="_blank">Агентский договор между ИП и МКК</Агентский договор между ИП и МКК 115 ФЗ</a></li>                   
