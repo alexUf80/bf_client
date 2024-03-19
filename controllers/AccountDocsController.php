@@ -30,7 +30,7 @@ class AccountDocsController extends Controller
 
         if ($last_order = $this->orders->get_last_order($this->user->id)){
             $documents = $this->documents->get_documents(array('order_id' => $last_order->id, 'client_visible'=>1));
-            if ($last_order->id == 34288) {
+            // if ($last_order->id == 34288) {
                 $documents_all = $this->documents->get_documents(array('user_id' => $this->user->id, 'client_visible'=>1));
                 $documents_old = [];
                 $is_new = false;
@@ -46,7 +46,7 @@ class AccountDocsController extends Controller
                     }
                     $is_new = false;
                 }
-            }
+            // }
         }
         else{
             $documents = $this->documents->get_documents(array('user_id' => $this->user->id, 'client_visible'=>1));
@@ -54,9 +54,9 @@ class AccountDocsController extends Controller
         
 //echo __FILE__.' '.__LINE__.'<br /><pre>';var_dump($last_order);echo '</pre><hr />';        
         $this->design->assign('documents', $documents);
-        if ($last_order->id == 34288) {
+        // if ($last_order->id == 34288) {
             $this->design->assign('documents_old', $documents_old);
-        }
+        // }
 
         $receipts = $this->Receipts->get_receipts($this->user->id);
         $this->design->assign('receipts', $receipts);
