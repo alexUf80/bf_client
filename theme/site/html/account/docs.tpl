@@ -59,6 +59,7 @@
                                     <li class="docs_list_item">
                                         <a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a>
                                     </li>
+                                    {*}
                                     {if $last_order_id != 34288}
                                         <li class="docs_list_item">
                                             <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_19_11_2021.pdf" target="_blank">Правила предоставления потребительских займов от 19.11.2021</a>
@@ -73,6 +74,7 @@
                                             <a class="docs_list_link" href="/files/about/rules_for_granting_microloans_16_09_2022.pdf" target="_blank">Правила предоставления потребительских займов от 16.09.2022</a>
                                         </li>
                                     {/if}
+                                    {*}
                                     <hr>
                                     {foreach $documents as $document}
                                             <li class="docs_list_item">
