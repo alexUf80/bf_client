@@ -49,6 +49,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="docs_list">				
+                            {*}
+                            <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Pamyatka_poluchatelya_fin_uslug.pdf" target="_blank">Порядок и сроки рассмотрения обращений потребителей</a></li>
+                            {*}
                             <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Procedure_and_terms_of_consideration_of_consumer_complaints.pdf" target="_blank">Порядок и сроки рассмотрения обращений потребителей</a></li>
                         </ul>
                     </div>

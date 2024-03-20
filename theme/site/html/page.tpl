@@ -42,6 +42,8 @@
                       {*}
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/memo_on_115_FZ.pdf" target="_blank">Памятка клиенту по 115 ФЗ</a></li>                   
                       <li class="docs_list_item"><a class="docs_list_link" href="/files/about/helper_document.pdf" target="_blank">Справочник финансовых продуктов</a></li>
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Soglasie_KO.pdf" target="_blank">Согласие заемщика на получение кредитного отчета</a></li>                   
+                      <li class="docs_list_item"><a class="docs_list_link" href="/files/about/Soglasie_PD.pdf" target="_blank">Согласие на обработку персональных данных заемщика</a></li>
                   </ul>
                 </div>
                 <div class="col-md-6">
