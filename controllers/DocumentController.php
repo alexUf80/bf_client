@@ -282,7 +282,7 @@ class DocumentController extends Controller
                 }
             }
             // !!!!!!!
-            else if($contract->order_id == 34287) {
+            else if($contract->order_id == 34287 || $contract->order_id == 90739) {
                 $insurance = 1290;
                 $insuranceSum = 44000;
                 $contract->amount += $insurance;

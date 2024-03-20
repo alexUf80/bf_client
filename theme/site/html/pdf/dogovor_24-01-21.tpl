@@ -1,5 +1,5 @@
 <div>
-
+{$contract->amount} + {$insurance_cost}
 </div>
 <table align="center">
     <tr>
@@ -407,20 +407,22 @@
 <div>
 
 </div>
-<table style="width: 50%">
-    <tr>
-        <td><strong>Кредитор</strong></td>
-        <td>Кройтор В.В</td>
-    </tr>
-    <tr>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
-    </tr>
-</table>
 <table style="page-break-after: always">
     <tr>
-        <td></td>
-        <td>
+        <td style="width: 50%">
+            <table>
+                <tr>
+                    <td><strong>Кредитор</strong></td>
+                    <td>Кройтор В.В</td>
+                </tr>
+                <tr>
+                    <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+                    <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 50%">
+            <br><br><br>
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
@@ -569,20 +571,22 @@
 <div>
 
 </div>
-<table style="width: 50%">
-    <tr>
-        <td><strong>Кредитор</strong></td>
-        <td>Кройтор В.В</td>
-    </tr>
-    <tr>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
-        <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
-    </tr>
-</table>
 <table>
     <tr>
-        <td></td>
-        <td>
+        <td style="width: 50%">
+            <table>
+                <tr>
+                    <td><strong>Кредитор</strong></td>
+                    <td>Кройтор В.В</td>
+                </tr>
+                <tr>
+                    <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfSigna.png"></td>
+                    <td><img src="{$config->root_dir}/theme/site/html/pdf/i/bfStamp.png"></td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 50%">
+            <br><br><br>
             <table border="1" cellpadding="4">
                 <tr>
                     <td>Подписано Аналогом собственноручной подписи (АСП)<br>Идентификатор клиента: {$contract->user_id}
