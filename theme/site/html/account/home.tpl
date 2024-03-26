@@ -443,6 +443,9 @@
                                             <span class="text-muted">до: {$order->prolongation_date}</span>
                                             <div class="row">
                                                 <div class="col-md-4 col-12">
+                                                    {if $order->order_id == 90740}
+                                                        {$prolongation_insurance_amount = 0}
+                                                    {/if}
                                                     <input type="text" readonly="" style="background-color: #fbfbfb;"
                                                            class="form-control text-right" name="amount_"
                                                            value="{($prolongation_amount + $prolongation_insurance_amount)}"
