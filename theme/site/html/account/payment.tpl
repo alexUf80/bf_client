@@ -125,6 +125,9 @@
                         <div class="col-12">
                             <div class="-fs-32 -gil-b -green text-center pb-3">
                                 {if $prolongation}
+                                    {if $order_id == 90740}
+                                        {$ins_amount = 0}
+                                    {/if}
                                     Сумма платежа {$amount + $ins_amount} руб.
                                 {else}
                                     Сумма платежа {$amount} руб.
