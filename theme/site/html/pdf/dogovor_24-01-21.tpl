@@ -1,5 +1,5 @@
 <div>
-{$contract->amount} + {$insurance_cost}
+
 </div>
 <table align="center">
     <tr>
