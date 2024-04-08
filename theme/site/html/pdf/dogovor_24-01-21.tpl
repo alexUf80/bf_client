@@ -55,8 +55,8 @@
     адресу: {$regaddress_full}, с другой стороны, далее вместе именуемые Стороны, заключили настоящий Договор о
     нижеследующем:
 </div>
-<div align="justify">- Займодавец предоставляет Заемщику денежные средства в размере {($contract->amount + $insurance_cost)|upper}
-    ({($contract->amount + $insurance_cost)|price_string|upper}), а Заемщик обязуется
+<div align="justify">- Займодавец предоставляет Заемщику денежные средства в размере {($amount)|upper}
+    ({($amount)|price_string|upper}), а Заемщик обязуется
     возвратить Займодавцу сумму займа и уплатить проценты на нее в срок, указанный в п. 2 настоящего Договора.
     В случае если по настоящему Договору срок возврата потребительского кредита (займа) на момент его заключения не
     превышает одного
@@ -102,7 +102,7 @@
         <td width="40%">Сумма кредита (займа) или лимит кредитования
             и порядок его изменения
         </td>
-        <td width="50%">Сумма займа составляет {($contract->amount + $insurance_cost)|upper} ({($contract->amount + $insurance_cost)|price_string|upper}). Лимит
+        <td width="50%">Сумма займа составляет {($amount)|upper} ({($amount)|price_string|upper}). Лимит
             кредитованияи порядок его изменения - ОТСУТСВУЕТ.
         </td>
     </tr>
@@ -171,8 +171,8 @@
         </td>
         <td width="50%">
             Количество платежей - 1 (один). 
-            Размер платежа - {$return_amount_percents + $contract->amount + $insurance_cost} рублей. 
-            Размер платежа состоит из Суммы микрозайма в размере  {$contract->amount + $insurance_cost} рублей и процентов за пользование Суммой микрозайма в размере {$return_amount_percents} рублей. 
+            Размер платежа - {$return_amount_percents + $amount} рублей. 
+            Размер платежа состоит из Суммы микрозайма в размере  {$amount} рублей и процентов за пользование Суммой микрозайма в размере {$return_amount_percents} рублей. 
             Дата платежа – {$contract->end_date|date} г.  
         </td>
     </tr>
@@ -491,15 +491,15 @@
     </tr>
     <tr>
         <td>{$contract->end_date|date}</td>
-        <td>{$return_amount_percents + $contract->amount + $insurance_cost}</td>
-        <td>{$contract->amount + $insurance_cost}</td>
+        <td>{$return_amount_percents + $amount}</td>
+        <td>{$amount}</td>
         <td>{$return_amount_percents}</td>
         <td>0</td>
     </tr>
     <tr>
         <td>Общая сумма выплат:</td>
-        <td>{$return_amount_percents + $contract->amount + $insurance_cost}</td>
-        <td>{$contract->amount + $insurance_cost}</td>
+        <td>{$return_amount_percents + $amount}</td>
+        <td>{$amount}</td>
         <td>{$return_amount_percents}</td>
         <td></td>
     </tr>
