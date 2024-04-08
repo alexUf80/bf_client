@@ -688,7 +688,8 @@ class DocumentController extends Controller
             }
 
             if($document->type == 'UVEDOMLENIE_OTKAZ_OT_USLUG'){
-                $dto = new DateTime($contract->inssuance_date);
+                // $dto = new DateTime($contract->inssuance_date);
+                $dto = new DateTime($document->created);
                 $dto->modify('+30 days');
                 $limit_date = $dto->format('d.m.Y');
                 $this->design->assign('limit_date', $limit_date);
@@ -698,6 +699,8 @@ class DocumentController extends Controller
 
             $this->design->assign('contract', $contract);
 
+            foreach ($user as $key => $value)
+                $this->design->assign($key, $value);
 
             foreach ($document->params as $param_name => $param_value)
             {
@@ -750,10 +753,9 @@ class DocumentController extends Controller
                     $this->design->assign($param_name, $param_value);
             }
 
-            $this->design->assign('document', $document);
+            $this->design->assign('created', $document->created);
 
-            foreach ($user as $key => $value)
-                $this->design->assign($key, $value);
+            $this->design->assign('document', $document);
 
             $regaddress = $this->Addresses->get_address($user->regaddress_id);
             $regaddress_full = $regaddress->adressfull;
@@ -799,6 +801,11 @@ class DocumentController extends Controller
                 $insurance_params = unserialize($order->insurance_params);
                 $insurance = $insurance_params['i_p'];
                 $insuranceSum = $insurance_params['i_a'];
+            }
+            else if ($contract->inssuance_date < '2023-02-28 13:00:00') {
+                $insurance = 390;
+                $insuranceSum = 20000;
+                $contract->amount += $insurance;
             }
             else if ($contract->inssuance_date < '2023-10-24') {
                 if ($contract->amount <= 4999)
@@ -859,12 +866,25 @@ class DocumentController extends Controller
                     $contract->amount += $insurance;
                 }
             }
-            else{
+            else if($contract->inssuance_date < '2024-02-27') {
 
                 // exception_regions = 0
                 // red_regions = 1
                 // yellow_regions = 2
                 // green_regions = 3
+
+                if ($document->type == 'POLIS_24-01-21') {
+                    $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
+                    
+                    $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
+                    $ins_sum = 0;
+                    foreach ($insurances as $ins) {
+                        if (date('Y-m-d', strtotime($ins->create_date)) == date('Y-m-d', strtotime($p2p_operation->created))){
+                            $insurance = $ins->amount;
+                        }
+                    }
+                    $full_amount = $p2p_operation->amount;
+                }
 
                 $servise_cost_arr = 
                 [
@@ -874,34 +894,79 @@ class DocumentController extends Controller
                     [["4000","790","34000"],["5000","1090","40000"],["6000","1290","44000"],["7000","1590","50000"],["8000","1790","54000"],["9000","1990","58000"],["10000","2290","64000"],["11000","2490","68000"],["12000","2790","74000"],["1300","2990","78000"],["14000","3290","84000"],["15000","3490","88000"],["100000","3790","94000"]],
                 ];
 
-                $address = $this->Addresses->get_address($user->faktaddress_id);
-        
-                $scoring_type = $this->scorings->get_type('location');
-        
-                if (stripos($address->region, 'кути')) {
-                    $address->region = 'Саха/Якутия';
+                foreach ($servise_cost_arr as $servise_cost_ar) {
+                    foreach ($servise_cost_ar as $servise_cost_a) {
+                        if ($servise_cost_a[0] > $full_amount-$insurance && $servise_cost_a[1] == $insurance) {
+                            $insuranceSum = (int)$servise_cost_a[2];
+                        }
+                    }
                 }
 
-                $reg=3;
-                $yellow_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['yellow-regions'])));
-                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $yellow_regions)){
-                    $reg = 2;
-                }
-                $red_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['red-regions'])));
-                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $red_regions)){
-                    $reg = 1;
-                }
-                $exception_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['regions'])));
-                if(in_array(mb_strtolower(trim($address->region), 'utf8'), $exception_regions)){
-                    $reg = 0;
+                // $address = $this->Addresses->get_address($user->faktaddress_id);
+        
+                // $scoring_type = $this->scorings->get_type('location');
+        
+                // if (stripos($address->region, 'кути')) {
+                //     $address->region = 'Саха/Якутия';
+                // }
+
+                // $reg=3;
+                // $yellow_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['yellow-regions'])));
+                // if(in_array(mb_strtolower(trim($address->region), 'utf8'), $yellow_regions)){
+                //     $reg = 2;
+                // }
+                // $red_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['red-regions'])));
+                // if(in_array(mb_strtolower(trim($address->region), 'utf8'), $red_regions)){
+                //     $reg = 1;
+                // }
+                // $exception_regions = array_map('trim', explode(',', mb_strtolower($scoring_type->params['regions'])));
+                // if(in_array(mb_strtolower(trim($address->region), 'utf8'), $exception_regions)){
+                //     $reg = 0;
+                // }
+
+                // $arrs = $servise_cost_arr[$reg];
+                // // var_dump($arrs);
+                // // die;
+                // foreach ($arrs as $arr) {
+                //     if((int)$arr[0] > $contract->amount){
+                //         $insurance = (int)$arr[1];
+                //         $insuranceSum = (int)$arr[2];
+                //         break;
+                //     }
+                // }
+            }
+            else{
+                // exception_regions = 0
+                // red_regions = 1
+                // yellow_regions = 2
+                // green_regions = 3
+
+                if ($document->type == 'POLIS_24-01-21') {
+                    $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
+                    
+                    $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
+                    $ins_sum = 0;
+                    foreach ($insurances as $ins) {
+                        if (date('Y-m-d', strtotime($ins->create_date)) == date('Y-m-d', strtotime($p2p_operation->created))){
+                            $insurance = $ins->amount;
+                        }
+                    }
+                    $full_amount = $p2p_operation->amount;
                 }
 
-                $arrs = $servise_cost_arr[$reg];
-                foreach ($arrs as $arr) {
-                    if((int)$arr[0] > $contract->amount){
-                        $insurance = (int)$arr[1];
-                        $insuranceSum = (int)$arr[2];
-                        break;
+                $servise_cost_arr = 
+                [
+                    [["4000","890","36000"],["5000","1290","44000"],["6000","1490","48000"],["7000","1790","54000"],["8000","1990","58000"],["10000","2690","72000"],["11000","2990","78000"],["12000","3290","84000"],["13000","3590","90000"],["14000","3890","96000"],["15000","4190","102000"],["100000","4490","108000"]],
+                    [["4000","890","36000"],["5000","1290","44000"],["6000","1490","48000"],["7000","1790","54000"],["8000","1990","58000"],["9000","2390","66000"],["10000","2690","72000"],["11000","2990","78000"],["12000","3290","84000"],["13000","3590","90000"],["14000","3890","96000"],["15000","4190","102000"],["100000","4490","108000"]],
+                    [["4000","890","36000"],["5000","1290","44000"],["7000","1490","48000"],["8000","1990","58000"],["9000","2390","66000"],["10000","2690","72000"],["11000","2990","78000"],["12000","3290","84000"],["13000","3590","90000"],["14000","3890","96000"],["15000","4190","102000"],["100000","4490","108000"]],
+                    [["4000","890","36000"],["5000","1290","44000"],["6000","1490","48000"],["7000","1790","54000"],["9000","1990","58000"],["10000","2690","72000"],["11000","2990","78000"],["12000","3290","84000"],["13000","3590","90000"],["14000","3890","96000"],["15000","4190","102000"],["100000","4490","108000"]]
+                ];
+
+                foreach ($servise_cost_arr as $servise_cost_ar) {
+                    foreach ($servise_cost_ar as $servise_cost_a) {
+                        if ($servise_cost_a[0] > $full_amount-$insurance && $servise_cost_a[1] == $insurance) {
+                            $insuranceSum = (int)$servise_cost_a[2];
+                        }
                     }
                 }
             }
