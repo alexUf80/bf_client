@@ -273,24 +273,51 @@ class DocumentController extends Controller
         if (!empty($insurance) || isset($contract) && !empty($contract->service_insurance)) {
 
             $order = $this->orders->get_order($contract->order_id);
-            if ($order->insurance_params) {
-                $insurance_params = unserialize($order->insurance_params);
-                $insurance = $insurance_params['i_p'];
-                $insuranceSum = $insurance_params['i_a'];
-            }
-            else if ($contract->inssuance_date < '2023-02-28 13:00:00') {
+            // if ($order->insurance_params) {
+            //     $insurance_params = unserialize($order->insurance_params);
+            //     $insurance = $insurance_params['i_p'];
+            //     $insuranceSum = $insurance_params['i_a'];
+            // }
+            // else 
+            if ($contract->inssuance_date < '2023-02-26') {
                 $insurance = 390;
                 $insuranceSum = 20000;
                 $contract->amount += $insurance;
             }
-            else if ($contract->inssuance_date < '2023-10-24') {
-                if ($contract->amount <= 4999)
+            else if ($contract->inssuance_date < '2023-03-19') {
+                if ($contract->amount < 4000)
+                {
+                    $insurance = 390;
+                    $insuranceSum = 20000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 4000 && $contract->amount < 5000)
+                {
+                    $insurance = 490;
+                    $insuranceSum = 25000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 5000 && $contract->amount < 9000)
                 {
                     $insurance = 590;
                     $insuranceSum = 30000;
                     $contract->amount += $insurance;
                 }
-                elseif ($contract->amount >= 5000 && $contract->amount <= 8999)
+                elseif ($contract->amount >= 9000)
+                {
+                    $insurance = 890;
+                    $insuranceSum = 40000;
+                    $contract->amount += $insurance;
+                }
+            }
+            else if ($contract->inssuance_date < '2023-10-24') {
+                if ($contract->amount < 5000)
+                {
+                    $insurance = 590;
+                    $insuranceSum = 30000;
+                    $contract->amount += $insurance;
+                }
+                elseif ($contract->amount >= 5000 && $contract->amount < 9000)
                 {
                     $insurance = 890;
                     $insuranceSum = 40000;
