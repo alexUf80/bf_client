@@ -687,6 +687,21 @@ class DocumentController extends Controller
 
             }
 
+            if($document->type == 'ANKETA_PEP'){
+                $strahovka_2023_12_07 = false;
+                $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
+                $insurance_operations = OperationsORM::where('type', 'INSURANCE')->where('order_id', $document->order_id)->get();
+                foreach ($insurance_operations as $insurance_operation) {
+                    if (substr($p2p_operation->created, 0, 10) < substr($insurance_operation->created, 0, 10)) {
+                        if ($insurance_operation->created > '2023-12-07') {
+                            $strahovka_2023_12_07 = true;
+                            $this->design->assign('strahovka_2023_12_07', $strahovka_2023_12_07);
+                        }
+                        break;
+                    }
+                }
+            }
+
             if($document->type == 'UVEDOMLENIE_OTKAZ_OT_USLUG'){
                 // $dto = new DateTime($contract->inssuance_date);
                 $dto = new DateTime($document->created);
