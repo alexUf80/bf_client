@@ -355,7 +355,7 @@ class Best2PayCallback extends Controller
                                 ));
 
                                 if ($docs == 2) {
-                                    $epl = 2;
+                                    $epl = '2 -- ' . $transaction->prolongation.' - '.$payment_amount.' - '.$contract->loan_percents_summ . ' - ' . (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ);
                                     $document_params['insurance'] = $this->insurances->get_insurance($insurance_id);
                                     $document_params['insurance_amount'] = $ins_amount;
                                     $document_params['insurance_coverage'] = $ins_coverage;
