@@ -330,7 +330,7 @@ class Best2PayCallback extends Controller
 
                             $epl = $transaction->prolongation.' - '.$payment_amount.' - '.$contract->loan_percents_summ . ' - ' . (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ);
                             // $epl = 0;
-                            if (!empty($transaction->prolongation) && $payment_amount >= $contract->loan_percents_summ) {
+                            if (!empty($transaction->prolongation) && round($payment_amount,2) >= round($contract->loan_percents_summ,2)) {
                                 $epl = 1;
                                 if (!empty($collection_order))
                                     $collection_order['prolongation'] = 1;
