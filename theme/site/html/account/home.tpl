@@ -48,7 +48,16 @@
     <div class="content_wrap">
         <div class="container">
             <div style="display: flex">
-                <h1>Личный кабинет</h1>
+                <div style="display: flex">
+                    <h1>Личный кабинет</h1>
+                    <div style="padding: 0 0 15px 20px; max-width: 70%;color: darkblue;">
+                    <b>Уважаемые клиенты!</b> <br>
+                    <b>Зафиксированы сбои при оплате с карт Сбербанка. Специалисты работают над устранением неполадок. 
+                    По возможности просим воспользоваться оплатой с карт других банков. <br>
+                    Спасибо за понимание!</b>
+
+                    </div>
+                </div>
                 <!-- общая информация -->
                 {if !empty($warning_card)}
                     <div style="margin: 15px 50px; color: #ff0009">
