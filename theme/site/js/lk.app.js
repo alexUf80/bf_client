@@ -128,9 +128,23 @@ function LkApp() {
         })
     }
 
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+
     var _redirect_to_partner = function () {
 
         let orderId = $('.new_order_box').attr('data-order');
+
+        let first_load = false;
+        let get_сookie_first_load = getCookie("home_first_load");
+        if (!get_сookie_first_load) {
+            document.cookie = "home_first_load=1; max-age=300";
+            first_load = true;
+        }
 
         $.ajax({
             url: 'ajax/CheckStatus.php',
@@ -141,9 +155,14 @@ function LkApp() {
             success: function (status) {
                 if(status == 3 || status == 8)
                 {
-                    setTimeout(function () {
-                        window.location.href = "https://365zaim.ru/201/";
-                    }, 7000);
+                    if (first_load) {
+                        setTimeout(function () {
+                            window.open("https://denezhka.online/", "_blank");
+                        }, 0);
+                    }
+                    else{
+                        window.open("https://denezhka.online/", "_blank");
+                    }
                 }
             }
         });
