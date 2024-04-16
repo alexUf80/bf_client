@@ -128,26 +128,10 @@ function LkApp() {
         })
     }
 
-    function getCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-      }
-
     var _redirect_to_partner = function () {
 
         let orderId = $('.new_order_box').attr('data-order');
 
-        let first_load = false;
-        let first_load_vitrina = false;
-        let get_сookie_first_load = getCookie("home_first_load");
-        let get_сookie_first_load_vitrina = getCookie("home_first_load_vitrina");
-
-        if (!get_сookie_first_load) {
-            document.cookie = "home_first_load=1; max-age=300";
-            first_load = true;
-        }
 
         $.ajax({
             url: 'ajax/CheckStatus.php',
@@ -158,27 +142,10 @@ function LkApp() {
             success: function (status) {
                 if(status == 3 || status == 8)
                 {
-                    if(document.referrer.includes(window.location.host) && !get_сookie_first_load_vitrina){
-                        if (first_load) {
-                            setTimeout(function () {
-                                if (!get_сookie_first_load_vitrina) {
-                                    document.cookie = "home_first_load_vitrina=1; max-age=300";
-                                    first_load_vitrina = true;
-                                }
-                                window.location.href = "https://denezhka.online/";
-                            }, 2000);
-                        }
-                        else{
-                            if (!get_сookie_first_load_vitrina) {
-                                document.cookie = "home_first_load_vitrina=1; max-age=300";
-                                first_load_vitrina = true;
-                            }
-                            window.location.href = "https://denezhka.online/";
-                        }
-                    }
-                    else{
-                        document.cookie = "home_first_load_vitrina=; max-age=300";
-                    }
+                    alert(1);
+                    setTimeout(function () {
+                        window.location.href = "https://denezhka.online/";
+                    }, 2000);
                 }
             }
         });
