@@ -1,6 +1,6 @@
 ;
 
-function LkApp() {
+function LkApp(reject_block_date) {
     var app = this;
 
     app.order_updater;
@@ -142,9 +142,13 @@ function LkApp() {
             success: function (status) {
                 if(status == 3 || status == 8)
                 {
-                    setTimeout(function () {
-                        window.location.href = "https://denezhka.online/";
-                    }, 2000);
+                    var now = new Date();
+                    var date = new Date(Number(reject_block_date.substring(6, 10)), Number(reject_block_date.substring(3, 5))-1, reject_block_date.substring(0, 2));
+                     if (date > now) {
+                        setTimeout(function () {
+                            window.location.href = "https://denezhka.online/";
+                        }, 2000);
+                    }
                 }
             }
         });
@@ -161,5 +165,5 @@ function LkApp() {
 
 $(function () {
     if ($('.js-lk-app').length > 0)
-        new LkApp();
+        new LkApp(reject_block_date);
 })
