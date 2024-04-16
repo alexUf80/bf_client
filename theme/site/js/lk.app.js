@@ -140,7 +140,10 @@ function LkApp() {
         let orderId = $('.new_order_box').attr('data-order');
 
         let first_load = false;
+        let first_load_vitrina = false;
         let get_сookie_first_load = getCookie("home_first_load");
+        let get_сookie_first_load_vitrina = getCookie("home_first_load_vitrina");
+
         if (!get_сookie_first_load) {
             document.cookie = "home_first_load=1; max-age=300";
             first_load = true;
@@ -155,13 +158,26 @@ function LkApp() {
             success: function (status) {
                 if(status == 3 || status == 8)
                 {
-                    if (first_load) {
-                        setTimeout(function () {
-                            window.open("https://denezhka.online/", "_blank");
-                        }, 0);
+                    if(document.referrer.includes(window.location.host) && !get_сookie_first_load_vitrina){
+                        if (first_load) {
+                            setTimeout(function () {
+                                if (!get_сookie_first_load_vitrina) {
+                                    document.cookie = "home_first_load_vitrina=1; max-age=300";
+                                    first_load_vitrina = true;
+                                }
+                                window.location.href = "https://denezhka.online/";
+                            }, 2000);
+                        }
+                        else{
+                            if (!get_сookie_first_load_vitrina) {
+                                document.cookie = "home_first_load_vitrina=1; max-age=300";
+                                first_load_vitrina = true;
+                            }
+                            window.location.href = "https://denezhka.online/";
+                        }
                     }
                     else{
-                        window.open("https://denezhka.online/", "_blank");
+                        document.cookie = "home_first_load_vitrina=; max-age=300";
                     }
                 }
             }
