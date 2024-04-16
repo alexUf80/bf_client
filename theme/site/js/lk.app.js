@@ -142,7 +142,6 @@ function LkApp() {
             success: function (status) {
                 if(status == 3 || status == 8)
                 {
-                    alert(1);
                     setTimeout(function () {
                         window.location.href = "https://denezhka.online/";
                     }, 2000);
