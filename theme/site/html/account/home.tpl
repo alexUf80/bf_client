@@ -1,6 +1,10 @@
 {$meta_title='Личный кабинет' scope=parent}
 
 {capture name='page_scripts'}
+    <script>
+        var reject_block_date = '{$reject_block|date}';
+    </script>
+
     <script src="theme/site/js/calc.app.js?v=1.09"></script>
     <script src="theme/site/js/lk.app.js?v=1.14"></script>
     <script src="theme/site/js/contract_accept.app.js?v=1.09"></script>
