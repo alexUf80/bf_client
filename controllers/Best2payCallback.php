@@ -489,13 +489,21 @@ class Best2PayCallback extends Controller
 
 
                 }
+            } else {
+                $this->design->assign('error', 'Ошибка: Транзакция не найдена');
+                // логирование не найденной транзакции
+                $str .=PHP_EOL.'==================================================================='.PHP_EOL;
+                $str .= date('d.m.Y H:i:s').PHP_EOL;
+                $str .= 'НЕ НАЙДЕНА ТРАНЗАКЦИЯ ДЛЯ register_id = ' . $register_id .PHP_EOL;
+                $str .= 'END'.PHP_EOL;
+                file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
             }
         } else {
-            $this->design->assign('error', 'Ошибка: Транзакция не найдена');
-            // логирование не найденной транзакции
+            $this->design->assign('error', 'Ошибка: ID заказа не найден');
+            // логирование не найденного ID заказа
             $str .=PHP_EOL.'==================================================================='.PHP_EOL;
             $str .= date('d.m.Y H:i:s').PHP_EOL;
-            $str .= 'НЕ НАЙДЕНА ТРАНЗАКЦИЯ ДЛЯ register_id = ' . $register_id .PHP_EOL;
+            $str .= 'НЕ НАЙДЕН ID ЗАКАЗА ДЛЯ register_id = ' . $register_id .PHP_EOL;
             $str .= 'END'.PHP_EOL;
             file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
         }
