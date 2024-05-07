@@ -188,7 +188,7 @@
         <td style="width: 10%" align="center">{if isset($insurance)}V{/if}</td>
         <td style="width: 10%; text-align: center">Да</td>
         <td rowspan="2" style="width: 80%">С предоставлением дополнительных услуг страхования от Несчастных случаев.
-            Услуга предоставляется САО «ВСК», стоимость услуги составляет ({$insurance} рублей).
+            Услуга предоставляется САО «ВСК»{if isset($insurance)}, стоимость услуги составляет ({$insurance} рублей){/if}.
         </td>
     </tr>
     <tr>
