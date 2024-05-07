@@ -196,14 +196,14 @@
 <table border="0.5" cellpadding="5">
     <tbody>
     <tr>
-        <td style="width: 10%" align="center">V</td>
+        <td style="width: 10%" align="center">{if $contract->id == 8992}{else}V{/if}</td>
         <td style="width: 10%; text-align: center">Да</td>
         <td rowspan="2" style="width: 80%">С предоставлением дополнительных услуг страхования от Несчастных случаев.
             Услуга предоставляется САО «ВСК»{if isset($insurance)}, стоимость услуги составляет ({$insurance} рублей) {/if}.
         </td>
     </tr>
     <tr>
-        <td style="width: 10%; text-align: center"></td>
+        <td style="width: 10%; text-align: center">{if $contract->id == 8992}V{else}{/if}</td>
         <td style="width: 10%; text-align: center">Нет</td>
     </tr>
     </tbody>
