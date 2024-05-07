@@ -170,8 +170,10 @@ class DocumentController extends Controller
                 $limit_date = $dto->format('d.m.Y');
                 $this->design->assign('limit_date', $limit_date);
             }
-            
-            $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+
+            if ($contract) {
+                $contract->end_date = date("d.m.Y H:i:s", strtotime("+" . $contract->period . " days", strtotime($contract->inssuance_date)));
+            }
 
             $this->design->assign('contract', $contract);
 
@@ -257,9 +259,14 @@ class DocumentController extends Controller
                 }
                 $this->design->assign('active_card', $active_card);
             }
-            $amount = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
-            $amount = $amount->amount;
-
+            if ($contract) {
+                $amount = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
+                $amount = $amount->amount;
+            }
+            else{
+                $order = $this->orders->get_order($document->order_id);
+                $amount = $order->amount;
+            }
             $this->design->assign('amount', $amount);
             
             $loan_end_date = date('Y-m-d', strtotime($contract->accept_date) + $contract->period * 86400);
