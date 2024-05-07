@@ -257,6 +257,13 @@ class DocumentController extends Controller
                 }
                 $this->design->assign('active_card', $active_card);
             }
+            $amount = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
+            $amount = $amount->amount;
+
+            $this->design->assign('amount', $amount);
+            
+            $loan_end_date = date('Y-m-d', strtotime($contract->accept_date) + $contract->period * 86400);
+            $this->design->assign('loan_end_date', $loan_end_date);
         }
 
         $insurance = $this->request->get('insurance');
