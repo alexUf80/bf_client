@@ -16,7 +16,7 @@
     <strong>{$lastname|upper} {$firstname|upper} {$patronymic|upper} </strong>
     <br>Дата рождения: {$birth|date_format:'%d.%m.%Y'}, 
     <br>место рождения: <strong>{$birth_place|upper}</strong>, 
-    <br>паспорт серия: <strong>substr($passport_serial, 0, 4) № {$passport_number} выдан {$passport_issued|upper} {$passport_date}</strong>
+    <br>паспорт серия: <strong>{substr($passport_serial, 0, 4)} № {$passport_number} выдан {$passport_issued|upper} {$passport_date}</strong>
     года, код подразделения <strong>{$subdivision_code}</strong>
     <br>ИНН: {$inn}, СНИЛС:{$snils}, 
     <br>в целях принятия решения о предоставлении мне микрозайма, заключения со мной договора микрозайма выражаю свое согласие на получение ООО МКК «Баренц Финанс» (ИНН: 9723120835) из бюро кредитных историй кредитного отчета, содержащего, в том числе, основную часть кредитной истории, определенную в ст.4 Федерального закона «О кредитных историях».
