@@ -119,9 +119,9 @@ class AccountController extends Controller
                         $order['promocode_id'] = $promocode->id;
                 }
 
-                $order['utm_source'] = $_COOKIE['utm_source'];
-                $order['webmaster_id'] = $_COOKIE["wm_id"];
-                $order['click_hash'] = $_COOKIE["clickid"];
+                // $order['utm_source'] = $_COOKIE['utm_source'];
+                // $order['webmaster_id'] = $_COOKIE["wm_id"];
+                // $order['click_hash'] = $_COOKIE["clickid"];
                 if (isset($_COOKIE['url'])) {
                     $order['url'] = $_COOKIE['url'];
                 }
