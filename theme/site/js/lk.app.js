@@ -146,7 +146,7 @@ function LkApp(reject_block_date) {
                     var date = new Date(Number(reject_block_date.substring(6, 10)), Number(reject_block_date.substring(3, 5))-1, reject_block_date.substring(0, 2));
                      if (date > now) {
                         setTimeout(function () {
-                            window.location.href = "https://denezhka.online/";
+                            window.location.href = "https://t.leads.tech/client-click/?redirectUrl=https://barcredit.ru/";
                         }, 2000);
                     }
                 }
