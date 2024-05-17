@@ -390,7 +390,7 @@ class DocumentController extends Controller
                 // yellow_regions = 2
                 // green_regions = 3
 
-                if ($document->type == 'POLIS_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -458,7 +458,7 @@ class DocumentController extends Controller
                 // yellow_regions = 2
                 // green_regions = 3
 
-                if ($document->type == 'POLIS_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -492,8 +492,9 @@ class DocumentController extends Controller
                 // red_regions = 1
                 // yellow_regions = 2
                 // green_regions = 3
+                // var_dump('sas');
 
-                if ($document->type == 'POLIS_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -505,6 +506,9 @@ class DocumentController extends Controller
                     }
                     $full_amount = $p2p_operation->amount;
                 }
+
+                // var_dump($document->type);
+                // die;
 
                 $servise_cost_arr = 
                 [
@@ -522,6 +526,10 @@ class DocumentController extends Controller
                     }
                 }
             }
+
+            // var_dump($insurance);
+            // var_dump($insuranceSum);
+            // die;
 
             $this->design->assign('insurance', $insurance);
             $this->design->assign('insuranceSum', $insuranceSum);
