@@ -97,6 +97,9 @@ class StageCardController extends Controller
 
             if($_COOKIE['utm_source'] =='guruleads')
                 $this->gurulead->sendPendingPostback($order_id, $this->user->id, 2);
+            
+            if($_COOKIE['utm_source'] =='leadstech')
+                $this->Leadgens->sendPendingPostbackLeadstech($order_id, $this->user->id, 0, 0);
 
             if($_COOKIE['utm_source'] =='alians')
                 $this->Leadgens->sendPendingPostbackToAlians($order_id, 2);
