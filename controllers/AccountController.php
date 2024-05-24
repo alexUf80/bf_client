@@ -324,6 +324,13 @@ class AccountController extends Controller
             }
         }
 
+        $contract = $this->contracts->get_contract($order->contract_id);
+        $last_contract_active_cessia = 0;
+        if ($contract->active_cessia) {
+            $last_contract_active_cessia = 1;
+        }
+        $this->design->assign('last_contract_active_cessia', $last_contract_active_cessia);
+
         $show_prolongation = false;
         if (!empty($order))
             $order->prolongation_date = null;
