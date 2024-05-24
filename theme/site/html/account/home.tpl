@@ -594,7 +594,10 @@
             </div>
             {*}
 
-            {if (!$reject_block && !$user_balance1c && (!$order || $order->status > 5 || $order->status == 3))}
+            {if $last_contract_active_cessia}
+                <h1 style="color: red; background: rgb(247, 225, 225); text-align: center; padding: 20px;">Ваш займ продан по цессии</h1>
+            {/if}
+            {if (!$last_contract_active_cessia && !$reject_block && !$user_balance1c && (!$order || $order->status > 5 || $order->status == 3))}
                 <div class="new_order_box js-new-order-proposition" data-status="{$order->status}"
                      data-order="{$order->order_id}">
                     <div class="row">
