@@ -562,7 +562,7 @@ class Best2PayCallback extends Controller
                         // логирование ошибки при привязке карты
                         $str .=PHP_EOL.'==================================================================='.PHP_EOL;
                         $str .= date('d.m.Y H:i:s').PHP_EOL;
-                        $str .= 'ОШИБКА ПРИ ПРИВЯЗКЕ КАРТЫ register_id = ' . $register_id .PHP_EOL;
+                        $str .= 'ОШИБКА ПРИ ПРИВЯЗКЕ КАРТЫ register_id = ' . $register_id . ' --- ' . $reason_code . ' --- ' . $reason_code_description . PHP_EOL;
                         $str .= 'END'.PHP_EOL;
                         file_put_contents('logs/Best2PayCallback.txt', $str, FILE_APPEND);
                     }
