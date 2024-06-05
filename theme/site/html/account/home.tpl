@@ -6,7 +6,7 @@
     </script>
 
     <script src="theme/site/js/calc.app.js?v=1.09"></script>
-    <script src="theme/site/js/lk.app.js?v=1.15"></script>
+    <script src="theme/site/js/lk.app.js?v=1.16"></script>
     <script src="theme/site/js/contract_accept.app.js?v=1.09"></script>
     <script>
         {if $order->contract->active_cessia == 1}
