@@ -276,7 +276,7 @@ class Leadgens extends Core
 
         $this->postbacks->add($insert);
 
-        $this->logging_(__METHOD__, 'leadstech', $link, 'ok', 'leadstech.txt', 'logs/');
+        $this->logging_(__METHOD__, 'leadstech', $link, 'ok', 'leads-tech.txt', 'logs/');
 
         return 1;
     }
