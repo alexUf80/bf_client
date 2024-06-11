@@ -390,7 +390,7 @@ class DocumentController extends Controller
                 // yellow_regions = 2
                 // green_regions = 3
 
-                if ($document->type == 'ANKETA_PEP_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21' || $document->type == 'POLIS_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -458,7 +458,7 @@ class DocumentController extends Controller
                 // yellow_regions = 2
                 // green_regions = 3
 
-                if ($document->type == 'ANKETA_PEP_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21' || $document->type == 'POLIS_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -494,7 +494,7 @@ class DocumentController extends Controller
                 // green_regions = 3
                 // var_dump('sas');
 
-                if ($document->type == 'ANKETA_PEP_24-01-21') {
+                if ($document->type == 'ANKETA_PEP_24-01-21' || $document->type == 'POLIS_24-01-21') {
                     $p2p_operation = OperationsORM::where('type', 'P2P')->where('order_id', $document->order_id)->first();
                     
                     $insurances = $this->insurances->get_insurances(array('user_id' => $contract->user_id));
@@ -522,6 +522,9 @@ class DocumentController extends Controller
                     foreach ($servise_cost_ar as $servise_cost_a) {
                         if ($servise_cost_a[0] > $full_amount-$insurance && $servise_cost_a[1] == $insurance) {
                             $insuranceSum = (int)$servise_cost_a[2];
+                        }
+                        if ($insurance < 790) {
+                            $insuranceSum = 30000;
                         }
                     }
                 }
