@@ -60,6 +60,24 @@ class DocumentController extends Controller
             }
 
             $contract = ContractsORM::where('order_id', $document->order_id)->first();
+
+            
+            if($document->type == 'IND_USLOVIYA_NL_24-01-21' || $document->type == 'IND_USLOVIYA_NL'){
+                // генерация qr кода
+                require_once __DIR__.'/../libs/phpqrcode/qrlib.php';
+                QRcode::png('УИД договора - '.$contract->uid.'
+ООО МКК "Баренц Финанс", номер в государственном реестре микрофинансовых организаций : 2013045009732, контактный номер телефона: 88001018283;
+Правила предоставления микрозаймов ООО МКК "Баренц Финанс" - https://barents-finans.ru/files/about/rules_for_granting_microloans.pdf;
+Официальный сайт ООО МКК "Баренц Финанс" - https://barents-finans.ru/;
+Личный кабинет получателя финансовой услуги - https://barents-finans.ru/lk/;
+СРО МФО - Союз Микрофинансовый альянс - https://alliance-mfo.ru/;
+Форма для подачи жалоб и обращений СРО Союз Микрофинансовый Альянс - https://alliance-mfo.ru/upravlenie/offers;
+Официальный сайт Банка России www.cbr.ru, страница интернет-приемной Банка России: https://www.cbr.ru/reception/;
+Государственный реестр микрофинансовых организаций - https://cbr.ru/microfinance/registry;
+Федеральная служба судебных приставов, форма для подачи жалоб и обращений: https://fssp.gov.ru/form/
+Официальный сайт финансового уполномоченного - https://finombudsman.ru/', __DIR__ . '/../files/phpqrcode/'.$document->order_id.'.png', 'M', 6, 2);
+                $im = imagecreatefrompng(__DIR__ . '/../files/phpqrcode/'.$document->order_id.'.png');
+            }
             
             if($document->type == 'DOP_SOGLASHENIE'){
 

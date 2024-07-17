@@ -23,7 +23,10 @@
 <table border="1">
     <tr style="width: 100%;">
         <td style="width: 28%;">
+            {*}
             <img src="{$config->root_dir}/theme/site/html/pdf/i/qr-code.JPG" width="250">
+            {*}
+            <img src="{$config->root_dir}files/phpqrcode/{$contract->order_id}.png" width="250">
         </td>
         <td style="width: 36%" align="center">
             <div>ПОЛНАЯ СТОИМОСТЬ ЗАЙМА:
