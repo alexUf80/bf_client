@@ -65,6 +65,9 @@
                                     </li>
                                     <hr>
                                     {foreach $documents as $document}
+                                        {if $document->name|escape == 'Договор на оказание услуги Причина отказа'}
+                                            {continue}
+                                        {/if}
                                             <li class="docs_list_item">
                                                 <a href="{$config->root_url}/document/{$user->id}/{$document->id}"
                                                    class="docs_list_link" target="_blank">
