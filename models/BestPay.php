@@ -243,7 +243,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $amount = 100;
         }
         else{
-            $amount = 4600;
+            // $amount = 4600;
+            $amount = 100;
         }
         $description = 'Привязка карты'; // описание операции
 
@@ -673,7 +674,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $amount = 100;
         }
         else{
-            $amount = 4600;
+            // $amount = 4600;
+            $amount = 100;
         }
         $description = 'Привязка карты'; // описание операции
 
@@ -725,7 +727,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $amount = 100;
         }
         else{
-            $amount = 4600;
+            // $amount = 4600;
+            $amount = 100;
         }
 
         $data = array(
@@ -757,7 +760,8 @@ Sector ID: 3247 ООО МКК "Финансовый аспект" (ecozaym24.ru)
             $amount = 100;
         }
         else{
-            $amount = 4600;
+            // $amount = 4600;
+            $amount = 100;
         }
         $description = 'Привязка карты'; // описание операции
 

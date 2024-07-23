@@ -56,8 +56,10 @@
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_14_06_2023.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 14.06.2023</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/ustav_28_06_2022.pdf" target="_blank">Изменения в Устав ООО МКК Баренц Финанс от 28.06.2022</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/baza_po_riskam.pdf" target="_blank">Базовый стандарт по управлению рисками микрофинансовых организаций</a></li>
+                        {*}
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/pravila_predostavleniya_uslugi_prichina_otkaza_bf.pdf" target="_blank">Правила предоставления услуги причина отказа</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/usloviya_uslugi_prichina_otkaza_bf.pdf" target="_blank">Условия предоставления услуги Причина отказа</a></li>
+                        {*}
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/general_terms_of_a_consumer_microloan.pdf" target="_blank">Общие условия договора потребительского микрозайма</a></li>
                         <li class="docs_list_item"><a class="docs_list_link" href="/files/about/certificate_of_entry_of_information_into_the_state_register.pdf" target="_blank">Свидетельство о внесении сведений в государственный реестр МФО</a></li>
