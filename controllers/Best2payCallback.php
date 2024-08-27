@@ -172,45 +172,45 @@ class Best2PayCallback extends Controller
                                     $ins_coverage = (float)$insurance_coverage_cost;
                                 }
 
-                                if ($ins_amount == 0) {
-                                    $ins_amount = 400;
-                                }
+                                // if ($ins_amount == 0) {
+                                //     $ins_amount = 400;
+                                // }
 
-                                if ($payment_amount >= $contract->loan_percents_summ + $ins_amount) {
-                                    $operation_id = $this->operations->add_operation(array(
-                                        'contract_id' => $contract->id,
-                                        'user_id' => $contract->user_id,
-                                        'order_id' => $contract->order_id,
-                                        'transaction_id' => $transaction->id,
-                                        // 'type' => 'INSURANCE_BC',
-                                        'type' => 'INSURANCE',
-                                        'amount' => $ins_amount,
-                                        'created' => date('Y-m-d H:i:s'),
-                                        'sent_status' => 0,
-                                    ));
+                                // if ($payment_amount >= $contract->loan_percents_summ + $ins_amount) {
+                                //     $operation_id = $this->operations->add_operation(array(
+                                //         'contract_id' => $contract->id,
+                                //         'user_id' => $contract->user_id,
+                                //         'order_id' => $contract->order_id,
+                                //         'transaction_id' => $transaction->id,
+                                //         // 'type' => 'INSURANCE_BC',
+                                //         'type' => 'INSURANCE',
+                                //         'amount' => $ins_amount,
+                                //         'created' => date('Y-m-d H:i:s'),
+                                //         'sent_status' => 0,
+                                //     ));
 
-                                    $insurance_id = $this->insurances->add_insurance(array(
-                                        'number' => '',
-                                        'amount' => $ins_amount,
-                                        'user_id' => $contract->user_id,
-                                        'order_id' => $contract->order_id,
-                                        'create_date' => date('Y-m-d H:i:s'),
-                                        'start_date' => date('Y-m-d 00:00:00', time() + (1 * 86400)),
-                                        'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
-                                        'operation_id' => $operation_id,
-                                        'protection' => 0,
-                                    ), $transaction->id);
-                                    $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
+                                //     $insurance_id = $this->insurances->add_insurance(array(
+                                //         'number' => '',
+                                //         'amount' => $ins_amount,
+                                //         'user_id' => $contract->user_id,
+                                //         'order_id' => $contract->order_id,
+                                //         'create_date' => date('Y-m-d H:i:s'),
+                                //         'start_date' => date('Y-m-d 00:00:00', time() + (1 * 86400)),
+                                //         'end_date' => date('Y-m-d 23:59:59', time() + (31 * 86400)),
+                                //         'operation_id' => $operation_id,
+                                //         'protection' => 0,
+                                //     ), $transaction->id);
+                                //     $this->transactions->update_transaction($transaction->id, array('insurance_id' => $insurance_id));
 
-                                    $docs = 2;
+                                //     $docs = 2;
                                     
-                                    $rest_amount = $rest_amount - $ins_amount;
-                                    $payment_amount -= $ins_amount;
+                                //     $rest_amount = $rest_amount - $ins_amount;
+                                //     $payment_amount -= $ins_amount;
 
-                                    //Отправляем чек по страховке
-                                    $this->Cloudkassir->send_insurance($operation_id);
+                                //     //Отправляем чек по страховке
+                                //     $this->Cloudkassir->send_insurance($operation_id);
 
-                                }
+                                // }
 
                                 // продлеваем контракт
                                 $this->contracts->update_contract($contract->id, array(
