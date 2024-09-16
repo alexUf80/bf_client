@@ -76,10 +76,16 @@ class UploadApp extends Core
       		            $new_filename = md5(microtime().rand()).'.'.$ext;
       		        } while ($this->users->check_filename($new_filename));
                         
-                    if (move_uploaded_file($file['tmp_name'], $this->config->root_dir.$this->config->user_files_dir.$new_filename))
+                    $new_path_and_filename = $this->config->root_dir.$this->config->user_files_dir.$new_filename;
+                    if (move_uploaded_file($file['tmp_name'], $new_path_and_filename))
                     {
                         $this->response->filename = $this->config->root_url.'/'.$this->config->user_files_dir.$new_filename;
                         
+                        $info = getimagesize($new_path_and_filename);
+                        if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/jpg'){
+                            $image = imagecreatefromjpeg($new_path_and_filename);
+                            imagejpeg($image, $new_path_and_filename, 30);
+                        } 
                         
                         if (!$this->request->post('notreplace'))    
                         {
