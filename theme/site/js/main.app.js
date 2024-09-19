@@ -86,6 +86,12 @@ function MainApp() {
                                 src: '#user_exists_modal'
                             });
                         }
+                        else if (!!resp.too_many) {
+                            $btn.removeClass('loading');
+                            app.$phone.closest('.form-phone').addClass('-error');
+                            app.$phone_error.text('Слишком много запросов').show();
+                            app.$phone.focus();
+                        }
                         else if (!!resp.incorrect) {
                             $btn.removeClass('loading');
                             app.$phone.closest('.form-phone').addClass('-error');

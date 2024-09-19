@@ -26,6 +26,25 @@ class CheckPhone extends Core
 
         $user = $this->users->get_user($user_id);
 
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+        $date_from = date('Y-m-d', time());
+        $date_to = date('Y-m-d', time() + 1 * 86400);
+
+        $query = $this->db->placehold("
+            SELECT * 
+            FROM __sms_messages
+            WHERE ip = ?
+            and created > ?
+            and created < ?
+            ORDER BY id DESC 
+        ", $ip, $date_from, $date_to);
+        $this->db->query($query);
+        $results = $this->db->results();
+        if (count($results) > 4) {
+            $this->response['too_many'] = $clear_phone;
+        }
+        else
+
         if (strlen($clear_phone) != 11)
         {
             $this->response['incorrect'] = $clear_phone;
@@ -50,7 +69,7 @@ class CheckPhone extends Core
                 $this->response['not_found'] = 1;
             }
 
-            $this->response['recaptcha'] = 0;
+            $this->response['recaptcha'] = 1;
             $secret = '6LdP60gqAAAAAIyHOLW3Doz2oLU2WW98nzsKoSg4';
 
 
