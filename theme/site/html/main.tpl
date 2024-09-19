@@ -2,6 +2,7 @@
 
   <script src="theme/site/js/calc.app.js?v=1.05"></script>
   <script src="theme/site/js/main.app.js?v=1.24"></script>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
 
 {/capture}
 
@@ -79,6 +80,10 @@
                   </div>
               </div>
                 {include file='agreement_list.tpl'}
+
+              <div class="form-group">
+                <div style="margin-left: 11px;" class="g-recaptcha" data-sitekey="6LdP60gqAAAAACP5ly3s27Wmq8jZQd-SVbY_vJ4X"></div>
+              </div>
 
               <div class="form-group form-btn">
                 <a href="javascript:void(0);" class="btn btn-secondary -fs-20 -fullwidth js-loan-start">Получить займ</a>

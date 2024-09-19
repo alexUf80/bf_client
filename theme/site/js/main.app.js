@@ -20,6 +20,7 @@ function MainApp() {
             var $btn = $(this);
 
             var _phone = app.$phone.val();
+            var _recaptcha = $('.g-recaptcha-response').val();
 
             var _agreement = $('.js-loan-agreement').is(':checked');
 
@@ -61,7 +62,8 @@ function MainApp() {
                 $.ajax({
                     url: 'ajax/check_phone.php',
                     data: {
-                        phone: _phone
+                        phone: _phone,
+                        recaptcha: _recaptcha
                     },
                     beforeSend: function () {
                         $btn.addClass('loading');
@@ -70,7 +72,14 @@ function MainApp() {
                         if (!!app.DEBUG)
                             console.log(resp);
 
-                        if (!!resp.user_exists) {
+                        if (!resp.recaptcha)
+                            {
+                                $('#error_modal .error-message').html('Подтвердите что вы не робот');
+                                $.fancybox.open({
+                                    src: '#error_modal'
+                                })
+                            }
+                        else if (!!resp.user_exists) {
                             $btn.removeClass('loading');
                             $('.js-error-phone-number').text(_phone);
                             $.fancybox.open({
