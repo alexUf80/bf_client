@@ -117,7 +117,28 @@ class SmsCode extends Core
 
     private function send_action($phone)
     {
-        if (!empty($_SESSION['sms_time']) && ($_SESSION['sms_time'] + $this->delay) > time()) {
+
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+        $date_from = date('Y-m-d', time());
+        $date_to = date('Y-m-d', time() + 1 * 86400);
+
+        $query = $this->db->placehold("
+            SELECT * 
+            FROM __sms_messages
+            WHERE ip = ?
+            and created > ?
+            and created < ?
+            ORDER BY id DESC 
+        ", $ip, $date_from, $date_to);
+        $this->db->query($query);
+        $results = $this->db->results();
+        if (count($results) >= 3) {
+            $this->response['error'] = 'sms_time';
+            $this->response['time_left'] = $_SESSION['sms_time'] + $this->delay - time();
+        }
+
+         else 
+         if (!empty($_SESSION['sms_time']) && ($_SESSION['sms_time'] + $this->delay) > time()) {
             $this->response['error'] = 'sms_time';
             $this->response['time_left'] = $_SESSION['sms_time'] + $this->delay - time();
         } else {
@@ -157,6 +178,7 @@ class SmsCode extends Core
                     $sms_message['response'] = $send_response;
                 } else {
                     $send_response = $this->sms->send($phone, "$rand_code - код подтверждения https://barents-finans.ru/lk/");
+                    // $sms_message['message'] = "$rand_code - код подтверждения https://barents-finans.ru/lk/";
                     $this->response['response'] = $send_response;
                     $sms_message['response'] = $send_response;
 
