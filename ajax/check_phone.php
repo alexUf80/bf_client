@@ -41,7 +41,8 @@ class CheckPhone extends Core
         $this->db->query($query);
         $results = $this->db->results();
         if (count($results) > 4) {
-            $this->response['too_many'] = $clear_phone;
+            $this->response['too_many'] = $ip;
+            $this->captcha();
         }
         else
 
@@ -69,26 +70,8 @@ class CheckPhone extends Core
                 $this->response['not_found'] = 1;
             }
 
-            $this->response['recaptcha'] = 1;
-            $secret = '6LdP60gqAAAAAIyHOLW3Doz2oLU2WW98nzsKoSg4';
-
-
-            $this->response['recaptcha'] = $this->request->get('recaptcha');
-            if (!empty($this->request->get('recaptcha', 'string'))) {
-                $curl = curl_init('https://www.google.com/recaptcha/api/siteverify');
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, 'secret=' . $secret . '&response=' . $this->request->get('recaptcha', 'string'));
-                $out = curl_exec($curl);
-                curl_close($curl);
-
-                $out = json_decode($out);
-                if ($out->success == true) {
-                    $query = $this->db->placehold('INSERT INTO s_capcha_log SET ?%', array('phone' => $clear_phone));
-                    $this->db->query($query);
-                    $this->response['recaptcha'] = 1;
-                }
-            }
+            $this->captcha();
+            
 
         }
 
@@ -105,6 +88,30 @@ class CheckPhone extends Core
         echo json_encode($this->response);
         exit;
 
+    }
+
+    private function captcha()
+    {
+        $this->response['recaptcha'] = 0;
+        $secret = '6LdP60gqAAAAAIyHOLW3Doz2oLU2WW98nzsKoSg4';
+
+
+        $this->response['recaptcha'] = $this->request->get('recaptcha');
+        if (!empty($this->request->get('recaptcha', 'string'))) {
+            $curl = curl_init('https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, 'secret=' . $secret . '&response=' . $this->request->get('recaptcha', 'string'));
+            $out = curl_exec($curl);
+            curl_close($curl);
+
+            $out = json_decode($out);
+            if ($out->success == true) {
+                $query = $this->db->placehold('INSERT INTO s_capcha_log SET ?%', array('phone' => $clear_phone));
+                $this->db->query($query);
+                $this->response['recaptcha'] = 1;
+            }
+        }
     }
 }
 
