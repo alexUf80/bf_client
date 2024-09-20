@@ -21,6 +21,8 @@ function MainApp() {
 
             var _phone = app.$phone.val();
             var _recaptcha = $('.g-recaptcha-response').val();
+            $('.g-response').val(_recaptcha);
+            // alert($('.g-response').val());
 
             var _agreement = $('.js-loan-agreement').is(':checked');
 

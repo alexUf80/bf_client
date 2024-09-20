@@ -1,7 +1,7 @@
 {capture name='page_scripts'}
 
   <script src="theme/site/js/calc.app.js?v=1.05"></script>
-  <script src="theme/site/js/main.app.js?v=1.25"></script>
+  <script src="theme/site/js/main.app.js?v=1.26"></script>
   <script src="https://www.google.com/recaptcha/api.js"></script>
 
 {/capture}
@@ -120,8 +120,12 @@
 
 
             </form>
+        <div class="form-group">
+          <textarea class="g-response" style="position: relative;width: 250px;height: 40px;border: 1px solid rgb(193, 193, 193);margin: 10px 25px;padding: 0px;resize: none; display: none; "></textarea>
+        </div>
           </div>
         </div>
+
 
 
         <div class="col-lg-7">
