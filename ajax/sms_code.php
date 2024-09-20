@@ -17,14 +17,14 @@ class SmsCode extends Core
     public function run()
     {
         $phone = $this->request->get('phone', 'string');
-        $recaptcha = '';
-        if ($this->request->get('recaptcha', 'string')) {
-            $recaptcha = $this->request->get('recaptcha', 'string');
-        }
-        $recaptcha_plus = '';
-        if ($this->request->get('recaptcha_plus', 'string')) {
-            $recaptcha_plus = $this->request->get('recaptcha_plus', 'string');
-        }
+        // $recaptcha = '';
+        // if ($this->request->get('recaptcha', 'string')) {
+        //     $recaptcha = $this->request->get('recaptcha', 'string');
+        // }
+        // $recaptcha_plus = '';
+        // if ($this->request->get('recaptcha_plus', 'string')) {
+        //     $recaptcha_plus = $this->request->get('recaptcha_plus', 'string');
+        // }
         
 
         $action = $this->request->get('action', 'string');
@@ -32,7 +32,8 @@ class SmsCode extends Core
 
             case 'send':
 
-                $this->send_action($phone, $recaptcha, $recaptcha_plus);
+                // $this->send_action($phone, $recaptcha, $recaptcha_plus);
+                $this->send_action($phone);
 
                 break;
 
@@ -124,7 +125,8 @@ class SmsCode extends Core
         }
     }
 
-    private function send_action($phone, $recaptcha, $recaptcha_plus)
+    // private function send_action($phone, $recaptcha, $recaptcha_plus)
+    private function send_action($phone)
     {
 
         $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
@@ -142,13 +144,13 @@ class SmsCode extends Core
         $this->db->query($query);
         $results = $this->db->results();
 
-        if ($recaptcha != $recaptcha_plus || $recaptcha_plus == '') {
-            $this->response['error'] = 'sms_time';
-            $this->response['time_left'] = 15;
-        }
-        else 
+        // if ($recaptcha != $recaptcha_plus || $recaptcha_plus == '') {
+        //     $this->response['error'] = 'sms_time';
+        //     $this->response['time_left'] = 15;
+        // }
+        // else 
 
-        if (count($results) >= 5) {
+        if (count($results) >= 3) {
             $this->response['error'] = 'sms_time';
             $this->response['time_left'] = $_SESSION['sms_time'] + $this->delay - time();
         }
