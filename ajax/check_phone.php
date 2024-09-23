@@ -93,7 +93,7 @@ class CheckPhone extends Core
     private function captcha()
     {
         $this->response['recaptcha'] = 0;
-        $secret = '6LdP60gqAAAAAIyHOLW3Doz2oLU2WW98nzsKoSg4';
+        $secret = $this->config->captcha_secret_key;
 
 
         $this->response['recaptcha'] = $this->request->get('recaptcha');

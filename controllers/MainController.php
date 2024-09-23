@@ -112,7 +112,8 @@ class MainController extends Controller
 			$this->design->assign('meta_keywords', $this->page->meta_keywords);
 			$this->design->assign('meta_description', $this->page->meta_description);
 		}
-
+        $this->design->assign('captcha_site_key', $this->config->captcha_site_key);
+        
 		return $this->design->fetch('main.tpl');
 	}
 }
