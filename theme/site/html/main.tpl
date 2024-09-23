@@ -82,7 +82,7 @@
                 {include file='agreement_list.tpl'}
 
               <div class="form-group">
-                <div style="margin-left: 11px;" class="g-recaptcha" data-sitekey="6LdP60gqAAAAACP5ly3s27Wmq8jZQd-SVbY_vJ4X"></div>
+                <div style="margin-left: 11px;" class="g-recaptcha" data-sitekey={$captcha_site_key}></div>
               </div>
 
               <div class="form-group form-btn">
