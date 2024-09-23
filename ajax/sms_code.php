@@ -17,48 +17,45 @@ class SmsCode extends Core
     public function run()
     {
         $phone = $this->request->get('phone', 'string');
-        // $recaptcha = '';
-        // if ($this->request->get('recaptcha', 'string')) {
-        //     $recaptcha = $this->request->get('recaptcha', 'string');
-        // }
-        // $recaptcha_plus = '';
-        // if ($this->request->get('recaptcha_plus', 'string')) {
-        //     $recaptcha_plus = $this->request->get('recaptcha_plus', 'string');
-        // }
+        $ajax_password = $this->request->get('ajax_password', 'string');
+        if (!$ajax_password) {
+            $this->response['error'] = 'sms_time';
+            $this->response['time_left'] = '18';
+        }
+        else{
+
+            $action = $this->request->get('action', 'string');
+            switch ($action):
+    
+                case 'send':
+    
+                    $this->send_action($phone);
+    
+                    break;
+    
+                case 'send_accept_code':
+    
+                    $this->send_accept_code_action($phone);
+    
+                    break;
+    
+                case 'check':
+    
+                    $code = $this->request->get('code', 'string');
+    
+                    $this->check_action($phone, $code);
+    
+                    break;
+    
+                case 'check_accept_sms':
+    
+                    $this->check_accept_sms_action();
+    
+                    break;
+    
+            endswitch;
+        }
         
-
-        $action = $this->request->get('action', 'string');
-        switch ($action):
-
-            case 'send':
-
-                // $this->send_action($phone, $recaptcha, $recaptcha_plus);
-                $this->send_action($phone);
-
-                break;
-
-            case 'send_accept_code':
-
-                $this->send_accept_code_action($phone);
-
-                break;
-
-            case 'check':
-
-                $code = $this->request->get('code', 'string');
-
-                $this->check_action($phone, $code);
-
-                break;
-
-            case 'check_accept_sms':
-
-                $this->check_accept_sms_action();
-
-                break;
-
-        endswitch;
-
         $this->output();
     }
 
@@ -125,7 +122,6 @@ class SmsCode extends Core
         }
     }
 
-    // private function send_action($phone, $recaptcha, $recaptcha_plus)
     private function send_action($phone)
     {
 
@@ -143,12 +139,6 @@ class SmsCode extends Core
         ", $ip, $date_from, $date_to);
         $this->db->query($query);
         $results = $this->db->results();
-
-        // if ($recaptcha != $recaptcha_plus || $recaptcha_plus == '') {
-        //     $this->response['error'] = 'sms_time';
-        //     $this->response['time_left'] = 15;
-        // }
-        // else 
 
         if (count($results) >= 3) {
             $this->response['error'] = 'sms_time';

@@ -27,53 +27,49 @@
     };
 
     var _send_sms = function(via_call = 0){
-        var _recaptcha = $('.g-recaptcha-response').val();
-        var _recaptcha_plus = $('.g-response').val();
-        if (_recaptcha == _recaptcha_plus) {
-            $.ajax({
-                url: 'ajax/sms_code.php',
-                data: {
-                    action: 'send',
-                    phone: app.phone,
-                    recaptcha: _recaptcha,
-                    recaptcha_plus: _recaptcha_plus,
-                    via_call: via_call,
-                    registration: app.options.registration
-                },
-                success: function(resp){
-                    if (!!resp.error)
-                    {
-                        if (resp.error == 'sms_time')
-                            _set_timer(resp.time_left);
-                        else
-                            console.log(resp);
-                    }
-                    else
-                    {
+
+        $.ajax({
+            url: 'ajax/sms_code.php',
+            data: {
+                action: 'send',
+                phone: app.phone,
+                ajax_password: 'Mn4sH7bGlzKurs2FDTPU',
+                via_call: via_call,
+                registration: app.options.registration
+            },
+            success: function(resp){
+                if (!!resp.error)
+                {
+                    if (resp.error == 'sms_time')
                         _set_timer(resp.time_left);
-                        app.sms_sent = 1;
-    
-                        if (!!via_call && !!resp.aero_call_id)
-                        {
-                            setTimeout(function(){
-                                $.ajax({
-                                    url: 'ajax/sms_code.php',
-                                    data: {
-                                        action: 'check_aero_status',
-                                        phone: app.phone,
-                                        aero_call_id: resp.aero_call_id,
-                                        via_call: via_call,
-                                    },
-                                })
-                            }, 60000);
-                        }
-    
-                        if (!!resp.developer_code)
-                            $('.js-sms-code').val(resp.developer_code).change();
-                    }
+                    else
+                        console.log(resp);
                 }
-            });
-        }
+                else
+                {
+                    _set_timer(resp.time_left);
+                    app.sms_sent = 1;
+
+                    if (!!via_call && !!resp.aero_call_id)
+                    {
+                        setTimeout(function(){
+                            $.ajax({
+                                url: 'ajax/sms_code.php',
+                                data: {
+                                    action: 'check_aero_status',
+                                    phone: app.phone,
+                                    aero_call_id: resp.aero_call_id,
+                                    via_call: via_call,
+                                },
+                            })
+                        }, 60000);
+                    }
+
+                    if (!!resp.developer_code)
+                        $('.js-sms-code').val(resp.developer_code).change();
+                }
+            }
+        });
 
 
     };
