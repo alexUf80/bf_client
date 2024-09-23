@@ -32,6 +32,7 @@
             data: {
                 action: 'send',
                 phone: app.phone,
+                ajax_password: 'Mn4sH7bGlzKurs2FDTPU',
                 via_call: via_call,
             },
             success: function(resp){
