@@ -18,43 +18,43 @@ class SmsCode extends Core
     {
         $phone = $this->request->get('phone', 'string');
         $ajax_password = $this->request->get('ajax_password', 'string');
-        if (!$ajax_password) {
-            $this->response['error'] = 'sms_time';
-            $this->response['time_left'] = '18';
-        }
-        else{
 
-            $action = $this->request->get('action', 'string');
-            switch ($action):
-    
-                case 'send':
-    
+        $action = $this->request->get('action', 'string');
+        switch ($action):
+
+            case 'send':
+
+                if (!$ajax_password) {
+                    $this->response['error'] = 'sms_time';
+                    $this->response['time_left'] = '18';
+                }
+                else{
                     $this->send_action($phone);
-    
-                    break;
-    
-                case 'send_accept_code':
-    
-                    $this->send_accept_code_action($phone);
-    
-                    break;
-    
-                case 'check':
-    
-                    $code = $this->request->get('code', 'string');
-    
-                    $this->check_action($phone, $code);
-    
-                    break;
-    
-                case 'check_accept_sms':
-    
-                    $this->check_accept_sms_action();
-    
-                    break;
-    
-            endswitch;
-        }
+                }
+
+                break;
+
+            case 'send_accept_code':
+
+                $this->send_accept_code_action($phone);
+
+                break;
+
+            case 'check':
+
+                $code = $this->request->get('code', 'string');
+
+                $this->check_action($phone, $code);
+
+                break;
+
+            case 'check_accept_sms':
+
+                $this->check_accept_sms_action();
+
+                break;
+
+        endswitch;
         
         $this->output();
     }
