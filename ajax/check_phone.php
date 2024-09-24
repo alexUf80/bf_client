@@ -40,7 +40,7 @@ class CheckPhone extends Core
         ", $ip, $date_from, $date_to);
         $this->db->query($query);
         $results = $this->db->results();
-        if (count($results) >= 3) {
+        if (count($results) >= 5) {
             $this->response['too_many'] = $ip;
             $this->captcha();
         }
