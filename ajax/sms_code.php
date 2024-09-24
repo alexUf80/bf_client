@@ -140,7 +140,7 @@ class SmsCode extends Core
         $this->db->query($query);
         $results = $this->db->results();
 
-        if (count($results) >= 3) {
+        if (count($results) >= 5) {
             $this->response['error'] = 'sms_time';
             $this->response['time_left'] = $_SESSION['sms_time'] + $this->delay - time();
         }
