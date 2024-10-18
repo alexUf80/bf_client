@@ -130,6 +130,7 @@
                 <div class="new-footer__menu">
                     <div class="new-footer__menu-title">Частые вопросы:</div>
                     <a href="/page/get-money/" class="new-footer__menu-item">Как получить кредит?</a>
+                    <a href="/files/about/loan_repayment_methods.pdf" class="new-footer__menu-item">Способы погашения займа</a>
                     {*}<a href="/page/repay-a-loan/" class="new-footer__menu-item">Как погасить или продлить кредит?</a>{*}
                 </div>
                 <div class="new-footer__menu">
