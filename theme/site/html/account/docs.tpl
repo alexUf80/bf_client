@@ -63,6 +63,11 @@
                                     <li class="docs_list_item">
                                         <a class="docs_list_link" href="/files/about/rules_for_granting_microloans.pdf" target="_blank">Правила предоставления потребительских займов</a>
                                     </li>
+                                    {if $user->id == 95837}
+                                        <li class="docs_list_item">
+                                            <a class="docs_list_link" href="/files/about/loan_repayment_methods.pdf" target="_blank">Способы погашения займа</a>
+                                        </li>
+                                    {/if}
                                     <hr>
                                     {foreach $documents as $document}
                                         {if $document->name|escape == 'Договор на оказание услуги Причина отказа'}
